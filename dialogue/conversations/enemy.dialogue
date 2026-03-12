@@ -1,0 +1,18 @@
+~ _1
+enemy: [[Hi|Hello|Howdy]], this is enemy.
+ - What do you want?
+	if Global.given_item == false:
+		enemy: Do you have the item?
+		if Global.has_item == true:
+			- Yes, I will give it you.
+				enemy: Thanksss.
+				set Global.given_item = true
+				set Global.has_item = false
+				=> END
+			- Yes, but I won't give it to you. => END
+		else:
+			enemy: You don't have the item => END
+	else:
+		enemy: Thank you for giving me the item. => END
+ - Bye. => END
+=> END
