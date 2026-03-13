@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbv5frl5bow6y" path="res://character/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://c5skj7k86c1pw" path="res://assets/placeholder_sprite.png" id="2_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://bx1qk3b53a1h1" path="res://ui/player_hud.tscn" id="2_gtsfv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(32, 32)
@@ -10,6 +11,8 @@ size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D" unique_id=417667803]
 script = ExtResource("1_rkbax")
+
+[node name="PlayerHUD" parent="." unique_id=966903807 instance=ExtResource("2_gtsfv")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1035082915]
 scale = Vector2(2, 2)

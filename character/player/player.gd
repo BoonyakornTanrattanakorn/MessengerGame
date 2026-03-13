@@ -15,6 +15,16 @@ var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
 
 var interact_with = ""
 var current_dialog = 0
+@onready var hud = $PlayerHUD  # or get_node path
+
+func _ready():
+	hud.skill_changed.connect(_on_skill_changed)
+	# Set starting attribute from HUD
+	playerAttribute = hud.get_current_skill()
+
+func _on_skill_changed(attribute: String):
+	playerAttribute = attribute
+	print("Switched to: ", attribute)
 
 func _physics_process(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
