@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ctflitlcvky8b"]
+
+[ext_resource type="Script" uid="uid://clclv2xwlqv4x" path="res://Scripts/level_editor_node_2.gd" id="1_u7u7i"]
+[ext_resource type="PackedScene" uid="uid://ppm5ewbxc88f" path="res://Scenes/lever.tscn" id="2_loefg"]
+[ext_resource type="PackedScene" uid="uid://dkhxdt27gjdxu" path="res://Scenes/door.tscn" id="3_0fb2t"]
+
+[node name="level_editor_node2" type="Node2D" unique_id=1591301048]
+script = ExtResource("1_u7u7i")
+
+[node name="lever" parent="." unique_id=2093616132 instance=ExtResource("2_loefg")]
+position = Vector2(1183, 1953)
+
+[node name="lever2" parent="." unique_id=1496099809 instance=ExtResource("2_loefg")]
+position = Vector2(1101, 2260)
+
+[node name="Door" parent="." unique_id=1681554828 instance=ExtResource("3_0fb2t")]
+position = Vector2(1463, 1919)

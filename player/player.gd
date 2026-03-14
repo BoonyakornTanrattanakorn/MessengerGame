@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var speed = 300.0  # speed in pixels/sec
-var dash_speed = 800.0
+var speed = 200.0  # speed in pixels/sec
+var dash_speed = 600.0
 var dash_duration = 0.15
 var dash_cooldown = 0.5
 
@@ -16,6 +16,10 @@ var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
 func _physics_process(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
 	
+	# Handle Wind Wave input (F)
+	if Input.is_action_just_pressed("major magic"):
+		shoot_wind_wave()
+		
 	# Update last direction if there's input
 	if direction.length() > 0:
 		last_direction = direction.normalized()
@@ -46,3 +50,17 @@ func _physics_process(delta):
 	# Normal movement
 	velocity = direction * speed
 	move_and_slide()
+	
+	
+@export var wind_scene: PackedScene = preload("res://Scenes/wind.tscn")
+		
+func shoot_wind_wave():
+	if wind_scene:
+		var wave = wind_scene.instantiate()
+		wave.direction = last_direction
+		wave.global_position = global_position
+	
+		wave.rotation = last_direction.angle()
+		
+		get_tree().current_scene.add_child(wave)
+		
