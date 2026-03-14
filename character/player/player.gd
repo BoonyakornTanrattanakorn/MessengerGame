@@ -16,6 +16,7 @@ var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
 var interact_with = ""
 var current_dialog = 0
 @onready var hud = $PlayerHUD  # or get_node path
+
 @export var save_id = "player" 
 @export var save_scope = "global" 
 

@@ -1,6 +1,4 @@
-[gd_scene format=3 uid="uid://dh7803taue6uc"]
-
-[ext_resource type="Script" uid="uid://dmkqjxtrqiv16" path="res://ui/Menu/main_menu.gd" id="1_b07fi"]
+[gd_scene format=3 uid="uid://b3xod0tb6s2a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f5wqp"]
 font_size = 40
@@ -12,7 +10,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_b07fi")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1834825062]
 layout_mode = 1

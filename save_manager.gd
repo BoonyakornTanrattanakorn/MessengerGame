@@ -1,5 +1,8 @@
 extends Node
 
+# To save node : have current scene in group "game_scene", add node to group "savable"
+#                Add save_id, save_scope field and func save(), load(data) 
+
 var save_path = "user://savegame.json"
 
 var save_data = {
@@ -18,7 +21,15 @@ var init_scene_path = "res://test scene.tscn"
 
 
 func save_game():
-	var current_scene = get_tree().current_scene.scene_file_path
+	var scene = get_tree().current_scene
+	
+	if scene == null:
+		return
+	
+	if not scene.is_in_group("game_scene"):
+		return
+
+	var current_scene = scene.scene_file_path
 	save_data["scene"] = current_scene
 
 	# Create scene entry if missing
