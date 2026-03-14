@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var speed = 200.0  # speed in pixels/sec
-var dash_speed = 500.0
+var speed = 300.0  # speed in pixels/sec
+var dash_speed = 800.0
 var dash_duration = 0.15
 var dash_cooldown = 0.5
 
