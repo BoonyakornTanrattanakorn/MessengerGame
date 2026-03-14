@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MagicMessengerGame"
-run/main_scene="uid://dgs1pfdiwapk2"
+run/main_scene="uid://dh7803taue6uc"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 DialogueManager="*uid://c3rodes2l3gxb"
 Global="*uid://cqe7q3hwi4d7r"
+SaveManager="*uid://2qlclfh64kkc"
+
+[dotnet]
+
+project/assembly_name="MagicMessengerGame"
 
 [editor_plugins]
 

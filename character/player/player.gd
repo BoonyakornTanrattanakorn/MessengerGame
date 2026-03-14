@@ -16,8 +16,11 @@ var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
 var interact_with = ""
 var current_dialog = 0
 @onready var hud = $PlayerHUD  # or get_node path
+@export var save_id = "player" 
+@export var save_scope = "global" 
 
 func _ready():
+	add_to_group("savable")
 	hud.skill_changed.connect(_on_skill_changed)
 	# Set starting attribute from HUD
 	playerAttribute = hud.get_current_skill()
@@ -80,3 +83,20 @@ func _on_interaction_area_body_exited(body: Node2D) -> void:
 	if body.has_method("can_interact"):
 		interact_with = ""	
 		print("Exited")
+		
+func save():
+	return {
+		"position" : {
+			"x" : position.x,
+			"y" : position.y
+		},
+		"playerAttribute" : playerAttribute
+	}
+	
+func load_data(data):
+	var pos = data.get("position", null)
+
+	if pos:
+		position = Vector2(pos["x"], pos["y"])
+
+	playerAttribute = data.get("attribute", playerAttribute)

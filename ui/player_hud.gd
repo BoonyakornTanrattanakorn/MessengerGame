@@ -22,9 +22,13 @@ var items = [
 var skill_index = 0
 var item_index = 0
 
+@export var save_id = "player_hud" 
+@export var save_scope = "global" 
+
 signal skill_changed(attribute: String)
 
 func _ready():
+	add_to_group("savable")
 	update_skill_display()
 	update_item_display()
 
@@ -63,3 +67,27 @@ func get_current_skill() -> String:
 func update_item_display():
 	item_icon.texture = items[item_index]["icon"]
 	item_count_label.text = "x" + str(items[item_index]["count"])
+
+func save():
+	var item_counts = []
+	for item in items:
+		item_counts.append(item["count"])
+
+	return {
+		"skill_index": skill_index,
+		"item_index": item_index,
+		"item_counts": item_counts
+	}
+	
+func load_data(data):
+
+	skill_index = int(data.get("skill_index", skill_index))
+	item_index = int(data.get("item_index", item_index))
+
+	var counts = data.get("item_counts", [])
+
+	for i in range(min(counts.size(), items.size())):
+		items[i]["count"] = int(counts[i])
+
+	update_skill_display()
+	update_item_display()
