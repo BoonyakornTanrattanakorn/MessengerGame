@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://player/player.tscn" id="1_3gk1n"]
 [ext_resource type="Script" uid="uid://cfb83basj5in7" path="res://scripts/node3.gd" id="1_mpsq6"]
-[ext_resource type="PackedScene" uid="uid://cvv6xnqi62uhb" path="res://assets/maps/levels/Level_0.scn" id="2_xqw1a"]
+[ext_resource type="PackedScene" uid="uid://c4ux6wx4j1f12" path="res://assets/maps/levels/Level_0.scn" id="2_xqw1a"]
 
 [node name="Node3" type="Node2D" unique_id=116769061]
 script = ExtResource("1_mpsq6")
@@ -13,6 +13,7 @@ position = Vector2(29, 317)
 up_direction = Vector2(0, 1)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=988539975]
+zoom = Vector2(2, 2)
 
 [node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
 
