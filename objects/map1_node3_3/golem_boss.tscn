@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://oeforo6vfrj0"]
+
+[ext_resource type="Script" uid="uid://b1pklcnsl05u3" path="res://objects/map1_node3_3/golem_boss.gd" id="1_kgk60"]
+[ext_resource type="Texture2D" uid="uid://c51clgp7wp6cs" path="res://character/enemy/golem_boss/blue_golem.png" id="2_7r80t"]
+[ext_resource type="Texture2D" uid="uid://d1pan02t0a8mm" path="res://character/enemy/golem_boss/green_golem.png" id="3_4g66n"]
+[ext_resource type="Texture2D" uid="uid://bwk44vchgqoca" path="res://character/enemy/golem_boss/die_golem.png" id="3_oc3tr"]
+[ext_resource type="Texture2D" uid="uid://b0gyh6mrbrsqt" path="res://character/enemy/golem_boss/idle_golem.png" id="4_oc3tr"]
+[ext_resource type="Texture2D" uid="uid://camdny0jxtex1" path="res://character/enemy/golem_boss/die_golem_wdrop.png" id="4_u5b4n"]
+[ext_resource type="Texture2D" uid="uid://dratd4xm53d0g" path="res://character/enemy/golem_boss/red_golem.png" id="5_u5b4n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_icho3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7r80t")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_oc3tr")
+}],
+"loop": true,
+"name": &"die_golem",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_u5b4n")
+}],
+"loop": true,
+"name": &"die_golem_wdrop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4g66n")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_oc3tr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_u5b4n")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xx2cy"]
+size = Vector2(599, 572)
+
+[node name="GolemBoss" type="CharacterBody2D" unique_id=156743071]
+script = ExtResource("1_kgk60")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=836547143]
+sprite_frames = SubResource("SpriteFrames_icho3")
+animation = &"green"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1217686039]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_xx2cy")
+
+[node name="HitBoxArea" type="Area2D" parent="." unique_id=1000891617]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea" unique_id=1598350371]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_xx2cy")
+debug_color = Color(0.8330845, 0.34332445, 0.49466944, 0.41960785)
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="." unique_id=766271222]
+position = Vector2(-1, 0)
+
+[connection signal="body_entered" from="HitBoxArea" to="." method="_on_hit_box_area_body_entered"]

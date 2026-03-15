@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://dgs1pfdiwapk2"]
+
+[ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://player/player.tscn" id="1_3gk1n"]
+[ext_resource type="Script" uid="uid://cfb83basj5in7" path="res://scripts/node3.gd" id="1_mpsq6"]
+[ext_resource type="PackedScene" uid="uid://c4ux6wx4j1f12" path="res://assets/maps/levels/Level_0.scn" id="2_xqw1a"]
+
+[sub_resource type="GDScript" id="GDScript_xqw1a"]
+script/source = "extends CharacterBody2D
+
+var speed = 200.0  # speed in pixels/sec
+var dash_speed = 500.0
+var dash_duration = 0.15
+var dash_cooldown = 0.5
+
+var playerAttribute = \"wind\"
+#HP system
+var player_hp = 3
+var is_invincible = false
+var invincible_timer = 0.0
+var invincible_duration = 1.0 
+
+# Dash system
+var is_dashing: bool = false
+var dash_timer: float = 0.0
+var dash_cooldown_timer: float = 0.0
+var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
+
+var current_dialog = 0
+var interact_with = null
+@onready var hud = $PlayerHUD  # or get_node path
+
+var inventory = {
+	\"blue_gem\": 0,
+	\"brave_stone\": 0,
+	\"potion\": 3,
+	\"antidote\": 2,
+}
+
+func _ready():
+	hud.skill_changed.connect(_on_skill_changed)
+	# Set starting attribute from HUD
+	playerAttribute = hud.get_current_skill()
+
+func _on_skill_changed(attribute: String):
+	playerAttribute = attribute
+	print(\"Switched to: \", attribute)
+
+func _physics_process(delta):
+	var direction = Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+	
+	# Dialogue
+	if interact_with != null:
+		if Input.is_action_just_pressed(\"interact\"):
+			print(\"Pressing F on: \", interact_with.name)
+			if interact_with.has_method(\"activate\"):
+				interact_with.activate()
+				interact_with = null
+			elif interact_with.has_method(\"can_interact\"):
+				DialogueManager.show_example_dialogue_balloon(
+				load(\"res://dialogue/conversations/\" + interact_with.name + \".dialogue\"),
+				\"_\" + str(current_dialog)
+			)
+	
+	# Update last direction if there's input
+	if direction.length() > 0:
+		last_direction = direction.normalized()
+	
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
+	
+	#Handle damage taking
+	if is_invincible:
+		invincible_timer -= delta
+		if invincible_timer <= 0:
+			is_invincible = false
+	
+	# Handle dashing
+	if is_dashing:
+		dash_timer -= delta
+		if dash_timer <= 0:
+			# End dash
+			is_dashing = false
+			dash_cooldown_timer = dash_cooldown
+		else:
+			# During dash: move in dash direction at dash speed
+			velocity = last_direction * dash_speed
+			move_and_slide()
+			return  # Skip rest of physics processing while dashing
+	
+	# Handle dash input (only if not on cooldown and not already dashing)
+	if Input.is_action_just_pressed(\"minor magic\") and dash_cooldown_timer <= 0 and not is_dashing and playerAttribute == \"wind\":
+		# Start dash in last faced direction
+		is_dashing = true
+		dash_timer = dash_duration
+		velocity = last_direction * dash_speed
+	
+	# Normal movement
+	velocity = direction * speed
+	move_and_slide()
+
+func _on_interaction_area_body_exited(body: Node2D) -> void:
+	if body == self:  # ignore own body
+		return
+	if body == interact_with:
+		interact_with = null
+
+func _on_interaction_area_body_entered(body: Node2D) -> void:
+	if body == self:
+		return
+	# Check normal can_interact
+	if body.has_method(\"can_interact\"):
+		# Skip if boss marked no_interact
+		if body.has_meta(\"no_interact\"):
+			return
+		interact_with = body
+		current_dialog = body.can_interact()
+		print(\"Interactable: \", body.name)
+
+func take_damage(amount: int):
+	if is_invincible:
+		return
+	player_hp -= amount
+	print(\"Player HP: \", player_hp)
+	is_invincible = true
+	invincible_timer = invincible_duration
+	if player_hp <= 0:
+		print(\"Player dead!\")
+
+#Inventory system
+func add_item(item_name: String, amount: int = 1):
+	if item_name in inventory:
+		inventory[item_name] += amount
+	else:
+		inventory[item_name] = amount
+	print(\"Got: \", item_name, \" total: \", inventory[item_name])
+	# Notify HUD to update
+	get_node(\"/root\").find_child(\"PlayerHUD\", true, false).refresh_items()
+"
+
+[node name="Node3" type="Node2D" unique_id=116769061]
+script = ExtResource("1_mpsq6")
+
+[node name="Player" parent="." unique_id=565105511 instance=ExtResource("1_3gk1n")]
+z_index = 10
+position = Vector2(29, 317)
+up_direction = Vector2(0, 1)
+script = SubResource("GDScript_xqw1a")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=988539975]
+zoom = Vector2(2, 2)
+
+[node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
+
+[node name="Level_0" parent="LevelHolder" unique_id=1186606688 instance=ExtResource("2_xqw1a")]

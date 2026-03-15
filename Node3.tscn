@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dgs1pfdiwapk2"]
 
-[ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://player/player.tscn" id="1_3gk1n"]
+[ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://character/player/player.tscn" id="1_3gk1n"]
 [ext_resource type="Script" uid="uid://cfb83basj5in7" path="res://scripts/node3.gd" id="1_mpsq6"]
 [ext_resource type="PackedScene" uid="uid://c4ux6wx4j1f12" path="res://assets/maps/levels/Level_0.scn" id="2_xqw1a"]
 
 [node name="Node3" type="Node2D" unique_id=116769061]
 script = ExtResource("1_mpsq6")
 
-[node name="Player" parent="." unique_id=565105511 instance=ExtResource("1_3gk1n")]
+[node name="Player" parent="." unique_id=565105511 groups=["player"] instance=ExtResource("1_3gk1n")]
 z_index = 10
 position = Vector2(29, 317)
 up_direction = Vector2(0, 1)
