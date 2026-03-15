@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://do2c3i77sbag3"]
+
+[node name="ComingSoon" type="Node2D" unique_id=1875221843]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=843876430]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1561403071]
+offset_left = 187.0
+offset_top = 242.0
+offset_right = 986.0
+offset_bottom = 379.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 100
+text = "Coming Soon!!!!!!"

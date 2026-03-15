@@ -25,6 +25,8 @@ var current_mount = null
 var respawn_position = Vector2(110, 115)
 	
 var inventory = {
+	"red_gem": 0,
+	"green_gem": 0,
 	"blue_gem": 0,
 	"brave_stone": 0,
 	"potion": 3,
@@ -53,10 +55,14 @@ func _physics_process(delta):
 				interact_with.activate()
 				interact_with = null
 			elif interact_with.has_method("can_interact"):
-				DialogueManager.show_dialogue_balloon(
-					load("res://dialogue/conversations/" + interact_with.name + ".dialogue"),
-					"_" + str(current_dialog)
-				)
+				var dialogue_path = "res://dialogue/conversations/" + interact_with.name + ".dialogue"
+				if ResourceLoader.exists(dialogue_path):
+					DialogueManager.show_dialogue_balloon(
+						load(dialogue_path),
+						"_" + str(current_dialog)
+					)
+				else:
+					print("No dialogue for: ", interact_with.name)
 
 	# If mounted, skip all movement and just follow the cart
 	if is_mounted:
@@ -96,6 +102,12 @@ func _physics_process(delta):
 	# Normal movement
 	velocity = direction * speed
 	move_and_slide()
+	
+	# Major skill on nearby interactable object
+	if Input.is_action_just_pressed("major magic"):
+		if interact_with != null and interact_with.has_method("major_activate"):
+			print("Major skill on: ", interact_with.name)
+			interact_with.major_activate(self)
 
 # Called by minecart to mount the player
 func mount(minecart, mount_position):
@@ -127,6 +139,22 @@ func _on_interaction_area_body_entered(body: Node2D) -> void:
 		current_dialog = body.can_interact()
 		print("Interactable: ", body.name)
 
+func _on_interaction_area_area_entered(area: Area2D) -> void:
+	if area == self:
+		return
+	if area.has_method("can_interact"):
+		if area.has_meta("no_interact"):
+			return
+		interact_with = area
+		current_dialog = area.can_interact()
+		print("Interactable area: ", area.name)
+
+func _on_interaction_area_area_exited(area: Area2D) -> void:
+	if area == self:
+		return
+	if area == interact_with:
+		interact_with = null
+
 func take_damage(amount: int):
 	if is_invincible:
 		return
@@ -156,3 +184,4 @@ func die_in_minecart_and_respawn():
 	current_mount = null
 	global_position = respawn_position
 	player_hp = 3
+	

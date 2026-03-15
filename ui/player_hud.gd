@@ -85,6 +85,7 @@ func refresh_items():
 
 func get_icon(item_name: String) -> Texture2D:
 	match item_name:
+		"red_gem":    return preload("res://assets/icons/red_gem.png")
 		"blue_gem":    return preload("res://assets/icons/blue_gem.png")
 		"green_gem":    return preload("res://assets/icons/green_gem.png")
 		"brave_stone": return preload("res://assets/icons/brave_stone.png")
