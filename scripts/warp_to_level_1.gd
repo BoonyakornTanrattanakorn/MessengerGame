@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var next_level_path: String = "res://assets/maps/levels/Level_3.scn"
+@export var next_level_path: String = "res://assets/maps/levels/Level_1.scn"
 @export var spawn_position_in_next_level: Vector2 = Vector2(120, 500)
 
 func _ready() -> void:
