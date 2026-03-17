@@ -110,11 +110,6 @@ func _physics_process(delta):
 	move_and_slide()
 	_update_animation(direction)
 	
-	# Major skill on nearby interactable object
-	if Input.is_action_just_pressed("major magic"):
-		if interact_with != null and interact_with.has_method("major_activate"):
-			print("Major skill on: ", interact_with.name)
-			interact_with.major_activate(self)
 
 func _facing_suffix(dir: Vector2) -> String:
 	if abs(dir.x) >= abs(dir.y):
@@ -123,8 +118,17 @@ func _facing_suffix(dir: Vector2) -> String:
 		return "front" if dir.y > 0 else "back"
 
 func _update_animation(direction: Vector2) -> void:
-	var moving = direction.length() > 0.1
-	var anim = ("walk " if moving else "idle ") + _facing_suffix(last_direction)
+	var facing = _facing_suffix(last_direction)
+	var anim = ""
+
+	if is_dashing:
+		anim = "dash"
+		if not animated_sprite.sprite_frames.has_animation(anim):
+			anim = "walk " + facing
+	else:
+		var moving = direction.length() > 0.1
+		anim = ("walk " if moving else "idle ") + facing
+
 	if animated_sprite.animation != anim:
 		animated_sprite.play(anim)
 

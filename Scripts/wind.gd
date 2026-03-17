@@ -6,12 +6,38 @@ var lifetime = 1.0
 
 func _ready():
 	# สั่งให้ลบตัวเองทิ้งเมื่อครบเวลา
+	add_to_group("wind_wave")
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 
 func _physics_process(delta):
 	position += direction * speed * delta
 
+func _belongs_to_player(node: Node) -> bool:
+	if node == null:
+		return false
+	if node.is_in_group("player"):
+		return true
+	var parent := node.get_parent()
+	while parent != null:
+		if parent.is_in_group("player"):
+			return true
+		parent = parent.get_parent()
+	return false
+
 func _on_body_entered(body):
-	if body.is_in_group("walls") or body.is_in_group("enemies"):
-		queue_free()
+	if _belongs_to_player(body):
+		return
+	queue_free()
+
+func _on_area_entered(area: Area2D) -> void:
+	if area == null:
+		return
+	if _belongs_to_player(area):
+		return
+
+	if area.name.to_lower().contains("bell") and area.has_method("_on_area_entered"):
+		area.call("_on_area_entered", self)
+
+
+	queue_free()

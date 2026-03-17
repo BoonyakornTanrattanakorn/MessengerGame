@@ -1,27 +1,25 @@
 extends Area2D
 
-@export var required_attribute: String = "wind"
 @export var tiger_guard_path: NodePath
 @export var red_gem_path: NodePath
 
 var used := false
 
-func can_interact() -> int:
-	return 0
+func _ready() -> void:
+	area_entered.connect(_on_area_entered)
+	set_meta("no_interact", true)
 
-func major_activate(player) -> void:
+func _on_area_entered(area: Area2D) -> void:
+	print("Bell touched by: ", area.name)
+
 	if used:
 		return
 
-	if player == null:
-		return
-
-	if player.playerAttribute != required_attribute:
-		print("Need attribute: ", required_attribute)
+	if not area.is_in_group("wind_wave"):
 		return
 
 	used = true
-	print("Bell trigger activated")
+	print("Bell triggered by wind wave")
 
 	var tiger = get_node_or_null(tiger_guard_path)
 	if tiger and tiger.has_method("scare_and_leave"):
@@ -31,4 +29,4 @@ func major_activate(player) -> void:
 	if gem and gem.has_method("unlock_pickup"):
 		gem.unlock_pickup()
 
-	set_meta("no_interact", true)
+	area.queue_free()
