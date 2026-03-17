@@ -8,7 +8,7 @@ namespace DialogueManagerRuntime
     [Export] public Resource DialogueResource;
     [Export] public string StartFromTitle = "";
     [Export] public bool AutoStart = false;
-    [Export] public string NextAction = "ui_accept";
+    [Export] public string NextAction = "interact";
     [Export] public string SkipAction = "ui_cancel";
 
 

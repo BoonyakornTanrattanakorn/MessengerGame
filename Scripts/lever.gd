@@ -13,7 +13,7 @@ func _ready():
 	sprite.play("off")
 
 func _process(_delta):
-	if player_in_range and Input.is_action_just_pressed("ui_accept"):
+	if player_in_range and Input.is_action_just_pressed("interact"):
 		activate_lever()
 
 func activate_lever():
