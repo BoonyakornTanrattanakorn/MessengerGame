@@ -51,7 +51,7 @@ func _on_body_exited(body: Node) -> void:
 func _on_dialogue_ended(_resource: Resource) -> void:
 	is_talking = false
 	if player_in_range:
-		prompt_label.text = "Press E"
+		prompt_label.text = "Press F"
 		prompt_label.visible = true
 
 func submit_answer(answer: Array[String]) -> void:

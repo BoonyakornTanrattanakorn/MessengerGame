@@ -20,7 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if is_talking:
 		return
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("interact"):
 		read_paper()
 
 func read_paper() -> void:
