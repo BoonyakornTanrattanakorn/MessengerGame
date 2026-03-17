@@ -1,6 +1,8 @@
 extends Area2D
 
-signal lever_activated 
+signal lever_activated(room_id: int)
+
+@export var room_id: int = 0
 
 @onready var sprite = $AnimatedSprite2D
 
@@ -18,10 +20,9 @@ func activate_lever():
 	if not is_active:
 		is_active = true
 		sprite.play("on")
-		lever_activated.emit()
-		print("Lever activated!")
+		lever_activated.emit(room_id)
+		print("Lever activated in room ", room_id)
 
-# ตรวจสอบเมื่อชนกับ Wind Wave (Area2D)
 func _on_area_entered(area):
 	if area.name.to_lower().contains("wind") or area.is_in_group("wind_magic"):
 		activate_lever()

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cjxj6cgjmbec3"
+path="res://.godot/imported/character_gate.dialogue-49adc6dcc71e143c6de0056ce51136d2.tres"
+
+[deps]
+
+source_file="res://character_gate.dialogue"
+dest_files=["res://.godot/imported/character_gate.dialogue-49adc6dcc71e143c6de0056ce51136d2.tres"]
+
+[params]
+
+defaults=true

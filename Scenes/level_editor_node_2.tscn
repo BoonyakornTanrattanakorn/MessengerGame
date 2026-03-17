@@ -7,11 +7,39 @@
 [node name="level_editor_node2" type="Node2D" unique_id=1591301048]
 script = ExtResource("1_u7u7i")
 
-[node name="lever" parent="." unique_id=2093616132 instance=ExtResource("2_loefg")]
-position = Vector2(1183, 1953)
+[node name="lever_room0_a" parent="." unique_id=2093616132 instance=ExtResource("2_loefg")]
+position = Vector2(1088, 2240)
 
-[node name="lever2" parent="." unique_id=1496099809 instance=ExtResource("2_loefg")]
-position = Vector2(1101, 2260)
+[node name="lever_room0_b" parent="." unique_id=1496099809 instance=ExtResource("2_loefg")]
+position = Vector2(1216, 1968)
 
-[node name="Door" parent="." unique_id=1681554828 instance=ExtResource("3_0fb2t")]
-position = Vector2(1463, 1919)
+[node name="door_room0" parent="." unique_id=1681554828 instance=ExtResource("3_0fb2t")]
+position = Vector2(1456, 1936)
+
+[node name="lever_room1_a" parent="." unique_id=1590454240 instance=ExtResource("2_loefg")]
+position = Vector2(1328, 1536)
+room_id = 1
+
+[node name="lever_room1_b" parent="." unique_id=1754665072 instance=ExtResource("2_loefg")]
+position = Vector2(1696, 1536)
+room_id = 1
+
+[node name="door_room1" parent="." unique_id=1490579669 instance=ExtResource("3_0fb2t")]
+position = Vector2(1440, 1376)
+room_id = 1
+
+[node name="lever_room2_a" parent="." unique_id=1040725313 instance=ExtResource("2_loefg")]
+position = Vector2(2688, 1056)
+room_id = 2
+
+[node name="door_room2" parent="." unique_id=1153818460 instance=ExtResource("3_0fb2t")]
+position = Vector2(2656, 1024)
+room_id = 2
+
+[node name="lever_room3_a" parent="." unique_id=480919312 instance=ExtResource("2_loefg")]
+position = Vector2(2720, 1336)
+room_id = 3
+
+[node name="door_room3" parent="." unique_id=5025049 instance=ExtResource("3_0fb2t")]
+position = Vector2(2688, 1408)
+room_id = 3
