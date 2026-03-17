@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://ce0d0sr32qkcj"]
 
 [ext_resource type="Texture2D" uid="uid://djeobr0rmqbuj" path="res://assets/Chapter1_node2/decorative_cracks_floor.png" id="1_yposl"]
-[ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://player/player.tscn" id="2_m0gel"]
+[ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://character/player/player.tscn" id="2_m0gel"]
 [ext_resource type="Texture2D" uid="uid://ckjyovjexcsjt" path="res://assets/Chapter1_node2/decorative_cracks_coasts_animation.png" id="2_uju0g"]
 [ext_resource type="Texture2D" uid="uid://dbygyvq1d7arx" path="res://assets/Chapter1_node2/water_detilazation_v2.png" id="3_lcne0"]
 [ext_resource type="Texture2D" uid="uid://x7whbvejwdvw" path="res://assets/Chapter1_node2/decorative_cracks_walls.png" id="4_87n3a"]
@@ -16396,9 +16396,9 @@ tile_set = SubResource("TileSet_87n3a")
 collision_visibility_mode = 2
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("2_m0gel")]
-position = Vector2(2728, 1568)
+position = Vector2(1458, 2024)
 
-[node name="Camera2D2" type="Camera2D" parent="Player" unique_id=1934617874]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1290809352]
 zoom = Vector2(2, 2)
 
 [node name="WallNoCollision" type="TileMapLayer" parent="." unique_id=885888599 groups=["walls"]]

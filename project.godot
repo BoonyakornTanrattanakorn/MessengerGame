@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="MagicMessengerGame"
-run/main_scene="uid://ce0d0sr32qkcj"
+run/main_scene="uid://dfrt83npofiis"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 DialogueManager="*uid://c3rodes2l3gxb"
+PuzzleState="*uid://bn1d7wijd7ou8"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [editor_plugins]
 

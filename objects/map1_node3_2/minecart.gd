@@ -52,12 +52,14 @@ func _on_body_exited(body):
 			body.interact_with = null
 
 func activate():
+	print("yesris")
 	var player = get_tree().get_first_node_in_group("player")
 	if player == null:
 		return
 	mount_player(player)
 
 func mount_player(player):
+	print("yessir")
 	player_mounted = true
 	mounted_player = player
 	player.mount(self, mount_point.global_position)

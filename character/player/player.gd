@@ -102,6 +102,9 @@ func _physics_process(delta):
 		dash_timer = dash_duration
 		velocity = last_direction * dash_speed
 
+	if Input.is_action_just_pressed("major magic"):
+		shoot_wind_wave()
+
 	# Normal movement
 	velocity = direction * speed
 	move_and_slide()
@@ -233,3 +236,14 @@ func die_in_minecart_and_respawn():
 	global_position = respawn_position
 	player_hp = 3
 	
+@export var wind_scene: PackedScene = preload("res://Scenes/wind.tscn")
+		
+func shoot_wind_wave():
+	if wind_scene:
+		var wave = wind_scene.instantiate()
+		wave.direction = last_direction
+		wave.global_position = global_position
+	
+		wave.rotation = last_direction.angle()
+		
+		get_tree().current_scene.add_child(wave)
