@@ -25,6 +25,10 @@ PuzzleState="*uid://bn1d7wijd7ou8"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
+[dotnet]
+
+project/assembly_name="MagicMessengerGame"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/ldtk-importer/plugin.cfg")
@@ -107,7 +111,7 @@ skill_right={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogue/conversations/enemy.dialogue", "res://dialogue/conversations/character_gate.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/conversations/character_gate.dialogue")
 
 [layer_names]
 

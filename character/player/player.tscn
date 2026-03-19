@@ -418,8 +418,9 @@ script = ExtResource("1_rkbax")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=913524806]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_jr3wi")
-animation = &"dash"
+animation = &"walk left"
 autoplay = "idle front"
+frame_progress = 0.7162294
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1035082915]
 visible = false

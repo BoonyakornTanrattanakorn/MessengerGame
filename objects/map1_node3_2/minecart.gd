@@ -38,6 +38,8 @@ func reset_position():
 	turn_input = ""
 	player_mounted = false
 	mounted_player = null
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 	in_turn_zone = true
 	
 func _on_body_entered(body):
@@ -79,18 +81,18 @@ func _physics_process(delta):
 	if player_mounted:
 		if Input.is_action_just_pressed("major magic") and in_turn_zone:
 			var dir = Vector2.ZERO
-			if is_moving:
-				if Input.is_action_pressed(turn_input):
+			#if is_moving:
+			if Input.is_action_pressed(turn_input):
 					dir = turn_direction
-			else:
-				if Input.is_action_pressed("up"):
-					dir = Vector2.DOWN
-				elif Input.is_action_pressed("down"):
-					dir = Vector2.UP
-				elif Input.is_action_pressed("left"):
-					dir = Vector2.RIGHT
-				elif Input.is_action_pressed("right"):
-					dir = Vector2.LEFT
+			#else:
+			#	if Input.is_action_pressed("up"):
+			#		dir = Vector2.DOWN
+			#	elif Input.is_action_pressed("down"):
+			#		dir = Vector2.UP
+			#	elif Input.is_action_pressed("left"):
+			#		dir = Vector2.RIGHT
+			#	elif Input.is_action_pressed("right"):
+			#		dir = Vector2.LEFT
 			if dir != Vector2.ZERO:
 				is_moving = true
 				move_direction = dir
