@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bjmvx33n8l4a6"]
+
+[ext_resource type="Texture2D" uid="uid://xyesrqtb8535" path="res://assets/vehicles/minecart.png" id="1_3eu0j"]
+[ext_resource type="Script" uid="uid://rgabvt8h11av" path="res://objects/map1_node3_2/minecart.gd" id="2_ssjfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3eu0j"]
+size = Vector2(82, 115)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssjfq"]
+size = Vector2(51, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxsxr"]
+size = Vector2(49, 60)
+
+[node name="Minecart" type="Node2D" unique_id=2032104864 groups=["minecart"]]
+script = ExtResource("2_ssjfq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=825038969]
+position = Vector2(-0.23958302, -7.034219)
+scale = Vector2(1.389974, 1.3517113)
+texture = ExtResource("1_3eu0j")
+region_enabled = true
+region_rect = Rect2(0, 18, 32, 40)
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=978228653]
+position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=1621761630]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_3eu0j")
+
+[node name="MountPoint" type="Marker2D" parent="." unique_id=1397669888]
+position = Vector2(0, -17)
+
+[node name="DangerArea" type="Area2D" parent="." unique_id=448431187]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DangerArea" unique_id=1077796808]
+position = Vector2(0.5, -6)
+shape = SubResource("RectangleShape2D_ssjfq")
+
+[node name="StopArea" type="Area2D" parent="." unique_id=1872567120]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StopArea" unique_id=1483278413]
+position = Vector2(0.5, -6)
+shape = SubResource("RectangleShape2D_ssjfq")
+
+[node name="CartArea" type="Area2D" parent="." unique_id=1427292044]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CartArea" unique_id=962124265]
+position = Vector2(0.5, -6)
+shape = SubResource("RectangleShape2D_hxsxr")
