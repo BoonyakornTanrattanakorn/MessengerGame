@@ -39,21 +39,27 @@ animations = [{
 size = Vector2(19, 19)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1u0ni"]
+size = Vector2(11, 5)
 
 [node name="lever" type="Area2D" unique_id=2093616132]
 script = ExtResource("1_wv1st")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1638210522]
+position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_wv1st")
 animation = &"on"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=554904059]
-position = Vector2(-0.5, 1.5)
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_2ihno")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=46727239]
+position = Vector2(0, -5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=362607394]
+position = Vector2(0.5, 5.5)
 shape = SubResource("RectangleShape2D_1u0ni")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

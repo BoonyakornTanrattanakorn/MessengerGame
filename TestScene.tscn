@@ -5,14 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://b8qsp3gj4rw21" path="res://assets/maps/levels/Ch1N2L1.scn" id="2_wicfy"]
 
 [node name="TestScene" type="Node2D" unique_id=116769061]
+y_sort_enabled = true
 script = ExtResource("1_wicfy")
 
 [node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
+y_sort_enabled = true
 
 [node name="Chapter1_Node2" parent="LevelHolder" unique_id=1729998318 instance=ExtResource("2_wicfy")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("2_go42g")]
-position = Vector2(6699, 3182)
+z_index = 1
+y_sort_enabled = true
+position = Vector2(3034, 4085)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1552768552]
 zoom = Vector2(2, 2)
