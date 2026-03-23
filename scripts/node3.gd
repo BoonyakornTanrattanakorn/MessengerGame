@@ -10,7 +10,7 @@ func _ready() -> void:
 		current_level = level_holder.get_child(0)
 	
 	# Play BGM
-	BGMManager.play_bgm("res://assets/audio/testBGM.ogg", 0.0, true)
+	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
 
 func load_level(level_path: String, player_spawn_position: Vector2) -> void:
 	var packed_level := load(level_path) as PackedScene
