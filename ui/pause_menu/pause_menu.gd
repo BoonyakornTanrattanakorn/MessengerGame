@@ -17,16 +17,9 @@ func _ready() -> void:
 	visible = false
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	
-	# Initialize sliders with current values from audio buses
-	var master_bus_index = AudioServer.get_bus_index("Master")
-	if master_bus_index != -1:
-		bgm_slider.value = AudioServer.get_bus_volume_db(master_bus_index)
-	
-	var sfx_bus_index = AudioServer.get_bus_index("SFX")
-	if sfx_bus_index != -1:
-		sfx_slider.value = AudioServer.get_bus_volume_db(sfx_bus_index)
-	else:
-		sfx_slider.value = 0.0
+	# Initialize sliders to 100% (default/normal volume)
+	bgm_slider.value = 100.0
+	sfx_slider.value = 100.0
 
 func open() -> void:
 	visible = true
@@ -72,13 +65,31 @@ func _on_quit_button_pressed() -> void:
 	emit_signal("quit_requested")
 
 func _on_bgm_slider_value_changed(value: float) -> void:
-	# Set BGM volume on the Master bus
+	# Convert percentage (0-200%) to dB
+	# 100% = 0dB (normal volume)
+	# 0% = -80dB (silent)
+	# 200% = +6dB (loud)
+	var volume_db: float
+	if value <= 100.0:
+		volume_db = -80.0 + (value / 100.0) * 80.0
+	else:
+		volume_db = (value - 100.0) * 0.06
+	
 	if BGMManager:
-		BGMManager.set_volume(value)
+		var master_bus_index = AudioServer.get_bus_index("Master")
+		if master_bus_index != -1:
+			AudioServer.set_bus_volume_db(master_bus_index, volume_db)
 
 func _on_sfx_slider_value_changed(value: float) -> void:
-	# Set SFX volume - placeholder for future SFX manager
-	# When SFXManager is implemented, use:
-	# SFXManager.set_volume(value)
+	# Convert percentage (0-200%) to dB
+	# 100% = 0dB (normal volume)
+	# 0% = -80dB (silent)
+	# 200% = +6dB (loud)
+	var volume_db: float
+	if value <= 100.0:
+		volume_db = -80.0 + (value / 100.0) * 80.0
+	else:
+		volume_db = (value - 100.0) * 0.06
+	
 	if AudioServer.get_bus_index("SFX") != -1:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), value)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), volume_db)

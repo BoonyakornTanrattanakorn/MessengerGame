@@ -7,6 +7,8 @@ func _ready() -> void:
 	# Create the AudioStreamPlayer for BGM
 	current_bgm = AudioStreamPlayer.new()
 	current_bgm.bus = "Master"
+	# Allow BGM to continue playing when game is paused
+	current_bgm.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(current_bgm)
 
 func play_bgm(track_path: String, volume_db: float = 0.0, loop: bool = true) -> void:
