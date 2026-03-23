@@ -29,7 +29,9 @@ func play_bgm(track_path: String, volume_db: float = 0.0, loop: bool = true) -> 
 	current_bgm.bus = "Master"
 	
 	# Enable looping if supported
-	if loop and audio_stream is AudioStreamOGG:
+	if loop and audio_stream.has_meta("loop"):
+		audio_stream.set_meta("loop", true)
+	elif loop and "loop" in audio_stream:
 		audio_stream.loop = true
 	
 	current_bgm.play()
@@ -45,8 +47,10 @@ func stop_bgm(fade_out: float = 0.0) -> void:
 	current_track = ""
 
 func set_volume(volume_db: float) -> void:
-	if current_bgm:
-		current_bgm.volume_db = volume_db
+	# Set Master bus volume (affects BGM)
+	var master_bus_index = AudioServer.get_bus_index("Master")
+	if master_bus_index != -1:
+		AudioServer.set_bus_volume_db(master_bus_index, volume_db)
 
 func pause_bgm() -> void:
 	if current_bgm and current_bgm.playing:
