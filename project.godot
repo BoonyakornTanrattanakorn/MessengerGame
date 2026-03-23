@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DialogueManager="*uid://c3rodes2l3gxb"
 PuzzleState="*uid://bn1d7wijd7ou8"
+BGMManager="*res://Scripts/BGMManager.gd"
 
 [display]
 
