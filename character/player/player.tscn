@@ -411,11 +411,14 @@ radius = 8.0
 height = 42.0
 
 [node name="Player" type="CharacterBody2D" unique_id=417667803 groups=["player"]]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_rkbax")
 
 [node name="PlayerHUD" parent="." unique_id=966903807 instance=ExtResource("2_gtsfv")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=913524806]
+position = Vector2(0, -22)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_jr3wi")
 animation = &"walk left"
@@ -428,15 +431,17 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_g1dw6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=851665150]
-position = Vector2(0, 12)
+position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_rkbax")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=618093146]
+position = Vector2(0, -22)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1616288134]
 shape = SubResource("CircleShape2D_8eijk")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=2119696330]
+position = Vector2(0, -22)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2054913705]
 position = Vector2(0, 3)
