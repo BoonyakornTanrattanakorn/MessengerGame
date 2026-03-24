@@ -411,6 +411,7 @@ radius = 8.0
 height = 42.0
 
 [node name="Player" type="CharacterBody2D" unique_id=417667803 groups=["player"]]
+y_sort_enabled = true
 script = ExtResource("1_rkbax")
 
 [node name="PlayerHUD" parent="." unique_id=966903807 instance=ExtResource("2_gtsfv")]

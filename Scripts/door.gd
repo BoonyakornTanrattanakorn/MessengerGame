@@ -8,9 +8,6 @@ extends StaticBody2D
 
 func _ready():
 	_play_all("Closed")
-	# Force the top part to stay above the bottom part to stop blinking
-	$AnimatedSprite2D.z_index = 1 
-	$AnimatedSprite2D2.z_index = 0
 
 func open():
 	_play_all("Open")
