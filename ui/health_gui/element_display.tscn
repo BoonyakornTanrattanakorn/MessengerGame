@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cvg005qrgt6qu"]
 
 [ext_resource type="Texture2D" uid="uid://cb0ocaujedja1" path="res://assets/health_gui/HealthBarElementDisplay.png" id="1_s06x0"]
-[ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/icons/elements/WindIcon.png" id="2_nbj01"]
+[ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/icons/elements/wind_icon.png" id="2_nbj01"]
 
 [node name="ElementDisplay" type="Panel" unique_id=300156056]
 self_modulate = Color(1, 1, 1, 0)
@@ -21,6 +21,6 @@ centered = false
 [node name="Elements" type="Node2D" parent="." unique_id=180403251]
 
 [node name="Sprite2D" type="Sprite2D" parent="Elements" unique_id=1277765619]
-position = Vector2(6, 6)
+position = Vector2(26, 28)
 texture = ExtResource("2_nbj01")
-centered = false
+offset = Vector2(0.5, 0)

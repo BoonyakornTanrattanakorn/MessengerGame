@@ -3,13 +3,14 @@ extends CanvasLayer
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
 @onready var skill_icon = %SkillIcon
+@onready var element_icon = $HealthGUI/ElementDisplay/Elements/Sprite2D
 @onready var skill_slot = %SkillSlot
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
 @onready var health_gui = $HealthGUI
 # Skill list — add more elements here as you implement them
 var skills = [
-	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/wind.png")},
+	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/elements/wind_icon.png")},
 	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": preload("res://assets/icons/fire.png")},
 	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": preload("res://assets/icons/water.png")},
 ]
@@ -57,7 +58,15 @@ func update_skill_display():
 	var style = skill_slot.get_theme_stylebox("panel").duplicate()
 	style.border_color = skills[skill_index]["color"]
 	skill_slot.add_theme_stylebox_override("panel", style)
-	skill_icon.texture = skills[skill_index]["icon"]
+	var current_skill = skills[skill_index]
+	element_icon.texture = current_skill["icon"]
+
+	if current_skill["attribute"] == "wind":
+		element_icon.scale = Vector2.ONE
+	else:
+		var tex: Texture2D = current_skill["icon"]
+		if tex != null and tex.get_width() > 0 and tex.get_height() > 0:
+			element_icon.scale = Vector2(40.0 / tex.get_width(), 40.0 / tex.get_height())
 
 func get_current_skill() -> String:
 	return skills[skill_index]["attribute"]

@@ -49,6 +49,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SkillBar" unique_id=484740197]
+visible = false
 layout_mode = 2
 
 [node name="SkillUp" type="Button" parent="MarginContainer/VBoxContainer/SkillBar/HBoxContainer" unique_id=240973256]
