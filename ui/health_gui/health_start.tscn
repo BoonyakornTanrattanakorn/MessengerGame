@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dc5go6mrixuv5"]
+
+[ext_resource type="Texture2D" uid="uid://c7lmrtafmg1fj" path="res://assets/health_gui/HealthBarStartSheet.png" id="1_56xjk"]
+
+[node name="HealthStart" type="Panel" unique_id=300156056]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 56)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1888.0
+offset_bottom = -1024.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1954673454]
+texture = ExtResource("1_56xjk")
+centered = false
+hframes = 2

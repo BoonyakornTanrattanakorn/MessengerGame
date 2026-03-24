@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var skill_slot = %SkillSlot
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
+@onready var health_gui = $HealthGUI
 # Skill list — add more elements here as you implement them
 var skills = [
 	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/wind.png")},
@@ -22,27 +23,31 @@ var item_index = 0
 signal skill_changed(attribute: String)
 
 func _ready():
+	var player = get_tree().root.find_child("Player", true, false)
 	update_skill_display()
-	call_deferred("refresh_items") 
+	call_deferred("refresh_items")
+	health_gui.set_max_health(player.player_max_hp)
+	health_gui.update_health(player.player_hp)
+	player.health_changed.connect(health_gui.update_health)
 
 func _process(_delta):
 	# Skill bar — up/down
-	if Input.is_action_just_pressed("skill_up"):
+	if Input.is_action_just_pressed("element_rotate_left"):
 		skill_index = (skill_index - 1 + skills.size()) % skills.size()
 		update_skill_display()
 		emit_signal("skill_changed", skills[skill_index]["attribute"])
 
-	if Input.is_action_just_pressed("skill_down"):
+	if Input.is_action_just_pressed("element_rotate_right"):
 		skill_index = (skill_index + 1) % skills.size()
 		update_skill_display()
 		emit_signal("skill_changed", skills[skill_index]["attribute"])
 
 	# Item bar — left/right
-	if Input.is_action_just_pressed("skill_left"):
+	if Input.is_action_just_pressed("item_rotate_left"):
 		item_index = (item_index - 1 + items.size()) % items.size()
 		update_item_display()
 
-	if Input.is_action_just_pressed("skill_right"):
+	if Input.is_action_just_pressed("item_rotate_right"):
 		item_index = (item_index + 1) % items.size()
 		update_item_display()
 
