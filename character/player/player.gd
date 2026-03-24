@@ -227,6 +227,7 @@ func take_damage(amount: int):
 	invincible_timer = invincible_duration
 	health_changed.emit(player_hp)
 	if player_hp <= 0:
+		player_hp = 0
 		print("Player dead!")
 
 func add_item(item_name: String, amount: int = 1):
