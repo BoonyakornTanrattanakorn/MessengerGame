@@ -4,11 +4,15 @@ var dash_speed = 500.0
 var dash_duration = 0.15
 var dash_cooldown = 0.5
 var playerAttribute = "wind"
+
 #HP system
-var player_hp = 3
+@export var player_max_hp = 3
+var player_hp = player_max_hp
 var is_invincible = false
 var invincible_timer = 0.0
 var invincible_duration = 1.0 
+signal health_changed
+
 # Dash system
 var is_dashing: bool = false
 var dash_timer: float = 0.0
@@ -16,6 +20,7 @@ var dash_cooldown_timer: float = 0.0
 var last_direction: Vector2 = Vector2.RIGHT
 var current_dialog = 0
 var interact_with = null
+
 # Mount system
 var is_mounted = false
 var current_mount = null
@@ -220,7 +225,9 @@ func take_damage(amount: int):
 	print("Player HP: ", player_hp)
 	is_invincible = true
 	invincible_timer = invincible_duration
+	health_changed.emit(player_hp)
 	if player_hp <= 0:
+		player_hp = 0
 		print("Player dead!")
 
 func add_item(item_name: String, amount: int = 1):
@@ -238,7 +245,7 @@ func die_in_minecart_and_respawn():
 	is_mounted = false
 	current_mount = null
 	global_position = respawn_position
-	player_hp = 3
+	player_hp = player_max_hp
 	
 @export var wind_scene: PackedScene = preload("res://Scenes/wind.tscn")
 		
