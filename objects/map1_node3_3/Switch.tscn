@@ -10,9 +10,12 @@ size = Vector2(0.625, 0.859375)
 size = Vector2(2.0625, 2.46875)
 
 [node name="Switch" type="StaticBody2D" unique_id=192359483]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_11x4n")
 
 [node name="Switch" type="Sprite2D" parent="." unique_id=1210954144]
+position = Vector2(0.40625, -22.19889)
 scale = Vector2(0.08251953, 0.08375347)
 texture = ExtResource("2_fism0")
 
@@ -20,11 +23,12 @@ texture = ExtResource("2_fism0")
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2061581298]
-position = Vector2(0, 13)
+position = Vector2(0.40625, -9.198891)
 scale = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_fism0")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=1088975074]
+position = Vector2(0.40625, -22.19889)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=835642725]
 scale = Vector2(32, 32)
