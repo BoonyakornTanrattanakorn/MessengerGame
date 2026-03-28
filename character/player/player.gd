@@ -13,6 +13,14 @@ var invincible_timer = 0.0
 var invincible_duration = 1.0 
 signal health_changed
 
+#Heat gauge for fire element
+var heat_gauge: float = 0.0
+var max_heat: float = 100.0
+var heat_cooldown_timer: float = 0.0
+var heat_cooldown_delay: float = 3.0   # seconds before cooling starts
+var heat_drain_rate: float = 15.0      # gauge units drained per second
+signal heat_changed(value: float)
+
 # Dash system
 var is_dashing: bool = false
 var dash_timer: float = 0.0
@@ -101,14 +109,26 @@ func _physics_process(delta):
 			_update_animation(last_direction)
 			return
 
-	# Handle dash input
-	if Input.is_action_just_pressed("minor magic") and dash_cooldown_timer <= 0 and not is_dashing and playerAttribute == "wind":
-		is_dashing = true
-		dash_timer = dash_duration
-		velocity = last_direction * dash_speed
-
-	if Input.is_action_just_pressed("major magic"):
-		shoot_wind_wave()
+	# Handle fire skill
+	if playerAttribute == "fire" and heat_gauge > 0:
+		if heat_cooldown_timer > 0:
+			heat_cooldown_timer -= delta
+		else:
+			heat_gauge = max(0.0, heat_gauge - heat_drain_rate * delta)
+			heat_changed.emit(heat_gauge)
+	# Handle skill
+	if playerAttribute == "fire":
+		if Input.is_action_just_pressed("minor magic"):
+			shoot_fire_small()
+		if Input.is_action_just_pressed("major magic"):
+			shoot_fire_heavy()
+	elif playerAttribute == "wind":
+		if Input.is_action_just_pressed("minor magic") and dash_cooldown_timer <= 0 and not is_dashing:
+			is_dashing = true
+			dash_timer = dash_duration
+			velocity = last_direction * dash_speed
+		if Input.is_action_just_pressed("major magic"):
+			shoot_wind_wave()
 
 	# Normal movement
 	velocity = direction * speed
@@ -247,6 +267,7 @@ func die_in_minecart_and_respawn():
 	global_position = respawn_position
 	player_hp = player_max_hp
 	
+#wind skill
 @export var wind_scene: PackedScene = preload("res://Scenes/wind.tscn")
 		
 func shoot_wind_wave():
@@ -258,3 +279,34 @@ func shoot_wind_wave():
 		wave.rotation = last_direction.angle()
 		
 		get_tree().current_scene.add_child(wave)
+
+#fire skill
+@export var fire_small_scene: PackedScene = preload("res://Scenes/fire_small.tscn")
+@export var fire_heavy_scene: PackedScene = preload("res://Scenes/fire_heavy.tscn")
+
+func shoot_fire_small():
+	if fire_small_scene:
+		var ball = fire_small_scene.instantiate()
+		ball.direction = last_direction
+		ball.global_position = global_position
+		ball.rotation = last_direction.angle()
+		get_tree().current_scene.add_child(ball)
+	add_heat(20.0)
+
+func shoot_fire_heavy():
+	if fire_heavy_scene:
+		var ball = fire_heavy_scene.instantiate()
+		ball.direction = last_direction
+		ball.global_position = global_position
+		ball.rotation = last_direction.angle()
+		get_tree().current_scene.add_child(ball)
+	add_heat(40.0)
+
+func add_heat(amount: float):
+	heat_gauge = clamp(heat_gauge + amount, 0.0, max_heat)
+	heat_cooldown_timer = heat_cooldown_delay   # reset cooldown window
+	heat_changed.emit(heat_gauge)
+	if heat_gauge >= max_heat:
+		player_hp = 0
+		health_changed.emit(player_hp)
+		print("Overheated! Player dead!")

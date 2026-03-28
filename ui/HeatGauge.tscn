@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://b7q4tjsvib3gr"]
+
+[ext_resource type="Script" uid="uid://bc27fdl6a6xfs" path="res://ui/heat_gauge.gd" id="1_qcvxq"]
+[ext_resource type="Texture2D" uid="uid://dn5eu31d62r7p" path="res://assets/icons/flame.png" id="2_ir8k4"]
+
+[node name="HeatGauge" type="HBoxContainer" unique_id=1396212735]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qcvxq")
+
+[node name="IconBox" type="ColorRect" parent="." unique_id=2072977496]
+visible = false
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="IconBox" unique_id=2060476387]
+visible = false
+position = Vector2(14, 20)
+scale = Vector2(0.09609373, 0.09609373)
+texture = ExtResource("2_ir8k4")
+
+[node name="SegmentBar" type="HBoxContainer" parent="." unique_id=343351086]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 3
+
+[node name="SegmentBar0" type="ColorRect" parent="SegmentBar" unique_id=442837253]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar1" type="ColorRect" parent="SegmentBar" unique_id=475187402]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar2" type="ColorRect" parent="SegmentBar" unique_id=1799442684]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar3" type="ColorRect" parent="SegmentBar" unique_id=1016633808]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar4" type="ColorRect" parent="SegmentBar" unique_id=915996511]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar5" type="ColorRect" parent="SegmentBar" unique_id=1147530275]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar6" type="ColorRect" parent="SegmentBar" unique_id=1438840315]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar7" type="ColorRect" parent="SegmentBar" unique_id=692812341]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar8" type="ColorRect" parent="SegmentBar" unique_id=834934810]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)
+
+[node name="SegmentBar9" type="ColorRect" parent="SegmentBar" unique_id=710727429]
+custom_minimum_size = Vector2(26, 10)
+layout_mode = 2
+color = Color(0.13818389, 0.08000181, 0, 1)

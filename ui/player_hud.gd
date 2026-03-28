@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
 @onready var health_gui = $HealthGUI
+@onready var heat_gauge = $HealthGUI/VBoxContainer/HeatGauge
 # Skill list — add more elements here as you implement them
 var skills = [
 	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/elements/wind_icon.png")},
@@ -27,9 +28,21 @@ func _ready():
 	var player = get_tree().root.find_child("Player", true, false)
 	update_skill_display()
 	call_deferred("refresh_items")
+	# Defer these so @onready vars inside HealthGUI resolve first
+	call_deferred("_setup_health", player)
+	
+	#heat gauge
+	skill_changed.connect(_on_skill_changed)
+	heat_gauge.set_max_hp(player.player_max_hp)
+	heat_gauge.update_heat(0.0)
+	heat_gauge.visible = false   # hidden until fire element active
+	player.heat_changed.connect(heat_gauge.update_heat)
+
+func _setup_health(player):
 	health_gui.set_max_health(player.player_max_hp)
 	health_gui.update_health(player.player_hp)
 	player.health_changed.connect(health_gui.update_health)
+	
 
 func _process(_delta):
 	# Skill bar — up/down
@@ -106,3 +119,9 @@ func get_icon(item_name: String) -> Texture2D:
 		"potion":      return preload("res://assets/icons/potion.png")
 		"antidote":    return preload("res://assets/icons/antidote.png")
 	return null
+
+func _on_heat_changed(value: float):
+	heat_gauge.update_heat(value)
+
+func _on_skill_changed(attribute: String):
+	heat_gauge.set_visible(attribute == "fire")
