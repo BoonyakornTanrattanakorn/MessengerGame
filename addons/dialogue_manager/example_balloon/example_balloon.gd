@@ -15,7 +15,7 @@ class_name DialogueManagerExampleBalloon extends CanvasLayer
 @export var will_block_other_input: bool = true
 
 ## The action to use for advancing the dialogue
-@export var next_action: StringName = &"ui_accept"
+@export var next_action: StringName = &"interact"
 
 ## The action to use to skip typing the dialogue
 @export var skip_action: StringName = &"ui_cancel"
@@ -188,8 +188,8 @@ func _on_mutation_cooldown_timeout() -> void:
 		balloon.hide()
 
 
-func _on_mutated(_mutation: Dictionary) -> void:
-	if not _mutation.is_inline:
+func _on_mutated(mutation: Dictionary) -> void:
+	if not mutation.is_inline:
 		is_waiting_for_input = false
 		will_hide_balloon = true
 		mutation_cooldown.start(0.1)

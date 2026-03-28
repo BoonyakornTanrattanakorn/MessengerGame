@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://2215xa1l24qs"]
+
+[ext_resource type="Script" uid="uid://nubhrhsq8yfe" path="res://objects/map1_node3_3/Switch.gd" id="1_11x4n"]
+[ext_resource type="Texture2D" uid="uid://braag636absr8" path="res://character/enemy/golem_boss/switch.png" id="2_fism0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fism0"]
+size = Vector2(0.625, 0.859375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fu0b0"]
+size = Vector2(2.0625, 2.46875)
+
+[node name="Switch" type="StaticBody2D" unique_id=192359483]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_11x4n")
+
+[node name="Switch" type="Sprite2D" parent="." unique_id=1210954144]
+position = Vector2(0.40625, -22.19889)
+scale = Vector2(0.08251953, 0.08375347)
+texture = ExtResource("2_fism0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1054430639]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2061581298]
+position = Vector2(0.40625, -9.198891)
+scale = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_fism0")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1088975074]
+position = Vector2(0.40625, -22.19889)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=835642725]
+scale = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_fu0b0")
+debug_color = Color(0.6484775, 0.5210381, 0, 0.41960785)

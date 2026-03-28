@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bx1qk3b53a1h1"]
 
 [ext_resource type="Script" uid="uid://e361eggsk80u" path="res://ui/player_hud.gd" id="1_1m6my"]
+[ext_resource type="Script" uid="uid://dh3oalqt8k0m" path="res://ui/health_container.gd" id="2_sjha8"]
+[ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://ui/health_gui/element_display.tscn" id="3_q84jv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -47,6 +49,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SkillBar" unique_id=484740197]
+visible = false
 layout_mode = 2
 
 [node name="SkillUp" type="Button" parent="MarginContainer/VBoxContainer/SkillBar/HBoxContainer" unique_id=240973256]
@@ -136,3 +139,14 @@ vertical_alignment = 2
 [node name="ItemRight" type="Button" parent="MarginContainer/VBoxContainer/ItemBar/HBoxContainer" unique_id=1431894364]
 layout_mode = 2
 text = "►"
+
+[node name="HealthGUI" type="HBoxContainer" parent="." unique_id=1427920160]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 195.0
+offset_bottom = 96.0
+theme_override_constants/separation = 0
+script = ExtResource("2_sjha8")
+
+[node name="ElementDisplay" parent="HealthGUI" unique_id=300156056 instance=ExtResource("3_q84jv")]
+layout_mode = 2

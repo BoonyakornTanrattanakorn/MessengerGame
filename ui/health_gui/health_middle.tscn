@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bc7lcjk07jgut"]
+
+[ext_resource type="Script" uid="uid://bqfelbmhsoegq" path="res://ui/health_gui/health_gui.gd" id="1_0ccrc"]
+[ext_resource type="Texture2D" uid="uid://s6ni7l1c08xl" path="res://assets/health_gui/HealthBarMiddleSheet.png" id="1_j7wjx"]
+
+[node name="HealthMiddle" type="Panel" unique_id=300156056]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 56)
+offset_right = 32.0
+offset_bottom = 56.0
+script = ExtResource("1_0ccrc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=320224364]
+texture = ExtResource("1_j7wjx")
+centered = false
+hframes = 2
