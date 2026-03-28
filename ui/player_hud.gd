@@ -118,19 +118,12 @@ func save():
 
 	return {
 		"skill_index": skill_index,
-		"item_index": item_index,
-		"item_counts": item_counts
+		"item_index": item_index
 	}
 	
 func load_data(data):
 
 	skill_index = int(data.get("skill_index", skill_index))
 	item_index = int(data.get("item_index", item_index))
-
-	var counts = data.get("item_counts", [])
-
-	for i in range(min(counts.size(), items.size())):
-		items[i]["count"] = int(counts[i])
-
 	update_skill_display()
-	update_item_display()
+	refresh_items()

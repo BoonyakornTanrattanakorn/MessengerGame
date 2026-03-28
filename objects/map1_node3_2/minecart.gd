@@ -17,6 +17,9 @@ var can_dismount = false
 @onready var danger_area = $DangerArea
 @onready var stop_area = $StopArea
 
+@export var save_id = "minecart_1"
+@export var save_scope = "scene"
+
 var front_region = Rect2(0, 18, 32, 40)
 var side_region = Rect2(34, 18, 58, 42)
 var original_position = Vector2.ZERO
@@ -24,6 +27,7 @@ var start_turn_direction = Vector2.ZERO
 var start_turn_input = ""
 
 func _ready():
+	add_to_group("savable")
 	original_position = global_position
 	interact_area.body_entered.connect(_on_body_entered)
 	interact_area.body_exited.connect(_on_body_exited)
@@ -123,3 +127,27 @@ func _on_danger_entered(area):
 func _on_stop_area_entered(area):
 	if area.is_in_group("stop_block"):
 		stop_cart()
+		
+func save():
+	return {
+		"player_mounted": player_mounted,
+		"cart_position": {"x": global_position.x, "y": global_position.y},
+		"is_moving": is_moving,
+		"move_direction": {"x": move_direction.x, "y": move_direction.y}
+	}
+
+func load_data(data):
+	player_mounted = data.get("player_mounted", false)
+
+	var pos = data.get("cart_position", {"x": original_position.x, "y": original_position.y})
+	global_position = Vector2(pos.get("x", original_position.x), pos.get("y", original_position.y))
+
+	var dir = data.get("move_direction", {"x": 0, "y": 0})
+	move_direction = Vector2(dir.get("x", 0), dir.get("y", 0))
+
+	is_moving = data.get("is_moving", false)
+
+	if player_mounted:
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			mount_player(player)

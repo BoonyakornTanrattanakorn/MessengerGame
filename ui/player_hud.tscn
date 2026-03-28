@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://bx1qk3b53a1h1"]
 
 [ext_resource type="Script" uid="uid://e361eggsk80u" path="res://ui/player_hud.gd" id="1_1m6my"]
-[ext_resource type="Script" uid="uid://dh3oalqt8k0m" path="res://ui/health_container.gd" id="2_sjha8"]
+[ext_resource type="Script" path="res://ui/health_container.gd" id="2_sjha8"]
 [ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://ui/health_gui/element_display.tscn" id="3_q84jv"]
+[ext_resource type="PackedScene" uid="uid://kdx43i281auy" path="res://ui/setting/setting.tscn" id="4_w11uw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -150,3 +151,5 @@ script = ExtResource("2_sjha8")
 
 [node name="ElementDisplay" parent="HealthGUI" unique_id=300156056 instance=ExtResource("3_q84jv")]
 layout_mode = 2
+
+[node name="Setting" parent="." unique_id=1015252459 instance=ExtResource("4_w11uw")]

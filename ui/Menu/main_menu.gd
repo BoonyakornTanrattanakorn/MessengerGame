@@ -6,7 +6,6 @@ func _ready():
 	$CenterContainer/VBoxContainer/QuitButton.pressed.connect(_quit_game)
 	if not FileAccess.file_exists(SaveManager.save_path): 
 		$CenterContainer/VBoxContainer/LoadGameButton.disabled = true
-	
 func _start_game():
 	SaveManager.new_game()
 

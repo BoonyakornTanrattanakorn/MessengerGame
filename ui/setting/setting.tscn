@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bxeeecc16eceg" path="res://ui/setting/setting_button.gd" id="1_1lr1k"]
 [ext_resource type="PackedScene" uid="uid://6yu1iyqyvbsv" path="res://ui/setting/setting_menu.tscn" id="1_mt4kn"]
 
-[node name="Setting" type="CanvasLayer" unique_id=1015252459]
+[node name="Setting" type="CanvasLayer" unique_id=1760135751]
 
 [node name="SettingButton" type="Button" parent="." unique_id=2015273222]
 offset_left = 1008.0
@@ -15,4 +15,3 @@ script = ExtResource("1_1lr1k")
 metadata/_edit_use_anchors_ = true
 
 [node name="SettingMenu" parent="." unique_id=329963932 instance=ExtResource("1_mt4kn")]
-visible = false

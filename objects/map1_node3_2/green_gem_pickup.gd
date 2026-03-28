@@ -5,6 +5,12 @@ extends Area2D
 
 var picked_up := false
 
+@export var save_id = "red_gem_pickup"
+@export var save_scope = "scene"
+
+func _ready():
+	add_to_group("savable")
+
 func can_interact() -> int:
 	return 0
 
@@ -19,4 +25,18 @@ func activate():
 
 	picked_up = true
 	set_meta("no_interact", true)
-	queue_free()
+	hide()
+	
+func save():
+	return {
+		"picked_up": picked_up
+	}
+
+
+func load_data(data):
+
+	picked_up = data.get("picked_up", picked_up)
+
+	if picked_up:
+		hide()
+		return

@@ -275,13 +275,31 @@ func save():
 			"x" : position.x,
 			"y" : position.y
 		},
-		"playerAttribute" : playerAttribute
+		"playerAttribute" : playerAttribute,
+		"player_max_hp" : player_max_hp,
+		"player_hp" : player_hp,
+		"inventory" : inventory,
+		"respawn_position" : {
+			"x" : respawn_position.x,
+			"y" : respawn_position.y
+		}
 	}
 	
 func load_data(data):
 	var pos = data.get("position", null)
+	var re_pos = data.get("respawn_position", null)
+	
+	if re_pos:
+		respawn_position = Vector2(re_pos["x"], re_pos["y"])
 
 	if pos:
 		position = Vector2(pos["x"], pos["y"])
 
-	playerAttribute = data.get("playerAttribute", playerAttribute)
+	playerAttribute = hud.get_current_skill()
+	player_max_hp = int(data.get("player_max_hp", player_max_hp))
+	player_hp = int(data.get("player_hp", player_hp))
+	call_deferred("emit_signal", "health_changed", player_hp)
+	var loaded_inventory = data.get("inventory", {})
+
+	for key in loaded_inventory:
+		inventory[key] = int(loaded_inventory[key])

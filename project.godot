@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MagicMessengerGame"
-run/main_scene="uid://dfrt83npofiis"
+run/main_scene="uid://dh7803taue6uc"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DialogueManager="*uid://c3rodes2l3gxb"
 PuzzleState="*uid://bn1d7wijd7ou8"
+SaveManager="*uid://2qlclfh64kkc"
 
 [display]
 
@@ -31,7 +32,7 @@ project/assembly_name="MagicMessengerGame"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/ldtk-importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/ldtk-importer/plugin.cfg")
 
 [global_group]
 

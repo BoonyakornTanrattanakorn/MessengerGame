@@ -34,7 +34,11 @@ var death_blink_duration = 1.0
 
 @onready var sprite = $AnimatedSprite2D
 
+@export var save_id = "golem_boss"
+@export var save_scope = "scene"
+
 func _ready():
+	add_to_group("savable")
 	player = get_tree().root.find_child("Player", true, false)
 	sprite.play("idle")
 
@@ -174,3 +178,68 @@ func shoot():
 func _on_hit_box_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		body.take_damage(1)
+		
+func save():
+	return {
+		"state": state,
+		"current_hp_index": current_hp_index,
+		"is_stunned": is_stunned,
+		"stun_timer": stun_timer,
+		"activation_timer": activation_timer,
+		"death_blink_timer": death_blink_timer,
+		"no_interact": has_meta("no_interact"),
+		"position": {
+			"x": global_position.x,
+			"y": global_position.y
+		}
+	}
+	
+func load_data(data):
+
+	state = int(data.get("state", BossState.IDLE))
+	current_hp_index = int(data.get("current_hp_index", 0))
+
+	is_stunned = data.get("is_stunned", false)
+
+	stun_timer = float(data.get("stun_timer", 0.0))
+	activation_timer = float(data.get("activation_timer", 0.0))
+	death_blink_timer = float(data.get("death_blink_timer", 0.0))
+
+	if data.get("no_interact", false):
+		set_meta("no_interact", true)
+	else:
+		remove_meta("no_interact")
+
+
+	if data.has("position"):
+		var pos = data["position"]
+		global_position = Vector2(
+			float(pos["x"]),
+			float(pos["y"])
+		)
+		velocity = Vector2.ZERO
+
+
+	match state:
+
+		BossState.IDLE:
+			sprite.play("idle")
+
+		BossState.ACTIVATING:
+			sprite.play("idle")
+
+		BossState.ACTIVE:
+			update_mode()
+
+		BossState.STUNNED:
+			is_stunned = true
+			update_mode()
+
+		BossState.DYING:
+			start_death()
+
+		BossState.DEAD_WITH_DROP:
+			sprite.play("die_golem_wdrop")
+
+		BossState.DEAD:
+			sprite.play("die_golem")
