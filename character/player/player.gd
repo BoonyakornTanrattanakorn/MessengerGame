@@ -79,6 +79,7 @@ func _ready():
 	$Hurtbox.add_to_group("player_hurtbox")
 	player_camera = get_tree().root.find_child("Camera2D", true, false)
 	print("Player camera: ", player_camera)
+	
 
 func _on_skill_changed(attribute: String):
 	playerAttribute = attribute
@@ -208,8 +209,21 @@ func _physics_process(delta):
 			is_charging_wave = false
 			shoot_water_wave(get_wave_level())
 			hud.show_wave_charge_preview(-1)
+	elif playerAttribute == "earth":
+		if Input.is_action_just_pressed("minor magic"):
+			activate_earth_shield()
+		if Input.is_action_just_pressed("major magic"):
+			spawn_rock_pillar()
+	#check water
+	var speed_multiplier = 1.0
+	
+	var check_pos = global_position + (direction * 10.0) 
+	
+	if check_if_water_at(check_pos):
+		if not is_standing_on_pillar(check_pos):
+			speed_multiplier = 0.0 
 	# Normal movement
-	velocity = direction * speed
+	velocity = direction * speed * speed_multiplier
 	move_and_slide()
 	_update_animation(direction)
 	
@@ -318,6 +332,13 @@ func take_damage(amount: int):
 		return
 	# Can't take damage while mounted
 	if is_mounted:
+		return
+	if is_shield_active:
+		current_shield_hp -= amount
+		print("Shield hit! Remaining HP: ", current_shield_hp)
+		if current_shield_hp <= 0:
+			is_shield_active = false
+			print("Shield Broke!")
 		return
 	player_hp -= amount
 	print("Player HP: ", player_hp)
@@ -465,3 +486,83 @@ func shoot_water_wave(level: int):
 		wave.rotation = last_direction.angle()
 		wave.level = level
 		get_tree().current_scene.add_child(wave)
+
+
+# Earth system
+var earth_gauge: float = 0.0
+var max_earth: float = 100.0
+signal earth_changed(value: float)
+
+# Minor: Shield
+@export var shield_max_hp = 2
+var current_shield_hp = 0
+var is_shield_active = false
+
+# Major: Rock Pillars
+@export var rock_pillar_scene: PackedScene = preload("res://Scenes/RockPillar.tscn")
+var active_pillars = []
+var max_pillars = 3
+
+func activate_earth_shield():
+	if is_shield_active: return
+	
+	current_shield_hp = shield_max_hp
+	is_shield_active = true
+	print("Earth Shield Activated! HP: ", current_shield_hp)
+	if animated_sprite.has_node("ShieldVisual"):
+		animated_sprite.get_node("ShieldVisual").show()
+
+func spawn_rock_pillar():
+	active_pillars = active_pillars.filter(func(p): return is_instance_valid(p))
+
+	if active_pillars.size() >= max_pillars:
+		var oldest = active_pillars.pop_front()
+		if is_instance_valid(oldest):
+			oldest.queue_free()
+
+	if rock_pillar_scene:
+		var pillar = rock_pillar_scene.instantiate()
+		
+		var spawn_pos = global_position + last_direction * 32.0
+		pillar.global_position = spawn_pos
+		
+		var is_on_water = check_if_water_at(spawn_pos)
+		
+		get_tree().current_scene.add_child(pillar)
+		
+		active_pillars.append(pillar)
+		
+		if pillar.has_method("setup_pillar"):
+			pillar.setup_pillar(is_on_water)
+
+func check_if_water_at(pos: Vector2) -> bool:
+	var tilemap = get_tree().current_scene.find_child("Ground", true, false)
+	
+	if tilemap == null:
+		print("TileMapLayer 'Ground' not found")
+		return false
+
+	var local_pos = tilemap.to_local(pos)
+	var map_pos = tilemap.local_to_map(local_pos)
+
+	var tile_data = tilemap.get_cell_tile_data(map_pos)
+	
+	if tile_data == null:
+		print("No tile at", map_pos)
+		return false
+
+	var is_water = tile_data.get_custom_data("is_water")
+
+	if is_water == true:
+		print("FOUND WATER")
+		return true
+
+	print("NOT WATER")
+	return false
+	
+func is_standing_on_pillar(pos: Vector2) -> bool:
+	for pillar in active_pillars:
+		if is_instance_valid(pillar):
+			if pos.distance_to(pillar.global_position) < 25.0:
+				return true
+	return false

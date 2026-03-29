@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MagicMessengerGame"
-run/main_scene="uid://dfrt83npofiis"
+run/main_scene="uid://caimee62ouxhw"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

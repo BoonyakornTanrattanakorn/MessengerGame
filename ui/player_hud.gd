@@ -17,6 +17,7 @@ var skills = [
 	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/elements/wind_icon.png")},
 	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": preload("res://assets/icons/fire.png")},
 	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": preload("res://assets/icons/water.png")},
+	{"name": "Earth", "attribute": "earth", "color": Color(0.7, 0.5, 0.3), "icon": preload("res://assets/icons/earth.jpg")},
 ]
 
 # Item list — populate as needed
@@ -29,13 +30,17 @@ var cool_gauge_value: int = 0
 signal skill_changed(attribute: String)
 
 func _ready():
-	var player = get_tree().root.find_child("Player", true, false)
-	
-	# Guard — player not found
-	if player == null:
-		print("ERROR: Player not found!")
+	var players = get_tree().get_nodes_in_group("player")
+
+	if players.size() == 0:
+		print("No player found")
 		return
+
+	var player = players[0]
 	
+	if not player.is_node_ready():
+		await player.ready
+		
 	update_skill_display()
 	call_deferred("refresh_items")
 	call_deferred("_setup_health", player)
