@@ -42,23 +42,40 @@ var inventory = {
 	"antidote": 2,
 }
 
+var is_in_dialogue = false
+
 @export var save_id = "player" 
 @export var save_scope = "global" 
 
 @export var wind_scene: PackedScene = preload("res://Scenes/wind.tscn")
 
 func _ready():
+	DialogueManager.dialogue_started.connect(_on_dialogue_started)
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	add_to_group("savable")
 	hud.skill_changed.connect(_on_skill_changed)
 	# Set starting attribute from HUD
 	playerAttribute = hud.get_current_skill()
 	$Hurtbox.add_to_group("player_hurtbox")
 
+func _on_dialogue_started(_arg = null):
+	is_in_dialogue = true
+	is_dashing = false
+	velocity = Vector2.ZERO
+
+func _on_dialogue_ended(_arg = null):
+	is_in_dialogue = false
+	
 func _on_skill_changed(attribute: String):
 	playerAttribute = attribute
 	print("Switched to: ", attribute)
 
 func _physics_process(delta):
+	if is_in_dialogue:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+		
 	var direction = Input.get_vector("left", "right", "up", "down")
 	
 	# Mount/Dismount

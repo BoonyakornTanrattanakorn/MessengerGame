@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 DialogueManager="*uid://c3rodes2l3gxb"
 PuzzleState="*uid://bn1d7wijd7ou8"
 SaveManager="*uid://2qlclfh64kkc"
+Global="*uid://cqe7q3hwi4d7r"
 
 [display]
 
@@ -112,7 +113,7 @@ item_rotate_right={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogue/conversations/character_gate.dialogue", "res://dialogue/conversations/enemy.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/conversations/character_gate.dialogue", "res://dialogue/conversations/tutorial.dialogue")
 
 [layer_names]
 

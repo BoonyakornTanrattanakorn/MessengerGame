@@ -8,6 +8,15 @@ var current_level: Node = null
 func _ready() -> void:
 	if level_holder.get_child_count() > 0:
 		current_level = level_holder.get_child(0)
+		
+	await get_tree().process_frame
+
+	if not Global.tutorial_shown:
+		Global.tutorial_shown = true
+		DialogueManager.show_dialogue_balloon(
+			load("res://dialogue/conversations/tutorial.dialogue"),
+			"start"
+		)
 
 func load_level(level_path: String, player_spawn_position: Vector2) -> void:
 	var packed_level := load(level_path) as PackedScene
