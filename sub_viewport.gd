@@ -40,7 +40,7 @@ func _apply_config() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_apply_config()
 
 	if _target == null:

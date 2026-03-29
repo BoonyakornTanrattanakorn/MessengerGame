@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://sub_viewport.gd" id="4_go42g"]
 [ext_resource type="Texture2D" uid="uid://dh1li8ns2r2u4" path="res://assets/maps/minimap_frame_background.png" id="4_sreuk"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tq6uv"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sreuk"]
 texture = ExtResource("4_sreuk")
 
 [node name="TestScene" type="Node2D" unique_id=116769061]
@@ -29,10 +29,10 @@ zoom = Vector2(2, 2)
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1670294330]
 clip_children = 1
 offset_left = 982.0
-offset_top = 33.0
+offset_top = 45.0
 offset_right = 1206.0
-offset_bottom = 252.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_tq6uv")
+offset_bottom = 264.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_sreuk")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/PanelContainer" unique_id=1130062419]
 visibility_layer = 3
