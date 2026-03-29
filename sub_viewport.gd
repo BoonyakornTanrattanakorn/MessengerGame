@@ -12,7 +12,7 @@ var _minimap_camera: Camera2D
 func _ready() -> void:
 	render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	world_2d = get_tree().root.world_2d
-
+	canvas_cull_mask &= ~(1 << 1) # hide player in mimimap camera replace it with icon instead
 	_minimap_camera = Camera2D.new()
 	_minimap_camera.enabled = true
 	add_child(_minimap_camera)
