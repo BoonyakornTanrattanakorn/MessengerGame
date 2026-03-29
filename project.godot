@@ -32,7 +32,7 @@ project/assembly_name="MagicMessengerGame"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ldtk-importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/ldtk-importer/plugin.cfg")
 
 [global_group]
 
@@ -112,7 +112,7 @@ item_rotate_right={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogue/conversations/character_gate.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/conversations/character_gate.dialogue", "res://dialogue/conversations/enemy.dialogue")
 
 [layer_names]
 
