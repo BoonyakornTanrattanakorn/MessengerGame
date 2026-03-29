@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cfb83basj5in7" path="res://Scripts/node3.gd" id="1_wicfy"]
 [ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://character/player/player.tscn" id="2_go42g"]
 [ext_resource type="PackedScene" uid="uid://b8qsp3gj4rw21" path="res://assets/maps/levels/Ch1N2L1.scn" id="2_wicfy"]
+[ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://sub_viewport.gd" id="4_go42g"]
 
 [node name="TestScene" type="Node2D" unique_id=116769061]
 y_sort_enabled = true
@@ -18,3 +19,16 @@ position = Vector2(2874, 4212)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1552768552]
 zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=957682362]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=1130062419]
+offset_left = 1011.0
+offset_top = 40.0
+offset_right = 1226.0
+offset_bottom = 228.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=1587483765]
+size = Vector2i(215, 188)
+script = ExtResource("4_go42g")
