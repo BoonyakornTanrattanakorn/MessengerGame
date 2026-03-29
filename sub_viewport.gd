@@ -23,11 +23,18 @@ func _ready() -> void:
 
 
 func _apply_config() -> void:
-	size = minimap_viewport_size
+	# Godot locks SubViewport size when parent SubViewportContainer uses stretch.
+	# Skip manual size updates in that case to avoid runtime warnings.
+	var container := get_parent()
+	var can_set_size := true
+	if container is SubViewportContainer and (container as SubViewportContainer).stretch:
+		can_set_size = false
+
+	if can_set_size and size != minimap_viewport_size:
+		size = minimap_viewport_size
 	if _minimap_camera != null:
 		_minimap_camera.zoom = Vector2(minimap_zoom_scale, minimap_zoom_scale)
 
-	var container := get_parent()
 	if container is Control:
 		(container as Control).scale = Vector2(minimap_display_scale, minimap_display_scale)
 
