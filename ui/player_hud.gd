@@ -8,6 +8,11 @@ extends CanvasLayer
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
 @onready var health_gui = $HealthGUI
+
+# Objective UI
+@onready var objective_box = $ObjectiveBox
+@onready var objective_label = $ObjectiveBox/ObjectivePanel/MarginContainer/ObjectiveLabel
+
 # Skill list — add more elements here as you implement them
 var skills = [
 	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/elements/wind_icon.png")},
@@ -20,6 +25,7 @@ var items = []
 
 var skill_index = 0
 var item_index = 0
+var current_objective: String = ""
 
 @export var save_id = "player_hud" 
 @export var save_scope = "global" 
@@ -28,12 +34,21 @@ signal skill_changed(attribute: String)
 
 func _ready():
 	add_to_group("savable")
+
+	ObjectiveManager.register_hud(self)
+	hide_objective()
+
 	var player = get_tree().root.find_child("Player", true, false)
 	update_skill_display()
 	call_deferred("refresh_items")
-	health_gui.set_max_health(player.player_max_hp)
-	health_gui.update_health(player.player_hp)
-	player.health_changed.connect(health_gui.update_health)
+
+	if player:
+		health_gui.set_max_health(player.player_max_hp)
+		health_gui.update_health(player.player_hp)
+		player.health_changed.connect(health_gui.update_health)
+
+func _exit_tree() -> void:
+	ObjectiveManager.unregister_hud(self)
 
 func _process(_delta):
 	# Skill bar — up/down
@@ -48,11 +63,11 @@ func _process(_delta):
 		emit_signal("skill_changed", skills[skill_index]["attribute"])
 
 	# Item bar — left/right
-	if Input.is_action_just_pressed("item_rotate_left"):
+	if items.size() > 0 and Input.is_action_just_pressed("item_rotate_left"):
 		item_index = (item_index - 1 + items.size()) % items.size()
 		update_item_display()
 
-	if Input.is_action_just_pressed("item_rotate_right"):
+	if items.size() > 0 and Input.is_action_just_pressed("item_rotate_right"):
 		item_index = (item_index + 1) % items.size()
 		update_item_display()
 
@@ -62,6 +77,7 @@ func update_skill_display():
 	var style = skill_slot.get_theme_stylebox("panel").duplicate()
 	style.border_color = skills[skill_index]["color"]
 	skill_slot.add_theme_stylebox_override("panel", style)
+
 	var current_skill = skills[skill_index]
 	element_icon.texture = current_skill["icon"]
 
@@ -80,6 +96,7 @@ func update_item_display():
 		item_icon.texture = null
 		item_count_label.text = ""
 		return
+
 	item_icon.texture = items[item_index]["icon"]
 	item_count_label.text = "x" + str(items[item_index]["count"])
 
@@ -87,6 +104,7 @@ func refresh_items():
 	var player = get_tree().root.find_child("Player", true, false)
 	if not player:
 		return
+
 	items.clear()
 	for item_name in player.inventory:
 		if player.inventory[item_name] > 0:
@@ -95,35 +113,68 @@ func refresh_items():
 				"count": player.inventory[item_name],
 				"icon": get_icon(item_name)
 			})
+
 	if items.size() == 0:
+		update_item_display()
 		return
-	if items.size() > 0:
-		item_index = clamp(item_index, 0, items.size() - 1)
+
+	item_index = clamp(item_index, 0, items.size() - 1)
 	update_item_display()
 
 func get_icon(item_name: String) -> Texture2D:
 	match item_name:
-		"red_gem":    return preload("res://assets/icons/red_gem.png")
-		"blue_gem":    return preload("res://assets/icons/blue_gem.png")
-		"green_gem":    return preload("res://assets/icons/green_gem.png")
+		"red_gem": return preload("res://assets/icons/red_gem.png")
+		"blue_gem": return preload("res://assets/icons/blue_gem.png")
+		"green_gem": return preload("res://assets/icons/green_gem.png")
 		"brave_stone": return preload("res://assets/icons/brave_stone.png")
-		"potion":      return preload("res://assets/icons/potion.png")
-		"antidote":    return preload("res://assets/icons/antidote.png")
+		"potion": return preload("res://assets/icons/potion.png")
+		"antidote": return preload("res://assets/icons/antidote.png")
 	return null
 
-func save():
-	var item_counts = []
-	for item in items:
-		item_counts.append(item["count"])
+# =========================
+# Objective system
+# =========================
 
+func set_objective_text(new_text: String, prefix: String = "Objective: ") -> void:
+	current_objective = new_text.strip_edges()
+
+	if current_objective.is_empty():
+		clear_objective()
+		return
+
+	objective_label.text = prefix + current_objective
+	show_objective()
+
+func clear_objective() -> void:
+	current_objective = ""
+	objective_label.text = ""
+	hide_objective()
+
+func get_objective_text() -> String:
+	return current_objective
+
+func show_objective() -> void:
+	objective_box.show()
+
+func hide_objective() -> void:
+	objective_box.hide()
+
+func save():
 	return {
 		"skill_index": skill_index,
-		"item_index": item_index
+		"item_index": item_index,
+		"current_objective": current_objective
 	}
 	
 func load_data(data):
-
 	skill_index = int(data.get("skill_index", skill_index))
 	item_index = int(data.get("item_index", item_index))
+
 	update_skill_display()
 	refresh_items()
+
+	var saved_objective = data.get("current_objective", "")
+	if String(saved_objective).strip_edges().is_empty():
+		clear_objective()
+	else:
+		set_objective_text(saved_objective)

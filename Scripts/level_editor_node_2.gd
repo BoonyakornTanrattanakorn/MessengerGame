@@ -14,6 +14,8 @@ func _ready():
 	for i in range(activated_levers.size()):
 		activated_levers[i] = 0
 
+	call_deferred("_init_objective")
+	
 	for child in get_children():
 		if child.has_signal("lever_activated"):
 			child.lever_activated.connect(_on_lever_activated)
@@ -30,6 +32,8 @@ func _on_lever_activated(room_id: int):
 	print("Room ", room_id, " levers active: ",
 		activated_levers[room_id], "/", total_levers[room_id])
 
+	update_objective_for_room(room_id)
+	
 	if activated_levers[room_id] >= total_levers[room_id]:
 		open_door(room_id)
 
@@ -53,3 +57,23 @@ func load_data(data):
 	for room_id in doors_by_room.keys():
 		if room_id < activated_levers.size() and activated_levers[room_id] >= total_levers[room_id]:
 			open_door(room_id)
+			
+# update obj system
+func update_objective_for_room(room_id: int):
+	# Only handle room 0 and 1 (your room 1 and 2)
+	if room_id > 1:
+		return
+
+	var current = activated_levers[room_id]
+	var total = total_levers[room_id]
+
+	# If not complete yet
+	if current < total:
+		ObjectiveManager.set_objective(
+			"Use wind power to flip the switch %d/%d" % [current, total]
+		)
+	else:
+		ObjectiveManager.set_objective("Go to the next room")
+		
+func _init_objective():
+	update_objective_for_room(0)

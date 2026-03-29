@@ -52,6 +52,7 @@ var is_in_dialogue = false
 func _ready():
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+	#ObjectiveManager.set_objective("Use wind power to flip the switch")
 	add_to_group("savable")
 	hud.skill_changed.connect(_on_skill_changed)
 	# Set starting attribute from HUD
