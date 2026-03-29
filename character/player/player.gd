@@ -460,7 +460,7 @@ func shoot_water_wave(level: int):
 	if water_wave_scene:
 		var wave = water_wave_scene.instantiate()
 		# Offset spawn position forward in the direction of travel
-		wave.global_position = global_position + last_direction *  35.0
+		wave.global_position = global_position + last_direction *  40.0
 		wave.direction = last_direction
 		wave.rotation = last_direction.angle()
 		wave.level = level

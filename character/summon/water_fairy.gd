@@ -39,12 +39,17 @@ func try_interact():
 		print("[Fairy] No interactable nearby")
 		return
 	print("[Fairy] Interacting with: ", interact_with.name)
-	if interact_with.has_method("activate"):
-		print("[Fairy] Calling activate()")
-		interact_with.activate()
-	elif interact_with.has_method("can_interact"):
-		print("[Fairy] Calling dialogue for: ", interact_with.name)
-		var dialogue_path = "res://dialogue/conversations/" + interact_with.name + ".dialogue"
+	
+	var target = interact_with
+	# If interact_with has no activate, try its parent
+	if not target.has_method("activate") and target.get_parent().has_method("activate"):
+		target = target.get_parent()
+		print("[Fairy] Forwarding to parent: ", target.name)
+	
+	if target.has_method("activate"):
+		target.activate()
+	elif target.has_method("can_interact"):
+		var dialogue_path = "res://dialogue/conversations/" + target.name + ".dialogue"
 		if ResourceLoader.exists(dialogue_path):
 			DialogueManager.show_dialogue_balloon(load(dialogue_path), "_0")
 		else:
@@ -81,3 +86,16 @@ func _on_interaction_area_area_exited(area: Area2D):
 	if area == interact_with:
 		interact_with = null
 		print("[Fairy] Cleared interact_with (area exited): ", area.name)
+
+func _ready():
+	print("[Fairy] Ready")
+	var area = $InteractionArea
+	if area == null:
+		print("[Fairy] ERROR: InteractionArea not found!")
+		return
+	print("[Fairy] InteractionArea found, connecting signals")
+	area.body_entered.connect(_on_interaction_area_body_entered)
+	area.body_exited.connect(_on_interaction_area_body_exited)
+	area.area_entered.connect(_on_interaction_area_area_entered)
+	area.area_exited.connect(_on_interaction_area_area_exited)
+	print("[Fairy] Signals connected")
