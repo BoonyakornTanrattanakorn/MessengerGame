@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djv704ulqnjfc"
-path="res://.godot/imported/minimap_frame_background.png-73e0164a2cbb0f7f1e601811a0ee7514.ctex"
+uid="uid://dh1li8ns2r2u4"
+path="res://.godot/imported/minimap_frame_background.png-17f6339344822a79191cf2c63d50f96b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/minimap_frame_background.png"
-dest_files=["res://.godot/imported/minimap_frame_background.png-73e0164a2cbb0f7f1e601811a0ee7514.ctex"]
+source_file="res://assets/maps/minimap_frame_background.png"
+dest_files=["res://.godot/imported/minimap_frame_background.png-17f6339344822a79191cf2c63d50f96b.ctex"]
 
 [params]
 
