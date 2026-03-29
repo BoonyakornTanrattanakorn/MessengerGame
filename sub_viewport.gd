@@ -1,7 +1,7 @@
 extends SubViewport
 
 @export var target_node_name: String = "Player"
-@export_range(0.05, 2.0, 0.01) var minimap_zoom_scale: float = 0.5
+@export_range(0.05, 2.0, 0.01) var minimap_zoom_scale: float = 0.3
 @export_range(0.5, 4.0, 0.1) var minimap_display_scale: float = 1.0
 @export var minimap_viewport_size: Vector2i = Vector2i(215, 188)
 
