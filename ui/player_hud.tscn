@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://e361eggsk80u" path="res://ui/player_hud.gd" id="1_1m6my"]
 [ext_resource type="Script" uid="uid://bqfelbmhsoegq" path="res://ui/health_gui/health_gui.gd" id="2_w11uw"]
 [ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://ui/health_gui/element_display.tscn" id="3_q84jv"]
+[ext_resource type="PackedScene" uid="uid://ctxx46yi1gm4o" path="res://ui/CoolGauge.tscn" id="4_7pawb"]
 [ext_resource type="PackedScene" uid="uid://b7q4tjsvib3gr" path="res://ui/HeatGauge.tscn" id="4_w11uw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
@@ -161,6 +162,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 0
+
+[node name="CoolGauge" parent="HealthGUI/VBoxContainer" unique_id=802023072 instance=ExtResource("4_7pawb")]
+layout_mode = 2
 
 [node name="HeatGauge" parent="HealthGUI/VBoxContainer" unique_id=498134378 instance=ExtResource("4_w11uw")]
 custom_minimum_size = Vector2(0, 10)

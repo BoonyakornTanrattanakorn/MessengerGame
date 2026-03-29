@@ -8,6 +8,9 @@ extends CanvasLayer
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
 @onready var health_gui = $HealthGUI
+#cool gauge
+@onready var cool_gauge_ui = $HealthGUI/VBoxContainer/CoolGauge
+#heat gauge
 @onready var heat_gauge = $HealthGUI/VBoxContainer/HeatGauge
 # Skill list — add more elements here as you implement them
 var skills = [
@@ -21,22 +24,43 @@ var items = []
 
 var skill_index = 0
 var item_index = 0
-
+var heat_gauge_value: float = 0.0
+var cool_gauge_value: int = 0
 signal skill_changed(attribute: String)
 
 func _ready():
 	var player = get_tree().root.find_child("Player", true, false)
+	
+	# Guard — player not found
+	if player == null:
+		print("ERROR: Player not found!")
+		return
+	
 	update_skill_display()
 	call_deferred("refresh_items")
-	# Defer these so @onready vars inside HealthGUI resolve first
 	call_deferred("_setup_health", player)
-	
-	#heat gauge
+
 	skill_changed.connect(_on_skill_changed)
-	heat_gauge.set_max_hp(player.player_max_hp)
-	heat_gauge.update_heat(0.0)
-	heat_gauge.visible = false   # hidden until fire element active
-	player.heat_changed.connect(heat_gauge.update_heat)
+	
+	# Heat gauge
+	if heat_gauge != null:
+		heat_gauge.set_max_hp(player.player_max_hp)
+		heat_gauge.update_heat(0.0)
+		heat_gauge.visible = false
+		player.heat_changed.connect(heat_gauge.update_heat)
+	else:
+		print("ERROR: heat_gauge node not found! Check path: ", heat_gauge)
+
+	# Cool gauge
+	if cool_gauge_ui != null:
+		cool_gauge_ui.set_max_hp(player.player_max_hp)
+		cool_gauge_ui.update_cool(0)
+		cool_gauge_ui.visible = false
+		player.cool_changed.connect(cool_gauge_ui.update_cool)
+		player.cool_changed.connect(_on_cool_value_changed)
+	else:
+		print("ERROR: cool_gauge_ui node not found! Check path: ", cool_gauge_ui)
+
 
 func _setup_health(player):
 	health_gui.set_max_health(player.player_max_hp)
@@ -124,4 +148,30 @@ func _on_heat_changed(value: float):
 	heat_gauge.update_heat(value)
 
 func _on_skill_changed(attribute: String):
-	heat_gauge.set_visible(attribute == "fire")
+	heat_gauge.visible = (attribute == "fire") or (heat_gauge_value > 0)
+	cool_gauge_ui.visible = (attribute == "water") or (cool_gauge_value > 0)
+
+func _on_heat_value_changed(value: float):
+	heat_gauge_value = value
+	heat_gauge.update_heat(value)
+	# Auto hide when fully cooled and not on fire element
+	if value <= 0.0 and skills[skill_index]["attribute"] != "fire":
+		heat_gauge.visible = false
+
+func _on_cool_value_changed(value: int):
+	cool_gauge_value = value
+	cool_gauge_ui.update_cool(value)
+	if value <= 0 and skills[skill_index]["attribute"] != "water":
+		cool_gauge_ui.visible = false
+
+func show_wave_charge_preview(preview_value: int):
+	if cool_gauge_ui == null:
+		return
+	if preview_value == -1:
+		cool_gauge_ui.update_cool(cool_gauge_value)
+		# Hide if not water element and gauge is empty
+		if cool_gauge_value <= 0 and skills[skill_index]["attribute"] != "water":
+			cool_gauge_ui.visible = false
+	else:
+		cool_gauge_ui.visible = true  # always show while charging
+		cool_gauge_ui.update_cool_preview(clamp(preview_value, 0, 3))

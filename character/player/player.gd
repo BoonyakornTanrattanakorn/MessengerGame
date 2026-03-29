@@ -21,6 +21,29 @@ var heat_cooldown_delay: float = 3.0   # seconds before cooling starts
 var heat_drain_rate: float = 15.0      # gauge units drained per second
 signal heat_changed(value: float)
 
+# Water system
+var cool_gauge: int = 0          # 0, 1, 2, or 3
+var max_cool_gauge: int = 3
+var cool_drain_timer: float = 0.0
+var cool_drain_delay: float = 3.0
+var cool_drain_rate: float = 0.5  # drains 1 unit per 0.5 sec
+var cool_drain_accum: float = 0.0
+signal cool_changed(value: int)
+
+# Water fairy
+var fairy_instance = null
+var is_controlling_fairy: bool = false
+var fairy_duration: float = 5.0
+var fairy_timer: float = 0.0
+var fairy_cooldown: float = 8.0
+var fairy_cooldown_timer: float = 0.0
+
+# Water wave charging
+var wave_charge_timer: float = 0.0
+var is_charging_wave: bool = false
+
+
+
 # Dash system
 var is_dashing: bool = false
 var dash_timer: float = 0.0
@@ -47,10 +70,15 @@ var inventory = {
 	"antidote": 2,
 }
 
+var player_camera: Camera2D = null
+
+
 func _ready():
 	hud.skill_changed.connect(_on_skill_changed)
 	playerAttribute = hud.get_current_skill()
 	$Hurtbox.add_to_group("player_hurtbox")
+	player_camera = get_tree().root.find_child("Camera2D", true, false)
+	print("Player camera: ", player_camera)
 
 func _on_skill_changed(attribute: String):
 	playerAttribute = attribute
@@ -110,12 +138,44 @@ func _physics_process(delta):
 			return
 
 	# Handle fire skill
-	if playerAttribute == "fire" and heat_gauge > 0:
+	if heat_gauge > 0:
 		if heat_cooldown_timer > 0:
 			heat_cooldown_timer -= delta
 		else:
 			heat_gauge = max(0.0, heat_gauge - heat_drain_rate * delta)
 			heat_changed.emit(heat_gauge)
+	# Cool gauge global drain
+	if cool_gauge > 0:
+		if cool_drain_timer > 0:
+			cool_drain_timer -= delta
+		else:
+			cool_drain_accum += delta
+			if cool_drain_accum >= cool_drain_rate:
+				cool_drain_accum = 0.0
+				add_cool(-1)
+	# Fairy duration countdown
+	if is_controlling_fairy:
+		fairy_timer -= delta
+	
+		# Cancel fairy with minor magic (C key)
+		if Input.is_action_just_pressed("minor magic"):
+			print("[Fairy] Cancelled by player")
+			end_fairy()
+			return
+	
+		if fairy_timer <= 0:
+			print("[Fairy] Duration expired")
+			end_fairy()
+		else:
+			handle_fairy_movement(delta)
+			# Show remaining time debug
+			if Engine.get_frames_drawn() % 60 == 0:  # print once per second
+				print("[Fairy] Time remaining: ", snappedf(fairy_timer, 0.1), "s")
+		return  # skip all player movement
+
+	# Fairy cooldown countdown
+	if fairy_cooldown_timer > 0:
+		fairy_cooldown_timer -= delta
 	# Handle skill
 	if playerAttribute == "fire":
 		if Input.is_action_just_pressed("minor magic"):
@@ -129,7 +189,25 @@ func _physics_process(delta):
 			velocity = last_direction * dash_speed
 		if Input.is_action_just_pressed("major magic"):
 			shoot_wind_wave()
-
+	elif playerAttribute == "water":
+		# Light skill — summon fairy
+		if Input.is_action_just_pressed("minor magic"):
+			if is_controlling_fairy:
+				end_fairy()  # cancel fairy early
+			elif fairy_cooldown_timer <= 0 and cool_gauge < max_cool_gauge:
+				summon_fairy()
+		# Heavy skill — wave charge
+		if Input.is_action_just_pressed("major magic"):
+			is_charging_wave = true
+			wave_charge_timer = 0.0
+		if Input.is_action_pressed("major magic") and is_charging_wave:
+			wave_charge_timer += delta
+			var preview_level = get_wave_level()
+			hud.show_wave_charge_preview(cool_gauge + preview_level)
+		if Input.is_action_just_released("major magic") and is_charging_wave:
+			is_charging_wave = false
+			shoot_water_wave(get_wave_level())
+			hud.show_wave_charge_preview(-1)
 	# Normal movement
 	velocity = direction * speed
 	move_and_slide()
@@ -310,3 +388,80 @@ func add_heat(amount: float):
 		player_hp = 0
 		health_changed.emit(player_hp)
 		print("Overheated! Player dead!")
+
+#water skill
+@export var water_fairy_scene: PackedScene = preload("res://character/summon/WaterFairy.tscn")
+@export var water_wave_scene: PackedScene = preload("res://Scenes/WaterWave.tscn")
+
+func add_cool(amount: int):
+	cool_gauge = clamp(cool_gauge + amount, 0, max_cool_gauge)
+	cool_drain_timer = cool_drain_delay  # reset drain delay on any change
+	cool_changed.emit(cool_gauge)
+
+func get_wave_level() -> int:
+	if wave_charge_timer >= 1.0:
+		return 3
+	elif wave_charge_timer >= 0.5:
+		return 2
+	else:
+		return 1
+
+func get_wave_cost(level: int) -> int:
+	return level  # level 1 = 1 gauge, level 2 = 2, level 3 = 3
+
+func summon_fairy():
+	if cool_gauge + 1 > max_cool_gauge:
+		return
+	add_cool(1)
+	is_controlling_fairy = true
+	fairy_timer = fairy_duration
+	fairy_instance = water_fairy_scene.instantiate()
+	fairy_instance.global_position = global_position + Vector2(16, 0)
+	get_tree().current_scene.add_child(fairy_instance)
+	
+	# Switch camera to fairy
+	fairy_instance.activate_camera()
+	# Disable player camera so fairy camera takes over
+	if player_camera:
+		player_camera.enabled = false
+	print("[Fairy] Summoned — camera switched to fairy")
+
+func end_fairy():
+	is_controlling_fairy = false
+	fairy_timer = 0.0
+	fairy_cooldown_timer = fairy_cooldown
+	if fairy_instance != null:
+		fairy_instance.deactivate_camera()
+		fairy_instance.queue_free()
+		fairy_instance = null
+	
+	# Return camera to player
+	if player_camera:
+		player_camera.enabled = true
+	print("[Fairy] Dismissed — camera returned to player")
+
+func handle_fairy_movement(delta: float):
+	if fairy_instance == null:
+		return
+	var dir = Input.get_vector("left", "right", "up", "down")
+	fairy_instance.move(dir, delta)
+	if Input.is_action_just_pressed("interact"):
+		print("[Fairy] Interact pressed")
+		fairy_instance.try_interact()
+
+func shoot_water_wave(level: int):
+	var cost = get_wave_cost(level)
+	if cool_gauge + cost > max_cool_gauge:
+		level = max_cool_gauge - cool_gauge
+		if level <= 0:
+			return
+		cost = level
+	add_cool(cost)
+	if water_wave_scene:
+		var wave = water_wave_scene.instantiate()
+		# Offset spawn position forward in the direction of travel
+		wave.global_position = global_position + last_direction *  35.0
+		wave.direction = last_direction
+		wave.rotation = last_direction.angle()
+		wave.level = level
+		get_tree().current_scene.add_child(wave)
