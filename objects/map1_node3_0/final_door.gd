@@ -17,10 +17,11 @@ func can_interact() -> int:
 func activate():
 	refresh_state()
 
-	if not unlocked:
+	if not Node3State.has_all_gems():
 		print("Need all 3 gems first")
 		return
 
+	ObjectiveManager.clear_objective()
 	get_tree().change_scene_to_file(coming_soon_scene_path)
 
 func refresh_state() -> void:

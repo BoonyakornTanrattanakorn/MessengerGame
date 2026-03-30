@@ -35,6 +35,8 @@ func activate():
 	if player and player.has_method("add_item"):
 		player.add_item(item_name, amount)
 		print("Player received ", item_name, " x", amount)
+	
+	Node3State.collect_gem("red_gem")
 
 	picked_up = true
 	set_meta("no_interact", true)

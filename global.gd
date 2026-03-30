@@ -1,6 +1,10 @@
 extends Node
 
-var tutorial_shown := false
+var chap1_node2_shown := false
+var chap1_node3_shown := false
+var chap1_node3_1_shown := false
+var chap1_node3_2_shown := false
+var chap1_node3_3_shown := false
 
 var room1_switch := 2
 var room1_flipped := 0

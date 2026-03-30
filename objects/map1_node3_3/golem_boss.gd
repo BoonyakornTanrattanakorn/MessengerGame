@@ -50,6 +50,7 @@ func activate():
 		BossState.IDLE:
 			if player:
 				player.add_item("blue_gem", 1)
+				Node3State.collect_gem("blue_gem")
 			state = BossState.ACTIVATING
 			activation_timer = activation_delay
 

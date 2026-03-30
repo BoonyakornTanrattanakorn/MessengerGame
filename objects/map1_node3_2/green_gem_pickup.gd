@@ -23,6 +23,7 @@ func activate():
 		player.add_item(item_name, amount)
 		print("Player received ", item_name, " x", amount)
 
+	Node3State.collect_gem("green_gem")
 	picked_up = true
 	set_meta("no_interact", true)
 	hide()
