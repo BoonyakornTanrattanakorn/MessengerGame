@@ -16,6 +16,10 @@ func collect_fragment(fragment_id: String) -> void:
 	print("Found: ", fragment_id)
 	if fragment_id not in found_fragments:
 		found_fragments.append(fragment_id)
+		if (len(found_fragments) != 0 && len(found_fragments) != 4):
+			ObjectiveManager.set_objective("Find all clues %d/4" % len(found_fragments))
+		elif (len(found_fragments) == 4):
+			ObjectiveManager.set_objective("Talk to the gatekeeper again")
 
 func has_all_fragments() -> bool:
 	return found_fragments.size() >= TOTAL_FRAGMENTS

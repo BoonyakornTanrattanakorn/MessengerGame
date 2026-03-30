@@ -9,6 +9,7 @@ extends Area2D
 
 var player_in_range: bool = false
 var is_talking: bool = false
+var first_talk: bool = false
 
 func _ready() -> void:
 	prompt_label.visible = false
@@ -35,6 +36,10 @@ func start_dialogue() -> void:
 
 	# Pass "self" into extra_game_states so dialogue can call NPC.submit_answer(...)
 	DialogueManager.show_dialogue_balloon(dialogue_resource, start_title, [self])
+	
+	if (!first_talk):
+		ObjectiveManager.set_objective("Find all clues 0/4")
+		first_talk = true
 
 func _on_body_entered(body: Node) -> void:
 	if body.name == player_node_name:

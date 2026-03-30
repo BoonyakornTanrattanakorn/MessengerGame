@@ -20,6 +20,7 @@ func open() -> void:
 	opened = true
 
 	_play_all("Open")
+	ObjectiveManager.set_objective("Leave the dungeons")
 
 	if collision:
 		collision.set_deferred("disabled", true)
