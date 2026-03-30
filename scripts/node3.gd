@@ -11,7 +11,7 @@ func _ready() -> void:
 		
 	await get_tree().process_frame
 
-	if not Global.tutorial_shown:
+	if not Global.tutorial_shown and current_level.name == "Chapter1_Node2" :
 		Global.tutorial_shown = true
 		DialogueManager.show_dialogue_balloon(
 			load("res://dialogue/conversations/tutorial.dialogue"),
