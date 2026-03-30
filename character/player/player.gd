@@ -30,6 +30,7 @@ var current_mount = null
 
 @onready var hud = $PlayerHUD  # or get_node path
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var camera = $Camera2D
 
 var respawn_position = Vector2(110, 115)
 
@@ -321,3 +322,13 @@ func load_data(data):
 
 	for key in loaded_inventory:
 		inventory[key] = int(loaded_inventory[key])
+		
+func focus_camera_to(target: Node2D):
+	camera.reparent(get_tree().current_scene) # detach from player
+
+	var tween = create_tween()
+	tween.tween_property(camera, "global_position", target.global_position, 0.5)
+
+func return_camera():
+	camera.reparent(self)  # back to player
+	camera.position = Vector2.ZERO  # reset offset

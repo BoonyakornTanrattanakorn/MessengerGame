@@ -29,15 +29,21 @@ func _on_body_entered(body: Node) -> void:
 
 func handle_trigger_1() -> void:
 	print("Trigger 1")
-	var dialogue = load("res://dialogue/conversations/tutorial.dialogue")
-	print("Loaded:", dialogue)
+	var player = get_tree().get_first_node_in_group("player")
+	var switch_node = get_tree().current_scene.get_node("LevelHolder/Chapter1_Node2/Door/lever_room1_a2")
 
-	if dialogue == null:
-		print("Dialogue failed to load")
-		return
+	player.focus_camera_to(switch_node)
 
-	DialogueManager.show_dialogue_balloon(dialogue, "after_first_room")
-	print("Tried to show dialogue")
+	await get_tree().create_timer(1.0).timeout
+
+	DialogueManager.show_dialogue_balloon(
+		preload("res://dialogue/conversations/tutorial.dialogue"),
+		"after_first_room"
+	)
+
+	await DialogueManager.dialogue_ended
+
+	player.return_camera()
 	ObjectiveManager.set_objective("Use wind power to flip the switch 0/2")
 
 func handle_trigger_2() -> void:
@@ -47,3 +53,6 @@ func handle_trigger_2() -> void:
 func handle_trigger_3() -> void:
 	print("Trigger 3")
 	ObjectiveManager.set_objective("Talk to the gatekeeper")
+	
+	
+	# ScriptedObjects/ChapterGateNpc

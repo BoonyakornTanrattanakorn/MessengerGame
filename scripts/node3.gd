@@ -17,6 +17,14 @@ func _ready() -> void:
 			load("res://dialogue/conversations/tutorial.dialogue"),
 			"start"
 		)
+		
+		await DialogueManager.dialogue_ended
+
+		var switch_node = get_tree().current_scene.get_node("LevelHolder/Chapter1_Node2/Door/lever_room0_a2")
+		player.focus_camera_to(switch_node)
+
+		await get_tree().create_timer(1.0).timeout
+		player.return_camera()
 
 func load_level(level_path: String, player_spawn_position: Vector2) -> void:
 	var packed_level := load(level_path) as PackedScene
