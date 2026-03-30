@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var next_level_path: String = "res://assets/maps/levels/Level_1.scn"
-@export var spawn_position_in_next_level: Vector2 = Vector2(-846, 348)
+@export var spawn_position_in_next_level: Vector2 = Vector2(-956, 348)
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
