@@ -121,7 +121,7 @@ func _physics_process(delta):
 func _on_danger_entered(area):
 	if area.is_in_group("danger"):
 		if mounted_player:
-			mounted_player.die_in_minecart_and_respawn()
+			mounted_player.die_in_minecart_and_respawn(Vector2(-30, -200))
 		stop_cart()
 
 func _on_stop_area_entered(area):

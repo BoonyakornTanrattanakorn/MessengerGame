@@ -385,13 +385,13 @@ func add_item(item_name: String, amount: int = 1):
 	print("Got: ", item_name, " total: ", inventory[item_name])
 	get_node("/root").find_child("PlayerHUD", true, false).refresh_items()
 
-func die_in_minecart_and_respawn():
+func die_in_minecart_and_respawn(minecart_respawn_position):
 	if current_mount != null:
 		current_mount.reset_position()
 		current_mount.dismount_player()
 	is_mounted = false
 	current_mount = null
-	global_position = respawn_position
+	global_position = minecart_respawn_position
 	player_hp = player_max_hp
 	
 #wind skill
@@ -611,7 +611,7 @@ func check_if_water_at(pos: Vector2) -> bool:
 	var tilemap = get_tree().current_scene.find_child("Ground", true, false)
 	
 	if tilemap == null:
-		print("TileMapLayer 'Ground' not found")
+		#print("TileMapLayer 'Ground' not found")
 		return false
 
 	var local_pos = tilemap.to_local(pos)
@@ -620,16 +620,16 @@ func check_if_water_at(pos: Vector2) -> bool:
 	var tile_data = tilemap.get_cell_tile_data(map_pos)
 	
 	if tile_data == null:
-		print("No tile at", map_pos)
+		#print("No tile at", map_pos)
 		return false
+	else:
+		var is_water = tile_data.get_custom_data("is_water")
 
-	var is_water = tile_data.get_custom_data("is_water")
+		if is_water == true:
+			#print("FOUND WATER")
+			return true
 
-	if is_water == true:
-		print("FOUND WATER")
-		return true
-
-	print("NOT WATER")
+	#print("NOT WATER")
 	return false
 	
 func is_standing_on_pillar(pos: Vector2) -> bool:

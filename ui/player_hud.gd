@@ -37,28 +37,32 @@ var current_objective: String = ""
 
 signal skill_changed(attribute: String)
 
-func _ready():
-	add_to_group("savable")
-
-	ObjectiveManager.register_hud(self)
-	hide_objective()
-
-	var player = get_tree().root.find_child("Player", true, false)
-	update_skill_display()
-	call_deferred("refresh_items")
-
-	if player:
-		health_gui.set_max_health(player.player_max_hp)
-		health_gui.update_health(player.player_hp)
-		player.health_changed.connect(health_gui.update_health)
+#func _ready():
+	#add_to_group("savable")
+#
+	#ObjectiveManager.register_hud(self)
+	#hide_objective()
+#
+	#var player = get_tree().root.find_child("Player", true, false)
+	#update_skill_display()
+	#call_deferred("refresh_items")
+#
+	#if player:
+		#health_gui.set_max_health(player.player_max_hp)
+		#health_gui.update_health(player.player_hp)
+		#player.health_changed.connect(health_gui.update_health)
 
 func _exit_tree() -> void:
 	ObjectiveManager.unregister_hud(self)
 var heat_gauge_value: float = 0.0
 var cool_gauge_value: int = 0
-signal skill_changed(attribute: String)
 
 func _ready():
+	add_to_group("savable")
+
+	ObjectiveManager.register_hud(self)
+	hide_objective()
+	
 	var players = get_tree().get_nodes_in_group("player")
 
 	if players.size() == 0:

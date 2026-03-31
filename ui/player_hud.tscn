@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://bx1qk3b53a1h1"]
+[gd_scene format=3 uid="uid://bt83ehltqgd07"]
 
 [ext_resource type="Script" uid="uid://e361eggsk80u" path="res://ui/player_hud.gd" id="1_1m6my"]
 [ext_resource type="Script" uid="uid://bqfelbmhsoegq" path="res://ui/health_gui/health_gui.gd" id="2_w11uw"]
 [ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://ui/health_gui/element_display.tscn" id="3_q84jv"]
-[ext_resource type="PackedScene" uid="uid://kdx43i281auy" path="res://ui/setting/setting.tscn" id="4_w11uw"]
 [ext_resource type="PackedScene" uid="uid://ctxx46yi1gm4o" path="res://ui/CoolGauge.tscn" id="4_7pawb"]
 [ext_resource type="PackedScene" uid="uid://b7q4tjsvib3gr" path="res://ui/HeatGauge.tscn" id="4_w11uw"]
+[ext_resource type="PackedScene" uid="uid://kdx43i281auy" path="res://ui/setting/setting.tscn" id="6_sjha8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -31,7 +31,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w11uw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q84jv"]
 bg_color = Color(0, 0, 0, 0.2)
 
 [node name="PlayerHUD" type="CanvasLayer" unique_id=966903807]
@@ -157,38 +157,6 @@ script = ExtResource("2_w11uw")
 [node name="ElementDisplay" parent="HealthGUI" unique_id=300156056 instance=ExtResource("3_q84jv")]
 layout_mode = 2
 
-<<<<<<< HEAD
-[node name="Setting" parent="." unique_id=1015252459 instance=ExtResource("4_w11uw")]
-
-[node name="ObjectiveBox" type="MarginContainer" parent="." unique_id=708548058]
-anchors_preset = -1
-anchor_left = 0.03
-anchor_top = 0.2
-anchor_right = 0.23
-anchor_bottom = 0.3
-size_flags_vertical = 0
-
-[node name="ObjectivePanel" type="Panel" parent="ObjectiveBox" unique_id=1789669682]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_w11uw")
-
-[node name="MarginContainer" type="MarginContainer" parent="ObjectiveBox/ObjectivePanel" unique_id=263296525]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 4
-
-[node name="ObjectiveLabel" type="Label" parent="ObjectiveBox/ObjectivePanel/MarginContainer" unique_id=1915229781]
-layout_mode = 2
-vertical_alignment = 1
-autowrap_mode = 2
-=======
 [node name="VBoxContainer" type="VBoxContainer" parent="HealthGUI" unique_id=103624246]
 layout_mode = 2
 theme_override_constants/separation = 2
@@ -205,4 +173,34 @@ layout_mode = 2
 [node name="HeatGauge" parent="HealthGUI/VBoxContainer" unique_id=498134378 instance=ExtResource("4_w11uw")]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
->>>>>>> Chapter2/node1/village
+
+[node name="Setting" parent="." unique_id=1760135751 instance=ExtResource("6_sjha8")]
+
+[node name="ObjectiveBox" type="MarginContainer" parent="." unique_id=1076374514]
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.2
+anchor_right = 0.23
+anchor_bottom = 0.3
+size_flags_vertical = 0
+
+[node name="ObjectivePanel" type="Panel" parent="ObjectiveBox" unique_id=1727431533]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q84jv")
+
+[node name="MarginContainer" type="MarginContainer" parent="ObjectiveBox/ObjectivePanel" unique_id=1664091836]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="ObjectiveLabel" type="Label" parent="ObjectiveBox/ObjectivePanel/MarginContainer" unique_id=1013287796]
+layout_mode = 2
+vertical_alignment = 1
+autowrap_mode = 2

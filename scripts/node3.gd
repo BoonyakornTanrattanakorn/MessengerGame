@@ -32,7 +32,7 @@ func load_level(level_path: String, player_spawn_position: Vector2) -> void:
 	player.global_position = player_spawn_position
 	
 	if current_level.name in ["Level_0"]:
-			Node3State.start_node3_objective()
+		Node3State.start_node3_objective()
 	
 	await get_tree().process_frame
 	await _run_level_intro_if_needed()
