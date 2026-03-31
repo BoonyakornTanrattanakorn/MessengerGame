@@ -2,7 +2,8 @@ extends Area2D
 
 @export var locked_texture: Texture2D
 @export var unlocked_texture: Texture2D
-@export var coming_soon_scene_path: String = "res://ui/coming_soon.tscn"
+@export var next_level_path: String = "res://assets/maps/levels/chapter_2_village.tscn"
+@export var spawn_position_in_next_level: Vector2 = Vector2(0, 100)
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -17,11 +18,16 @@ func can_interact() -> int:
 func activate():
 	refresh_state()
 
-	if not unlocked:
+	if not Node3State.has_all_gems():
 		print("Need all 3 gems first")
 		return
 
-	get_tree().change_scene_to_file(coming_soon_scene_path)
+	ObjectiveManager.clear_objective()
+	get_tree().current_scene.call_deferred(
+		"load_level",
+		next_level_path,
+		spawn_position_in_next_level
+	)
 
 func refresh_state() -> void:
 	var player = get_tree().root.find_child("Player", true, false)

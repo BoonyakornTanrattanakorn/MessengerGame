@@ -5,7 +5,11 @@ extends StaticBody2D
 
 var opened: bool = false
 
+@export var save_id = "last_door"
+@export var save_scope = "scene" 
+
 func _ready() -> void:
+	add_to_group("savable")
 	_play_all("Closed")
 
 
@@ -15,13 +19,43 @@ func open() -> void:
 
 	opened = true
 
+	var player = get_tree().get_first_node_in_group("player")
+	var door_node = get_tree().current_scene.get_node_or_null(
+		"LevelHolder/Chapter1_Node2/ScriptedObjects/NextChapterDoor"
+	)
+
+	if player != null and door_node != null:
+		player.focus_camera_to(door_node)
+
+	await get_tree().create_timer(1.0).timeout
+
 	_play_all("Open")
+
+	ObjectiveManager.set_objective("Leave the dungeons")
 
 	if collision:
 		collision.set_deferred("disabled", true)
 
 	print("The chapter door is open.")
+
+	await get_tree().create_timer(1.0).timeout
+
+	if player != null:
+		player.return_camera()
 	
 func _play_all(anim_name: String):
 	for sprite in sprites:
 		sprite.play(anim_name)
+		
+func save():
+	return {
+		"opened": opened
+	}
+
+func load_data(data):
+	opened = data.get("opened", false)
+	if opened:
+		_play_all("Open")
+		if collision:
+			collision.set_deferred("disabled", true)
+		

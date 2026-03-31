@@ -9,7 +9,11 @@ signal lever_activated(room_id: int)
 var is_active: bool = false
 var player_in_range: bool = false
 
+@export var save_id = "lever_1"
+@export var save_scope = "scene" 
+
 func _ready():
+	add_to_group("savable")
 	sprite.play("off")
 
 func _process(_delta):
@@ -36,3 +40,18 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if body.name == "Player":
 		player_in_range = false
+		
+func _update_sprite():
+	if is_active:
+		sprite.play("on")
+	else:
+		sprite.play("off")
+		
+func save():
+	return {
+		"is_active": is_active
+	}
+
+func load_data(data):
+	is_active = data.get("is_active", false)
+	_update_sprite()

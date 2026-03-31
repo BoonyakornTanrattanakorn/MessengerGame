@@ -1,0 +1,32 @@
+extends Area2D
+
+var speed = 180.0
+var direction = Vector2.RIGHT
+var damage = 3
+var blast_range = 60.0
+var travel_distance = 200.0
+var traveled = 0.0
+var has_exploded = false
+
+func _physics_process(delta):
+	if has_exploded:
+		return
+	var step = direction * speed * delta
+	position += step
+	traveled += step.length()
+	if traveled >= travel_distance:
+		explode()
+
+func explode():
+	has_exploded = true
+	# damage enemies in blast_range
+	for body in get_tree().get_nodes_in_group("enemy"):
+		if global_position.distance_to(body.global_position) <= blast_range:
+			pass
+			#body.take_damage(damage)
+	# visual flash — you can add a brief AnimatedSprite here
+	queue_free()
+
+func _on_body_entered(body):
+	if not has_exploded:
+		explode()

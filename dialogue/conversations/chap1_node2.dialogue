@@ -1,0 +1,12 @@
+~ start
+player: ...
+player: Wow... I didn't know such dungeons existed beneath the castle.
+player: I need to find a way out of here.
+player: That switch on the left side of the room looks familiar...
+player: Maybe I can flip it with my wind power.
+=> END
+
+~ after_first_room
+player: ...
+player: More switches
+=> END

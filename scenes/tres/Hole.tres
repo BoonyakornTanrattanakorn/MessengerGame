@@ -10066,6 +10066,8 @@ use_texture_padding = false
 
 [resource]
 resource_name = "tileset_16px"
+custom_data_layer_0/name = "is_water"
+custom_data_layer_0/type = 1
 sources/4 = SubResource("TileSetAtlasSource_k7g8x")
 sources/7 = SubResource("TileSetAtlasSource_56wid")
 sources/9 = SubResource("TileSetAtlasSource_bkupl")

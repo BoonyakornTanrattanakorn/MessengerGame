@@ -11,7 +11,11 @@ const MAX_ACTIVE = 2
 @onready var blue_collision = %BlueBridgeCollision
 @onready var green_collision = %GreenBridgeCollision
 
+@export var save_id = "bridge_manager"
+@export var save_scope = "scene"
+
 func _ready():
+	add_to_group("savable")
 	red_layer.visible = false
 	blue_layer.visible = false
 	green_layer.visible = false
@@ -81,3 +85,15 @@ func get_collision(color: String):
 		"blue":  return blue_collision
 		"green": return green_collision
 	return null
+	
+func save():
+	return {
+		"active_colors": active_colors
+	}
+	
+func load_data(data):
+
+	active_colors = data.get("active_colors", [])
+
+	for color in active_colors:
+		show_color(color)
