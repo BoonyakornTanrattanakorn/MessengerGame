@@ -80,13 +80,19 @@ func load_game():
 		return
 
 	save_data = parsed
+	print(save_data, init_data)
+	if save_data == init_data:
+		new_game()
+		return
 
 	var level_path = save_data.get("scene", "")
 
 	get_tree().change_scene_to_file(init_scene_path)
 	await get_tree().scene_changed
-		
-	get_tree().paused = true
+	
+	#var player = get_tree().current_scene.get_node("Player")
+	#var player_hud = player.get_node("PlayerHUD")
+	#player_hud._pause_game()
 	
 	var root_scene = get_tree().current_scene
 
@@ -157,9 +163,9 @@ func new_game():
 	get_tree().change_scene_to_file(init_scene_path)
 	await get_tree().scene_changed
 	var root = get_tree().current_scene
-	var setting = root.get_node_or_null("Player/PlayerHUD/Setting/SettingMenu")
-	if setting:
-		setting.hide()
+	#var setting = root.get_node_or_null("Player/PlayerHUD/Setting/SettingMenu")
+	#if setting:
+	#	setting.hide()
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

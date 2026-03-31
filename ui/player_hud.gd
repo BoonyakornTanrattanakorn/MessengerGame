@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
+
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
 @onready var skill_icon = %SkillIcon
@@ -29,6 +31,7 @@ var current_objective: String = ""
 
 @export var save_id = "player_hud" 
 @export var save_scope = "global" 
+var pause_menu: PauseMenu
 
 signal skill_changed(attribute: String)
 
@@ -39,6 +42,13 @@ func _ready():
 	hide_objective()
 
 	var player = get_tree().root.find_child("Player", true, false)
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	pause_menu = PAUSE_MENU_SCENE.instantiate() as PauseMenu
+	add_child(pause_menu)
+	pause_menu.resume_requested.connect(_on_pause_resume_requested)
+	pause_menu.settings_requested.connect(_on_pause_settings_requested)
+	pause_menu.quit_requested.connect(_on_pause_quit_requested)
+
 	update_skill_display()
 	call_deferred("refresh_items")
 
@@ -51,6 +61,9 @@ func _exit_tree() -> void:
 	ObjectiveManager.unregister_hud(self)
 
 func _process(_delta):
+	if get_tree().paused:
+		return
+
 	# Skill bar — up/down
 	if Input.is_action_just_pressed("element_rotate_left"):
 		skill_index = (skill_index - 1 + skills.size()) % skills.size()
@@ -70,6 +83,33 @@ func _process(_delta):
 	if items.size() > 0 and Input.is_action_just_pressed("item_rotate_right"):
 		item_index = (item_index + 1) % items.size()
 		update_item_display()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause_menu"):
+		if get_tree().paused:
+			_resume_game()
+		else:
+			_pause_game()
+		get_viewport().set_input_as_handled()
+
+func _pause_game() -> void:
+	get_tree().paused = true
+	pause_menu.open()
+
+func _resume_game() -> void:
+	pause_menu.close()
+	get_tree().paused = false
+
+func _on_pause_resume_requested() -> void:
+	_resume_game()
+
+func _on_pause_settings_requested() -> void:
+	# Placeholder until settings UI is implemented.
+	print("Settings menu requested (not implemented yet).")
+
+func _on_pause_quit_requested() -> void:
+	get_tree().paused = false
+	get_tree().quit()
 
 func update_skill_display():
 	#skill_label.text = skills[skill_index]["name"]

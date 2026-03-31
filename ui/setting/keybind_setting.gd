@@ -2,9 +2,22 @@ extends VBoxContainer
 
 var waiting_action = null
 var buttons = {}
+var input_to_name = {
+	"up": "Walk Up",
+	"down": "Walk Down",
+	"left": "Walk Left",
+	"right": "Walk Right",
+	"minor magic": "Minor Magic",
+	"major magic": "Major Magic",
+	"interact": "Interact",
+	"element_rotate_left": "Rotate Element Left",
+	"element_rotate_right": "Rotate Element Right",
+	"item_rotate_left": "Rotate Item Left",
+	"item_rotate_right": "Rotate Item Right",
+	"pause_menu": "Pause Menu"
+}
 
 func _ready():
-	$"../../CloseButton".pressed.connect(stop_listening)
 	create_input_buttons()
 
 func create_input_buttons():
@@ -17,23 +30,27 @@ func create_input_buttons():
 
 	for i in range(filtered_actions.size()):
 		var action = filtered_actions[i]
-
+		print(action)
 		var margin = MarginContainer.new()
-		margin.add_theme_constant_override("margin_left", 8)
-		margin.add_theme_constant_override("margin_right", 8)
-		margin.add_theme_constant_override("margin_top", 4)
-		margin.add_theme_constant_override("margin_bottom", 4)
+		margin.add_theme_constant_override("margin_left", 10)
+		margin.add_theme_constant_override("margin_right", 10)
+		margin.add_theme_constant_override("margin_top", 6)
+		margin.add_theme_constant_override("margin_bottom", 6)
 
 		var row = HBoxContainer.new()
 
 		var label = Label.new()
-		label.text = action
+		if(input_to_name.has(action)):
+			label.text = input_to_name[action]
+		else:
+			label.text = action
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.add_theme_font_size_override("font_size", 28)
 
 		var button = Button.new()
 		button.set_meta("action", action)
-
-		button.custom_minimum_size = Vector2(100, 32)
+		button.add_theme_font_size_override("font_size", 24)
+		button.custom_minimum_size = Vector2(160, 32)
 		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 
 		row.add_child(label)
@@ -50,7 +67,7 @@ func create_input_buttons():
 		# Add separator line (except after last row)
 		if i < filtered_actions.size() - 1:
 			var sep = HSeparator.new()
-			sep.modulate = Color(1, 1, 1, 1)
+			sep.modulate = Color(0.248, 0.248, 0.248, 1.0)
 			add_child(sep)
 
 func _on_button_pressed(action):
@@ -95,3 +112,7 @@ func stop_listening():
 	if waiting_action != null:
 		update_button_text(waiting_action)
 		waiting_action = null
+
+
+func _on_back_button_pressed() -> void:
+	pass # Replace with function body.

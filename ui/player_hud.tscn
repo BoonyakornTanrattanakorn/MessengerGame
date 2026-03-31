@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bx1qk3b53a1h1"]
 
 [ext_resource type="Script" uid="uid://e361eggsk80u" path="res://ui/player_hud.gd" id="1_1m6my"]
-[ext_resource type="Script" uid="uid://dh3oalqt8k0m" path="res://ui/health_container.gd" id="2_sjha8"]
+[ext_resource type="Script" path="res://ui/health_container.gd" id="2_sjha8"]
 [ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://ui/health_gui/element_display.tscn" id="3_q84jv"]
-[ext_resource type="PackedScene" uid="uid://kdx43i281auy" path="res://ui/setting/setting.tscn" id="4_w11uw"]
+[ext_resource type="Script" uid="uid://bxeeecc16eceg" path="res://ui/setting/setting_button.gd" id="4_w11uw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -155,7 +155,17 @@ script = ExtResource("2_sjha8")
 [node name="ElementDisplay" parent="HealthGUI" unique_id=300156056 instance=ExtResource("3_q84jv")]
 layout_mode = 2
 
-[node name="Setting" parent="." unique_id=1015252459 instance=ExtResource("4_w11uw")]
+[node name="SettingButton" type="Button" parent="." unique_id=1226227189]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 47.0
+offset_right = -35.0
+offset_bottom = 80.0
+text = "Setting"
+script = ExtResource("4_w11uw")
+metadata/_edit_use_anchors_ = true
 
 [node name="ObjectiveBox" type="MarginContainer" parent="." unique_id=708548058]
 anchors_preset = -1

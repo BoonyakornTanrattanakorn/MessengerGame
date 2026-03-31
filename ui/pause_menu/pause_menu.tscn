@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://csvk43uw3bjqv"]
+
+[ext_resource type="Script" uid="uid://c3m15f7btii12" path="res://ui/pause_menu/pause_menu.gd" id="1_4vh0x"]
+[ext_resource type="Script" uid="uid://cwledwpxd0xpg" path="res://ui/setting/keybind_setting.gd" id="2_jbgdu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu3lf"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.05882353, 0.078431375, 0.10980392, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9254902, 0.83137256, 0.6313726, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_le02u"]
+bg_color = Color(18.892157, 18.892157, 18.892157, 0.10980392)
+
+[node name="PauseMenu" type="Control" unique_id=1196514697]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_4vh0x")
+
+[node name="Overlay" type="ColorRect" parent="." unique_id=1667059508]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1337766471]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=76447597]
+custom_minimum_size = Vector2(1248, 702)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xu3lf")
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel" unique_id=1428714556]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="CenterContainer/Panel/VBox" unique_id=1920858547]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=704603512]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=513672259]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Settings"
+
+[node name="MenuButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=854230742]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Menu"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=1015927953]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Quit Game"
+
+[node name="SettingsPanel" type="ScrollContainer" parent="CenterContainer/Panel/VBox" unique_id=852333105]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SettingsVBox" type="VBoxContainer" parent="CenterContainer/Panel/VBox/SettingsPanel" unique_id=220462583]
+custom_minimum_size = Vector2(1208, 0)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="SettingsTitle" type="Label" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox" unique_id=898551197]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="BGMContainer" type="HBoxContainer" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox" unique_id=861101188]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="BGMLabel" type="Label" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/BGMContainer" unique_id=2073759502]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "BGM Volume:"
+vertical_alignment = 1
+
+[node name="BGMSlider" type="HSlider" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/BGMContainer" unique_id=448589722]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 200.0
+value = 100.0
+
+[node name="SFXContainer" type="HBoxContainer" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox" unique_id=1256977926]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="SFXLabel" type="Label" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/SFXContainer" unique_id=1449712964]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "SFX Volume:"
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/SFXContainer" unique_id=1382782513]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 200.0
+value = 100.0
+
+[node name="Label" type="Label" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox" unique_id=107549214]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "CONTROL"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox" unique_id=1649463888]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_le02u")
+
+[node name="Control" type="VBoxContainer" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/ScrollContainer" unique_id=1563747301]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_jbgdu")
+
+[node name="BackButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=863485224]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[connection signal="pressed" from="CenterContainer/Panel/VBox/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/MenuButton" to="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/ScrollContainer/Control" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/BGMContainer/BGMSlider" to="." method="_on_bgm_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/SFXContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBox/BackButton" to="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/ScrollContainer/Control" method="stop_listening"]

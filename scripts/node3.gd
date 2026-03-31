@@ -25,6 +25,9 @@ func _ready() -> void:
 
 		await get_tree().create_timer(1.0).timeout
 		player.return_camera()
+	
+	# Play BGM
+	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
 
 func load_level(level_path: String, player_spawn_position: Vector2) -> void:
 	var packed_level := load(level_path) as PackedScene
