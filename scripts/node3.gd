@@ -12,6 +12,24 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await _run_level_intro_if_needed()
 
+	if not Global.tutorial_shown:
+		Global.tutorial_shown = true
+		DialogueManager.show_dialogue_balloon(
+			load("res://dialogue/conversations/tutorial.dialogue"),
+			"start"
+		)
+		
+		await DialogueManager.dialogue_ended
+
+		var switch_node = get_tree().current_scene.get_node("LevelHolder/Chapter1_Node2/Door/lever_room0_a2")
+		player.focus_camera_to(switch_node)
+
+		await get_tree().create_timer(1.0).timeout
+		player.return_camera()
+	
+	# Play BGM
+	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
+
 func load_level(level_path: String, player_spawn_position: Vector2) -> void:
 	var packed_level := load(level_path) as PackedScene
 	if packed_level == null:

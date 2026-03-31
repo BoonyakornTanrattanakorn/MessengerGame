@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://ui/health_gui/element_display.tscn" id="3_q84jv"]
 [ext_resource type="PackedScene" uid="uid://ctxx46yi1gm4o" path="res://ui/CoolGauge.tscn" id="4_7pawb"]
 [ext_resource type="PackedScene" uid="uid://b7q4tjsvib3gr" path="res://ui/HeatGauge.tscn" id="4_w11uw"]
-[ext_resource type="PackedScene" uid="uid://kdx43i281auy" path="res://ui/setting/setting.tscn" id="6_sjha8"]
+[ext_resource type="Script" uid="uid://bxeeecc16eceg" path="res://ui/setting/setting_button.gd" id="6_sjha8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -157,24 +157,7 @@ script = ExtResource("2_w11uw")
 [node name="ElementDisplay" parent="HealthGUI" unique_id=300156056 instance=ExtResource("3_q84jv")]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HealthGUI" unique_id=103624246]
-layout_mode = 2
-theme_override_constants/separation = 2
-
-[node name="HPBar" type="HBoxContainer" parent="HealthGUI/VBoxContainer" unique_id=1171951560]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/separation = 0
-
-[node name="CoolGauge" parent="HealthGUI/VBoxContainer" unique_id=802023072 instance=ExtResource("4_7pawb")]
-layout_mode = 2
-
-[node name="HeatGauge" parent="HealthGUI/VBoxContainer" unique_id=498134378 instance=ExtResource("4_w11uw")]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Setting" parent="." unique_id=1760135751 instance=ExtResource("6_sjha8")]
+[node name="Setting" parent="." unique_id=1015252459 instance=ExtResource("4_w11uw")]
 
 [node name="ObjectiveBox" type="MarginContainer" parent="." unique_id=1076374514]
 anchors_preset = -1
