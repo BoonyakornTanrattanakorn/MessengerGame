@@ -13,11 +13,16 @@ extends CanvasLayer
 @onready var objective_box = $ObjectiveBox
 @onready var objective_label = $ObjectiveBox/ObjectivePanel/MarginContainer/ObjectiveLabel
 
+#cool gauge
+@onready var cool_gauge_ui = $HealthGUI/VBoxContainer/CoolGauge
+#heat gauge
+@onready var heat_gauge = $HealthGUI/VBoxContainer/HeatGauge
 # Skill list — add more elements here as you implement them
 var skills = [
 	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/elements/wind_icon.png")},
 	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": preload("res://assets/icons/fire.png")},
 	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": preload("res://assets/icons/water.png")},
+	{"name": "Earth", "attribute": "earth", "color": Color(0.7, 0.5, 0.3), "icon": preload("res://assets/icons/earth.jpg")},
 ]
 
 # Item list — populate as needed
@@ -49,6 +54,54 @@ func _ready():
 
 func _exit_tree() -> void:
 	ObjectiveManager.unregister_hud(self)
+var heat_gauge_value: float = 0.0
+var cool_gauge_value: int = 0
+signal skill_changed(attribute: String)
+
+func _ready():
+	var players = get_tree().get_nodes_in_group("player")
+
+	if players.size() == 0:
+		print("No player found")
+		return
+
+	var player = players[0]
+	
+	if not player.is_node_ready():
+		await player.ready
+		
+	update_skill_display()
+	call_deferred("refresh_items")
+	call_deferred("_setup_health", player)
+
+	skill_changed.connect(_on_skill_changed)
+	
+	# Heat gauge
+	if heat_gauge != null:
+		heat_gauge.set_max_hp(player.player_max_hp)
+		heat_gauge.update_heat(0.0)
+		heat_gauge.visible = false
+		player.heat_changed.connect(heat_gauge.update_heat)
+		player.heat_changed.connect(_on_heat_value_changed)
+	else:
+		print("ERROR: heat_gauge node not found! Check path: ", heat_gauge)
+
+	# Cool gauge
+	if cool_gauge_ui != null:
+		cool_gauge_ui.set_max_hp(player.player_max_hp)
+		cool_gauge_ui.update_cool(0)
+		cool_gauge_ui.visible = false
+		player.cool_changed.connect(cool_gauge_ui.update_cool)
+		player.cool_changed.connect(_on_cool_value_changed)
+	else:
+		print("ERROR: cool_gauge_ui node not found! Check path: ", cool_gauge_ui)
+
+
+func _setup_health(player):
+	health_gui.set_max_health(player.player_max_hp)
+	health_gui.update_health(player.player_hp)
+	player.health_changed.connect(health_gui.update_health)
+	
 
 func _process(_delta):
 	# Skill bar — up/down
@@ -178,3 +231,34 @@ func load_data(data):
 		clear_objective()
 	else:
 		set_objective_text(saved_objective)
+func _on_heat_changed(value: float):
+	heat_gauge.update_heat(value)
+
+func _on_skill_changed(attribute: String):
+	heat_gauge.visible = (attribute == "fire") or (heat_gauge_value > 0)
+	cool_gauge_ui.visible = (attribute == "water") or (cool_gauge_value > 0)
+
+func _on_heat_value_changed(value: float):
+	heat_gauge_value = value
+	heat_gauge.update_heat(value)
+	# Auto hide when fully cooled and not on fire element
+	if value <= 0.0 and skills[skill_index]["attribute"] != "fire":
+		heat_gauge.visible = false
+
+func _on_cool_value_changed(value: int):
+	cool_gauge_value = value
+	cool_gauge_ui.update_cool(value)
+	if value <= 0 and skills[skill_index]["attribute"] != "water":
+		cool_gauge_ui.visible = false
+
+func show_wave_charge_preview(preview_value: int):
+	if cool_gauge_ui == null:
+		return
+	if preview_value == -1:
+		cool_gauge_ui.update_cool(cool_gauge_value)
+		# Hide if not water element and gauge is empty
+		if cool_gauge_value <= 0 and skills[skill_index]["attribute"] != "water":
+			cool_gauge_ui.visible = false
+	else:
+		cool_gauge_ui.visible = true  # always show while charging
+		cool_gauge_ui.update_cool_preview(clamp(preview_value, 0, 3))

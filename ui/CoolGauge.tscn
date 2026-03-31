@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ctxx46yi1gm4o"]
+
+[ext_resource type="Script" uid="uid://bnyj7vbim7145" path="res://ui/cool_gauge.gd" id="1_tby2j"]
+
+[node name="CoolGauge" type="HBoxContainer" unique_id=802023072]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_tby2j")
+
+[node name="SegmentBar" type="HBoxContainer" parent="." unique_id=574472352]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Seg0" type="ColorRect" parent="SegmentBar" unique_id=604960981]
+custom_minimum_size = Vector2(26, 12)
+layout_mode = 2
+color = Color(0.9540544, 0.94209486, 0.9995279, 1)
+
+[node name="Seg1" type="ColorRect" parent="SegmentBar" unique_id=1319155871]
+custom_minimum_size = Vector2(26, 12)
+layout_mode = 2
+color = Color(0.9540544, 0.94209486, 0.9995279, 1)
+
+[node name="Seg2" type="ColorRect" parent="SegmentBar" unique_id=43221715]
+custom_minimum_size = Vector2(26, 12)
+layout_mode = 2
+color = Color(0.9540544, 0.94209486, 0.9995279, 1)

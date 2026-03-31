@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dcujg6vgrtmxl"]
 
 [ext_resource type="Texture2D" uid="uid://dem0w7bjvbh35" path="res://assets/health_gui/HealthBarEndSheet.png" id="1_6yjcv"]
-[ext_resource type="Script" uid="uid://bqfelbmhsoegq" path="res://ui/health_gui/health_gui.gd" id="1_dlp3p"]
+[ext_resource type="Script" uid="uid://d200e12sm61cn" path="res://ui/health_gui/health_change.gd" id="1_dlp3p"]
 
 [node name="HealthEnd" type="Panel" unique_id=300156056]
 self_modulate = Color(1, 1, 1, 0)
