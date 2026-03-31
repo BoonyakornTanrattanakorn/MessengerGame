@@ -53,6 +53,7 @@ func _ready():
 		heat_gauge.update_heat(0.0)
 		heat_gauge.visible = false
 		player.heat_changed.connect(heat_gauge.update_heat)
+		player.heat_changed.connect(_on_heat_value_changed)
 	else:
 		print("ERROR: heat_gauge node not found! Check path: ", heat_gauge)
 
