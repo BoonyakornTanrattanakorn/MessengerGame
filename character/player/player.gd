@@ -99,6 +99,7 @@ func _on_dialogue_started(_arg = null):
 	is_in_dialogue = true
 	is_dashing = false
 	velocity = Vector2.ZERO
+	_update_animation(Vector2.ZERO)
 
 func _on_dialogue_ended(_arg = null):
 	is_in_dialogue = false
@@ -276,6 +277,12 @@ func _update_animation(direction: Vector2) -> void:
 
 	if animated_sprite.animation != anim:
 		animated_sprite.play(anim)
+
+func set_facing_direction(direction: Vector2) -> void:
+	if direction.length() == 0:
+		return
+	last_direction = direction.normalized()
+	_update_animation(last_direction)
 
 # Called by minecart to mount the player
 func mount(minecart, mount_position):

@@ -30,7 +30,7 @@ func _ready() -> void:
 		#await get_tree().create_timer(1.0).timeout
 		#player.return_camera()
 
-func load_level(level_path: String, player_spawn_position: Vector2) -> void:
+func load_level(level_path: String, player_spawn_position: Vector2, spawn_facing_direction: Vector2 = Vector2.ZERO) -> void:
 	var packed_level := load(level_path) as PackedScene
 	if packed_level == null:
 		push_error("โหลดแมพไม่ได้: %s" % level_path)
@@ -48,6 +48,8 @@ func load_level(level_path: String, player_spawn_position: Vector2) -> void:
 	current_level = new_level
 
 	player.global_position = player_spawn_position
+	if spawn_facing_direction != Vector2.ZERO and player.has_method("set_facing_direction"):
+		player.set_facing_direction(spawn_facing_direction)
 	
 	if current_level.name in ["Level_0"]:
 		Node3State.start_node3_objective()
