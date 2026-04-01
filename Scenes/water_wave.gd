@@ -2,8 +2,9 @@ extends Area2D
 
 var direction: Vector2 = Vector2.RIGHT
 var level: int = 1
-var damage: int = 1
+var damage: int = 0
 
+var source: String = ""
 # Per level: [speed, max_distance, scale]
 const LEVEL_SETTINGS = [
 	{"speed": 200.0, "distance": 80.0,  "scale": Vector2(1.0, 1.0)},  # level 1
@@ -19,6 +20,18 @@ var traveled: float = 0.0
 @onready var collision = $CollisionShape2D
 
 func _ready():
+	match level:
+		1:
+			source = "water_lv1"
+			damage = 0   # no raw damage — only dries
+		2:
+			source = "water_lv2"
+			damage = 2
+		3:
+			source = "water_lv3"
+			damage = 3
+	
+	add_to_group("enemy_projectile")
 	var settings = LEVEL_SETTINGS[level - 1]
 	speed        = settings["speed"]
 	max_distance = settings["distance"]

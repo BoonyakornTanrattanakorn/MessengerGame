@@ -7,6 +7,9 @@ var blast_range = 60.0
 var travel_distance = 200.0
 var traveled = 0.0
 var has_exploded = false
+var source: String = "fire"
+func _ready():
+	add_to_group("enemy_projectile")
 
 func _physics_process(delta):
 	if has_exploded:

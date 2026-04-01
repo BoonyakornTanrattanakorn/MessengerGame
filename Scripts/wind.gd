@@ -3,9 +3,11 @@ extends Area2D
 var speed = 400.0
 var direction = Vector2.RIGHT
 var lifetime = 1.0
-
+var source: String = "wind"
+var damage: int = 0  # wind does no raw damage
 func _ready():
 	# สั่งให้ลบตัวเองทิ้งเมื่อครบเวลา
+	add_to_group("enemy_projectile")
 	add_to_group("wind_wave")
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
