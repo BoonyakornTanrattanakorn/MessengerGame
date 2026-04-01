@@ -277,6 +277,12 @@ func _update_animation(direction: Vector2) -> void:
 	if animated_sprite.animation != anim:
 		animated_sprite.play(anim)
 
+func set_facing_direction(direction: Vector2) -> void:
+	if direction.length() == 0:
+		return
+	last_direction = direction.normalized()
+	_update_animation(last_direction)
+
 # Called by minecart to mount the player
 func mount(minecart, mount_position):
 	is_mounted = true

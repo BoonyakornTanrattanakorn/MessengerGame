@@ -4,6 +4,7 @@ extends Area2D
 @export var unlocked_texture: Texture2D
 @export var next_level_path: String = "res://assets/maps/levels/chapter_2_village.tscn"
 @export var spawn_position_in_next_level: Vector2 = Vector2(0, 100)
+@export var facing_direction_on_warp: Vector2 = Vector2.RIGHT
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -26,7 +27,8 @@ func activate():
 	get_tree().current_scene.call_deferred(
 		"load_level",
 		next_level_path,
-		spawn_position_in_next_level
+		spawn_position_in_next_level,
+		facing_direction_on_warp
 	)
 
 func refresh_state() -> void:
