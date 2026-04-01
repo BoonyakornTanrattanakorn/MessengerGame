@@ -62,6 +62,7 @@ func _on_dialogue_ended(_resource: Resource) -> void:
 func submit_answer(answer: Array[String]) -> void:
 	if PuzzleState.check_answer(answer):
 		PuzzleState.puzzle_solved = true
+		ObjectiveManager.clear_memorized_keywords()
 		open_next_door()
 	else:
 		# nothing else needed here;

@@ -33,6 +33,9 @@ var items = []
 var skill_index = 0
 var item_index = 0
 var current_objective: String = ""
+var current_objective_prefix: String = "Objective: "
+var memorized_keywords: Array[String] = []
+var memorized_keyword_order: Dictionary = {}
 
 @export var save_id = "player_hud" 
 @export var save_scope = "global" 
@@ -234,18 +237,39 @@ func get_icon(item_name: String) -> Texture2D:
 
 func set_objective_text(new_text: String, prefix: String = "Objective: ") -> void:
 	current_objective = new_text.strip_edges()
+	current_objective_prefix = prefix
 
 	if current_objective.is_empty():
-		clear_objective()
+		_refresh_objective_display()
 		return
 
-	objective_label.text = prefix + current_objective
-	show_objective()
+	_refresh_objective_display()
 
 func clear_objective() -> void:
 	current_objective = ""
-	objective_label.text = ""
-	hide_objective()
+	_refresh_objective_display()
+
+func add_memorized_keyword(keyword: String, order_index: int = -1) -> void:
+	var trimmed_keyword := keyword.strip_edges()
+	if trimmed_keyword.is_empty():
+		return
+
+	var normalized_keyword := trimmed_keyword.to_lower()
+	var existing_index := _find_memorized_keyword_index(normalized_keyword)
+
+	if existing_index == -1:
+		memorized_keywords.append(trimmed_keyword)
+
+	if order_index >= 0:
+		memorized_keyword_order[normalized_keyword] = order_index
+
+	_sort_memorized_keywords()
+	_refresh_objective_display()
+
+func clear_memorized_keywords() -> void:
+	memorized_keywords.clear()
+	memorized_keyword_order.clear()
+	_refresh_objective_display()
 
 func get_objective_text() -> String:
 	return current_objective
@@ -256,11 +280,48 @@ func show_objective() -> void:
 func hide_objective() -> void:
 	objective_box.hide()
 
+func _refresh_objective_display() -> void:
+	var lines: Array[String] = []
+
+	if not current_objective.is_empty():
+		lines.append(current_objective_prefix + current_objective)
+
+	if not memorized_keywords.is_empty():
+		lines.append("Notes keyword: " + ", ".join(memorized_keywords))
+
+	if lines.is_empty():
+		objective_label.text = ""
+		hide_objective()
+		return
+
+	objective_label.text = "\n".join(lines)
+	show_objective()
+
+func _find_memorized_keyword_index(normalized_keyword: String) -> int:
+	for i in range(memorized_keywords.size()):
+		if String(memorized_keywords[i]).to_lower() == normalized_keyword:
+			return i
+	return -1
+
+func _sort_memorized_keywords() -> void:
+	memorized_keywords.sort_custom(func(a: String, b: String) -> bool:
+		var a_key := a.to_lower()
+		var b_key := b.to_lower()
+		var a_order := int(memorized_keyword_order.get(a_key, 2147483647))
+		var b_order := int(memorized_keyword_order.get(b_key, 2147483647))
+		if a_order == b_order:
+			return a_key < b_key
+		return a_order < b_order
+	)
+
 func save():
 	return {
 		"skill_index": skill_index,
 		"item_index": item_index,
-		"current_objective": current_objective
+		"current_objective": current_objective,
+		"current_objective_prefix": current_objective_prefix,
+		"memorized_keywords": memorized_keywords.duplicate(),
+		"memorized_keyword_order": memorized_keyword_order.duplicate()
 	}
 	
 func load_data(data):
@@ -270,11 +331,31 @@ func load_data(data):
 	update_skill_display()
 	refresh_items()
 
-	var saved_objective = data.get("current_objective", "")
-	if String(saved_objective).strip_edges().is_empty():
-		clear_objective()
+	current_objective_prefix = String(data.get("current_objective_prefix", "Objective: "))
+	memorized_keywords.clear()
+	memorized_keyword_order = {}
+	var loaded_keyword_order = data.get("memorized_keyword_order", {})
+	if loaded_keyword_order is Dictionary:
+		for key in loaded_keyword_order.keys():
+			memorized_keyword_order[String(key).to_lower()] = int(loaded_keyword_order[key])
+
+	for keyword in data.get("memorized_keywords", []):
+		var display_keyword := String(keyword).strip_edges()
+		if display_keyword.is_empty():
+			continue
+		var normalized_keyword := display_keyword.to_lower()
+		if _find_memorized_keyword_index(normalized_keyword) != -1:
+			continue
+		memorized_keywords.append(display_keyword)
+
+	_sort_memorized_keywords()
+
+	var saved_objective = String(data.get("current_objective", "")).strip_edges()
+	if saved_objective.is_empty():
+		current_objective = ""
+		_refresh_objective_display()
 	else:
-		set_objective_text(saved_objective)
+		set_objective_text(saved_objective, current_objective_prefix)
 func _on_heat_changed(value: float):
 	heat_gauge.update_heat(value)
 

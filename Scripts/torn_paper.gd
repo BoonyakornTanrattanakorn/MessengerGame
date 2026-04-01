@@ -35,7 +35,47 @@ func read_paper() -> void:
 	prompt_label.visible = false
 
 	PuzzleState.collect_fragment(fragment_id)
+	_memorize_player_keywords_from_dialogue()
 	DialogueManager.show_dialogue_balloon(dialogue_resource, start_title)
+
+func _memorize_player_keywords_from_dialogue() -> void:
+	var dialogue_path := dialogue_resource.resource_path
+	if dialogue_path.is_empty():
+		return
+
+	var torn_note_index := _get_torn_note_index()
+
+	var file := FileAccess.open(dialogue_path, FileAccess.READ)
+	if file == null:
+		return
+
+	var quote_regex := RegEx.create_from_string("\"([^\"]+)\"")
+	var in_target_title := false
+
+	while not file.eof_reached():
+		var line := file.get_line().strip_edges()
+
+		if line.begins_with("~ "):
+			in_target_title = line.substr(2).strip_edges() == start_title
+			continue
+
+		if not in_target_title:
+			continue
+
+		if not line.begins_with("player:"):
+			continue
+
+		for match in quote_regex.search_all(line):
+			var keyword := match.get_string(1).strip_edges()
+			if not keyword.is_empty():
+				ObjectiveManager.memorize_keyword(keyword, torn_note_index)
+
+func _get_torn_note_index() -> int:
+	var match_regex := RegEx.create_from_string("^paper_(\\d+)$")
+	var match := match_regex.search(start_title.strip_edges().to_lower())
+	if match == null:
+		return -1
+	return int(match.get_string(1))
 
 func _on_body_entered(body: Node) -> void:
 	if body.name == player_node_name:
