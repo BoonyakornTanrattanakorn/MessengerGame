@@ -99,6 +99,7 @@ func _on_dialogue_started(_arg = null):
 	is_in_dialogue = true
 	is_dashing = false
 	velocity = Vector2.ZERO
+	_update_animation(Vector2.ZERO)
 
 func _on_dialogue_ended(_arg = null):
 	is_in_dialogue = false
