@@ -1,4 +1,7 @@
 extends CharacterBody2D
+ 
+const PlayerMovement = preload("res://features/player/components/player_movement.gd")
+var _movement: PlayerMovement = null
 
 var speed = 200.0  # speed in pixels/sec
 var dash_speed = 500.0
@@ -93,6 +96,9 @@ func _ready():
 	$Hurtbox.add_to_group("player_hurtbox")
 	player_camera = get_tree().root.find_child("Camera2D", true, false)
 	print("Player camera: ", player_camera)
+
+	# initialize movement component
+	_movement = PlayerMovement.new()
 	
 
 func _on_dialogue_started(_arg = null):
@@ -144,29 +150,12 @@ func _physics_process(delta):
 	# Update last direction if there's input
 	if direction.length() > 0:
 		last_direction = direction.normalized()
-	
-	if dash_cooldown_timer > 0:
-		dash_cooldown_timer -= delta
-	
+
 	# Handle damage taking
 	if is_invincible:
 		invincible_timer -= delta
 		if invincible_timer <= 0:
 			is_invincible = false
-	
-	# Handle dashing
-	if is_dashing:
-		dash_timer -= delta
-		if dash_timer <= 0:
-			# End dash
-			is_dashing = false
-			dash_cooldown_timer = dash_cooldown
-		else:
-			# During dash: move in dash direction at dash speed
-			velocity = last_direction * dash_speed
-			move_and_slide()
-			_update_animation(last_direction)
-			return
 
 	# Handle fire skill
 	if heat_gauge > 0:
@@ -214,10 +203,8 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("major magic"):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
-		if Input.is_action_just_pressed("minor magic") and dash_cooldown_timer <= 0 and not is_dashing:
-			is_dashing = true
-			dash_timer = dash_duration
-			velocity = last_direction * dash_speed
+		if Input.is_action_just_pressed("minor magic"):
+			_movement.request_dash(self, last_direction)
 		if Input.is_action_just_pressed("major magic"):
 			shoot_wind_wave()
 	elif playerAttribute == "water":
@@ -252,9 +239,8 @@ func _physics_process(delta):
 	if check_if_water_at(check_pos):
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
-	# Normal movement
-	velocity = direction * speed * speed_multiplier
-	move_and_slide()
+	# Movement + dash handled by movement component
+	_movement.process_movement(self, direction, speed_multiplier, delta)
 	_update_animation(direction)
 
 func _facing_suffix(dir: Vector2) -> String:

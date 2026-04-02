@@ -31,3 +31,4 @@ Thumbs.db
 
 # Optional: ignore build/artifacts folders you don't want tracked
 .cache/
+.godot/
