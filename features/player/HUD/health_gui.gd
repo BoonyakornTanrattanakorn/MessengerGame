@@ -1,8 +1,8 @@
 extends HBoxContainer
 
 #need to change
-const HealthMiddle = preload("res://features/player/HUD/health_middle.tscn")
-const HealthEnd = preload("res://features/player/HUD/health_end.tscn")
+@onready var health_middle: Panel = $HealthDisplay/HealthMiddle
+@onready var health_end: Panel = $HealthDisplay/HealthEnd
 
 @onready var hp_bar = $VBoxContainer/HPBar
 
@@ -14,11 +14,11 @@ func set_max_health(max_hp: int):
 	if hp_bar == null:
 		await ready
 	for i in range(max_hp - 1):
-		var health = HealthMiddle.instantiate()
+		var health = health_middle.instantiate()
 		health.name = "health_middle_%d" % i
 		health.add_to_group("health_bar")
 		hp_bar.add_child(health)
-	var health = HealthEnd.instantiate()
+	var health = health_end.instantiate()
 	health.name = "health_end"
 	health.add_to_group("health_bar")
 	hp_bar.add_child(health)

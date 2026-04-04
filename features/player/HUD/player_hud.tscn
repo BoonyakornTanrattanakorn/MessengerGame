@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://co4o2sbnpmmu6" path="res://features/player/HUD/player_hud.gd" id="1_1m6my"]
 [ext_resource type="Script" uid="uid://bilg3jgxb2knl" path="res://features/player/HUD/health_gui.gd" id="2_w11uw"]
+[ext_resource type="PackedScene" uid="uid://dcujg6vgrtmxl" path="res://features/player/HUD/health_end.tscn" id="3_p1370"]
 [ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://features/player/HUD/element_display.tscn" id="3_q84jv"]
 [ext_resource type="PackedScene" uid="uid://ctxx46yi1gm4o" path="res://features/player/powers/water/CoolGauge.tscn" id="4_7pawb"]
+[ext_resource type="PackedScene" uid="uid://bc7lcjk07jgut" path="res://features/player/HUD/health_middle.tscn" id="4_cnowh"]
 [ext_resource type="PackedScene" uid="uid://b7q4tjsvib3gr" path="res://features/player/powers/fire/HeatGauge.tscn" id="4_w11uw"]
 [ext_resource type="Script" uid="uid://bs53hegfc0v51" path="res://ui/setting/setting_button.gd" id="6_sjha8"]
 
@@ -154,7 +156,21 @@ offset_bottom = 96.0
 theme_override_constants/separation = 0
 script = ExtResource("2_w11uw")
 
-[node name="ElementDisplay" parent="HealthGUI" unique_id=300156056 instance=ExtResource("3_q84jv")]
+[node name="HealthDisplay" type="Panel" parent="HealthGUI" unique_id=669539048]
+visible = false
+layout_mode = 2
+
+[node name="HealthEnd" parent="HealthGUI/HealthDisplay" unique_id=300156056 instance=ExtResource("3_p1370")]
+layout_mode = 0
+offset_left = -70.0
+offset_right = -32.0
+
+[node name="HealthMiddle" parent="HealthGUI/HealthDisplay" unique_id=1262745481 instance=ExtResource("4_cnowh")]
+layout_mode = 0
+offset_left = -32.0
+offset_right = 0.0
+
+[node name="ElementDisplay" parent="HealthGUI" unique_id=452823664 instance=ExtResource("3_q84jv")]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HealthGUI" unique_id=1977272837]
