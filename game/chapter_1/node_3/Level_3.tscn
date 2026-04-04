@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://csdhr8hdh1orb" path="res://game/chapter_1/node_3/golem_level/node_3_level_3_event_handler.gd" id="1_dr1y6"]
 [ext_resource type="TileSet" uid="uid://c71ipw3cggrd0" path="res://game/chapter_1/node_3/tres/hole.tres" id="2_s8l73"]
-[ext_resource type="TileSet" uid="uid://oor3xx5ie02p" path="res://game/chapter_1/node_3/tres/tile.tres" id="3_j1b6p"]
+[ext_resource type="TileSet" uid="uid://oor3xx5ie02p" path="res://game/chapter_1/node_3/tres/tiles.tres" id="3_j1b6p"]
 [ext_resource type="TileSet" uid="uid://cakd4038gdvlg" path="res://game/chapter_1/node_3/tres/bridge_shuffle.tres" id="5_dh3pg"]
 [ext_resource type="TileSet" uid="uid://dartk06cv4tgy" path="res://game/chapter_1/node_3/tres/invisible_collision.tres" id="8_r8158"]
 [ext_resource type="TileSet" uid="uid://cy24m54pcr32o" path="res://game/chapter_1/node_3/tres/rope.tres" id="11_ifk54"]
