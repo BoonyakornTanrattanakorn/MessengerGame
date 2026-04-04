@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctxx46yi1gm4o"]
 
-[ext_resource type="Script" uid="uid://6mx4pyewgit0" path="res://ui/cool_gauge.gd" id="1_tby2j"]
+[ext_resource type="Script" uid="uid://6mx4pyewgit0" path="res://features/player/powers/water/cool_gauge.gd" id="1_tby2j"]
 
 [node name="CoolGauge" type="HBoxContainer" unique_id=802023072]
 offset_right = 40.0
