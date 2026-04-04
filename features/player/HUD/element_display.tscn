@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cb0ocaujedja1" path="res://assets/sprites/health_gui/HealthBarElementDisplay.png" id="1_s06x0"]
 [ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/sprites/icons/elements/wind_icon.png" id="2_nbj01"]
+[ext_resource type="Texture2D" uid="uid://cqlnvte1gqur0" path="res://assets/sprites/icons/earth.jpg" id="3_0pnh8"]
+[ext_resource type="Texture2D" uid="uid://20sisqtolg2q" path="res://assets/sprites/icons/water.png" id="4_rvcsg"]
+[ext_resource type="Texture2D" uid="uid://ccg4ruvsxhn1n" path="res://assets/sprites/icons/fire.png" id="5_wxp03"]
 
 [node name="ElementDisplay" type="Panel" unique_id=300156056]
 self_modulate = Color(1, 1, 1, 0)
@@ -20,7 +23,29 @@ centered = false
 
 [node name="Elements" type="Node2D" parent="." unique_id=180403251]
 
-[node name="Sprite2D" type="Sprite2D" parent="Elements" unique_id=1277765619]
+[node name="WindIcon" type="Sprite2D" parent="Elements" unique_id=1277765619]
+visible = false
 position = Vector2(26, 28)
 texture = ExtResource("2_nbj01")
+offset = Vector2(0.5, 0)
+
+[node name="EarthIcon" type="Sprite2D" parent="Elements" unique_id=1089153817]
+visible = false
+position = Vector2(26, 28)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("3_0pnh8")
+offset = Vector2(0.5, 0)
+
+[node name="WaterIcon" type="Sprite2D" parent="Elements" unique_id=979662785]
+visible = false
+position = Vector2(26.426, 28)
+scale = Vector2(0.148, 0.148)
+texture = ExtResource("4_rvcsg")
+offset = Vector2(0.5, 0)
+
+[node name="FireIcon" type="Sprite2D" parent="Elements" unique_id=1129019614]
+visible = false
+position = Vector2(26.426, 28)
+scale = Vector2(0.148, 0.148)
+texture = ExtResource("5_wxp03")
 offset = Vector2(0.5, 0)
