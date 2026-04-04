@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://ppm5ewbxc88f"]
+
+[ext_resource type="Script" uid="uid://dcp7nu3bqvy5q" path="res://game/chapter_1/node_2/scripts/lever.gd" id="1_wv1st"]
+[ext_resource type="Texture2D" uid="uid://c1bkcmltdlg2t" path="res://assets/sprites/chapter1_node2/Lever/lever_off.png" id="2_6kuia"]
+[ext_resource type="Texture2D" uid="uid://bolmlvfee8mmv" path="res://assets/sprites/chapter1_node2/Lever/lever_on1.png" id="3_2ihno"]
+[ext_resource type="Texture2D" uid="uid://b2n04co42c65x" path="res://assets/sprites/chapter1_node2/Lever/lever_on2.png" id="4_1u0ni"]
+[ext_resource type="Texture2D" uid="uid://cmnnjqt2h2dbl" path="res://assets/sprites/chapter1_node2/Lever/lever_on3.png" id="5_chrb4"]
+[ext_resource type="Texture2D" uid="uid://c4p80qehdpkmr" path="res://assets/sprites/chapter1_node2/Lever/lever_on4.png" id="6_ojti0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wv1st"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6kuia")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2ihno")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1u0ni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_chrb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ojti0")
+}],
+"loop": false,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ihno"]
+size = Vector2(19, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1u0ni"]
+size = Vector2(11, 5)
+
+[node name="lever" type="Area2D" unique_id=2093616132]
+y_sort_enabled = true
+script = ExtResource("1_wv1st")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1638210522]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_wv1st")
+animation = &"on"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=554904059]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_2ihno")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=46727239]
+position = Vector2(0, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=362607394]
+position = Vector2(0.5, 5.5)
+shape = SubResource("RectangleShape2D_1u0ni")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

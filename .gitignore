@@ -1,33 +1,19 @@
-# Godot generated import metadata
+# Godot 4+ specific ignores
+.godot/
+.nomedia
+
+# Godot-specific ignores
 .import/
-*.import
-*.import.*
-
-# Godot editor UID files (generated resource ids)
-*.gd.uid
-
-# Godot export/build caches (optional)
-.export/
-.export_presets.cfg
-
-# Mono / C# build artifacts
-.mono/
-bin/
-obj/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Editor/IDE
-.vscode/
-.idea/
-
-# Temporary / swap / backup files
-*~
-*.swp
+export.cfg
+export_credentials.cfg
 *.tmp
-*.bak
 
-# Optional: ignore build/artifacts folders you don't want tracked
-.cache/
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+*.pck

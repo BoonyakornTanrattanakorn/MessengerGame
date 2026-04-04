@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://csvk43uw3bjqv"]
 
-[ext_resource type="Script" uid="uid://c3m15f7btii12" path="res://ui/pause_menu/pause_menu.gd" id="1_4vh0x"]
-[ext_resource type="Script" uid="uid://cwledwpxd0xpg" path="res://ui/setting/keybind_setting.gd" id="2_jbgdu"]
+[ext_resource type="Script" uid="uid://b5ronoxehxsnw" path="res://ui/pause_menu/pause_menu.gd" id="1_4vh0x"]
+[ext_resource type="Script" uid="uid://dyludjcbfs8qc" path="res://ui/setting/keybind_setting.gd" id="2_jbgdu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu3lf"]
 content_margin_left = 20.0

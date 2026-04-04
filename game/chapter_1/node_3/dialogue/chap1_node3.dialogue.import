@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bcnew0mavym8i"
+path="res://.godot/imported/chap1_node3.dialogue-1daba7555a9f94f215718a9b84fee9ac.tres"
+
+[deps]
+
+source_file="res://game/chapter_1/node_3/dialogue/chap1_node3.dialogue"
+dest_files=["res://.godot/imported/chap1_node3.dialogue-1daba7555a9f94f215718a9b84fee9ac.tres"]
+
+[params]
+
+defaults=true
