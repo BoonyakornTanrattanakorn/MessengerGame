@@ -14,7 +14,7 @@ var init_data = {
 	"scenes": {}
 }
 
-var init_scene_path = "res://chapters/chapter_1/node_2/node_2.tscn"
+var init_scene_path = "res://game/game_scene.tscn"
 
 
 func save_game():

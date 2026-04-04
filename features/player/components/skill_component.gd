@@ -8,6 +8,8 @@ class_name SkillComponent
 @export var water_wave_scene: PackedScene
 @export var rock_pillar_scene: PackedScene
 
+var scenes = {}
+
 func _ready():
 	# Scenes should be assigned in the editor; provide lightweight helpers
 	scenes = {

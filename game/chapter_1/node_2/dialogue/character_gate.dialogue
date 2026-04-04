@@ -1,0 +1,83 @@
+~ paper_1
+Paper No.1: The paper is torn and faded.
+Paper No.1: "First blooms the rose where silence gently sleeps."
+Player: So the first line is talking about "Rose".
+=> END
+
+~ paper_2
+Paper No.2: A brittle scrap of parchment.
+Paper No.2: "Then stands the helm, where duty vigil keeps."
+Player: The second one must be "Helmet".
+=> END
+
+~ paper_3
+Paper No.3: Ink has run across the edges, but one line remains clear.
+Paper No.3: "The sword must follow, sharp with iron will."
+Player: "Sword" is the third line.
+=> END
+
+~ paper_4
+Paper No.4: The final fragment is nearly intact.
+Paper No.4: "And last the book, when all the world is still."
+Player: The fourth line must be "Book".
+=> END
+
+
+~ npc_start
+Gatekeeper: Halt. These halls do not open for the careless.
+Gatekeeper: Only one who understands the torn verse may pass.
+
+- I am still searching for the clues.
+	Gatekeeper: Then search well. Four fragments were scattered through these rooms.
+	=> END
+
+- I found the torn papers.
+	=> check_fragments
+
+~ check_fragments
+if PuzzleState.has_all_fragments()
+	=> npc_quiz
+else
+	Gatekeeper: No, you have not found them all.
+	Gatekeeper: Bring me the complete poem, not guesses born of haste.
+	=> END
+
+
+~ npc_quiz
+Gatekeeper: Then answer me.
+Gatekeeper: In what order do the relics belong?
+
+- Rose → Helmet → Sword → Book
+	do submit_answer(["rose", "helmet", "sword", "book"])
+	=> correct_answer
+
+- Rose → Sword → Helmet → Book
+	do submit_answer(["rose", "sword", "helmet", "book"])
+	=> wrong_answer
+
+- Helmet → Rose → Sword → Book
+	do submit_answer(["helmet", "rose", "sword", "book"])
+	=> wrong_answer
+
+- Book → Sword → Helmet → Rose
+	do submit_answer(["book", "sword", "helmet", "rose"])
+	=> wrong_answer
+
+
+~ correct_answer
+Gatekeeper: You have read with care.
+Gatekeeper: Beauty first, then duty, then strength, and at last, wisdom.
+Gatekeeper: The way forward is now open.
+=> END
+
+
+~ wrong_answer
+Gatekeeper: That is not the order written by time.
+Gatekeeper: Read the fragments again, and listen to what the poem truly says.
+=> END
+
+
+~ npc_after_solved
+Gatekeeper: The path ahead is already open to you.
+Gatekeeper: Go on. Your next trial waits beyond this door.
+=> END

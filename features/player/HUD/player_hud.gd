@@ -5,23 +5,23 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
 @onready var skill_icon = %SkillIcon
-@onready var wind_icon = $HealthGUI/ElementDisplay/Elements/WindIcon
-@onready var fire_icon = $HealthGUI/ElementDisplay/Elements/FireIcon
-@onready var water_icon = $HealthGUI/ElementDisplay/Elements/WaterIcon
-@onready var earth_icon = $HealthGUI/ElementDisplay/Elements/EarthIcon
+@onready var wind_icon = $TopLeftGUI/ElementDisplay/Elements/WindIcon
+@onready var fire_icon = $TopLeftGUI/ElementDisplay/Elements/FireIcon
+@onready var water_icon = $TopLeftGUI/ElementDisplay/Elements/WaterIcon
+@onready var earth_icon = $TopLeftGUI/ElementDisplay/Elements/EarthIcon
 @onready var skill_slot = %SkillSlot
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
-@onready var health_gui = $HealthGUI
+@onready var top_left_gui = $TopLeftGUI
 
 # Objective UI
 @onready var objective_box = $ObjectiveBox
 @onready var objective_label = $ObjectiveBox/ObjectivePanel/MarginContainer/ObjectiveLabel
 
 #cool gauge
-@onready var cool_gauge_ui = $HealthGUI/VBoxContainer/CoolGauge
+@onready var cool_gauge_ui = $TopLeftGUI/VBoxContainer/CoolGauge
 #heat gauge
-@onready var heat_gauge = $HealthGUI/VBoxContainer/HeatGauge
+@onready var heat_gauge = $TopLeftGUI/VBoxContainer/HeatGauge
 # Skill list — add more elements here as you implement them
 var skills = [
 	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": wind_icon},
@@ -127,9 +127,9 @@ func _ready():
 
 
 func _setup_health(player):
-	health_gui.set_max_health(player.player_max_hp)
-	health_gui.update_health(player.player_hp)
-	player.health_changed.connect(health_gui.update_health)
+	top_left_gui.set_max_health(player.player_max_hp)
+	top_left_gui.update_health(player.player_hp)
+	player.health_changed.connect(top_left_gui.update_health)
 	
 
 func _process(_delta):

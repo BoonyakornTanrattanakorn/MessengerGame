@@ -364,6 +364,7 @@ func add_item(item_name: String, amount: int = 1):
 	print("Got: ", item_name, " total: ", inventory[item_name])
 	get_node("/root").find_child("PlayerHUD", true, false).refresh_items()
 
+
 func die_in_minecart_and_respawn(minecart_respawn_position):
 	if current_mount != null:
 		current_mount.reset_position()
@@ -374,7 +375,6 @@ func die_in_minecart_and_respawn(minecart_respawn_position):
 	health_component.hp = health_component.max_hp
 	
 
-		
 func shoot_wind_wave():
 	if skill_component:
 		skill_component.shoot_wind_wave()
@@ -394,7 +394,8 @@ func save():
 			"y" : respawn_position.y
 		}
 	}
-	
+
+
 func load_data(data):
 	var pos = data.get("position", null)
 	var re_pos = data.get("respawn_position", null)
@@ -414,17 +415,20 @@ func load_data(data):
 	for key in loaded_inventory:
 		inventory[key] = int(loaded_inventory[key])
 
+
 func _on_health_changed(new_hp: int) -> void:
 	# keep aliases in sync
 	player_hp = int(new_hp)
 	player_max_hp = health_component.max_hp if health_component else player_max_hp
 	emit_signal("health_changed", player_hp)
-		
+
+
 func focus_camera_to(target: Node2D):
 	camera.reparent(get_tree().current_scene) # detach from player
 
 	var tween = create_tween()
 	tween.tween_property(camera, "global_position", target.global_position, 0.5)
+
 
 func return_camera():
 	camera.reparent(self)  # back to player
@@ -435,9 +439,11 @@ func shoot_fire_small():
 	if skill_component:
 		skill_component.shoot_fire_small()
 
+
 func shoot_fire_heavy():
 	if skill_component:
 		skill_component.shoot_fire_heavy()
+
 
 func add_heat(amount: float):
 	heat_gauge = clamp(heat_gauge + amount, 0.0, max_heat)
@@ -447,7 +453,6 @@ func add_heat(amount: float):
 		health_component.hp = 0
 		health_component.emit_signal("health_changed", health_component.hp)
 		print("Overheated! Player dead!")
-
 
 
 func add_cool(amount: int):
