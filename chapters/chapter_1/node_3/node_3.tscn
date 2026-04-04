@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://dbopjw4setk5u" path="res://chapters/chapter_1/node_3/node_3.gd" id="1_tjmu8"]
 [ext_resource type="PackedScene" uid="uid://b4u2ea5kgyw2e" path="res://chapters/chapter_1/node_3/Level_0.tscn" id="2_tjmu8"]
 [ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://features/player/player.tscn" id="3_ptpbg"]
-[ext_resource type="Texture2D" uid="uid://dtan4iu1ggc8h" path="res://assets/maps/minimap_frame.png" id="4_47bg4"]
+[ext_resource type="Texture2D" uid="uid://dtan4iu1ggc8h" path="res://assets/sprites/maps/minimap_frame.png" id="4_47bg4"]
 [ext_resource type="Script" uid="uid://0iqe0tscjprc" path="res://features/panel_container.gd" id="5_0sn8n"]
 [ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://features/sub_viewport.gd" id="6_3y1ny"]
-[ext_resource type="Texture2D" uid="uid://bmnymc7ne7cep" path="res://assets/maps/border_frame.png" id="7_wuw71"]
-[ext_resource type="Texture2D" uid="uid://bdd4sm3nv5qpf" path="res://assets/icons/arrow.png" id="8_bpxl4"]
+[ext_resource type="Texture2D" uid="uid://bmnymc7ne7cep" path="res://assets/sprites/maps/border_frame.png" id="7_wuw71"]
+[ext_resource type="Texture2D" uid="uid://bdd4sm3nv5qpf" path="res://assets/sprites/icons/arrow.png" id="8_bpxl4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sreuk"]
 content_margin_left = 0.0

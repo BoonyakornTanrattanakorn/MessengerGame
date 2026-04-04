@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://8u2hukuvatir"]
 
 [ext_resource type="Script" uid="uid://b5n6ho1xo6dy0" path="res://addons/ldtk-importer/src/components/ldtk-level.gd" id="1_bjeug"]
-[ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/maps/tilesets/tileset_16px.res" id="2_vrgyj"]
+[ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_vrgyj"]
 [ext_resource type="Script" uid="uid://byqnwcsc08ud4" path="res://chapters/chapter_1/node_3/warp_to_level_0_from_2.gd" id="3_wtqb0"]
 [ext_resource type="PackedScene" uid="uid://bjmvx33n8l4a6" path="res://chapters/chapter_1/node_3/green_gem/minecart.tscn" id="4_ad0e2"]
 [ext_resource type="Script" uid="uid://ba5kpb58s0dn6" path="res://chapters/chapter_1/node_3/green_gem/turn_area_right.gd" id="5_qqth2"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://cbkbjt25cwlfn" path="res://chapters/chapter_1/node_3/green_gem/dismounted_area.gd" id="8_l72s6"]
 [ext_resource type="Script" uid="uid://bovrkpbdtcddh" path="res://chapters/chapter_1/node_3/green_gem/turn_area_left.gd" id="9_rj057"]
 [ext_resource type="Script" uid="uid://dl8q310xeu046" path="res://chapters/chapter_1/node_3/green_gem/green_gem_pickup.gd" id="10_gs5mo"]
-[ext_resource type="Texture2D" uid="uid://dipfaeovuk0pq" path="res://assets/icons/green_gem.png" id="11_saeti"]
+[ext_resource type="Texture2D" uid="uid://dipfaeovuk0pq" path="res://assets/sprites/icons/green_gem.png" id="11_saeti"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e4qru"]
 size = Vector2(139, 42)

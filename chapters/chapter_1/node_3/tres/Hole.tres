@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" format=3 uid="uid://c71ipw3cggrd0"]
 
-[ext_resource type="Texture2D" uid="uid://b2sc06n4r8jul" path="res://assets/maps/tilesets/Inside_A2.png" id="1_inus4"]
-[ext_resource type="Texture2D" uid="uid://bo7nns22nceho" path="res://assets/maps/tilesets/Outside_C.png" id="2_n3rl3"]
-[ext_resource type="Texture2D" uid="uid://0ufhc5wwcjo7" path="res://assets/maps/tilesets/Dungeon_A2.png" id="3_nppg7"]
-[ext_resource type="Texture2D" uid="uid://0th1mn4je08n" path="res://assets/maps/tilesets/Dungeon_A4.png" id="4_emyp7"]
-[ext_resource type="Texture2D" uid="uid://dta6q5nhljyju" path="res://assets/maps/tilesets/World_B.png" id="5_5quuc"]
+[ext_resource type="Texture2D" uid="uid://b2sc06n4r8jul" path="res://assets/sprites/maps/tilesets/Inside_A2.png" id="1_inus4"]
+[ext_resource type="Texture2D" uid="uid://bo7nns22nceho" path="res://assets/sprites/maps/tilesets/Outside_C.png" id="2_n3rl3"]
+[ext_resource type="Texture2D" uid="uid://0ufhc5wwcjo7" path="res://assets/sprites/maps/tilesets/Dungeon_A2.png" id="3_nppg7"]
+[ext_resource type="Texture2D" uid="uid://0th1mn4je08n" path="res://assets/sprites/maps/tilesets/Dungeon_A4.png" id="4_emyp7"]
+[ext_resource type="Texture2D" uid="uid://dta6q5nhljyju" path="res://assets/sprites/maps/tilesets/World_B.png" id="5_5quuc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nsogq"]
 resource_name = "Inside_A22"

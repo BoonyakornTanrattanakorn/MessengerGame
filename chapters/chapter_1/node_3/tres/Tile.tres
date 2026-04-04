@@ -1,11 +1,11 @@
 [gd_resource type="TileSet" format=3 uid="uid://oor3xx5ie02p"]
 
-[ext_resource type="Texture2D" uid="uid://b2sc06n4r8jul" path="res://assets/maps/tilesets/Inside_A2.png" id="1_jfwa4"]
-[ext_resource type="Texture2D" uid="uid://bu57udwrf0l1x" path="res://assets/maps/tilesets/Dungeon_B.png" id="1_o0yty"]
-[ext_resource type="Texture2D" uid="uid://bo7nns22nceho" path="res://assets/maps/tilesets/Outside_C.png" id="2_843py"]
-[ext_resource type="Texture2D" uid="uid://0ufhc5wwcjo7" path="res://assets/maps/tilesets/Dungeon_A2.png" id="3_g51kb"]
-[ext_resource type="Texture2D" uid="uid://0th1mn4je08n" path="res://assets/maps/tilesets/Dungeon_A4.png" id="4_8yu30"]
-[ext_resource type="Texture2D" uid="uid://dta6q5nhljyju" path="res://assets/maps/tilesets/World_B.png" id="5_gjij6"]
+[ext_resource type="Texture2D" uid="uid://b2sc06n4r8jul" path="res://assets/sprites/maps/tilesets/Inside_A2.png" id="1_jfwa4"]
+[ext_resource type="Texture2D" uid="uid://bu57udwrf0l1x" path="res://assets/sprites/maps/tilesets/Dungeon_B.png" id="1_o0yty"]
+[ext_resource type="Texture2D" uid="uid://bo7nns22nceho" path="res://assets/sprites/maps/tilesets/Outside_C.png" id="2_843py"]
+[ext_resource type="Texture2D" uid="uid://0ufhc5wwcjo7" path="res://assets/sprites/maps/tilesets/Dungeon_A2.png" id="3_g51kb"]
+[ext_resource type="Texture2D" uid="uid://0th1mn4je08n" path="res://assets/sprites/maps/tilesets/Dungeon_A4.png" id="4_8yu30"]
+[ext_resource type="Texture2D" uid="uid://dta6q5nhljyju" path="res://assets/sprites/maps/tilesets/World_B.png" id="5_gjij6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eare6"]
 texture = ExtResource("1_o0yty")

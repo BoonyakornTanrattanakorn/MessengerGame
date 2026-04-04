@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjmvx33n8l4a6"]
 
-[ext_resource type="Texture2D" uid="uid://xyesrqtb8535" path="res://assets/vehicles/minecart.png" id="1_3eu0j"]
+[ext_resource type="Texture2D" uid="uid://xyesrqtb8535" path="res://assets/sprites/vehicles/minecart.png" id="1_3eu0j"]
 [ext_resource type="Script" uid="uid://bl46aviuqeq1u" path="res://chapters/chapter_1/node_3/green_gem/minecart.gd" id="2_ssjfq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3eu0j"]

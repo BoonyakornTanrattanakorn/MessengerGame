@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c0m86g4tkr1t5"]
 
 [ext_resource type="Script" uid="uid://bflppq2f4y4cp" path="res://features/player/powers/fire/fire_heavy.gd" id="1_n54um"]
-[ext_resource type="Texture2D" uid="uid://l83avrh60y1y" path="res://assets/Chapter1_node2/heavy_fire.png" id="2_18i0b"]
+[ext_resource type="Texture2D" uid="uid://l83avrh60y1y" path="res://assets/sprites/Chapter1_node2/heavy_fire.png" id="2_18i0b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8paqh"]
 radius = 25.96151

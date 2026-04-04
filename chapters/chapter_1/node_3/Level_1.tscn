@@ -1,15 +1,15 @@
 [gd_scene format=4 uid="uid://nt7tlf00wkc1"]
 
 [ext_resource type="Script" uid="uid://b5n6ho1xo6dy0" path="res://addons/ldtk-importer/src/components/ldtk-level.gd" id="1_87i3a"]
-[ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/maps/tilesets/tileset_16px.res" id="2_ayuvw"]
+[ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_ayuvw"]
 [ext_resource type="Script" uid="uid://bamwo7l48o40x" path="res://chapters/chapter_1/node_3/warp_to_level_0_from_1.gd" id="3_yrulf"]
 [ext_resource type="Script" uid="uid://6jv154ufl3u3" path="res://chapters/chapter_1/node_3/red_gem/red_gem_pickup.gd" id="4_absj7"]
-[ext_resource type="Texture2D" uid="uid://bi5saalcfd6o3" path="res://assets/icons/red_gem.png" id="5_b0un0"]
+[ext_resource type="Texture2D" uid="uid://bi5saalcfd6o3" path="res://assets/sprites/icons/red_gem.png" id="5_b0un0"]
 [ext_resource type="Script" uid="uid://ccfhabpdr6fmp" path="res://chapters/chapter_1/node_3/red_gem/bell_trigger.gd" id="6_bmla4"]
-[ext_resource type="Texture2D" uid="uid://0qjgm8fdc6cl" path="res://assets/maps/tilesets/Bell.png" id="7_1u44n"]
+[ext_resource type="Texture2D" uid="uid://0qjgm8fdc6cl" path="res://assets/sprites/maps/tilesets/Bell.png" id="7_1u44n"]
 [ext_resource type="Script" uid="uid://cvsusrbxppgxp" path="res://chapters/chapter_1/node_3/red_gem/tiger_guard.gd" id="8_tsfri"]
-[ext_resource type="Texture2D" uid="uid://btwaaclujhpnk" path="res://assets/maps/tilesets/LionShocked.png" id="9_ga05n"]
-[ext_resource type="Texture2D" uid="uid://d0i0821b5qhc3" path="res://assets/maps/tilesets/LionSleep.png" id="10_31yu7"]
+[ext_resource type="Texture2D" uid="uid://btwaaclujhpnk" path="res://assets/sprites/maps/tilesets/LionShocked.png" id="9_ga05n"]
+[ext_resource type="Texture2D" uid="uid://d0i0821b5qhc3" path="res://assets/sprites/maps/tilesets/LionSleep.png" id="10_31yu7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1ato"]
 size = Vector2(80.875, 101)

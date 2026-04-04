@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bvu7tsbbwku3y"]
 
 [ext_resource type="Script" uid="uid://deqx25i4su7ab" path="res://features/player/powers/earth/rock_pillar.gd" id="1_5felu"]
-[ext_resource type="Texture2D" uid="uid://3h3p8kaq3q5w" path="res://assets/icons/e2.png" id="2_fr2h6"]
+[ext_resource type="Texture2D" uid="uid://3h3p8kaq3q5w" path="res://assets/sprites/icons/e2.png" id="2_fr2h6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6nhr5"]
 animations = [{
