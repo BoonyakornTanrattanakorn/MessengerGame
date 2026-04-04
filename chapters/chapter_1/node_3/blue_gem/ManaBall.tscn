@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://fasri4bcymc3"]
 
-[ext_resource type="Script" uid="uid://bkks74ovdap6c" path="res://objects/map1_node3_3/ManaBall.gd" id="1_3wdvh"]
-[ext_resource type="Texture2D" uid="uid://purl78x2qx2c" path="res://character/enemy/golem_boss/mana_ball.png" id="2_x2kho"]
+[ext_resource type="Script" path="res://objects/map1_node3_3/ManaBall.gd" id="1_3wdvh"]
+[ext_resource type="Texture2D" uid="uid://purl78x2qx2c" path="res://assets/golem_boss/mana_ball.png" id="2_x2kho"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_myyew"]
 radius = 75.16648

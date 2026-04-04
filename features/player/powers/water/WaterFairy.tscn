@@ -1,0 +1,233 @@
+[gd_scene format=3 uid="uid://cadd8ara6sth3"]
+
+[ext_resource type="Script" uid="uid://bhm5gogo1h51g" path="res://features/player/powers/water/water_fairy.gd" id="1_vaps4"]
+[ext_resource type="Texture2D" uid="uid://c8d0r5lmulc3w" path="res://assets/fairy_picture/fl1.png" id="2_o033k"]
+[ext_resource type="Texture2D" uid="uid://c8jotmsvld6ss" path="res://assets/fairy_picture/fl2.png" id="3_2k2vy"]
+[ext_resource type="Texture2D" uid="uid://cvw8dg7j7gg8j" path="res://assets/fairy_picture/fl3.png" id="4_w3qyx"]
+[ext_resource type="Texture2D" uid="uid://d31sfrfm6lubr" path="res://assets/fairy_picture/fl4.png" id="5_86vac"]
+[ext_resource type="Texture2D" uid="uid://byo3v2alsmdek" path="res://assets/fairy_picture/fl5.png" id="6_yqh6o"]
+[ext_resource type="Texture2D" uid="uid://c4k2feypn5ol0" path="res://assets/fairy_picture/fl6.png" id="7_vdtms"]
+[ext_resource type="Texture2D" uid="uid://cq7y1kpjx6c8m" path="res://assets/fairy_picture/f1.png" id="8_cjplf"]
+[ext_resource type="Texture2D" uid="uid://bpq75kiv2h4yq" path="res://assets/fairy_picture/f2.png" id="9_3dsgi"]
+[ext_resource type="Texture2D" uid="uid://r2j5ysbjdyx1" path="res://assets/fairy_picture/f3.png" id="10_triay"]
+[ext_resource type="Texture2D" uid="uid://dbs8b671f30uc" path="res://assets/fairy_picture/f4.png" id="11_8hasv"]
+[ext_resource type="Texture2D" uid="uid://b4pktrxw755iu" path="res://assets/fairy_picture/f5.png" id="12_uojxa"]
+[ext_resource type="Texture2D" uid="uid://dhs6r15nvg2gl" path="res://assets/fairy_picture/f6.png" id="13_my3nr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_orjd8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o033k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2k2vy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w3qyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_86vac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yqh6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vdtms")
+}],
+"loop": true,
+"name": &"idle back",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_cjplf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3dsgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_triay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8hasv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_uojxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_my3nr")
+}],
+"loop": true,
+"name": &"idle front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o033k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2k2vy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w3qyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_86vac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yqh6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vdtms")
+}],
+"loop": true,
+"name": &"idle left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_cjplf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3dsgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_triay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8hasv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_uojxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_my3nr")
+}],
+"loop": true,
+"name": &"idle right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_cjplf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3dsgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_triay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8hasv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_uojxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_my3nr")
+}],
+"loop": true,
+"name": &"walk back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_cjplf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3dsgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_triay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8hasv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_uojxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_my3nr")
+}],
+"loop": true,
+"name": &"walk front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o033k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2k2vy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w3qyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_86vac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yqh6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vdtms")
+}],
+"loop": true,
+"name": &"walk left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_cjplf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3dsgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_triay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8hasv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_uojxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_my3nr")
+}],
+"loop": true,
+"name": &"walk right",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gphl0"]
+size = Vector2(40, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1vkk"]
+size = Vector2(100, 149.99998)
+
+[node name="WaterFairy" type="CharacterBody2D" unique_id=387822076]
+script = ExtResource("1_vaps4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=730896454]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_orjd8")
+animation = &"idle back"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1640479366]
+position = Vector2(0, 4.2)
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_gphl0")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=394092598]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=749593518]
+position = Vector2(5.9604645e-08, 4.7683716e-07)
+scale = Vector2(0.2, 0.2)
+shape = SubResource("RectangleShape2D_b1vkk")
+debug_color = Color(0.9156372, 0.22454095, 0.46855557, 0.41960785)
+
+[node name="FairyCamera" type="Camera2D" parent="." unique_id=520256482]
+enabled = false
+zoom = Vector2(2, 2)

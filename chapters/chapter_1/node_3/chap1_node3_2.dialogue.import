@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dagus2g8b2hlj"
+path="res://.godot/imported/chap1_node3_2.dialogue-1f5bc0b9f0fe681eefb7f89e9c1446f5.tres"
+
+[deps]
+
+source_file="res://chapters/chapter_1/node_3/chap1_node3_2.dialogue"
+dest_files=["res://.godot/imported/chap1_node3_2.dialogue-1f5bc0b9f0fe681eefb7f89e9c1446f5.tres"]
+
+[params]
+
+defaults=true

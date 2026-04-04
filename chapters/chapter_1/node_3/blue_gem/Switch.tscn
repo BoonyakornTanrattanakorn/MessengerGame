@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://2215xa1l24qs"]
 
-[ext_resource type="Script" uid="uid://nubhrhsq8yfe" path="res://objects/map1_node3_3/Switch.gd" id="1_11x4n"]
-[ext_resource type="Texture2D" uid="uid://braag636absr8" path="res://character/enemy/golem_boss/switch.png" id="2_fism0"]
-[ext_resource type="Script" uid="uid://crhqvr3y53hds" path="res://objects/map1_node3_3/interaction_area.gd" id="3_sblcj"]
+[ext_resource type="Script" path="res://objects/map1_node3_3/Switch.gd" id="1_11x4n"]
+[ext_resource type="Texture2D" uid="uid://braag636absr8" path="res://assets/golem_boss/switch.png" id="2_fism0"]
+[ext_resource type="Script" path="res://objects/map1_node3_3/interaction_area.gd" id="3_sblcj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fism0"]
 size = Vector2(0.625, 0.859375)

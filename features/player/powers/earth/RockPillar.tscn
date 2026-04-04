@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bvu7tsbbwku3y"]
+
+[ext_resource type="Script" uid="uid://deqx25i4su7ab" path="res://features/player/powers/earth/rock_pillar.gd" id="1_5felu"]
+[ext_resource type="Texture2D" uid="uid://3h3p8kaq3q5w" path="res://assets/icons/e2.png" id="2_fr2h6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6nhr5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fr2h6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iqu4q"]
+size = Vector2(66.5, 59)
+
+[node name="RockPillar" type="StaticBody2D" unique_id=32078339]
+script = ExtResource("1_5felu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1709738574]
+position = Vector2(-1, -1)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_6nhr5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=383029351]
+position = Vector2(-5.75, -2.5)
+shape = SubResource("RectangleShape2D_iqu4q")

@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://oeforo6vfrj0"]
 
-[ext_resource type="Script" uid="uid://b1pklcnsl05u3" path="res://objects/map1_node3_3/golem_boss.gd" id="1_kgk60"]
-[ext_resource type="Texture2D" uid="uid://c51clgp7wp6cs" path="res://character/enemy/golem_boss/blue_golem.png" id="2_7r80t"]
-[ext_resource type="Texture2D" uid="uid://d1pan02t0a8mm" path="res://character/enemy/golem_boss/green_golem.png" id="3_4g66n"]
-[ext_resource type="Texture2D" uid="uid://bwk44vchgqoca" path="res://character/enemy/golem_boss/die_golem.png" id="3_oc3tr"]
-[ext_resource type="Texture2D" uid="uid://b0gyh6mrbrsqt" path="res://character/enemy/golem_boss/idle_golem.png" id="4_oc3tr"]
-[ext_resource type="Texture2D" uid="uid://camdny0jxtex1" path="res://character/enemy/golem_boss/die_golem_wdrop.png" id="4_u5b4n"]
-[ext_resource type="Texture2D" uid="uid://dratd4xm53d0g" path="res://character/enemy/golem_boss/red_golem.png" id="5_u5b4n"]
+[ext_resource type="Script" path="res://objects/map1_node3_3/golem_boss.gd" id="1_kgk60"]
+[ext_resource type="Texture2D" uid="uid://c51clgp7wp6cs" path="res://assets/golem_boss/blue_golem.png" id="2_7r80t"]
+[ext_resource type="Texture2D" uid="uid://d1pan02t0a8mm" path="res://assets/golem_boss/green_golem.png" id="3_4g66n"]
+[ext_resource type="Texture2D" uid="uid://bwk44vchgqoca" path="res://assets/golem_boss/die_golem.png" id="3_oc3tr"]
+[ext_resource type="Texture2D" uid="uid://b0gyh6mrbrsqt" path="res://assets/golem_boss/idle_golem.png" id="4_oc3tr"]
+[ext_resource type="Texture2D" uid="uid://camdny0jxtex1" path="res://assets/golem_boss/die_golem_wdrop.png" id="4_u5b4n"]
+[ext_resource type="Texture2D" uid="uid://dratd4xm53d0g" path="res://assets/golem_boss/red_golem.png" id="5_u5b4n"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_icho3"]
 animations = [{
