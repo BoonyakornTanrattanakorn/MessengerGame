@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var tiger_guard_path: NodePath
+@export var lion_guard_path: NodePath
 @export var red_gem_path: NodePath
 
 @export var save_id = "bell_trigger"
@@ -25,9 +25,9 @@ func _on_area_entered(area: Area2D) -> void:
 	used = true
 	print("Bell triggered by wind wave")
 
-	var tiger = get_node_or_null(tiger_guard_path)
-	if tiger and tiger.has_method("scare_and_leave"):
-		tiger.scare_and_leave()
+	var lion = get_node_or_null(lion_guard_path)
+	if lion and lion.has_method("scare_and_leave"):
+		lion.scare_and_leave()
 
 	var gem = get_node_or_null(red_gem_path)
 	if gem and gem.has_method("unlock_pickup"):
@@ -44,9 +44,9 @@ func load_data(data):
 	used = data.get("used", used)
 	
 	if used:
-		var tiger = get_node_or_null(tiger_guard_path)
-		if tiger and tiger.has_method("scare_and_leave"):
-			tiger.scare_and_leave()
+		var lion = get_node_or_null(lion_guard_path)
+		if lion and lion.has_method("scare_and_leave"):
+			lion.scare_and_leave()
 
 		var gem = get_node_or_null(red_gem_path)
 		if gem and gem.has_method("unlock_pickup"):

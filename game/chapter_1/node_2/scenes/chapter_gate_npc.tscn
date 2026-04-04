@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cxjyqmqtayne1"]
 
-[ext_resource type="Script" uid="uid://cb748gxcsquck" path="res://game/chapter_1/node_2/scripts/ChapterGateNPC.gd" id="1_wpeu3"]
+[ext_resource type="Script" uid="uid://cb748gxcsquck" path="res://game/chapter_1/node_2/scripts/chapter_gate_npc.gd" id="1_wpeu3"]
 [ext_resource type="Texture2D" uid="uid://dg2foeeegdnba" path="res://icon.svg" id="1_xm0qu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeu3"]

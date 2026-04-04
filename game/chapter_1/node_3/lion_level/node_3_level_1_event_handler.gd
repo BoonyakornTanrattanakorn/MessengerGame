@@ -11,8 +11,8 @@ func handle_intro_for_level() -> void:
 
 		await DialogueManager.dialogue_ended
 
-		var tigerguard = get_node("TigerGuard")
-		player.focus_camera_to(tigerguard)
+		var lion_guard = get_node("LionGuard")
+		player.focus_camera_to(lion_guard)
 
 		await get_tree().create_timer(1.0).timeout
 		player.return_camera()

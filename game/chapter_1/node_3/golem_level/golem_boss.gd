@@ -13,7 +13,7 @@ var speed = 80.0
 var player: Node2D = null
 
 # Bullet
-var bullet_scene = preload("res://game/chapter_1/node_3/golem_level/ManaBall.tscn")
+var bullet_scene = preload("res://game/chapter_1/node_3/golem_level/mana_ball.tscn")
 var bullet_timer = 0.0
 var bullet_interval = 2.0
 var bullet_speed = 150.0

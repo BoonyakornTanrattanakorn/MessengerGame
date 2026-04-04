@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://fasri4bcymc3"]
 
-[ext_resource type="Script" uid="uid://dw5m31nbyqvft" path="res://game/chapter_1/node_3/golem_level/ManaBall.gd" id="1_3wdvh"]
+[ext_resource type="Script" uid="uid://dw5m31nbyqvft" path="res://game/chapter_1/node_3/golem_level/mana_ball.gd" id="1_3wdvh"]
 [ext_resource type="Texture2D" uid="uid://purl78x2qx2c" path="res://assets/sprites/golem_boss/mana_ball.png" id="2_x2kho"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_myyew"]

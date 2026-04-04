@@ -232,7 +232,7 @@ func refresh_items():
 func get_icon(item_name: String) -> Texture2D:
 	match item_name:
 		"red_gem": return red_gem
-		"blue_gem": return red_gem
+		"blue_gem": return blue_gem
 		"green_gem": return green_gem
 		"brave_stone": return brave_stone
 		"potion": return potion
