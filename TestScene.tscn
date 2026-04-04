@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dym1377lo2af1" path="res://chapters/node_template.gd" id="1_wicfy"]
 [ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://character/player/player.tscn" id="2_go42g"]
 [ext_resource type="PackedScene" path="res://assets/maps/levels/Ch1N2L1.scn" id="2_wicfy"]
-[ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://sub_viewport.gd" id="4_go42g"]
+[ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://features/sub_viewport.gd" id="4_go42g"]
 [ext_resource type="Texture2D" uid="uid://dtan4iu1ggc8h" path="res://assets/maps/minimap_frame.png" id="4_tq6uv"]
-[ext_resource type="Script" uid="uid://0iqe0tscjprc" path="res://panel_container.gd" id="5_5uqhi"]
+[ext_resource type="Script" uid="uid://0iqe0tscjprc" path="res://features/panel_container.gd" id="5_5uqhi"]
 [ext_resource type="Texture2D" uid="uid://bmnymc7ne7cep" path="res://assets/maps/border_frame.png" id="6_12c36"]
 [ext_resource type="Texture2D" uid="uid://bdd4sm3nv5qpf" path="res://assets/icons/arrow.png" id="8_5uqhi"]
 

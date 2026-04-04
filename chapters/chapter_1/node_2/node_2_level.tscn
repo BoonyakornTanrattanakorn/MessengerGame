@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://couyb0elflapq" path="res://assets/Chapter1_node2/Decorations.png" id="14_kjx3l"]
 [ext_resource type="Texture2D" uid="uid://dkx24nbabvuj" path="res://assets/Chapter1_node2/Other_objects.png" id="15_bbqlo"]
 [ext_resource type="Texture2D" uid="uid://cgw7hlqq1xc0q" path="res://assets/Chapter1_node2/supplies_objects.png" id="16_gaowi"]
-[ext_resource type="Script" uid="uid://bqfnj76dul6ck" path="res://scripts/level_editor_node_2.gd" id="17_c6e6w"]
+[ext_resource type="Script" uid="uid://bqfnj76dul6ck" path="res://chapters/chapter_1/node_2/scripts/level_editor_node_2.gd" id="17_c6e6w"]
 [ext_resource type="PackedScene" uid="uid://dkhxdt27gjdxu" path="res://scenes/door.tscn" id="18_qenax"]
 [ext_resource type="PackedScene" uid="uid://ppm5ewbxc88f" path="res://scenes/lever.tscn" id="19_xhgmw"]
 [ext_resource type="PackedScene" uid="uid://dyq6ux7kg3r48" path="res://scenes/TornPaper.tscn" id="20_5ob0a"]
@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cxjyqmqtayne1" path="res://scenes/ChapterGateNPC.tscn" id="22_j1ogr"]
 [ext_resource type="PackedScene" uid="uid://bcm4xltoe7hub" path="res://scenes/NextChapterDoor.tscn" id="23_lytj8"]
 [ext_resource type="PackedScene" uid="uid://05acn6y4wcy5" path="res://scenes/trigger.tscn" id="24_y4eed"]
-[ext_resource type="Script" uid="uid://c77mivnod5cyi" path="res://scripts/warp_to_node_3.gd" id="25_wk8wq"]
+[ext_resource type="Script" uid="uid://c77mivnod5cyi" path="res://chapters/chapter_1/node_3/warp_to_node_3.gd" id="25_wk8wq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m0gel"]
 texture = ExtResource("1_jbm2r")

@@ -6,7 +6,7 @@ func _handle_intro_for_level(level_name: String) -> void:
 		Global.chap1_node2_shown = true
 
 		DialogueManager.show_dialogue_balloon(
-			load("res://chapters/chapter_1/node_2/node_2.dialogue"),
+			load("res://chapters/chapter_1/node_2/dialogue/node_2.dialogue"),
 			"start"
 		)
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5n6ho1xo6dy0" path="res://addons/ldtk-importer/src/components/ldtk-level.gd" id="1_87i3a"]
 [ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/maps/tilesets/tileset_16px.res" id="2_ayuvw"]
-[ext_resource type="Script" uid="uid://bamwo7l48o40x" path="res://scripts/warp_to_level_0_from_1.gd" id="3_yrulf"]
+[ext_resource type="Script" uid="uid://bamwo7l48o40x" path="res://chapters/chapter_1/node_3/warp_to_level_0_from_1.gd" id="3_yrulf"]
 [ext_resource type="Script" uid="uid://6jv154ufl3u3" path="res://chapters/chapter_1/node_3/red_gem/red_gem_pickup.gd" id="4_absj7"]
 [ext_resource type="Texture2D" uid="uid://bi5saalcfd6o3" path="res://assets/icons/red_gem.png" id="5_b0un0"]
 [ext_resource type="Script" uid="uid://ccfhabpdr6fmp" path="res://chapters/chapter_1/node_3/red_gem/bell_trigger.gd" id="6_bmla4"]
