@@ -178,7 +178,7 @@ func shoot():
 
 func _on_hit_box_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		body.take_damage(1)
+		body.health_component.take_damage(1)
 		
 func save():
 	return {

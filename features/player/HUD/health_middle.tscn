@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bc7lcjk07jgut"]
 
-[ext_resource type="Script" uid="uid://c1cnfcdiwgxla" path="res://features/player/HUD/health_change.gd" id="1_0ccrc"]
+[ext_resource type="Script" uid="uid://c1cnfcdiwgxla" path="res://features/player/hud/health_change.gd" id="1_0ccrc"]
 [ext_resource type="Texture2D" uid="uid://s6ni7l1c08xl" path="res://assets/sprites/health_gui/HealthBarMiddleSheet.png" id="1_j7wjx"]
 
 [node name="HealthMiddle" type="Panel" unique_id=300156056]

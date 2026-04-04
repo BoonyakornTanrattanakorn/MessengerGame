@@ -18,6 +18,14 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 @onready var objective_box = $ObjectiveBox
 @onready var objective_label = $ObjectiveBox/ObjectivePanel/MarginContainer/ObjectiveLabel
 
+# Items UI
+@export var red_gem: Texture2D
+@export var blue_gem: Texture2D
+@export var green_gem: Texture2D
+@export var brave_stone: Texture2D
+@export var potion: Texture2D
+@export var antidote: Texture2D
+
 #cool gauge
 @onready var cool_gauge_ui = $TopLeftGUI/VBoxContainer/CoolGauge
 #heat gauge
@@ -45,21 +53,6 @@ var memorized_keyword_order: Dictionary = {}
 var pause_menu: PauseMenu
 
 signal skill_changed(attribute: String)
-
-#func _ready():
-	#add_to_group("savable")
-#
-	#ObjectiveManager.register_hud(self)
-	#hide_objective()
-#
-	#var player = get_tree().root.find_child("Player", true, false)
-	#update_skill_display()
-	#call_deferred("refresh_items")
-#
-	#if player:
-		#health_gui.set_max_health(player.player_max_hp)
-		#health_gui.update_health(player.player_hp)
-		#player.health_changed.connect(health_gui.update_health)
 
 func _exit_tree() -> void:
 	ObjectiveManager.unregister_hud(self)
@@ -238,13 +231,12 @@ func refresh_items():
 
 func get_icon(item_name: String) -> Texture2D:
 	match item_name:
-		"red_gem": wind_icon
-		#"red_gem": return preload("res://assets/icons/red_gem.png")
-		#"blue_gem": return preload("res://assets/icons/blue_gem.png")
-		#"green_gem": return preload("res://assets/icons/green_gem.png")
-		#"brave_stone": return preload("res://assets/icons/brave_stone.png")
-		#"potion": return preload("res://assets/icons/potion.png")
-		#"antidote": return preload("res://assets/icons/antidote.png")
+		"red_gem": return red_gem
+		"blue_gem": return red_gem
+		"green_gem": return green_gem
+		"brave_stone": return brave_stone
+		"potion": return potion
+		"antidote": return antidote
 	return null
 
 # =========================

@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var next_level_path: String = "res://game/chapter_1/node_3/Level_3.tscn"
+@export var next_level_path: String = "res://game/chapter_1/node_3/level_3.tscn"
 @export var spawn_position_in_next_level: Vector2 = Vector2(-170, -200)
 @export var facing_direction_on_warp: Vector2 = Vector2.RIGHT
 
