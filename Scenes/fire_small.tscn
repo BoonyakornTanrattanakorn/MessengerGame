@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhx5nknyw30h4"]
 
-[ext_resource type="Script" uid="uid://c835pxmm48cs8" path="res://Scripts/fire_small.gd" id="1_xjbj5"]
+[ext_resource type="Script" uid="uid://jnjbprhpor7y" path="res://Scripts/fire_small.gd" id="1_xjbj5"]
 [ext_resource type="Texture2D" uid="uid://d2d4lcvgxlnhr" path="res://assets/Chapter1_node2/small_fire.png" id="2_2klpw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2klpw"]

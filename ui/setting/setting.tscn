@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://kdx43i281auy"]
 
-[ext_resource type="Script" uid="uid://bxeeecc16eceg" path="res://ui/setting/setting_button.gd" id="1_1lr1k"]
+[ext_resource type="Script" uid="uid://bs53hegfc0v51" path="res://ui/setting/setting_button.gd" id="1_1lr1k"]
 [ext_resource type="PackedScene" uid="uid://6yu1iyqyvbsv" path="res://ui/setting/setting_menu.tscn" id="1_mt4kn"]
 
 [node name="Setting" type="CanvasLayer" unique_id=1760135751]
 
 [node name="SettingButton" type="Button" parent="." unique_id=2015273222]
-anchors_preset = -1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -130.0

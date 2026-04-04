@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b7q4tjsvib3gr"]
 
-[ext_resource type="Script" uid="uid://bc27fdl6a6xfs" path="res://ui/heat_gauge.gd" id="1_qcvxq"]
+[ext_resource type="Script" uid="uid://dwjnswohhcx8n" path="res://ui/heat_gauge.gd" id="1_qcvxq"]
 [ext_resource type="Texture2D" uid="uid://dn5eu31d62r7p" path="res://assets/icons/flame.png" id="2_ir8k4"]
 
 [node name="HeatGauge" type="HBoxContainer" unique_id=1396212735]

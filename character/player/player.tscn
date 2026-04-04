@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bq8fy4b0jdi2"]
 
-[ext_resource type="Script" uid="uid://dbv5frl5bow6y" path="res://character/player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://c0io81kk6o7gw" path="res://character/player/player.gd" id="1_rkbax"]
 [ext_resource type="Texture2D" uid="uid://c5skj7k86c1pw" path="res://assets/placeholder_sprite.png" id="2_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://bt83ehltqgd07" path="res://ui/player_hud.tscn" id="2_vuhga"]
 [ext_resource type="Texture2D" uid="uid://dvrlx2db8my0u" path="res://assets/player_sprite/MCIdleBack64x64-Sheet.png" id="3_hr31g"]

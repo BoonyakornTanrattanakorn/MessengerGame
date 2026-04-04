@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cadd8ara6sth3"]
 
-[ext_resource type="Script" uid="uid://0ucrp5syql28" path="res://character/summon/water_fairy.gd" id="1_vaps4"]
+[ext_resource type="Script" uid="uid://bhm5gogo1h51g" path="res://character/summon/water_fairy.gd" id="1_vaps4"]
 [ext_resource type="Texture2D" uid="uid://c8d0r5lmulc3w" path="res://character/summon/fairy_picture/fl1.png" id="2_o033k"]
 [ext_resource type="Texture2D" uid="uid://c8jotmsvld6ss" path="res://character/summon/fairy_picture/fl2.png" id="3_2k2vy"]
 [ext_resource type="Texture2D" uid="uid://cvw8dg7j7gg8j" path="res://character/summon/fairy_picture/fl3.png" id="4_w3qyx"]
