@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[node name="WaterFairy" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = null
