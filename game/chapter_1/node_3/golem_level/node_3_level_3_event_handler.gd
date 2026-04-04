@@ -17,8 +17,8 @@ func get_all_children(node: Node) -> Array:
 
 
 func handle_intro_for_level() -> void:
-	if not Global.chap1_node3_3_shown:
-		Global.chap1_node3_3_shown = true
+	if not GameState.chap1_node3_3_shown:
+		GameState.chap1_node3_3_shown = true
 
 		DialogueManager.show_dialogue_balloon(
 			load("res://game/chapter_1/node_3/dialogue/chap1_node3_3.dialogue"),

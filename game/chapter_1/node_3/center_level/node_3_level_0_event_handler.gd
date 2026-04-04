@@ -4,8 +4,8 @@ func on_level_loaded() -> void:
 	Node3State.start_node3_objective()
 
 func handle_intro_for_level() -> void:
-	if not Global.chap1_node3_shown:
-		Global.chap1_node3_shown = true
+	if not GameState.chap1_node3_shown:
+		GameState.chap1_node3_shown = true
 
 		DialogueManager.show_dialogue_balloon(
 			load("res://game/chapter_1/node_3/dialogue/chap1_node3.dialogue"),

@@ -4,7 +4,7 @@ func handle_intro_for_level() -> void:
 	# Play BGM
 	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
 	
-	Global.chap1_node2_shown = true
+	GameState.chap1_node2_shown = true
 
 	DialogueManager.show_dialogue_balloon(
 		load("res://game/chapter_1/node_2/dialogue/node_2.dialogue"),

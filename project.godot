@@ -20,8 +20,8 @@ config/icon="res://icon.svg"
 PuzzleState="*uid://nblcysl4djqa"
 ObjectiveManager="*uid://orp5pbbxk54d"
 Node3State="*uid://c648q5xrupaqh"
-BGMManager="*res://autoload/BGMManager.gd"
-SFXManager="*res://autoload/SFXManager.gd"
+BGMManager="*res://autoload/bgm_manager.gd"
+SFXManager="*res://autoload/sfx_manager.gd"
 Global="*uid://cqe7q3hwi4d7r"
 SaveManager="*uid://2knwwbky8u6y"
 DialogueManager="*uid://g4hn1po5lutd"
@@ -137,3 +137,4 @@ locale/translations_pot_files=PackedStringArray("res://game/chapter_1/node_2/dia
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_etc2_astc=true

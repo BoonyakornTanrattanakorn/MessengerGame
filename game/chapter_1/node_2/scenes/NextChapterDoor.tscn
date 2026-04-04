@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bcm4xltoe7hub"]
 
 [ext_resource type="Script" uid="uid://7l1q26fpxv88" path="res://game/chapter_1/node_2/scripts/last_door.gd" id="1_bwwaj"]
-[ext_resource type="Texture2D" uid="uid://dlbacx8nwr7dp" path="res://assets/sprites/Chapter1_node2/DoorInside.png" id="2_n0x0h"]
-[ext_resource type="Texture2D" uid="uid://8axh3suu3n1r" path="res://assets/sprites/Chapter1_node2/DoorWall.png" id="3_wprfh"]
+[ext_resource type="Texture2D" uid="uid://dlbacx8nwr7dp" path="res://assets/sprites/chapter1_node2/DoorInside.png" id="2_n0x0h"]
+[ext_resource type="Texture2D" uid="uid://8axh3suu3n1r" path="res://assets/sprites/chapter1_node2/DoorWall.png" id="3_wprfh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n0x0h"]
 size = Vector2(32, 32)

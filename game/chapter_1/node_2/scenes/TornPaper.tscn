@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dyq6ux7kg3r48"]
 
-[ext_resource type="Texture2D" uid="uid://ew14era11ag3" path="res://assets/sprites/Chapter1_node2/Inside_B.png" id="1_3lw2m"]
+[ext_resource type="Texture2D" uid="uid://ew14era11ag3" path="res://assets/sprites/chapter1_node2/Inside_B.png" id="1_3lw2m"]
 [ext_resource type="Script" uid="uid://c2c5olmhc03ji" path="res://game/chapter_1/node_2/scripts/torn_paper.gd" id="1_5k3o6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5k3o6"]
