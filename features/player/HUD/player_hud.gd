@@ -24,10 +24,10 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 @onready var heat_gauge = $HealthGUI/VBoxContainer/HeatGauge
 # Skill list — add more elements here as you implement them
 var skills = [
-	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/elements/wind_icon.png")},
-	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": preload("res://assets/icons/fire.png")},
-	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": preload("res://assets/icons/water.png")},
-	{"name": "Earth", "attribute": "earth", "color": Color(0.7, 0.5, 0.3), "icon": preload("res://assets/icons/earth.jpg")},
+	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": wind_icon},
+	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": fire_icon},
+	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": water_icon},
+	{"name": "Earth", "attribute": "earth", "color": Color(0.7, 0.5, 0.3), "icon": earth_icon},
 ]
 
 # Item list — populate as needed
@@ -238,12 +238,13 @@ func refresh_items():
 
 func get_icon(item_name: String) -> Texture2D:
 	match item_name:
-		"red_gem": return preload("res://assets/icons/red_gem.png")
-		"blue_gem": return preload("res://assets/icons/blue_gem.png")
-		"green_gem": return preload("res://assets/icons/green_gem.png")
-		"brave_stone": return preload("res://assets/icons/brave_stone.png")
-		"potion": return preload("res://assets/icons/potion.png")
-		"antidote": return preload("res://assets/icons/antidote.png")
+		"red_gem": wind_icon
+		#"red_gem": return preload("res://assets/icons/red_gem.png")
+		#"blue_gem": return preload("res://assets/icons/blue_gem.png")
+		#"green_gem": return preload("res://assets/icons/green_gem.png")
+		#"brave_stone": return preload("res://assets/icons/brave_stone.png")
+		#"potion": return preload("res://assets/icons/potion.png")
+		#"antidote": return preload("res://assets/icons/antidote.png")
 	return null
 
 # =========================

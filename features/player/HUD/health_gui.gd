@@ -1,8 +1,7 @@
 extends HBoxContainer
 
-#need to change
-@onready var health_middle: Panel = $HealthDisplay/HealthMiddle
-@onready var health_end: Panel = $HealthDisplay/HealthEnd
+@onready var health_middle_template = $HealthDisplayTemplate/HealthMiddle
+@onready var health_end_template = $HealthDisplayTemplate/HealthEnd
 
 @onready var hp_bar = $VBoxContainer/HPBar
 
@@ -13,12 +12,15 @@ func set_max_health(max_hp: int):
 	# Wait until hp_bar is ready
 	if hp_bar == null:
 		await ready
+	if health_middle_template == null or health_end_template == null:
+		push_error("Health templates not found under HealthDisplay")
+		return
 	for i in range(max_hp - 1):
-		var health = health_middle.instantiate()
+		var health = health_middle_template.duplicate()
 		health.name = "health_middle_%d" % i
 		health.add_to_group("health_bar")
 		hp_bar.add_child(health)
-	var health = health_end.instantiate()
+	var health = health_end_template.duplicate()
 	health.name = "health_end"
 	health.add_to_group("health_bar")
 	hp_bar.add_child(health)

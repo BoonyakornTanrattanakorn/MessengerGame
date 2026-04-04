@@ -10,11 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://cw6hb7hyn6yb2" path="res://assets/sprites/player_sprite/MCWalkLeft64x64-Sheet.png" id="9_pedpu"]
 [ext_resource type="Texture2D" uid="uid://qgxqjnrygapf" path="res://assets/sprites/player_sprite/MCWalkRight64x64-Sheet.png" id="10_i6sc0"]
 [ext_resource type="Script" uid="uid://baccvsovwuvvb" path="res://features/player/components/health_component.gd" id="12_5rlqq"]
+[ext_resource type="PackedScene" uid="uid://bt83ehltqgd07" path="res://features/player/HUD/player_hud.tscn" id="13_72p1y"]
 [ext_resource type="Script" uid="uid://b33cchplplyhp" path="res://features/player/components/movement_component.gd" id="13_yptax"]
-[ext_resource type="Script" uid="uid://player_script" path="res://features/player/player.gd" id="14_player"]
-
-[sub_resource type="GDScript" id="GDScript_5rlqq"]
-"""REMOVED_INLINE_SCRIPT"""
+[ext_resource type="Script" uid="uid://c0io81kk6o7gw" path="res://features/player/player.gd" id="14_player"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywhvj"]
 atlas = ExtResource("3_hr31g")
@@ -452,6 +450,8 @@ metadata/_custom_type_script = "uid://baccvsovwuvvb"
 [node name="MovementComponent" type="Node" parent="." unique_id=718966339]
 script = ExtResource("13_yptax")
 metadata/_custom_type_script = "uid://b33cchplplyhp"
+
+[node name="PlayerHUD" parent="." unique_id=966903807 instance=ExtResource("13_72p1y")]
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]

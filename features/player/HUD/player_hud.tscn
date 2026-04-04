@@ -156,16 +156,16 @@ offset_bottom = 96.0
 theme_override_constants/separation = 0
 script = ExtResource("2_w11uw")
 
-[node name="HealthDisplay" type="Panel" parent="HealthGUI" unique_id=669539048]
+[node name="HealthDisplayTemplate" type="Panel" parent="HealthGUI" unique_id=669539048]
 visible = false
 layout_mode = 2
 
-[node name="HealthEnd" parent="HealthGUI/HealthDisplay" unique_id=300156056 instance=ExtResource("3_p1370")]
+[node name="HealthEnd" parent="HealthGUI/HealthDisplayTemplate" unique_id=300156056 instance=ExtResource("3_p1370")]
 layout_mode = 0
 offset_left = -70.0
 offset_right = -32.0
 
-[node name="HealthMiddle" parent="HealthGUI/HealthDisplay" unique_id=1262745481 instance=ExtResource("4_cnowh")]
+[node name="HealthMiddle" parent="HealthGUI/HealthDisplayTemplate" unique_id=1262745481 instance=ExtResource("4_cnowh")]
 layout_mode = 0
 offset_left = -32.0
 offset_right = 0.0
