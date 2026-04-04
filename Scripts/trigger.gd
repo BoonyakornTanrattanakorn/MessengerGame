@@ -37,7 +37,7 @@ func handle_trigger_1() -> void:
 	await get_tree().create_timer(1.0).timeout
 
 	DialogueManager.show_dialogue_balloon(
-		preload("res://dialogue/conversations/chap1_node2.dialogue"),
+		preload("res://chapters/chapter_1/node_2/node_2.dialogue"),
 		"after_first_room"
 	)
 

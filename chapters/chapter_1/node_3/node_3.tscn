@@ -1,33 +1,32 @@
-[gd_scene format=3 uid="uid://dfrt83npofiis"]
+[gd_scene format=3 uid="uid://ciubina2fjdxx"]
 
-[ext_resource type="Script" uid="uid://dym1377lo2af1" path="res://chapters/node_template.gd" id="1_wicfy"]
-[ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://character/player/player.tscn" id="2_go42g"]
-[ext_resource type="PackedScene" path="res://assets/maps/levels/Ch1N2L1.scn" id="2_wicfy"]
-[ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://sub_viewport.gd" id="4_go42g"]
-[ext_resource type="Texture2D" uid="uid://dtan4iu1ggc8h" path="res://assets/maps/minimap_frame.png" id="4_tq6uv"]
-[ext_resource type="Script" uid="uid://0iqe0tscjprc" path="res://panel_container.gd" id="5_5uqhi"]
-[ext_resource type="Texture2D" uid="uid://bmnymc7ne7cep" path="res://assets/maps/border_frame.png" id="6_12c36"]
-[ext_resource type="Texture2D" uid="uid://bdd4sm3nv5qpf" path="res://assets/icons/arrow.png" id="8_5uqhi"]
+[ext_resource type="Script" uid="uid://dym1377lo2af1" path="res://chapters/node_template.gd" id="1_ng4qj"]
+[ext_resource type="PackedScene" uid="uid://b4u2ea5kgyw2e" path="res://chapters/chapter_1/node_3/Level_0.tscn" id="2_tjmu8"]
+[ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://character/player/player.tscn" id="3_ptpbg"]
+[ext_resource type="Texture2D" uid="uid://dtan4iu1ggc8h" path="res://assets/maps/minimap_frame.png" id="4_47bg4"]
+[ext_resource type="Script" uid="uid://0iqe0tscjprc" path="res://panel_container.gd" id="5_0sn8n"]
+[ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://sub_viewport.gd" id="6_3y1ny"]
+[ext_resource type="Texture2D" uid="uid://bmnymc7ne7cep" path="res://assets/maps/border_frame.png" id="7_wuw71"]
+[ext_resource type="Texture2D" uid="uid://bdd4sm3nv5qpf" path="res://assets/icons/arrow.png" id="8_bpxl4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sreuk"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-texture = ExtResource("4_tq6uv")
+texture = ExtResource("4_47bg4")
 
 [node name="TestScene" type="Node2D" unique_id=116769061]
 y_sort_enabled = true
-script = ExtResource("1_wicfy")
+script = ExtResource("1_ng4qj")
 
 [node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
 y_sort_enabled = true
-position = Vector2(-138, -316)
+position = Vector2(743, -446)
 
-[node name="Chapter1_Node2" parent="LevelHolder" unique_id=1729998318 instance=ExtResource("2_wicfy")]
+[node name="Level_0" parent="LevelHolder" unique_id=1186606688 instance=ExtResource("2_tjmu8")]
 
-[node name="Player" parent="." unique_id=417667803 instance=ExtResource("2_go42g")]
-position = Vector2(2746, 3957)
+[node name="Player" parent="." unique_id=417667803 instance=ExtResource("3_ptpbg")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1552768552]
 zoom = Vector2(2, 2)
@@ -46,7 +45,7 @@ offset_top = -0.6400032
 offset_right = -39.76001
 offset_bottom = -1.2000122
 theme_override_styles/panel = SubResource("StyleBoxTexture_sreuk")
-script = ExtResource("5_5uqhi")
+script = ExtResource("5_0sn8n")
 player = NodePath("../../Player")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/PanelContainer" unique_id=1130062419]
@@ -58,11 +57,11 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(301, 286)
 render_target_update_mode = 4
-script = ExtResource("4_go42g")
+script = ExtResource("6_3y1ny")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=688741874]
 layout_mode = 2
-texture = ExtResource("6_12c36")
+texture = ExtResource("7_wuw71")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=527799582]
@@ -70,5 +69,5 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("8_5uqhi")
+texture = ExtResource("8_bpxl4")
 expand_mode = 1
