@@ -1,7 +1,8 @@
 extends HBoxContainer
 
-const HealthMiddle = preload("res://ui/health_gui/health_middle.tscn")
-const HealthEnd = preload("res://ui/health_gui/health_end.tscn")
+#need to change
+const HealthMiddle = preload("res://features/player/HUD/health_middle.tscn")
+const HealthEnd = preload("res://features/player/HUD/health_end.tscn")
 
 @onready var hp_bar = $VBoxContainer/HPBar
 

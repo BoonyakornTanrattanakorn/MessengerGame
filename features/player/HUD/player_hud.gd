@@ -5,7 +5,10 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
 @onready var skill_icon = %SkillIcon
-@onready var element_icon = $HealthGUI/ElementDisplay/Elements/Sprite2D
+@onready var wind_icon = $HealthGUI/ElementDisplay/Elements/WindIcon
+@onready var fire_icon = $HealthGUI/ElementDisplay/Elements/FireIcon
+@onready var water_icon = $HealthGUI/ElementDisplay/Elements/WaterIcon
+@onready var earth_icon = $HealthGUI/ElementDisplay/Elements/EarthIcon
 @onready var skill_slot = %SkillSlot
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
@@ -21,10 +24,10 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 @onready var heat_gauge = $HealthGUI/VBoxContainer/HeatGauge
 # Skill list — add more elements here as you implement them
 var skills = [
-	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": null},
-	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": null},
-	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": null},
-	{"name": "Earth", "attribute": "earth", "color": Color(0.7, 0.5, 0.3), "icon": null},
+	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/elements/wind_icon.png")},
+	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": preload("res://assets/icons/fire.png")},
+	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": preload("res://assets/icons/water.png")},
+	{"name": "Earth", "attribute": "earth", "color": Color(0.7, 0.5, 0.3), "icon": preload("res://assets/icons/earth.jpg")},
 ]
 
 # Item list — populate as needed
@@ -62,6 +65,7 @@ func _exit_tree() -> void:
 	ObjectiveManager.unregister_hud(self)
 var heat_gauge_value: float = 0.0
 var cool_gauge_value: int = 0
+var element_icons := {}
 
 func _ready():
 	add_to_group("savable")
@@ -86,6 +90,14 @@ func _ready():
 	pause_menu.resume_requested.connect(_on_pause_resume_requested)
 	pause_menu.settings_requested.connect(_on_pause_settings_requested)
 	pause_menu.quit_requested.connect(_on_pause_quit_requested)
+
+	element_icons = {
+		"wind": wind_icon,
+		"fire": fire_icon,
+		"water": water_icon,
+		"earth": earth_icon,
+	}
+	_hide_all_element_icons()
 
 	update_skill_display()
 	call_deferred("refresh_items")
@@ -115,11 +127,9 @@ func _ready():
 
 
 func _setup_health(player):
-	health_gui.set_max_health(player.health_component.max_hp)
-	health_gui.update_health(player.health_component.hp)
-	# connect to health component's signal
-	if player.health_component:
-		player.health_component.connect("health_changed", health_gui, "update_health")
+	health_gui.set_max_health(player.player_max_hp)
+	health_gui.update_health(player.player_hp)
+	player.health_changed.connect(health_gui.update_health)
 	
 
 func _process(_delta):
@@ -181,14 +191,17 @@ func update_skill_display():
 	skill_slot.add_theme_stylebox_override("panel", style)
 
 	var current_skill = skills[skill_index]
-	element_icon.texture = current_skill["icon"]
+	_hide_all_element_icons()
+	var attribute: String = current_skill["attribute"]
+	if element_icons.has(attribute):
+		var icon_node = element_icons[attribute]
+		if icon_node != null:
+			icon_node.visible = true
 
-	if current_skill["attribute"] == "wind":
-		element_icon.scale = Vector2.ONE
-	else:
-		var tex: Texture2D = current_skill["icon"]
-		if tex != null and tex.get_width() > 0 and tex.get_height() > 0:
-			element_icon.scale = Vector2(40.0 / tex.get_width(), 40.0 / tex.get_height())
+func _hide_all_element_icons() -> void:
+	for icon_node in element_icons.values():
+		if icon_node != null:
+			icon_node.visible = false
 
 func get_current_skill() -> String:
 	return skills[skill_index]["attribute"]
@@ -223,8 +236,14 @@ func refresh_items():
 	item_index = clamp(item_index, 0, items.size() - 1)
 	update_item_display()
 
-func get_icon(_item_name: String) -> Texture2D:
-	# Icon loading handled in editor/resources; return null as fallback
+func get_icon(item_name: String) -> Texture2D:
+	match item_name:
+		"red_gem": return preload("res://assets/icons/red_gem.png")
+		"blue_gem": return preload("res://assets/icons/blue_gem.png")
+		"green_gem": return preload("res://assets/icons/green_gem.png")
+		"brave_stone": return preload("res://assets/icons/brave_stone.png")
+		"potion": return preload("res://assets/icons/potion.png")
+		"antidote": return preload("res://assets/icons/antidote.png")
 	return null
 
 # =========================
