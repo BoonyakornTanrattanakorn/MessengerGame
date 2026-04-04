@@ -1,0 +1,244 @@
+[gd_scene format=3 uid="uid://bt83ehltqgd07"]
+
+[ext_resource type="Script" uid="uid://co4o2sbnpmmu6" path="res://features/player/hud/player_hud.gd" id="1_1m6my"]
+[ext_resource type="Texture2D" uid="uid://bi5saalcfd6o3" path="res://assets/sprites/icons/red_gem.png" id="2_3bhmu"]
+[ext_resource type="Script" uid="uid://bilg3jgxb2knl" path="res://features/player/hud/health_gui.gd" id="2_w11uw"]
+[ext_resource type="Texture2D" uid="uid://bqvf7hr28q7n3" path="res://assets/sprites/icons/blue_gem.png" id="3_mycat"]
+[ext_resource type="PackedScene" uid="uid://dcujg6vgrtmxl" path="res://features/player/hud/health_end.tscn" id="3_p1370"]
+[ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://features/player/hud/element_display.tscn" id="3_q84jv"]
+[ext_resource type="Texture2D" uid="uid://dipfaeovuk0pq" path="res://assets/sprites/icons/green_gem.png" id="4_6wtyk"]
+[ext_resource type="PackedScene" uid="uid://ctxx46yi1gm4o" path="res://features/player/powers/water/cool_gauge.tscn" id="4_7pawb"]
+[ext_resource type="PackedScene" uid="uid://bc7lcjk07jgut" path="res://features/player/hud/health_middle.tscn" id="4_cnowh"]
+[ext_resource type="PackedScene" uid="uid://b7q4tjsvib3gr" path="res://features/player/powers/fire/heat_gauge.tscn" id="4_w11uw"]
+[ext_resource type="Texture2D" uid="uid://dys24sd0adlgt" path="res://assets/sprites/icons/brave_stone.png" id="5_al7x7"]
+[ext_resource type="Script" uid="uid://bs53hegfc0v51" path="res://ui/setting/setting_button.gd" id="6_sjha8"]
+[ext_resource type="Texture2D" uid="uid://d38elma05lmhl" path="res://assets/sprites/icons/potion.png" id="6_tydpe"]
+[ext_resource type="Texture2D" uid="uid://dauu5rfxbieq2" path="res://assets/sprites/icons/antidote.png" id="7_qtp52"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3019608, 0.9019608, 0.7019608, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4o6vf"]
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9019608, 0.7019608, 0.2, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjha8"]
+bg_color = Color(0, 0, 0, 0.2)
+
+[node name="PlayerHUD" type="CanvasLayer" unique_id=966903807]
+script = ExtResource("1_1m6my")
+red_gem = ExtResource("2_3bhmu")
+blue_gem = ExtResource("3_mycat")
+green_gem = ExtResource("4_6wtyk")
+brave_stone = ExtResource("5_al7x7")
+potion = ExtResource("6_tydpe")
+antidote = ExtResource("7_qtp52")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=526628163]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=116286688]
+layout_mode = 2
+
+[node name="SkillBar" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=935981879]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SkillBar" unique_id=484740197]
+visible = false
+layout_mode = 2
+
+[node name="SkillUp" type="Button" parent="MarginContainer/VBoxContainer/SkillBar/HBoxContainer" unique_id=240973256]
+layout_mode = 2
+text = "▲"
+
+[node name="SkillSlot" type="PanelContainer" parent="MarginContainer/VBoxContainer/SkillBar/HBoxContainer" unique_id=4365124]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1m6my")
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/SkillBar/HBoxContainer/SkillSlot" unique_id=1687686092]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="SkillIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/SkillBar/HBoxContainer/SkillSlot/Control" unique_id=1096002608]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+expand_mode = 3
+
+[node name="SkillName" type="Label" parent="MarginContainer/VBoxContainer/SkillBar/HBoxContainer/SkillSlot/Control" unique_id=832058002]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_top = 52.0
+offset_right = 48.0
+offset_bottom = 100.0
+text = "Wind"
+
+[node name="SkillDown" type="Button" parent="MarginContainer/VBoxContainer/SkillBar/HBoxContainer" unique_id=1570509362]
+layout_mode = 2
+text = "▼"
+
+[node name="ItemBar" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=813426367]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ItemBar" unique_id=1190467317]
+layout_mode = 2
+
+[node name="ItemLeft" type="Button" parent="MarginContainer/VBoxContainer/ItemBar/HBoxContainer" unique_id=398930375]
+layout_mode = 2
+text = "◄"
+
+[node name="ItemSlot" type="PanelContainer" parent="MarginContainer/VBoxContainer/ItemBar/HBoxContainer" unique_id=436779775]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4o6vf")
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/ItemBar/HBoxContainer/ItemSlot" unique_id=550071922]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/ItemBar/HBoxContainer/ItemSlot/Control" unique_id=1200796979]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+
+[node name="ItemCount" type="Label" parent="MarginContainer/VBoxContainer/ItemBar/HBoxContainer/ItemSlot/Control" unique_id=545912442]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "x5"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ItemRight" type="Button" parent="MarginContainer/VBoxContainer/ItemBar/HBoxContainer" unique_id=1431894364]
+layout_mode = 2
+text = "►"
+
+[node name="TopLeftGUI" type="HBoxContainer" parent="." unique_id=2124990455]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 380.0
+offset_bottom = 96.0
+theme_override_constants/separation = 0
+script = ExtResource("2_w11uw")
+
+[node name="HealthDisplayTemplate" type="Panel" parent="TopLeftGUI" unique_id=669539048]
+visible = false
+layout_mode = 2
+
+[node name="HealthEnd" parent="TopLeftGUI/HealthDisplayTemplate" unique_id=300156056 instance=ExtResource("3_p1370")]
+layout_mode = 0
+offset_left = -70.0
+offset_right = -32.0
+
+[node name="HealthMiddle" parent="TopLeftGUI/HealthDisplayTemplate" unique_id=1262745481 instance=ExtResource("4_cnowh")]
+layout_mode = 0
+offset_left = -32.0
+offset_right = 0.0
+
+[node name="ElementDisplay" parent="TopLeftGUI" unique_id=452823664 instance=ExtResource("3_q84jv")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TopLeftGUI" unique_id=1977272837]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="HPBar" type="HBoxContainer" parent="TopLeftGUI/VBoxContainer" unique_id=1159054998]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="CoolGauge" parent="TopLeftGUI/VBoxContainer" unique_id=802023072 instance=ExtResource("4_7pawb")]
+layout_mode = 2
+
+[node name="HeatGauge" parent="TopLeftGUI/VBoxContainer" unique_id=1396212735 instance=ExtResource("4_w11uw")]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="SettingButton" type="Button" parent="." unique_id=402804448]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 47.0
+offset_right = -35.0
+offset_bottom = 80.0
+text = "Setting"
+script = ExtResource("6_sjha8")
+metadata/_edit_use_anchors_ = true
+
+[node name="ObjectiveBox" type="MarginContainer" parent="." unique_id=659305858]
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.2
+anchor_right = 0.23
+anchor_bottom = 0.3
+size_flags_vertical = 0
+
+[node name="ObjectivePanel" type="Panel" parent="ObjectiveBox" unique_id=782961285]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sjha8")
+
+[node name="MarginContainer" type="MarginContainer" parent="ObjectiveBox/ObjectivePanel" unique_id=1203431610]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="ObjectiveLabel" type="Label" parent="ObjectiveBox/ObjectivePanel/MarginContainer" unique_id=1171156202]
+layout_mode = 2
+vertical_alignment = 1
+autowrap_mode = 2
