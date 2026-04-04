@@ -21,10 +21,10 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 @onready var heat_gauge = $HealthGUI/VBoxContainer/HeatGauge
 # Skill list — add more elements here as you implement them
 var skills = [
-	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": preload("res://assets/icons/elements/wind_icon.png")},
-	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": preload("res://assets/icons/fire.png")},
-	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": preload("res://assets/icons/water.png")},
-	{"name": "Earth", "attribute": "earth", "color": Color(0.7, 0.5, 0.3), "icon": preload("res://assets/icons/earth.jpg")},
+	{"name": "Wind",  "attribute": "wind",  "color": Color(0.5, 1.0, 0.8), "icon": null},
+	{"name": "Fire",  "attribute": "fire",  "color": Color(1.0, 0.4, 0.2), "icon": null},
+	{"name": "Water", "attribute": "water", "color": Color(0.2, 0.6, 1.0), "icon": null},
+	{"name": "Earth", "attribute": "earth", "color": Color(0.7, 0.5, 0.3), "icon": null},
 ]
 
 # Item list — populate as needed
@@ -95,7 +95,7 @@ func _ready():
 	
 	# Heat gauge
 	if heat_gauge != null:
-		heat_gauge.set_max_hp(player.player_max_hp)
+		heat_gauge.set_max_hp(player.health_component.max_hp)
 		heat_gauge.update_heat(0.0)
 		heat_gauge.visible = false
 		player.heat_changed.connect(heat_gauge.update_heat)
@@ -105,7 +105,7 @@ func _ready():
 
 	# Cool gauge
 	if cool_gauge_ui != null:
-		cool_gauge_ui.set_max_hp(player.player_max_hp)
+		cool_gauge_ui.set_max_hp(player.health_component.max_hp)
 		cool_gauge_ui.update_cool(0)
 		cool_gauge_ui.visible = false
 		player.cool_changed.connect(cool_gauge_ui.update_cool)
@@ -115,9 +115,11 @@ func _ready():
 
 
 func _setup_health(player):
-	health_gui.set_max_health(player.player_max_hp)
-	health_gui.update_health(player.player_hp)
-	player.health_changed.connect(health_gui.update_health)
+	health_gui.set_max_health(player.health_component.max_hp)
+	health_gui.update_health(player.health_component.hp)
+	# connect to health component's signal
+	if player.health_component:
+		player.health_component.connect("health_changed", health_gui, "update_health")
 	
 
 func _process(_delta):
@@ -221,14 +223,8 @@ func refresh_items():
 	item_index = clamp(item_index, 0, items.size() - 1)
 	update_item_display()
 
-func get_icon(item_name: String) -> Texture2D:
-	match item_name:
-		"red_gem": return preload("res://assets/icons/red_gem.png")
-		"blue_gem": return preload("res://assets/icons/blue_gem.png")
-		"green_gem": return preload("res://assets/icons/green_gem.png")
-		"brave_stone": return preload("res://assets/icons/brave_stone.png")
-		"potion": return preload("res://assets/icons/potion.png")
-		"antidote": return preload("res://assets/icons/antidote.png")
+func get_icon(_item_name: String) -> Texture2D:
+	# Icon loading handled in editor/resources; return null as fallback
 	return null
 
 # =========================

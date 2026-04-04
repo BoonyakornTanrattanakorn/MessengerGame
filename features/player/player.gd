@@ -58,6 +58,14 @@ var current_mount = null
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var camera = $Camera2D
 
+# Compatibility aliases for older code / analyzer
+signal health_changed(value: int)
+var player_hp: int = 0
+var player_max_hp: int = 0
+var is_invincible: bool = false
+var invincible_timer: float = 0.0
+var invincible_duration: float = 1.0
+
 var respawn_position = Vector2(110, 115)
 
 var inventory = {
@@ -76,6 +84,15 @@ var is_in_dialogue = false
 
 var player_camera: Camera2D = null
 
+# Compatibility placeholders for legacy identifiers referenced by other files / analyzer
+var _movement = null
+@export var wind_scene: PackedScene
+@export var fire_small_scene: PackedScene
+@export var fire_heavy_scene: PackedScene
+@export var water_fairy_scene: PackedScene
+@export var water_wave_scene: PackedScene
+@export var rock_pillar_scene: PackedScene
+
 
 func _ready():
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
@@ -88,6 +105,12 @@ func _ready():
 	$Hurtbox.add_to_group("player_hurtbox")
 	player_camera = get_tree().root.find_child("Camera2D", true, false)
 	print("Player camera: ", player_camera)
+
+	# Initialize compatibility aliases and connect HealthComponent signals
+	if health_component:
+		player_max_hp = health_component.max_hp
+		player_hp = health_component.hp
+		health_component.connect("health_changed", Callable(self, "_on_health_changed"))
 	
 
 func _on_dialogue_started(_arg = null):
@@ -331,9 +354,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	var dmg = area.get("damage")
 	health_component.take_damage(int(dmg) if dmg != null else 1)
 
-func take_damage(amount: int):
-	# This function is now handled by HealthComponent
-	pass
+# Player damage is handled by the HealthComponent; remove duplicate handler.
 
 func add_item(item_name: String, amount: int = 1):
 	if item_name in inventory:
@@ -355,14 +376,8 @@ func die_in_minecart_and_respawn(minecart_respawn_position):
 
 		
 func shoot_wind_wave():
-	if skill_component.wind_scene:
-		var wave = skill_component.wind_scene.instantiate()
-		wave.direction = last_direction
-		wave.global_position = global_position
-	
-		wave.rotation = last_direction.angle()
-		
-		get_tree().current_scene.add_child(wave)
+	if skill_component:
+		skill_component.shoot_wind_wave()
 
 func save():
 	return {
@@ -393,10 +408,17 @@ func load_data(data):
 	playerAttribute = hud.get_current_skill()
 	health_component.max_hp = int(data.get("player_max_hp", health_component.max_hp))
 	health_component.hp = int(data.get("player_hp", health_component.hp))
-	call_deferred("emit_signal", "health_changed", health_component.hp)
+	# Notify HUD and other listeners via the HealthComponent's signal
+	health_component.call_deferred("emit_signal", "health_changed", health_component.hp)
 	var loaded_inventory = data.get("inventory", {})
 	for key in loaded_inventory:
 		inventory[key] = int(loaded_inventory[key])
+
+func _on_health_changed(new_hp: int) -> void:
+	# keep aliases in sync
+	player_hp = int(new_hp)
+	player_max_hp = health_component.max_hp if health_component else player_max_hp
+	emit_signal("health_changed", player_hp)
 		
 func focus_camera_to(target: Node2D):
 	camera.reparent(get_tree().current_scene) # detach from player
@@ -410,22 +432,12 @@ func return_camera():
 
 
 func shoot_fire_small():
-	if skill_component.fire_small_scene:
-		var ball = skill_component.fire_small_scene.instantiate()
-		ball.direction = last_direction
-		ball.global_position = global_position
-		ball.rotation = last_direction.angle()
-		get_tree().current_scene.add_child(ball)
-	add_heat(20.0)
+	if skill_component:
+		skill_component.shoot_fire_small()
 
 func shoot_fire_heavy():
-	if skill_component.fire_heavy_scene:
-		var ball = skill_component.fire_heavy_scene.instantiate()
-		ball.direction = last_direction
-		ball.global_position = global_position
-		ball.rotation = last_direction.angle()
-		get_tree().current_scene.add_child(ball)
-	add_heat(40.0)
+	if skill_component:
+		skill_component.shoot_fire_heavy()
 
 func add_heat(amount: float):
 	heat_gauge = clamp(heat_gauge + amount, 0.0, max_heat)
@@ -455,65 +467,25 @@ func get_wave_cost(level: int) -> int:
 	return level  # level 1 = 1 gauge, level 2 = 2, level 3 = 3
 
 func summon_fairy():
-	if cool_gauge + 1 > max_cool_gauge:
-		return
-	add_cool(1)
-	is_controlling_fairy = true
-	fairy_timer = fairy_duration
-	if skill_component.water_fairy_scene:
-		fairy_instance = skill_component.water_fairy_scene.instantiate()
-		fairy_instance.global_position = global_position + Vector2(16, 0)
-		get_tree().current_scene.add_child(fairy_instance)
-		fairy_instance.activate_camera()
-		if player_camera:
-			player_camera.enabled = false
-		print("[Fairy] Summoned — camera switched to fairy")
+	if skill_component:
+		skill_component.summon_fairy()
 
 func end_fairy():
-	is_controlling_fairy = false
-	fairy_timer = 0.0
-	fairy_cooldown_timer = fairy_cooldown
-	if fairy_instance != null:
-		fairy_instance.deactivate_camera()
-		fairy_instance.queue_free()
-		fairy_instance = null
-	
-	# Return camera to player
-	if player_camera:
-		player_camera.enabled = true
-	print("[Fairy] Dismissed — camera returned to player")
+	if skill_component:
+		skill_component.end_fairy()
 
 func handle_fairy_movement(delta: float):
-	if fairy_instance == null:
-		return
-	var dir = Input.get_vector("left", "right", "up", "down")
-	fairy_instance.move(dir, delta)
-	if Input.is_action_just_pressed("interact"):
-		print("[Fairy] Interact pressed")
-		fairy_instance.try_interact()
+	if skill_component:
+		skill_component.handle_fairy_movement(delta)
 
 func shoot_water_wave(level: int):
-	var cost = get_wave_cost(level)
-	if cool_gauge + cost > max_cool_gauge:
-		level = max_cool_gauge - cool_gauge
-		if level <= 0:
-			return
-		cost = level
-	add_cool(cost)
-	if skill_component.water_wave_scene:
-		var wave = skill_component.water_wave_scene.instantiate()
-		# Offset spawn position forward in the direction of travel
-		wave.global_position = global_position + last_direction *  40.0
-		wave.direction = last_direction
-		wave.rotation = last_direction.angle()
-		wave.level = level
-		get_tree().current_scene.add_child(wave)
+	if skill_component:
+		skill_component.shoot_water_wave(level)
 
 
 # Earth system
 var earth_gauge: float = 0.0
 var max_earth: float = 100.0
-signal earth_changed(value: float)
 
 # Minor: Shield
 @export var shield_max_hp = 2
@@ -522,70 +494,46 @@ var is_shield_active = false
 
 
 # Skill system (component)
-#@onready var skill_component: SkillComponent = $SkillComponent
-#var active_pillars = []
-#var max_pillars = 3
-#
-#func activate_earth_shield():
-	#if is_shield_active: return
-	#
-	#current_shield_hp = shield_max_hp
-	#is_shield_active = true
-	#print("Earth Shield Activated! HP: ", current_shield_hp)
-	#if animated_sprite.has_node("ShieldVisual"):
-		#animated_sprite.get_node("ShieldVisual").show()
-#
-#func spawn_rock_pillar():
-	#active_pillars = active_pillars.filter(func(p): return is_instance_valid(p))
-#
-	#if active_pillars.size() >= max_pillars:
-		#var oldest = active_pillars.pop_front()
-		#if is_instance_valid(oldest):
-			#oldest.queue_free()
-#
-	#if skill_component.rock_pillar_scene:
-		#var pillar = skill_component.rock_pillar_scene.instantiate()
-		#
-		#var spawn_pos = global_position + last_direction * 32.0
-		#pillar.global_position = spawn_pos
-		#
-		#var is_on_water = check_if_water_at(spawn_pos)
-		#
-		#get_tree().current_scene.add_child(pillar)
-		#
-		#active_pillars.append(pillar)
-		#
-		#if pillar.has_method("setup_pillar"):
-			#pillar.setup_pillar(is_on_water)
-#
-#func check_if_water_at(pos: Vector2) -> bool:
-	#var tilemap = get_tree().current_scene.find_child("Ground", true, false)
-	#
-	#if tilemap == null:
-		##print("TileMapLayer 'Ground' not found")
-		#return false
-#
-	#var local_pos = tilemap.to_local(pos)
-	#var map_pos = tilemap.local_to_map(local_pos)
-#
-	#var tile_data = tilemap.get_cell_tile_data(map_pos)
-	#
-	#if tile_data == null:
-		##print("No tile at", map_pos)
-		#return false
-	#else:
-		#var is_water = tile_data.get_custom_data("is_water")
-#
-		#if is_water == true:
-			##print("FOUND WATER")
-			#return true
-#
-	##print("NOT WATER")
-	#return false
-	#
-#func is_standing_on_pillar(pos: Vector2) -> bool:
-	#for pillar in active_pillars:
-		#if is_instance_valid(pillar):
-			#if pos.distance_to(pillar.global_position) < 25.0:
-				#return true
-	#return false
+@onready var skill_component = $SkillComponent
+var active_pillars = []
+var max_pillars = 3
+
+func activate_earth_shield():
+	if skill_component:
+		skill_component.activate_earth_shield()
+
+func spawn_rock_pillar():
+	if skill_component:
+		skill_component.spawn_rock_pillar()
+
+func check_if_water_at(pos: Vector2) -> bool:
+	var tilemap = get_tree().current_scene.find_child("Ground", true, false)
+	
+	if tilemap == null:
+		#print("TileMapLayer 'Ground' not found")
+		return false
+
+	var local_pos = tilemap.to_local(pos)
+	var map_pos = tilemap.local_to_map(local_pos)
+
+	var tile_data = tilemap.get_cell_tile_data(map_pos)
+	
+	if tile_data == null:
+		#print("No tile at", map_pos)
+		return false
+	else:
+		var is_water = tile_data.get_custom_data("is_water")
+
+		if is_water == true:
+			#print("FOUND WATER")
+			return true
+
+	#print("NOT WATER")
+	return false
+	
+func is_standing_on_pillar(pos: Vector2) -> bool:
+	for pillar in active_pillars:
+		if is_instance_valid(pillar):
+			if pos.distance_to(pillar.global_position) < 25.0:
+				return true
+	return false

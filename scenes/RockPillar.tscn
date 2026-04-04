@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[node name="RockPillar" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = null

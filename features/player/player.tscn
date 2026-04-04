@@ -11,20 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://qgxqjnrygapf" path="res://assets/sprites/player_sprite/MCWalkRight64x64-Sheet.png" id="10_i6sc0"]
 [ext_resource type="Script" uid="uid://baccvsovwuvvb" path="res://features/player/components/health_component.gd" id="12_5rlqq"]
 [ext_resource type="Script" uid="uid://b33cchplplyhp" path="res://features/player/components/movement_component.gd" id="13_yptax"]
+[ext_resource type="Script" uid="uid://player_script" path="res://features/player/player.gd" id="14_player"]
 
 [sub_resource type="GDScript" id="GDScript_5rlqq"]
-script/source = "extends Node
-class_name SkillComponent
-
-@export var wind_scene: PackedScene = preload(\"res://Scenes/wind.tscn\")
-@export var fire_small_scene: PackedScene = preload(\"res://Scenes/fire_small.tscn\")
-@export var fire_heavy_scene: PackedScene = preload(\"res://Scenes/fire_heavy.tscn\")
-@export var water_fairy_scene: PackedScene = preload(\"res://character/summon/WaterFairy.tscn\")
-@export var water_wave_scene: PackedScene = preload(\"res://Scenes/WaterWave.tscn\")
-@export var rock_pillar_scene: PackedScene = preload(\"res://Scenes/RockPillar.tscn\")
-
-# Add skill logic and methods as needed
-"
+"""REMOVED_INLINE_SCRIPT"""
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywhvj"]
 atlas = ExtResource("3_hr31g")
@@ -427,7 +417,7 @@ height = 42.0
 visibility_layer = 2
 z_index = 1
 y_sort_enabled = true
-script = SubResource("GDScript_5rlqq")
+script = ExtResource("14_player")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=913524806]
 position = Vector2(0, -22)
