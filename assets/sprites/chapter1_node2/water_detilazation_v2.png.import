@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbygyvq1d7arx"
-path="res://.godot/imported/water_detilazation_v2.png-df15e1a475c7c20ef4310ae80bb8ec4c.ctex"
+uid="uid://ct6rh5px7poxe"
+path="res://.godot/imported/water_detilazation_v2.png-4ab1fdf22746545955cd063c7ca4dfff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Chapter1_node2/water_detilazation_v2.png"
-dest_files=["res://.godot/imported/water_detilazation_v2.png-df15e1a475c7c20ef4310ae80bb8ec4c.ctex"]
+source_file="res://assets/sprites/chapter1_node2/water_detilazation_v2.png"
+dest_files=["res://.godot/imported/water_detilazation_v2.png-4ab1fdf22746545955cd063c7ca4dfff.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ew14era11ag3"
-path="res://.godot/imported/Inside_B.png-54f3e96509b0e7b60c721939c5ef03d8.ctex"
+uid="uid://n24kjsllnxn1"
+path="res://.godot/imported/Inside_B.png-251594b2c8cb2b2e925ddaf2aea1ab4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Chapter1_node2/Inside_B.png"
-dest_files=["res://.godot/imported/Inside_B.png-54f3e96509b0e7b60c721939c5ef03d8.ctex"]
+source_file="res://assets/sprites/chapter1_node2/Inside_B.png"
+dest_files=["res://.godot/imported/Inside_B.png-251594b2c8cb2b2e925ddaf2aea1ab4a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l83avrh60y1y"
-path="res://.godot/imported/heavy_fire.png-7c7bdbb2925991a4734c7dc89e466d7f.ctex"
+uid="uid://cg3h3jt1dhwij"
+path="res://.godot/imported/heavy_fire.png-080cd3de91a4b78e9ff2d75a8cc39f7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Chapter1_node2/heavy_fire.png"
-dest_files=["res://.godot/imported/heavy_fire.png-7c7bdbb2925991a4734c7dc89e466d7f.ctex"]
+source_file="res://assets/sprites/chapter1_node2/heavy_fire.png"
+dest_files=["res://.godot/imported/heavy_fire.png-080cd3de91a4b78e9ff2d75a8cc39f7d.ctex"]
 
 [params]
 
