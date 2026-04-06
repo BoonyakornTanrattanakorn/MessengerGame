@@ -10,7 +10,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.name != "Player":
 		return
-
+	SaveManager.save_game()
 	get_tree().current_scene.call_deferred(
 		"load_level",
 		next_level_path,

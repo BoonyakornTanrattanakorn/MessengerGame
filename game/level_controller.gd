@@ -20,11 +20,11 @@ func load_level(level_path: String, player_spawn_position: Vector2, spawn_facing
 		return
 
 	# ล้างเลเวลเก่าทิ้งหมดจาก LevelHolder
-	for child in level_holder.get_children():
-		child.queue_free()
+	#for child in level_holder.get_children():
+	#	child.queue_free()
 
 	# รอ 1 physics frame ให้ collision เก่าหายจริงก่อน
-	await get_tree().physics_frame
+	#await get_tree().physics_frame
 
 	var new_level := packed_level.instantiate()
 	level_holder.add_child(new_level)
@@ -36,7 +36,12 @@ func load_level(level_path: String, player_spawn_position: Vector2, spawn_facing
 	
 	current_level.on_level_loaded()
 	
+	for child in level_holder.get_children():
+		if child != current_level:
+			child.queue_free()
+	await get_tree().physics_frame
 	await get_tree().process_frame
+	SaveManager.restore_level_objects()
 	await _run_level_intro_if_needed()
 
 func _run_level_intro_if_needed() -> void:

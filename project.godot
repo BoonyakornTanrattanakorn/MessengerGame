@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MagicMessengerGame"
-run/main_scene="uid://dh7803taue6uc"
+run/main_scene="uid://ccw2wjmgk3426"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -25,6 +25,7 @@ SFXManager="*res://autoload/sfx_manager.gd"
 SaveManager="*uid://2knwwbky8u6y"
 DialogueManager="*uid://g4hn1po5lutd"
 GameState="*uid://cqe7q3hwi4d7r"
+SceneCache="*uid://fq1fbbmd3mkm"
 
 [display]
 
@@ -45,6 +46,7 @@ player=""
 danger=""
 minecart=""
 stop_block=""
+savable=""
 
 [input]
 

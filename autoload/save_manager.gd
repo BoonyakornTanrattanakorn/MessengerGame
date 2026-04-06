@@ -1,5 +1,6 @@
 extends Node
 
+var AUTO_SAVE_LEVEL = true #game remember last level state  
 var save_path = "user://savegame.json"
 
 var save_data = {
@@ -80,14 +81,16 @@ func load_game():
 		return
 
 	save_data = parsed
-	print(save_data, init_data)
 	if save_data == init_data:
 		new_game()
 		return
+		
+	await restore_global_objects()
 
 	var level_path = save_data.get("scene", "")
 
 	get_tree().change_scene_to_file(init_scene_path)
+	
 	await get_tree().scene_changed
 	
 	#var player = get_tree().current_scene.get_node("Player")
@@ -156,13 +159,69 @@ func get_level_scene():
 		return null
 		
 	return holder.get_child(0)
+
 	
+func restore_level_objects():
+	if AUTO_SAVE_LEVEL == false:
+		return
+	await get_tree().process_frame
+	
+	var level_scene = get_level_scene()
+	if level_scene == null:
+		return
+
+	var current_scene = level_scene.scene_file_path
+	var scene_data = save_data["scenes"].get(current_scene, {})
+
+	if scene_data.is_empty():
+		return
+
+	var savables = level_scene.find_children("*", "", true, false)
+
+	for node in savables:
+		if not node.has_method("load_data"):
+			continue
+			
+		if node.save_scope != "scene":
+			continue
+		var data = scene_data.get(node.save_id, {})
+
+		if data.is_empty():
+			continue
+
+		node.load_data(data)
+		print(data)
+		
+func restore_global_objects():
+	await get_tree().process_frame
+
+	var global_data = save_data.get("global", {})
+	if global_data.is_empty():
+		return
+
+	var root_nodes = get_tree().get_root().get_children()
+
+	for node in root_nodes:
+		if not node.has_method("load_data"):
+			continue
+
+		if node.save_scope != "global":
+			continue
+
+		var data = global_data.get(node.save_id, {})
+		if data.is_empty():
+			continue
+
+		node.load_data(data)
+		print("Restored global object:", node.name, data)
+
 
 func new_game():
 	save_data = init_data.duplicate(true)
 	get_tree().change_scene_to_file(init_scene_path)
+	restore_objects()
 	await get_tree().scene_changed
-	var root = get_tree().current_scene
+	#var root = get_tree().current_scene
 	#var setting = root.get_node_or_null("Player/PlayerHUD/Setting/SettingMenu")
 	#if setting:
 	#	setting.hide()
