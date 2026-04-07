@@ -9,6 +9,7 @@ extends Container
 @export var min_select_distance: float = 24.0
 @export var hover_scale: float = 2.0
 @export var angle_offset_deg: float = -45.0
+@export var pivot: Vector2 = Vector2(32, 32)
 
 signal selection_changed(index)
 signal element_selected(index)
@@ -46,6 +47,7 @@ func _arrange_children() -> void:
 			node_size = node.size
 		elif node.has_method("get_size"):
 			node_size = node.get_size()
+		node.pivot_offset = pivot
 		# position/size API: use .position for Control in Godot 4
 		var pos = center + Vector2(cos(angle), sin(angle)) * radius - node_size * 0.5
 		if "position" in node:
