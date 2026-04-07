@@ -9,7 +9,7 @@ func unregister_hud(hud: Node) -> void:
 	if hud_ref == hud:
 		hud_ref = null
 
-func set_objective(text: String, prefix: String = "Objective: ") -> void:
+func set_objective(text: String, prefix: String = "Objective :  ") -> void:
 	if hud_ref and hud_ref.has_method("set_objective_text"):
 		hud_ref.set_objective_text(text, prefix)
 
