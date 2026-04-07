@@ -1,8 +1,9 @@
 [gd_resource type="Theme" format=3 uid="uid://bcvu4e1quq733"]
 
-[ext_resource type="Texture2D" uid="uid://bx06aokq1hpuk" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Button02a_2.png" id="1_dlkly"]
+[ext_resource type="Texture2D" uid="uid://bemr8uwfi08mr" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Button02a_3.png" id="1_dlkly"]
 [ext_resource type="Texture2D" uid="uid://daepsb850ug52" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Button02a_4.png" id="2_kdc6y"]
 [ext_resource type="Texture2D" uid="uid://dqqrnf8nh3ayh" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Button02a_1.png" id="3_64jw0"]
+[ext_resource type="Texture2D" uid="uid://38p2ovncrqp7" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Banner01a.png" id="4_kdc6y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wqo6m"]
 texture = ExtResource("1_dlkly")
@@ -25,6 +26,9 @@ texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_64jw0"]
+texture = ExtResource("4_kdc6y")
+
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
@@ -33,3 +37,6 @@ Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/styles/hover = SubResource("StyleBoxTexture_wqo6m")
 Button/styles/normal = SubResource("StyleBoxTexture_43naf")
 Button/styles/pressed = SubResource("StyleBoxTexture_bvimr")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/styles/normal = SubResource("StyleBoxTexture_64jw0")

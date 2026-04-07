@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://0a6rly3ha2jb"
+path="res://.godot/imported/Peaberry.fnt-9a07d9917a7bf025c8fb8fd7b8f839e1.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/Peaberry_Pixel_Font/Peaberry Regular Spacing/Peaberry.fnt"
+dest_files=["res://.godot/imported/Peaberry.fnt-9a07d9917a7bf025c8fb8fd7b8f839e1.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

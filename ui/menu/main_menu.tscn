@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://ca45ivxeqdlwc" path="res://ui/menu/main_menu.gd" id="1_f0u20"]
 [ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_or6mk"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_f5wqp"]
-font_size = 40
+[sub_resource type="LabelSettings" id="LabelSettings_or6mk"]
+font_size = 36
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control" unique_id=1110931433]
 layout_mode = 3
@@ -13,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_or6mk")
 script = ExtResource("1_f0u20")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1834825062]
@@ -22,9 +25,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_or6mk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1909306963]
 layout_mode = 2
+theme = ExtResource("2_or6mk")
 theme_override_constants/separation = 20
 alignment = 1
 
@@ -32,10 +37,8 @@ alignment = 1
 custom_minimum_size = Vector2(300, 120)
 layout_mode = 2
 theme = ExtResource("2_or6mk")
-theme_override_constants/line_spacing = -6
-theme_override_font_sizes/font_size = 40
 text = "Main Menu"
-label_settings = SubResource("LabelSettings_f5wqp")
+label_settings = SubResource("LabelSettings_or6mk")
 horizontal_alignment = 1
 vertical_alignment = 1
 

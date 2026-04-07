@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://d33o1g55s12fm"
+path="res://.godot/imported/Peaberry_Bitmap_XML.fnt-e00d1b853cc41908d2faac904637ef45.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/Peaberry_Pixel_Font/Peaberry Bitmap/Peaberry_Bitmap_XML.fnt"
+dest_files=["res://.godot/imported/Peaberry_Bitmap_XML.fnt-e00d1b853cc41908d2faac904637ef45.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2
