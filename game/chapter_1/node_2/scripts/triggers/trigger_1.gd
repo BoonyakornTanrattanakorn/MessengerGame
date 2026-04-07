@@ -1,10 +1,13 @@
 extends Trigger
 
+@export var save_id = "trigger1"
+@export var save_scope = "scene"
+@export var switch_node: Node2D
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func handle_trigger():
 	print("Trigger 1")
 	var player = get_tree().get_first_node_in_group("player")
-	var switch_node = get_tree().current_scene.get_node("LevelHolder/Chapter1_Node2/Door/lever_room1_a2")
 
 	player.focus_camera_to(switch_node)
 

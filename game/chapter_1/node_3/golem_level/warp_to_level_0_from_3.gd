@@ -28,7 +28,7 @@ func can_interact() -> int:
 func activate() -> void:
 	if not visible:
 		return
-
+	SaveManager.save_game()
 	get_tree().current_scene.call_deferred(
 		"load_level",
 		next_level_path,

@@ -15,6 +15,10 @@ func set_max_health(max_hp: int):
 	if health_middle_template == null or health_end_template == null:
 		push_error("Health templates not found under HealthDisplay")
 		return
+	for child in hp_bar.get_children():
+		if child.is_in_group("health_bar"):
+			hp_bar.remove_child(child)
+			child.free()
 	for i in range(max_hp - 1):
 		var health = health_middle_template.duplicate()
 		health.name = "health_middle_%d" % i

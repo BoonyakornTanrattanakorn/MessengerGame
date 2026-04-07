@@ -78,6 +78,7 @@ var inventory = {
 }
 
 var is_in_dialogue = false
+var is_camera_panning: bool = false
 
 @export var save_id = "player" 
 @export var save_scope = "global" 
@@ -126,8 +127,25 @@ func _on_skill_changed(attribute: String):
 	playerAttribute = attribute
 	print("Switched to: ", attribute)
 
+func _is_input_locked() -> bool:
+	return is_in_dialogue or is_camera_panning
+
+func _input(event: InputEvent) -> void:
+	if not _is_input_locked():
+		return
+
+	if event.is_action("interact"):
+		return
+
+	if event is InputEventMouseButton:
+		var mb_event := event as InputEventMouseButton
+		if mb_event.button_index == MOUSE_BUTTON_LEFT:
+			return
+
+	get_viewport().set_input_as_handled()
+
 func _physics_process(delta):
-	if is_in_dialogue:
+	if _is_input_locked():
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -365,6 +383,18 @@ func add_item(item_name: String, amount: int = 1):
 	get_node("/root").find_child("PlayerHUD", true, false).refresh_items()
 
 
+func remove_items_by_prefix(prefix: String) -> void:
+	var items_to_remove: Array[String] = []
+	for item_name in inventory.keys():
+		if String(item_name).begins_with(prefix):
+			items_to_remove.append(String(item_name))
+
+	for item_name in items_to_remove:
+		inventory.erase(item_name)
+
+	get_node("/root").find_child("PlayerHUD", true, false).refresh_items()
+
+
 func die_in_minecart_and_respawn(minecart_respawn_position):
 	if current_mount != null:
 		current_mount.reset_position()
@@ -424,6 +454,7 @@ func _on_health_changed(new_hp: int) -> void:
 
 
 func focus_camera_to(target: Node2D):
+	is_camera_panning = true
 	camera.reparent(get_tree().current_scene) # detach from player
 
 	var tween = create_tween()
@@ -431,6 +462,7 @@ func focus_camera_to(target: Node2D):
 
 
 func return_camera():
+	is_camera_panning = false
 	camera.reparent(self)  # back to player
 	camera.position = Vector2.ZERO  # reset offset
 

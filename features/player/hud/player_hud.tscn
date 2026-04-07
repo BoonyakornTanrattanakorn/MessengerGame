@@ -13,7 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://dys24sd0adlgt" path="res://assets/sprites/icons/brave_stone.png" id="5_al7x7"]
 [ext_resource type="Texture2D" uid="uid://d38elma05lmhl" path="res://assets/sprites/icons/potion.png" id="6_tydpe"]
 [ext_resource type="Texture2D" uid="uid://dauu5rfxbieq2" path="res://assets/sprites/icons/antidote.png" id="7_qtp52"]
+[ext_resource type="Texture2D" uid="uid://6reuwatuxlqw" path="res://assets/sprites/icons/torn_paper_1.png" id="8_61gxr"]
 [ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="8_mycat"]
+[ext_resource type="Texture2D" uid="uid://cjg8bkpprjhax" path="res://assets/sprites/icons/torn_paper_2.png" id="9_aq8ub"]
+[ext_resource type="Texture2D" uid="uid://dgsj18hqmm1ow" path="res://assets/sprites/icons/torn_paper_3.png" id="10_yi150"]
+[ext_resource type="Texture2D" uid="uid://cp1vhpdbob6ey" path="res://assets/sprites/icons/torn_paper_4.png" id="11_whfbj"]
 [ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/sprites/icons/elements/wind_icon.png" id="16_qtp52"]
 [ext_resource type="Texture2D" uid="uid://cqlnvte1gqur0" path="res://assets/sprites/icons/earth.jpg" id="17_h3xpv"]
 [ext_resource type="Texture2D" uid="uid://20sisqtolg2q" path="res://assets/sprites/icons/water.png" id="18_egdw0"]
@@ -55,6 +59,10 @@ green_gem = ExtResource("4_6wtyk")
 brave_stone = ExtResource("5_al7x7")
 potion = ExtResource("6_tydpe")
 antidote = ExtResource("7_qtp52")
+torn_paper_1 = ExtResource("8_61gxr")
+torn_paper_2 = ExtResource("9_aq8ub")
+torn_paper_3 = ExtResource("10_yi150")
+torn_paper_4 = ExtResource("11_whfbj")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=526628163]
 anchors_preset = 3

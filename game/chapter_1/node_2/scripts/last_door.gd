@@ -7,6 +7,7 @@ var opened: bool = false
 
 @export var save_id = "last_door"
 @export var save_scope = "scene" 
+@export var door_node: Node2D
 
 func _ready() -> void:
 	add_to_group("savable")
@@ -20,9 +21,6 @@ func open() -> void:
 	opened = true
 
 	var player = get_tree().get_first_node_in_group("player")
-	var door_node = get_tree().current_scene.get_node_or_null(
-		"LevelHolder/Chapter1_Node2/ScriptedObjects/NextChapterDoor"
-	)
 
 	if player != null and door_node != null:
 		player.focus_camera_to(door_node)
