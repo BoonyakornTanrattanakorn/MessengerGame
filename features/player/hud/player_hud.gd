@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
+const WORLD_MAP_SCENE = preload("res://features/worldmap/world_map_overlay.tscn")
 
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
@@ -52,6 +53,8 @@ var memorized_keyword_order: Dictionary = {}
 @export var save_id = "player_hud" 
 @export var save_scope = "global" 
 var pause_menu: PauseMenu
+var world_map_overlay: WorldMapOverlay
+var is_world_map_open: bool = false
 
 signal skill_changed(attribute: String)
 
@@ -84,6 +87,10 @@ func _ready():
 	pause_menu.resume_requested.connect(_on_pause_resume_requested)
 	pause_menu.settings_requested.connect(_on_pause_settings_requested)
 	pause_menu.quit_requested.connect(_on_pause_quit_requested)
+
+	world_map_overlay = WORLD_MAP_SCENE.instantiate() as WorldMapOverlay
+	add_child(world_map_overlay)
+	world_map_overlay.close_requested.connect(_on_world_map_close_requested)
 
 	element_icons = {
 		"wind": wind_icon,
@@ -151,13 +158,36 @@ func _process(_delta):
 		update_item_display()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("world_map"):
+		if is_world_map_open:
+			_close_world_map()
+		elif not get_tree().paused:
+			_open_world_map()
+		get_viewport().set_input_as_handled()
+		return
+
 	if event.is_action_pressed("pause_menu"):
-		if get_tree().paused:
+		if is_world_map_open:
+			_close_world_map()
+		elif get_tree().paused:
 			_resume_game()
 		else:
 			_pause_game()
 		get_viewport().set_input_as_handled()
 
+func _open_world_map() -> void:
+	is_world_map_open = true
+	get_tree().paused = true
+	world_map_overlay.open()
+
+func _close_world_map() -> void:
+	is_world_map_open = false
+	world_map_overlay.close()
+	get_tree().paused = false
+
+func _on_world_map_close_requested() -> void:
+	if is_world_map_open:
+		_close_world_map()
 	# Show power wheel while holding the assigned action
 	if event.is_action_pressed("power_wheel"):
 		if power_wheel:
