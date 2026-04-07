@@ -64,6 +64,9 @@ func submit_answer(answer: Array[String]) -> void:
 	if PuzzleState.check_answer(answer):
 		PuzzleState.puzzle_solved = true
 		ObjectiveManager.clear_memorized_keywords()
+		var player := get_tree().root.find_child(player_node_name, true, false)
+		if player != null and player.has_method("remove_items_by_prefix"):
+			player.remove_items_by_prefix("paper_")
 		open_next_door()
 	else:
 		# nothing else needed here;

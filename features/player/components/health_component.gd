@@ -16,12 +16,19 @@ func take_damage(amount: int):
 	if is_invincible:
 		return
 	hp -= amount
+	if hp <= 0:
+		hp = 0
 	is_invincible = true
 	invincible_timer = invincible_duration
 	emit_signal("health_changed", hp)
 
 func heal(amount: int):
 	hp = min(hp + amount, max_hp)
+	emit_signal("health_changed", hp)
+
+func increase_max_hp(amount: int = 1) -> void:
+	max_hp += amount
+	heal(amount)
 	emit_signal("health_changed", hp)
 
 func _process(delta: float):

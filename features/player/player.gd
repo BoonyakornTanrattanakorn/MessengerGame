@@ -383,6 +383,18 @@ func add_item(item_name: String, amount: int = 1):
 	get_node("/root").find_child("PlayerHUD", true, false).refresh_items()
 
 
+func remove_items_by_prefix(prefix: String) -> void:
+	var items_to_remove: Array[String] = []
+	for item_name in inventory.keys():
+		if String(item_name).begins_with(prefix):
+			items_to_remove.append(String(item_name))
+
+	for item_name in items_to_remove:
+		inventory.erase(item_name)
+
+	get_node("/root").find_child("PlayerHUD", true, false).refresh_items()
+
+
 func die_in_minecart_and_respawn(minecart_respawn_position):
 	if current_mount != null:
 		current_mount.reset_position()

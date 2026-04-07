@@ -10,6 +10,7 @@ var input_to_name = {
 	"lesser_magic": "Lesser Magic",
 	"greater_magic": "Greater Magic",
 	"interact": "Interact",
+	"use_item": "Use Item",
 	"element_rotate_left": "Rotate Element Left",
 	"element_rotate_right": "Rotate Element Right",
 	"power_wheel": "Power Wheel",

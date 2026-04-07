@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
+const TORN_PAPER_DIALOGUE_PATH := "res://game/chapter_1/node_2/dialogue/character_gate.dialogue"
 
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
@@ -26,6 +27,10 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 @export var brave_stone: Texture2D
 @export var potion: Texture2D
 @export var antidote: Texture2D
+@export var torn_paper_1: Texture2D
+@export var torn_paper_2: Texture2D
+@export var torn_paper_3: Texture2D
+@export var torn_paper_4: Texture2D
 
 #cool gauge
 @onready var cool_gauge_ui = $TopLeftGUI/VBoxContainer/CoolGauge
@@ -158,6 +163,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			_pause_game()
 		get_viewport().set_input_as_handled()
 
+	if event.is_action_pressed("use_item"):
+		if _use_selected_item():
+			get_viewport().set_input_as_handled()
+
 	# Show power wheel while holding the assigned action
 	if event.is_action_pressed("power_wheel"):
 		if power_wheel:
@@ -225,6 +234,45 @@ func update_item_display():
 	item_icon.texture = items[item_index]["icon"]
 	item_count_label.text = "x" + str(items[item_index]["count"])
 
+func get_selected_item_name() -> String:
+	if items.is_empty():
+		return ""
+	item_index = clamp(item_index, 0, items.size() - 1)
+	return String(items[item_index]["name"])
+
+func _use_selected_item() -> bool:
+	var selected_item_name := get_selected_item_name()
+	if selected_item_name.is_empty():
+		return false
+
+	if selected_item_name == "brave_stone":
+		var player := get_tree().root.find_child("Player", true, false)
+		if player == null or not player.health_component.has_method("increase_max_hp"):
+			return false
+		if player.inventory.get("brave_stone", 0) <= 0:
+			return false
+
+		player.inventory["brave_stone"] -= 1
+		if player.inventory["brave_stone"] <= 0:
+			player.inventory.erase("brave_stone")
+
+		player.health_component.increase_max_hp(1)
+		top_left_gui.set_max_health(player.health_component.max_hp)
+		top_left_gui.update_health(player.health_component.hp)
+		refresh_items()
+		return true
+
+	if selected_item_name.begins_with("paper_"):
+		var dialogue_resource := load(TORN_PAPER_DIALOGUE_PATH)
+		if dialogue_resource == null:
+			push_warning("Torn paper dialogue resource is missing.")
+			return false
+
+		DialogueManager.show_dialogue_balloon(dialogue_resource, selected_item_name)
+		return true
+
+	return false
+
 func refresh_items():
 	var player = get_tree().root.find_child("Player", true, false)
 	if not player:
@@ -254,6 +302,10 @@ func get_icon(item_name: String) -> Texture2D:
 		"brave_stone": return brave_stone
 		"potion": return potion
 		"antidote": return antidote
+		"paper_1": return torn_paper_1
+		"paper_2": return torn_paper_2
+		"paper_3": return torn_paper_3
+		"paper_4": return torn_paper_4
 	return null
 
 # =========================
