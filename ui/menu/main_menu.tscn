@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b615vigg075s8"]
 
 [ext_resource type="Script" uid="uid://ca45ivxeqdlwc" path="res://ui/menu/main_menu.gd" id="1_f0u20"]
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_or6mk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f5wqp"]
 font_size = 40
@@ -30,6 +31,7 @@ alignment = 1
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=506612424]
 custom_minimum_size = Vector2(300, 120)
 layout_mode = 2
+theme = ExtResource("2_or6mk")
 theme_override_constants/line_spacing = -6
 theme_override_font_sizes/font_size = 40
 text = "Main Menu"
@@ -40,17 +42,20 @@ vertical_alignment = 1
 [node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=449515268]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+theme = ExtResource("2_or6mk")
 theme_override_font_sizes/font_size = 24
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1275213216]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+theme = ExtResource("2_or6mk")
 theme_override_font_sizes/font_size = 24
 text = "Load Game"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1061648666]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
+theme = ExtResource("2_or6mk")
 theme_override_font_sizes/font_size = 24
 text = "Quit Game"
