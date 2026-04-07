@@ -25,6 +25,7 @@ SFXManager="*res://autoload/sfx_manager.gd"
 SaveManager="*uid://2knwwbky8u6y"
 DialogueManager="*uid://g4hn1po5lutd"
 GameState="*uid://cqe7q3hwi4d7r"
+SceneCache="*uid://fq1fbbmd3mkm"
 
 [display]
 
@@ -45,6 +46,7 @@ player=""
 danger=""
 minecart=""
 stop_block=""
+savable=""
 
 [input]
 
