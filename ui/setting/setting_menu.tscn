@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://6yu1iyqyvbsv"]
+[gd_scene format=3 uid="uid://r1fg1fbsvh5i"]
 
-[ext_resource type="Script" uid="uid://b3p8k5fc2did0" path="res://ui/setting/setting_menu.gd" id="1_gierh"]
-[ext_resource type="Script" uid="uid://c4s70iyy4ig7o" path="res://ui/setting/cancel_button.gd" id="1_yneud"]
+[ext_resource type="Script" path="res://ui/setting/setting_menu.gd" id="1_gierh"]
+[ext_resource type="Script" path="res://ui/setting/cancel_button.gd" id="1_yneud"]
 [ext_resource type="Script" uid="uid://dyludjcbfs8qc" path="res://ui/setting/keybind_setting.gd" id="2_gierh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t88pq"]

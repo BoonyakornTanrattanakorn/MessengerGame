@@ -7,14 +7,16 @@ var input_to_name = {
 	"down": "Walk Down",
 	"left": "Walk Left",
 	"right": "Walk Right",
-	"minor magic": "Minor Magic",
-	"major magic": "Major Magic",
+	"lesser_magic": "Lesser Magic",
+	"greater_magic": "Greater Magic",
 	"interact": "Interact",
 	"element_rotate_left": "Rotate Element Left",
 	"element_rotate_right": "Rotate Element Right",
+	"power_wheel": "Power Wheel",
 	"item_rotate_left": "Rotate Item Left",
 	"item_rotate_right": "Rotate Item Right",
-	"pause_menu": "Pause Menu"
+	"pause_menu": "Pause Menu",
+	"world_map": "World Map"
 }
 
 func _ready():
