@@ -26,7 +26,7 @@ func update_objective() -> void:
 	if has_all_gems():
 		ObjectiveManager.set_objective("Interact with the final door")
 	else:
-		ObjectiveManager.set_objective("Collect gems %d/3" % get_gem_count())
+		ObjectiveManager.set_objective("Collect gems (%d/3)" % get_gem_count())
 
 func reset_node3_state() -> void:
 	collected_gems.clear()

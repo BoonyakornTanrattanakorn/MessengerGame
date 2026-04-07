@@ -45,11 +45,19 @@ color = Color(0, 0, 0, 0.45)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1337766471]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 608.0
+offset_bottom = 342.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(640, 360)
 
 [node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=76447597]
 clip_contents = true
@@ -59,39 +67,45 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xu3lf")
 
 [node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel" unique_id=1428714556]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="CenterContainer/Panel/VBox" unique_id=1920858547]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
 text = "PAUSE MENU"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=704603512]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(400, 90)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
 text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=513672259]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(400, 90)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
 text = "Settings"
 
 [node name="MenuButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=854230742]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(400, 90)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
 text = "Menu"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=1015927953]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(400, 90)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
 text = "Quit Game"
 
@@ -121,7 +135,7 @@ theme_override_constants/separation = 30
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "BGM Volume:"
+text = "BGM Volume :"
 vertical_alignment = 1
 
 [node name="BGMSlider" type="HSlider" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/BGMContainer" unique_id=448589722]
@@ -139,7 +153,7 @@ theme_override_constants/separation = 30
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "SFX Volume:"
+text = "SFX Volume :"
 vertical_alignment = 1
 
 [node name="SFXSlider" type="HSlider" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox/SFXContainer" unique_id=1382782513]
@@ -152,7 +166,7 @@ value = 100.0
 [node name="Label" type="Label" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox" unique_id=107549214]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "CONTROL"
+text = "CONTROLS"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/Panel/VBox/SettingsPanel/SettingsVBox" unique_id=1649463888]

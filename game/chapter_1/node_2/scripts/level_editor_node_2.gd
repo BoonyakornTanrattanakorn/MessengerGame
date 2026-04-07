@@ -29,8 +29,8 @@ func _on_lever_activated(room_id: int):
 		return
 
 	activated_levers[room_id] += 1
-	print("Room ", room_id, " levers active: ",
-		activated_levers[room_id], "/", total_levers[room_id])
+	print("Room ", room_id, " levers active: (",
+		activated_levers[room_id], "/", total_levers[room_id], ")")
 
 	update_objective_for_room(room_id)
 	
@@ -70,7 +70,7 @@ func update_objective_for_room(room_id: int):
 	# If not complete yet
 	if current < total:
 		ObjectiveManager.set_objective(
-			"Use wind power to flip the switch %d/%d" % [current, total]
+			"Use wind power to flip the switch (%d/%d)" % [current, total]
 		)
 	else:
 		ObjectiveManager.set_objective("Go to the next room")

@@ -264,6 +264,7 @@ theme_override_constants/margin_bottom = 4
 [node name="ObjectiveLabel" type="Label" parent="ObjectiveBox/ObjectivePanel/MarginContainer" unique_id=1171156202]
 layout_mode = 2
 theme = ExtResource("8_mycat")
+theme_override_font_sizes/font_size = 20
 vertical_alignment = 1
 autowrap_mode = 2
 

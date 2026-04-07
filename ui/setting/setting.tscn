@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://kdx43i281auy"]
-
-[ext_resource type="PackedScene" uid="uid://6yu1iyqyvbsv" path="res://ui/setting/setting_menu.tscn" id="1_mt4kn"]
-
-[node name="Setting" type="CanvasLayer" unique_id=1760135751]
-
-[node name="SettingMenu" parent="." unique_id=329963932 instance=ExtResource("1_mt4kn")]
