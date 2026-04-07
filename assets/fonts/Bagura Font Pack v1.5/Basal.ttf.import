@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bpkfgjlqp65hn"
-path="res://.godot/imported/PeaberryDoublespace.otf-b180641b1ea1f84683280add3f39e3bb.fontdata"
+uid="uid://b072wueudatrp"
+path="res://.godot/imported/Basal.ttf-11a3c4f16d960eef64b1dc3dd874a913.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/Peaberry_Pixel_Font/Peaberry Doublespace/PeaberryDoublespace.otf"
-dest_files=["res://.godot/imported/PeaberryDoublespace.otf-b180641b1ea1f84683280add3f39e3bb.fontdata"]
+source_file="res://assets/fonts/Bagura Font Pack v1.5/Basal.ttf"
+dest_files=["res://.godot/imported/Basal.ttf-11a3c4f16d960eef64b1dc3dd874a913.fontdata"]
 
 [params]
 

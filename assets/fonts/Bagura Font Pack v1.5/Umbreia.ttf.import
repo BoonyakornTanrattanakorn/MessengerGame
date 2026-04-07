@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c0707jxau3cl4"
-path="res://.godot/imported/PeaberryDoublespace.ttf-813b16e6dbf31569af4b8c551736e2dd.fontdata"
+uid="uid://badnbhygrc2ej"
+path="res://.godot/imported/Umbreia.ttf-7cbd695ff7843896285efeb11c374a87.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/Peaberry_Pixel_Font/Peaberry Doublespace/PeaberryDoublespace.ttf"
-dest_files=["res://.godot/imported/PeaberryDoublespace.ttf-813b16e6dbf31569af4b8c551736e2dd.fontdata"]
+source_file="res://assets/fonts/Bagura Font Pack v1.5/Umbreia.ttf"
+dest_files=["res://.godot/imported/Umbreia.ttf-7cbd695ff7843896285efeb11c374a87.fontdata"]
 
 [params]
 

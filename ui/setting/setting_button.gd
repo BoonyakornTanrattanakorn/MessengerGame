@@ -1,5 +1,6 @@
 extends Button
 
+# TODO: fix this shitty code
 @onready var Player_HUD = $"../"
 
 func _pressed():

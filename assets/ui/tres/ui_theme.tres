@@ -1,9 +1,9 @@
 [gd_resource type="Theme" format=3 uid="uid://bcvu4e1quq733"]
 
 [ext_resource type="Texture2D" uid="uid://bemr8uwfi08mr" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Button02a_3.png" id="1_dlkly"]
+[ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="1_kdc6y"]
 [ext_resource type="Texture2D" uid="uid://daepsb850ug52" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Button02a_4.png" id="2_kdc6y"]
 [ext_resource type="Texture2D" uid="uid://dqqrnf8nh3ayh" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Button02a_1.png" id="3_64jw0"]
-[ext_resource type="Texture2D" uid="uid://38p2ovncrqp7" path="res://assets/ui/01_Flat_Theme/Sprites/UI_Flat_Banner01a.png" id="4_kdc6y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wqo6m"]
 texture = ExtResource("1_dlkly")
@@ -26,17 +26,33 @@ texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_64jw0"]
-texture = ExtResource("4_kdc6y")
-
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_kdc6y")
 Button/styles/hover = SubResource("StyleBoxTexture_wqo6m")
 Button/styles/normal = SubResource("StyleBoxTexture_43naf")
 Button/styles/pressed = SubResource("StyleBoxTexture_bvimr")
-Label/colors/font_color = Color(0, 0, 0, 1)
-Label/colors/font_outline_color = Color(1, 1, 1, 1)
-Label/styles/normal = SubResource("StyleBoxTexture_64jw0")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_kdc6y")
+RichTextLabel/font_sizes/bold_font_size = 30
+RichTextLabel/font_sizes/bold_italics_font_size = 30
+RichTextLabel/font_sizes/italics_font_size = 30
+RichTextLabel/font_sizes/mono_font_size = 30
+RichTextLabel/font_sizes/normal_font_size = 30
+RichTextLabel/fonts/bold_font = ExtResource("1_kdc6y")
+RichTextLabel/fonts/bold_italics_font = ExtResource("1_kdc6y")
+RichTextLabel/fonts/italics_font = ExtResource("1_kdc6y")
+RichTextLabel/fonts/mono_font = ExtResource("1_kdc6y")
+RichTextLabel/fonts/normal_font = ExtResource("1_kdc6y")

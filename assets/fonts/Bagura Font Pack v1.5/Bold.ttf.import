@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bx1dy1sstqock"
-path="res://.godot/imported/Peaberry-Bold.ttf-23aef859d09f4b1d58c0baa3abae5925.fontdata"
+uid="uid://bnhmi3yp5qqbu"
+path="res://.godot/imported/Bold.ttf-eb4255c2330af5e0a4989435cb4eb8a7.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/Peaberry_Pixel_Font/Peaberry Regular Spacing/Peaberry-Bold.ttf"
-dest_files=["res://.godot/imported/Peaberry-Bold.ttf-23aef859d09f4b1d58c0baa3abae5925.fontdata"]
+source_file="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf"
+dest_files=["res://.godot/imported/Bold.ttf-eb4255c2330af5e0a4989435cb4eb8a7.fontdata"]
 
 [params]
 

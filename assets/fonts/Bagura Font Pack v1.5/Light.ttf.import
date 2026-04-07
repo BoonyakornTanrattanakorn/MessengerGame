@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://7i6uxrje7qso"
-path="res://.godot/imported/PeaberryMono.ttf-96735965ec78b99845b84bc385f520e3.fontdata"
+uid="uid://bfv1p1lru5gux"
+path="res://.godot/imported/Light.ttf-98a3560d7e92420ada09e041ccd059bd.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/Peaberry_Pixel_Font/Peaberry Monospace/PeaberryMono.ttf"
-dest_files=["res://.godot/imported/PeaberryMono.ttf-96735965ec78b99845b84bc385f520e3.fontdata"]
+source_file="res://assets/fonts/Bagura Font Pack v1.5/Light.ttf"
+dest_files=["res://.godot/imported/Light.ttf-98a3560d7e92420ada09e041ccd059bd.fontdata"]
 
 [params]
 

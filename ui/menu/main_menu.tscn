@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ca45ivxeqdlwc" path="res://ui/menu/main_menu.gd" id="1_f0u20"]
 [ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_or6mk"]
+[ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="3_gvx18"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_or6mk"]
-font_size = 36
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_gvx18"]
+font = ExtResource("3_gvx18")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control" unique_id=1110931433]
 layout_mode = 3
@@ -37,27 +38,24 @@ alignment = 1
 custom_minimum_size = Vector2(300, 120)
 layout_mode = 2
 theme = ExtResource("2_or6mk")
-text = "Main Menu"
-label_settings = SubResource("LabelSettings_or6mk")
+text = "PLACEHOLDER GAME"
+label_settings = SubResource("LabelSettings_gvx18")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=449515268]
-custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 theme = ExtResource("2_or6mk")
 theme_override_font_sizes/font_size = 24
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1275213216]
-custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 theme = ExtResource("2_or6mk")
 theme_override_font_sizes/font_size = 24
 text = "Load Game"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1061648666]
-custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 theme = ExtResource("2_or6mk")
 theme_override_font_sizes/font_size = 24

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://csvk43uw3bjqv"]
 
 [ext_resource type="Script" uid="uid://b5ronoxehxsnw" path="res://ui/pause_menu/pause_menu.gd" id="1_4vh0x"]
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="1_le02u"]
 [ext_resource type="Script" uid="uid://dyludjcbfs8qc" path="res://ui/setting/keybind_setting.gd" id="2_jbgdu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu3lf"]
@@ -30,6 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme = ExtResource("1_le02u")
 script = ExtResource("1_4vh0x")
 
 [node name="Overlay" type="ColorRect" parent="." unique_id=1667059508]
@@ -50,6 +52,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="CenterContainer" unique_id=76447597]
+clip_contents = true
 custom_minimum_size = Vector2(1248, 702)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xu3lf")
@@ -61,7 +64,7 @@ theme_override_constants/separation = 30
 [node name="Title" type="Label" parent="CenterContainer/Panel/VBox" unique_id=1920858547]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "PAUSE"
+text = "PAUSE MENU"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="CenterContainer/Panel/VBox" unique_id=704603512]

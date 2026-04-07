@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://toq7gcs3x8bq"
-path="res://.godot/imported/PeaberryDoublespace.woff-8b63676a7e5497dafa67e16bad9fde4c.fontdata"
+uid="uid://1w5w4d5j88th"
+path="res://.godot/imported/Occular.ttf-be22d1785f42c43cd7051894dbfa00d8.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/Peaberry_Pixel_Font/Peaberry Doublespace/PeaberryDoublespace.woff"
-dest_files=["res://.godot/imported/PeaberryDoublespace.woff-8b63676a7e5497dafa67e16bad9fde4c.fontdata"]
+source_file="res://assets/fonts/Bagura Font Pack v1.5/Occular.ttf"
+dest_files=["res://.godot/imported/Occular.ttf-be22d1785f42c43cd7051894dbfa00d8.fontdata"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://rg5cpl7ap6ts"
-path="res://.godot/imported/PeaberryMono.otf-ce245febdf37126be325d59b24647b99.fontdata"
+uid="uid://clh4f3brqon2"
+path="res://.godot/imported/Enkarus.ttf-f8d98b7b20b2145566fdba9ea3cd18d0.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/Peaberry_Pixel_Font/Peaberry Monospace/PeaberryMono.otf"
-dest_files=["res://.godot/imported/PeaberryMono.otf-ce245febdf37126be325d59b24647b99.fontdata"]
+source_file="res://assets/fonts/Bagura Font Pack v1.5/Enkarus.ttf"
+dest_files=["res://.godot/imported/Enkarus.ttf-f8d98b7b20b2145566fdba9ea3cd18d0.fontdata"]
 
 [params]
 

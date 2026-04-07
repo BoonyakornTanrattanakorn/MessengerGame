@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b3p8k5fc2did0" path="res://ui/setting/setting_menu.gd" id="1_gierh"]
 [ext_resource type="Script" uid="uid://c4s70iyy4ig7o" path="res://ui/setting/cancel_button.gd" id="1_yneud"]
 [ext_resource type="Script" uid="uid://dyludjcbfs8qc" path="res://ui/setting/keybind_setting.gd" id="2_gierh"]
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_rsbv5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t88pq"]
 bg_color = Color(0.5019608, 0.5019608, 0.5019608, 0.78431374)
@@ -36,6 +37,7 @@ offset_right = 250.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_rsbv5")
 theme_override_styles/panel = SubResource("StyleBoxFlat_t88pq")
 metadata/_edit_use_anchors_ = true
 
