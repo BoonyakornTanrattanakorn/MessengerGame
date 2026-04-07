@@ -15,6 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://d38elma05lmhl" path="res://assets/sprites/icons/potion.png" id="6_tydpe"]
 [ext_resource type="Texture2D" uid="uid://dauu5rfxbieq2" path="res://assets/sprites/icons/antidote.png" id="7_qtp52"]
 [ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="8_mycat"]
+[ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/sprites/icons/elements/wind_icon.png" id="16_qtp52"]
+[ext_resource type="Texture2D" uid="uid://cqlnvte1gqur0" path="res://assets/sprites/icons/earth.jpg" id="17_h3xpv"]
+[ext_resource type="Texture2D" uid="uid://20sisqtolg2q" path="res://assets/sprites/icons/water.png" id="18_egdw0"]
+[ext_resource type="Texture2D" uid="uid://ccg4ruvsxhn1n" path="res://assets/sprites/icons/fire.png" id="19_q63r6"]
+[ext_resource type="Script" uid="uid://0mpy01q3e3yo" path="res://features/player/hud/power_wheel.gd" id="20_circ"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -275,3 +280,40 @@ layout_mode = 2
 theme = ExtResource("8_mycat")
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=727864891]
+offset_right = 1286.0
+offset_bottom = 721.0
+
+[node name="PowerWheel" type="Container" parent="CenterContainer" unique_id=1999999999]
+visible = false
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+script = ExtResource("20_circ")
+start_angle_deg = -90.0
+hover_scale = 1.25
+angle_offset_deg = 45.0
+
+[node name="Power_0" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999998]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("16_qtp52")
+expand_mode = 3
+
+[node name="Power_1" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999997]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("19_q63r6")
+expand_mode = 3
+
+[node name="Power_2" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999996]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("18_egdw0")
+expand_mode = 3
+
+[node name="Power_3" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999995]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("17_h3xpv")
+expand_mode = 3
