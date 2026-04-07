@@ -4,14 +4,14 @@ class_name WorldMapOverlay
 signal close_requested
 
 @onready var close_button: Button = %CloseButton
-@onready var objective_text: Label = %ObjectiveText
 
 @onready var map_sub_viewport: SubViewport = %MapSubViewport
+@onready var map_viewport_container: SubViewportContainer = $Panel/MarginContainer/VBoxContainer/MapViewportContainer
 
 @export_range(0.05, 4.0, 0.01) var fallback_zoom_scale: float = 0.6
+@export_range(0.1, 3.0, 0.01) var bounds_zoom_multiplier: float = 1.25
 
 var _player: Node2D
-var _last_objective_text: String = ""
 var _map_camera: Camera2D
 var _is_bounds_mode: bool = false
 
@@ -28,8 +28,8 @@ func open() -> void:
 	visible = true
 	_set_player_reference()
 	_fit_map_to_current_level()
-	_refresh_objective_text()
-	if close_button != null:
+	call_deferred("_refit_map_next_frame")
+	if close_button != null and close_button.visible:
 		close_button.grab_focus()
 
 func close() -> void:
@@ -38,9 +38,6 @@ func close() -> void:
 func _process(_delta: float) -> void:
 	if not visible:
 		return
-
-	if visible:
-		_refresh_objective_text()
 
 	if _player == null:
 		_set_player_reference()
@@ -64,15 +61,6 @@ func _set_player_reference() -> void:
 	if players.size() > 0:
 		_player = players[0] as Node2D
 
-func _refresh_objective_text() -> void:
-	var objective := ObjectiveManager.get_objective().strip_edges()
-	var next_text := "No active objective" if objective.is_empty() else "Objective: %s" % objective
-	if next_text == _last_objective_text:
-		return
-
-	_last_objective_text = next_text
-	objective_text.text = next_text
-
 func _setup_map_camera() -> void:
 	map_sub_viewport.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	map_sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -93,9 +81,17 @@ func _fit_map_to_current_level() -> void:
 		_map_camera.global_position = level_bounds.position + level_bounds.size * 0.5
 
 		var viewport_size := Vector2(map_sub_viewport.size)
+		if map_viewport_container != null and map_viewport_container.size.x > 1.0 and map_viewport_container.size.y > 1.0:
+			viewport_size = map_viewport_container.size
+
+		if viewport_size.x <= 1.0 or viewport_size.y <= 1.0:
+			viewport_size = get_viewport_rect().size
+
+		map_sub_viewport.size = Vector2i(int(maxf(viewport_size.x, 1.0)), int(maxf(viewport_size.y, 1.0)))
+
 		var fit_x: float = viewport_size.x / maxf(level_bounds.size.x, 1.0)
 		var fit_y: float = viewport_size.y / maxf(level_bounds.size.y, 1.0)
-		var zoom_value: float = minf(fit_x, fit_y) * 0.92
+		var zoom_value: float = minf(fit_x, fit_y) * 0.92 * bounds_zoom_multiplier
 		zoom_value = clamp(zoom_value, 0.05, 4.0)
 		_map_camera.zoom = Vector2(zoom_value, zoom_value)
 		return
@@ -104,6 +100,16 @@ func _fit_map_to_current_level() -> void:
 	_map_camera.zoom = Vector2(fallback_zoom_scale, fallback_zoom_scale)
 	if _player != null:
 		_map_camera.global_position = _player.global_position
+
+func _refit_map_next_frame() -> void:
+	if not visible:
+		return
+
+	await get_tree().process_frame
+	if not visible:
+		return
+
+	_fit_map_to_current_level()
 
 func _get_current_level_bounds() -> Rect2:
 	var current_scene := get_tree().current_scene
