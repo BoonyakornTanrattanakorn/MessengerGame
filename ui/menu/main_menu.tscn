@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://b615vigg075s8"]
 
-[ext_resource type="Script" uid="uid://ca45ivxeqdlwc" path="res://ui/menu/main_menu.gd" id="1_f0u20"]
+[ext_resource type="Script" path="res://ui/menu/main_menu.gd" id="1_f0u20"]
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_or6mk"]
+[ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="3_gvx18"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_f5wqp"]
-font_size = 40
+[sub_resource type="LabelSettings" id="LabelSettings_gvx18"]
+font = ExtResource("3_gvx18")
+font_size = 96
+font_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control" unique_id=1110931433]
 layout_mode = 3
@@ -12,45 +16,60 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_or6mk")
 script = ExtResource("1_f0u20")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1834825062]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -327.0
+offset_top = -289.165
+offset_right = 327.0
+offset_bottom = 205.83508
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_or6mk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1909306963]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme = ExtResource("2_or6mk")
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=506612424]
-custom_minimum_size = Vector2(300, 120)
+custom_minimum_size = Vector2(300, 225)
 layout_mode = 2
-theme_override_constants/line_spacing = -6
-theme_override_font_sizes/font_size = 40
-text = "Main Menu"
-label_settings = SubResource("LabelSettings_f5wqp")
+theme = ExtResource("2_or6mk")
+theme_override_font_sizes/font_size = 32
+text = "PLACEHOLDER GAME"
+label_settings = SubResource("LabelSettings_gvx18")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=449515268]
-custom_minimum_size = Vector2(300, 60)
+custom_minimum_size = Vector2(400, 75)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+size_flags_horizontal = 4
+theme = ExtResource("2_or6mk")
+theme_override_font_sizes/font_size = 36
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1275213216]
-custom_minimum_size = Vector2(300, 60)
+custom_minimum_size = Vector2(400, 75)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+size_flags_horizontal = 4
+theme = ExtResource("2_or6mk")
+theme_override_font_sizes/font_size = 36
 text = "Load Game"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1061648666]
-custom_minimum_size = Vector2(300, 60)
+custom_minimum_size = Vector2(400, 75)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+size_flags_horizontal = 4
+theme = ExtResource("2_or6mk")
+theme_override_font_sizes/font_size = 36
 text = "Quit Game"
