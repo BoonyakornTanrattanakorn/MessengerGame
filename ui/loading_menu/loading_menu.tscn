@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ccw2wjmgk3426"]
 
 [ext_resource type="Script" uid="uid://dqy1ka172sygm" path="res://ui/loading_menu/loading_menu.gd" id="1_0exkh"]
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="1_tku8r"]
 
 [node name="LoadingMenu" type="Control" unique_id=2008267167]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_tku8r")
 script = ExtResource("1_0exkh")
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1600773309]
@@ -22,7 +24,8 @@ offset_top = 22.799988
 offset_right = -3.0
 offset_bottom = -2.0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
+theme = ExtResource("1_tku8r")
+theme_override_font_sizes/font_size = 48
 
 [node name="Label" type="Label" parent="." unique_id=417397937]
 layout_mode = 1
@@ -37,5 +40,5 @@ offset_right = 33.0
 offset_bottom = 13.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 64
 text = "Loading..."

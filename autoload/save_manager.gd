@@ -108,6 +108,9 @@ func load_game():
 
 func restore_objects():
 	await get_tree().process_frame
+	
+	GameState.new_game()
+	
 	var level_scene = get_level_scene()
 
 	if level_scene == null:

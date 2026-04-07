@@ -50,4 +50,3 @@ func load_data(data) -> void:
 		for gem in data.collected_gems:
 			collected_gems.append(str(gem)) 
 	intro_objective_started = data.get("intro_objective_started", false)
-	update_objective()

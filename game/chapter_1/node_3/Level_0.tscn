@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://5bx4dpf7xj8n" path="res://game/chapter_1/node_3/center_level/node_3_level_0_event_handler.gd" id="1_o2bvy"]
 [ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_45wdf"]
-[ext_resource type="Texture2D" uid="uid://fhuldq13lcvx" path="res://assets/sprites/chapter1_node2/decorative_cracks_walls.png" id="3_tgbhp"]
-[ext_resource type="Texture2D" uid="uid://k8dvo4j0plyd" path="res://assets/sprites/chapter1_node2/doors_lever_chest_animation.png" id="4_ddwnc"]
-[ext_resource type="Texture2D" uid="uid://dwan3h73xi3tf" path="res://assets/sprites/chapter1_node2/DoorWall.png" id="5_laplg"]
-[ext_resource type="Texture2D" uid="uid://c56upo6fkoun4" path="res://assets/sprites/chapter1_node2/walls_floor.png" id="6_2pp24"]
+[ext_resource type="Texture2D" uid="uid://w23njenxpw23" path="res://assets/sprites/chapter1_node2/decorative_cracks_walls.png" id="3_tgbhp"]
+[ext_resource type="Texture2D" uid="uid://cq0lc2yyx230l" path="res://assets/sprites/chapter1_node2/doors_lever_chest_animation.png" id="4_ddwnc"]
+[ext_resource type="Texture2D" uid="uid://b46tqab1k7m0t" path="res://assets/sprites/chapter1_node2/DoorWall.png" id="5_laplg"]
+[ext_resource type="Texture2D" uid="uid://pcw3fdvdfh2t" path="res://assets/sprites/chapter1_node2/walls_floor.png" id="6_2pp24"]
 [ext_resource type="Script" uid="uid://dwljpayeh2veb" path="res://game/chapter_1/node_3/center_level/warp_to_level_1.gd" id="7_ggv0x"]
 [ext_resource type="Script" uid="uid://cby70hsh2j275" path="res://game/chapter_1/node_3/center_level/warp_to_level_2.gd" id="8_xur1w"]
 [ext_resource type="Script" uid="uid://pqhk3aff5hsb" path="res://game/chapter_1/node_3/center_level/warp_to_level_3.gd" id="9_pu3de"]
@@ -714,9 +714,13 @@ size = Vector2(159, 100.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owq4y"]
 size = Vector2(285, 758)
 
-[node name="Level_0" type="Node2D" unique_id=1186606688]
+[node name="Level_0" type="Node2D" unique_id=1186606688 node_paths=PackedStringArray("final_door", "wtl1", "wtl2", "wtl3")]
 y_sort_enabled = true
 script = ExtResource("1_o2bvy")
+final_door = NodePath("FinalDoor")
+wtl1 = NodePath("WarpToLevel1/CollisionShape2D")
+wtl2 = NodePath("WarpToLevel2/CollisionShape2D")
+wtl3 = NodePath("WarpToLevel3/CollisionShape2D")
 
 [node name="grass_and_mountain" type="TileMapLayer" parent="." unique_id=119897630]
 z_index = -1

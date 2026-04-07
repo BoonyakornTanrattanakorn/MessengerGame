@@ -1,6 +1,7 @@
 extends LevelEventHandler
 
 @onready var bridge_manager = $BridgeManager
+@export var golem_boss: Node2D
 
 func _ready():
 	for node in get_all_children(self):
@@ -27,8 +28,7 @@ func handle_intro_for_level() -> void:
 
 		await DialogueManager.dialogue_ended
 
-		var golemboss = get_node("GolemBoss")
-		player.focus_camera_to(golemboss)
+		player.focus_camera_to(golem_boss)
 
 		await get_tree().create_timer(1.0).timeout
 		player.return_camera()

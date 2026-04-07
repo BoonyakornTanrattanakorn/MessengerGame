@@ -1,17 +1,17 @@
 [gd_scene format=4 uid="uid://g4d0qydy7lwt"]
 
 [ext_resource type="Script" uid="uid://0lkpq6spv1hh" path="res://game/chapter_1/node_2/scripts/node_2_event_handler.gd" id="1_mx7r5"]
-[ext_resource type="Texture2D" uid="uid://bk47558qbueys" path="res://assets/sprites/chapter1_node2/Water_coasts_animation.png" id="2_tu21h"]
-[ext_resource type="Texture2D" uid="uid://c56upo6fkoun4" path="res://assets/sprites/chapter1_node2/walls_floor.png" id="3_4wi5c"]
-[ext_resource type="Texture2D" uid="uid://bgsyv50ndheyy" path="res://assets/sprites/chapter1_node2/decorative_cracks_floor.png" id="4_qd6rv"]
-[ext_resource type="Texture2D" uid="uid://cih5bxc1m26fn" path="res://assets/sprites/chapter1_node2/Bridges.png" id="5_gqs0q"]
-[ext_resource type="Texture2D" uid="uid://n24kjsllnxn1" path="res://assets/sprites/chapter1_node2/Inside_B.png" id="6_qe0yu"]
-[ext_resource type="Texture2D" uid="uid://bguh7n3wx2xv5" path="res://assets/sprites/chapter1_node2/Decorations.png" id="7_vkhdu"]
-[ext_resource type="Texture2D" uid="uid://b1sx6pg7sar0d" path="res://assets/sprites/chapter1_node2/Other_objects.png" id="8_pwpnf"]
-[ext_resource type="Texture2D" uid="uid://oqu0kwq50tmf" path="res://assets/sprites/chapter1_node2/supplies_objects.png" id="9_71i6t"]
-[ext_resource type="Texture2D" uid="uid://beufygcott7em" path="res://assets/sprites/chapter1_node2/Objects.png" id="10_hivxr"]
-[ext_resource type="Texture2D" uid="uid://curjdtc8ofg2r" path="res://assets/sprites/chapter1_node2/fire_animation2.png" id="11_uhmet"]
-[ext_resource type="Texture2D" uid="uid://dohj2cy0kcj8g" path="res://assets/sprites/chapter1_node2/fire_animation.png" id="12_hr5et"]
+[ext_resource type="Texture2D" uid="uid://cjlfia6ut7yvn" path="res://assets/sprites/chapter1_node2/Water_coasts_animation.png" id="2_tu21h"]
+[ext_resource type="Texture2D" uid="uid://pcw3fdvdfh2t" path="res://assets/sprites/chapter1_node2/walls_floor.png" id="3_4wi5c"]
+[ext_resource type="Texture2D" uid="uid://crdat8q2plkhq" path="res://assets/sprites/chapter1_node2/decorative_cracks_floor.png" id="4_qd6rv"]
+[ext_resource type="Texture2D" uid="uid://c0g2buxs5iwcn" path="res://assets/sprites/chapter1_node2/Bridges.png" id="5_gqs0q"]
+[ext_resource type="Texture2D" uid="uid://bhrepv3l67n8m" path="res://assets/sprites/chapter1_node2/Inside_B.png" id="6_qe0yu"]
+[ext_resource type="Texture2D" uid="uid://bj5d2scmpfsdy" path="res://assets/sprites/chapter1_node2/Decorations.png" id="7_vkhdu"]
+[ext_resource type="Texture2D" uid="uid://cb43klyl3odgt" path="res://assets/sprites/chapter1_node2/Other_objects.png" id="8_pwpnf"]
+[ext_resource type="Texture2D" uid="uid://ckb5lg7us8w6v" path="res://assets/sprites/chapter1_node2/supplies_objects.png" id="9_71i6t"]
+[ext_resource type="Texture2D" uid="uid://b2ylsk3wwm0sn" path="res://assets/sprites/chapter1_node2/Objects.png" id="10_hivxr"]
+[ext_resource type="Texture2D" uid="uid://bcpul2mcdyrvy" path="res://assets/sprites/chapter1_node2/fire_animation2.png" id="11_uhmet"]
+[ext_resource type="Texture2D" uid="uid://d1ruoot3yj1wj" path="res://assets/sprites/chapter1_node2/fire_animation.png" id="12_hr5et"]
 [ext_resource type="Script" uid="uid://bqfnj76dul6ck" path="res://game/chapter_1/node_2/scripts/level_editor_node_2.gd" id="13_7yf0n"]
 [ext_resource type="PackedScene" uid="uid://dkhxdt27gjdxu" path="res://game/chapter_1/node_2/scenes/door.tscn" id="14_vwdmx"]
 [ext_resource type="PackedScene" uid="uid://ppm5ewbxc88f" path="res://game/chapter_1/node_2/scenes/lever.tscn" id="15_cbp3v"]
@@ -13138,10 +13138,11 @@ sources/9 = SubResource("TileSetAtlasSource_t0e5m")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkvoq"]
 size = Vector2(32, 16)
 
-[node name="Chapter1_Node2" type="Node2D" unique_id=1441380444]
+[node name="Chapter1_Node2" type="Node2D" unique_id=1441380444 node_paths=PackedStringArray("switch_node")]
 y_sort_enabled = true
 scale = Vector2(2, 2)
 script = ExtResource("1_mx7r5")
+switch_node = NodePath("Door/lever_room0_a2")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1664782641]
 z_index = -1
@@ -13283,8 +13284,9 @@ position = Vector2(2777, 1189)
 dialogue_resource = ExtResource("17_65x57")
 next_door_path = NodePath("../NextChapterDoor")
 
-[node name="NextChapterDoor" parent="ScriptedObjects" unique_id=913977062 instance=ExtResource("19_igw1v")]
+[node name="NextChapterDoor" parent="ScriptedObjects" unique_id=913977062 node_paths=PackedStringArray("door_node") instance=ExtResource("19_igw1v")]
 position = Vector2(3808, 1488)
+door_node = NodePath(".")
 
 [node name="Trigger3" parent="ScriptedObjects" unique_id=1049504828 groups=["savable"] instance=ExtResource("20_2brpn")]
 position = Vector2(2456, 1117)
@@ -13298,11 +13300,12 @@ script = ExtResource("22_gk5ot")
 save_id = "trigger2"
 save_scope = "scene"
 
-[node name="Trigger1" parent="ScriptedObjects" unique_id=1504700445 groups=["savable"] instance=ExtResource("20_2brpn")]
+[node name="Trigger1" parent="ScriptedObjects" unique_id=1504700445 node_paths=PackedStringArray("switch_node") groups=["savable"] instance=ExtResource("20_2brpn")]
 position = Vector2(1466.5, 1847)
 script = ExtResource("23_ewag5")
 save_id = "trigger1"
 save_scope = "scene"
+switch_node = NodePath("../../Door/lever_room1_a2")
 
 [node name="DoorToNode3" type="Area2D" parent="." unique_id=1329107490]
 z_index = 1

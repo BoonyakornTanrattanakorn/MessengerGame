@@ -12,7 +12,14 @@ var chap1_node3_3_shown := false
 
 func _ready() -> void:
 	add_to_group("savable")
-	
+
+func new_game():
+	chap1_node2_shown = false
+	chap1_node3_shown = false
+	chap1_node3_1_shown = false
+	chap1_node3_2_shown = false
+	chap1_node3_3_shown = false
+
 func save():
 	return {
 		"chap1_node2_shown": chap1_node2_shown,

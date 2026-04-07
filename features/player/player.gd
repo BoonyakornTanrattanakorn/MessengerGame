@@ -78,6 +78,7 @@ var inventory = {
 }
 
 var is_in_dialogue = false
+var is_camera_panning: bool = false
 
 @export var save_id = "player" 
 @export var save_scope = "global" 
@@ -126,8 +127,25 @@ func _on_skill_changed(attribute: String):
 	playerAttribute = attribute
 	print("Switched to: ", attribute)
 
+func _is_input_locked() -> bool:
+	return is_in_dialogue or is_camera_panning
+
+func _input(event: InputEvent) -> void:
+	if not _is_input_locked():
+		return
+
+	if event.is_action("interact"):
+		return
+
+	if event is InputEventMouseButton:
+		var mb_event := event as InputEventMouseButton
+		if mb_event.button_index == MOUSE_BUTTON_LEFT:
+			return
+
+	get_viewport().set_input_as_handled()
+
 func _physics_process(delta):
-	if is_in_dialogue:
+	if _is_input_locked():
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -424,6 +442,7 @@ func _on_health_changed(new_hp: int) -> void:
 
 
 func focus_camera_to(target: Node2D):
+	is_camera_panning = true
 	camera.reparent(get_tree().current_scene) # detach from player
 
 	var tween = create_tween()
@@ -431,6 +450,7 @@ func focus_camera_to(target: Node2D):
 
 
 func return_camera():
+	is_camera_panning = false
 	camera.reparent(self)  # back to player
 	camera.position = Vector2.ZERO  # reset offset
 
