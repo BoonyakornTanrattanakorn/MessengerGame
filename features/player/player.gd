@@ -183,8 +183,8 @@ func _physics_process(delta):
 	if is_controlling_fairy:
 		fairy_timer -= delta
 	
-		# Cancel fairy with minor magic (C key)
-		if Input.is_action_just_pressed("minor magic"):
+		# Cancel fairy with lesser_magic (C key)
+		if Input.is_action_just_pressed("lesser_magic"):
 			print("[Fairy] Cancelled by player")
 			end_fairy()
 			return
@@ -204,38 +204,38 @@ func _physics_process(delta):
 		fairy_cooldown_timer -= delta
 	# Handle skill
 	if playerAttribute == "fire":
-		if Input.is_action_just_pressed("minor magic"):
+		if Input.is_action_just_pressed("lesser_magic"):
 			shoot_fire_small()
-		if Input.is_action_just_pressed("major magic"):
+		if Input.is_action_just_pressed("greater_magic"):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
-		if Input.is_action_just_pressed("minor magic"):
+		if Input.is_action_just_pressed("lesser_magic"):
 			movement_component.request_dash(self, last_direction)
-		if Input.is_action_just_pressed("major magic"):
+		if Input.is_action_just_pressed("greater_magic"):
 			shoot_wind_wave()
 	elif playerAttribute == "water":
 		# Light skill — summon fairy
-		if Input.is_action_just_pressed("minor magic"):
+		if Input.is_action_just_pressed("lesser_magic"):
 			if is_controlling_fairy:
 				end_fairy()  # cancel fairy early
 			elif fairy_cooldown_timer <= 0 and cool_gauge < max_cool_gauge:
 				summon_fairy()
 		# Heavy skill — wave charge
-		if Input.is_action_just_pressed("major magic"):
+		if Input.is_action_just_pressed("greater_magic"):
 			is_charging_wave = true
 			wave_charge_timer = 0.0
-		if Input.is_action_pressed("major magic") and is_charging_wave:
+		if Input.is_action_pressed("greater_magic") and is_charging_wave:
 			wave_charge_timer += delta
 			var preview_level = get_wave_level()
 			hud.show_wave_charge_preview(cool_gauge + preview_level)
-		if Input.is_action_just_released("major magic") and is_charging_wave:
+		if Input.is_action_just_released("greater_magic") and is_charging_wave:
 			is_charging_wave = false
 			shoot_water_wave(get_wave_level())
 			hud.show_wave_charge_preview(-1)
 	elif playerAttribute == "earth":
-		if Input.is_action_just_pressed("minor magic"):
+		if Input.is_action_just_pressed("lesser_magic"):
 			activate_earth_shield()
-		if Input.is_action_just_pressed("major magic"):
+		if Input.is_action_just_pressed("greater_magic"):
 			spawn_rock_pillar()
 	#check water
 	var speed_multiplier = 1.0

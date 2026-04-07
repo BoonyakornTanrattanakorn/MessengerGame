@@ -14,6 +14,7 @@ const WORLD_MAP_SCENE = preload("res://features/worldmap/world_map_overlay.tscn"
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
 @onready var top_left_gui = $TopLeftGUI
+@onready var power_wheel = $CenterContainer/PowerWheel
 
 # Objective UI
 @onready var objective_box = $ObjectiveBox
@@ -187,6 +188,21 @@ func _close_world_map() -> void:
 func _on_world_map_close_requested() -> void:
 	if is_world_map_open:
 		_close_world_map()
+	# Show power wheel while holding the assigned action
+	if event.is_action_pressed("power_wheel"):
+		if power_wheel:
+			power_wheel.visible = true
+		get_viewport().set_input_as_handled()
+
+	if event.is_action_released("power_wheel"):
+		if power_wheel:
+			var sel_idx = power_wheel.select_current()
+			if sel_idx >= 0 and sel_idx < skills.size():
+				skill_index = sel_idx
+				update_skill_display()
+				emit_signal("skill_changed", skills[skill_index]["attribute"])
+			power_wheel.visible = false
+		get_viewport().set_input_as_handled()
 
 func _pause_game() -> void:
 	get_tree().paused = true
