@@ -16,7 +16,8 @@ var input_to_name = {
 	"power_wheel": "Power Wheel",
 	"item_rotate_left": "Rotate Item Left",
 	"item_rotate_right": "Rotate Item Right",
-	"pause_menu": "Pause Menu"
+	"pause_menu": "Pause Menu",
+	"world_map": "World Map"
 }
 
 func _ready():

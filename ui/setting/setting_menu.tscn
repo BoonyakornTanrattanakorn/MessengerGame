@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://r1fg1fbsvh5i"]
+
+[ext_resource type="Script" path="res://ui/setting/setting_menu.gd" id="1_gierh"]
+[ext_resource type="Script" path="res://ui/setting/cancel_button.gd" id="1_yneud"]
+[ext_resource type="Script" uid="uid://dyludjcbfs8qc" path="res://ui/setting/keybind_setting.gd" id="2_gierh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t88pq"]
+bg_color = Color(0.5019608, 0.5019608, 0.5019608, 0.78431374)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gierh"]
+bg_color = Color(0.55518323, 0.55518323, 0.55518323, 0.6156863)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gierh"]
+font_size = 30
+font_color = Color(0.9696924, 0.9696924, 0.9696924, 1)
+
+[node name="SettingMenu" type="CanvasLayer" unique_id=329963932]
+process_mode = 3
+script = ExtResource("1_gierh")
+
+[node name="Panel" type="Panel" parent="." unique_id=1375982221]
+modulate = Color(0.9352509, 0.9352509, 0.9352509, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t88pq")
+metadata/_edit_use_anchors_ = true
+
+[node name="CloseButton" type="Button" parent="Panel" unique_id=720905526]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.738
+anchor_top = 0.054000005
+anchor_right = 0.92800003
+anchor_bottom = 0.12
+offset_right = -3.0517578e-05
+text = "Close"
+script = ExtResource("1_yneud")
+metadata/_edit_use_anchors_ = true
+
+[node name="MainMenuButton" type="Button" parent="Panel" unique_id=444783078]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.395
+anchor_top = 0.86
+anchor_right = 0.605
+anchor_bottom = 0.92600006
+offset_left = 0.12998962
+offset_right = -0.13000488
+offset_bottom = -3.0517578e-05
+text = "Menu"
+metadata/_edit_use_anchors_ = true
+
+[node name="SaveButton" type="Button" parent="Panel" unique_id=189914152]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.395
+anchor_top = 0.78000003
+anchor_right = 0.605
+anchor_bottom = 0.846
+offset_left = 0.12998962
+offset_top = -3.0517578e-05
+offset_right = -0.13000488
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=696724759]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = 82.0
+offset_right = -23.0
+offset_bottom = -131.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gierh")
+
+[node name="Control" type="VBoxContainer" parent="Panel/ScrollContainer" unique_id=1371473061]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_gierh")
+
+[node name="Label" type="Label" parent="Panel" unique_id=370568983]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.18400002
+offset_left = 199.0
+offset_top = 21.0
+offset_right = -200.0
+offset_bottom = -29.000008
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Setting"
+label_settings = SubResource("LabelSettings_gierh")
+horizontal_alignment = 1
+vertical_alignment = 1
