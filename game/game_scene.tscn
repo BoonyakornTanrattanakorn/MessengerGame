@@ -22,12 +22,12 @@ script = ExtResource("1_2fs4p")
 
 [node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
 y_sort_enabled = true
-position = Vector2(-138, -316)
 
 [node name="Node12" parent="LevelHolder" unique_id=981344518 instance=ExtResource("2_m7xky")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
-position = Vector2(2777, 3932)
+position = Vector2(1, 257)
+collision_mask = 3
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1552768552]
 zoom = Vector2(2, 2)
