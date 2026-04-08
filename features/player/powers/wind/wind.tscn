@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://oxmcfsdchgpc"]
 
 [ext_resource type="Script" uid="uid://berhwe8t6khyu" path="res://features/player/powers/wind/wind.gd" id="1_gc4i6"]
-[ext_resource type="Texture2D" uid="uid://b2alm6ygq1gsk" path="res://assets/sprites/chapter1_node2/Untitled-1.png" id="2_43i0t"]
+[ext_resource type="Texture2D" uid="uid://153r2eu0q42y" path="res://assets/sprites/chapter1_node2/Untitled-1.png" id="2_43i0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gc4i6"]
 size = Vector2(18, 16)
