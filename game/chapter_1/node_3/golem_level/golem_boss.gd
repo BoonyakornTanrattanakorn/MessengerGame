@@ -83,12 +83,14 @@ func current_mode() -> String:
 		return ""
 	return hp_sequence[current_hp_index]
 
-func update_mode():
+func update_mode(reset_shoot_timer := false):
 	sprite.play(current_mode())
 	if current_hp_index >= hp_sequence.size() / 2:
 		bullet_interval = 1.5
 		bullet_speed = 200.0
 		print("Boss enraged!")
+	if reset_shoot_timer:
+		bullet_timer = bullet_interval
 
 func try_damage(color: String):
 	if state != BossState.ACTIVE or is_stunned:
@@ -124,7 +126,7 @@ func _physics_process(delta):
 			activation_timer -= delta
 			if activation_timer <= 0:
 				state = BossState.ACTIVE
-				update_mode()
+				update_mode(true)
 
 		BossState.ACTIVE:
 			_handle_stun(delta)
@@ -200,6 +202,7 @@ func save():
 		"is_stunned": is_stunned,
 		"stun_timer": stun_timer,
 		"activation_timer": activation_timer,
+		"bullet_timer": bullet_timer,
 		"death_blink_timer": death_blink_timer,
 		"no_interact": has_meta("no_interact"),
 		"position": {
@@ -217,6 +220,7 @@ func load_data(data):
 
 	stun_timer = float(data.get("stun_timer", 0.0))
 	activation_timer = float(data.get("activation_timer", 0.0))
+	bullet_timer = float(data.get("bullet_timer", bullet_interval))
 	death_blink_timer = float(data.get("death_blink_timer", 0.0))
 
 	if data.get("no_interact", false):
@@ -243,7 +247,8 @@ func load_data(data):
 			sprite.play("idle")
 
 		BossState.ACTIVE:
-			update_mode()
+			state = BossState.ACTIVE
+			update_mode(true)
 
 		BossState.STUNNED:
 			is_stunned = true
