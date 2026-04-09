@@ -11,20 +11,40 @@ var _push_direction := Vector2.ZERO
 var _target_position := Vector2.ZERO
 var _current_plate: Node2D = null
 
+# Area2D child named "PushDetector" - add this in the scene, slightly larger than the block
+@onready var _push_detector: Area2D = $PushDetector
+
 func _physics_process(delta: float) -> void:
-	if not _is_moving:
+	if _is_moving:
+		_slide_to_target(delta)
 		return
 
-	var move_step := _push_direction * PUSH_SPEED * delta
-	var remaining := _target_position - global_position
+	_check_player_push()
 
-	if remaining.length() <= move_step.length():
+func _slide_to_target(delta: float) -> void:
+	var remaining := _target_position - global_position
+	var step := _push_direction * PUSH_SPEED * delta
+
+	if remaining.length() <= step.length():
 		global_position = _target_position
 		_is_moving = false
 		velocity = Vector2.ZERO
 	else:
 		velocity = _push_direction * PUSH_SPEED
 		move_and_slide()
+
+func _check_player_push() -> void:
+	for body in _push_detector.get_overlapping_bodies():
+		if body.name != "Player":
+			continue
+		if body.velocity.length() < 10.0:
+			continue
+		# Check if player is moving toward the block
+		var to_block := (global_position - body.global_position).normalized()
+		if body.velocity.normalized().dot(to_block) > 0.5:
+			var dir := Vector2(round(to_block.x), round(to_block.y))
+			push(dir)
+			break
 
 func push(direction: Vector2) -> void:
 	if _is_moving:
@@ -33,6 +53,7 @@ func push(direction: Vector2) -> void:
 	_push_direction = direction.normalized()
 	_target_position = global_position + _push_direction * TILE_SIZE
 
+	# Check if something is blocking the destination
 	var space := get_world_2d().direct_space_state
 	var query := PhysicsRayQueryParameters2D.create(
 		global_position,
@@ -41,7 +62,6 @@ func push(direction: Vector2) -> void:
 	)
 	query.exclude = [self]
 	var result := space.intersect_ray(query)
-
 	if result:
 		return
 
