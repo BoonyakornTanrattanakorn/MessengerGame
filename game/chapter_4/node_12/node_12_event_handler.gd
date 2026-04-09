@@ -8,9 +8,52 @@ func _ready() -> void:
 	assert(end_walk != null)
 	
 func handle_intro_for_level() -> void:
+	var original_input_locked = player.is_in_dialogue or player.is_camera_panning
+
 	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
+
+	# Hallway walk cutscene
 	await slow_walk_intro()
-	# Add dialogue or other intro steps here if needed
+	await show_player_thoughts()
+	await show_king_cutscene()
+	var outcome = await start_player_king_dialogue()
+	# Handle post-dialogue outcomes
+	match outcome:
+		"thanks_king":
+			await normal_ending()
+		"fight_begins":
+			await equip_fire_power()
+			await start_fight_sequence()
+		"player_killed":
+			await player_killed_sequence()
+	# Restore player input
+	player.is_in_dialogue = original_input_locked
+
+func show_player_thoughts() -> void:
+	# Simulate player thinking (can be replaced with dialogue balloon or cutscene text)
+	await get_tree().create_timer(1.0).timeout
+
+func show_king_cutscene() -> void:
+	# Simulate king cutscene (can be replaced with dialogue balloon or cutscene text)
+	await get_tree().create_timer(1.0).timeout
+
+func normal_ending() -> void:
+	# Placeholder for normal ending logic
+	pass
+
+func equip_fire_power() -> void:
+	# Auto-equip player with fire power
+	player.playerAttribute = "fire"
+	if player.hud:
+		player.hud.set_current_skill("fire")
+
+func start_fight_sequence() -> void:
+	# Placeholder for starting the fight
+	pass
+
+func player_killed_sequence() -> void:
+	# Placeholder for player killed logic
+	pass
 
 func slow_walk_intro() -> void:
 	# Move player to start
@@ -20,13 +63,12 @@ func slow_walk_intro() -> void:
 	var original_speed = player.speed
 	var anim_sprite = player.animated_sprite
 	var original_anim_speed = anim_sprite.speed_scale if anim_sprite.has_method("speed_scale") else 1.0
-	var original_input_locked = player.is_in_dialogue or player.is_camera_panning
 
 	# Disable player input
 	player.is_in_dialogue = true
 
 	# Set slow speed and animation
-	player.speed = 6000.0
+	player.speed = 600.0
 	if anim_sprite:
 		anim_sprite.speed_scale = 0.5
 
@@ -56,19 +98,18 @@ func slow_walk_intro() -> void:
 		anim_sprite.speed_scale = original_anim_speed
 		anim_sprite.play("idle " + player._facing_suffix(direction))
 
-	start_player_king_dialogue()
-
-	# Restore player input
-	player.is_in_dialogue = original_input_locked
-
-func start_player_king_dialogue() -> void:
-	# TODO: Replace with actual dialogue resource path for this scene
+func start_player_king_dialogue() -> String:
 	var dialogue_resource = load("res://game/chapter_4/node_12/dialogue/intro.dialogue")
 	if dialogue_resource == null:
 		push_error("Dialogue resource not found! Please set the correct path.")
-		return
+		return "error"
 
 	var dialogue_manager = Engine.get_singleton("DialogueManager")
 	var balloon = dialogue_manager.show_dialogue_balloon(dialogue_resource)
-	# Wait for dialogue to finish
-	await dialogue_manager.dialogue_ended
+
+	# Wait for dialogue to finish and get the last branch
+	var result = await balloon.finished if balloon.has_signal("finished") else await dialogue_manager.dialogue_ended
+	# Try to get the last branch (title) if possible
+	if typeof(result) == TYPE_STRING:
+		return result
+	return ""
