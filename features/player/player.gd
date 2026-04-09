@@ -274,6 +274,8 @@ func _facing_suffix(dir: Vector2) -> String:
 		return "front" if dir.y > 0 else "back"
 
 func _update_animation(direction: Vector2) -> void:
+	if not animated_sprite:
+		return
 	var facing = _facing_suffix(last_direction)
 	var anim = ""
 
