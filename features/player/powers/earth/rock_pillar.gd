@@ -3,7 +3,7 @@ extends Node2D
 @onready var body = $StaticBody2D
 @onready var area = $Area2D
 
-@export var duration = 5.0
+@export var duration = 10
 var is_in_hole = false
 var is_floating = false
 

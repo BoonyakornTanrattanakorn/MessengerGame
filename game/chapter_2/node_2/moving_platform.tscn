@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://bmsw7owjtv1um"]
 
-[ext_resource type="Script" uid="uid://82n0ge3wbjet" path="res://game/chapter_2/node2/moving_platform.gd" id="1_x1c7q"]
-[ext_resource type="Texture2D" uid="uid://bqebsvwe4pwi3" path="res://assets/sprites/maps/tilesets/Outside_A2.png" id="2_i8n6a"]
+[ext_resource type="Script" uid="uid://82n0ge3wbjet" path="res://game/chapter_2/node_2/moving_platform.gd" id="1_x1c7q"]
+[ext_resource type="Texture2D" uid="uid://d8jxn6d34bfy" path="res://assets/sprites/maps/tilesets/Outside_B.png" id="2_hs5s4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i8n6a"]
-atlas = ExtResource("2_i8n6a")
-region = Rect2(0, 48, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs5s4"]
+atlas = ExtResource("2_hs5s4")
+region = Rect2(193, 433, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i8mfi"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i8n6a")
+"texture": SubResource("AtlasTexture_hs5s4")
 }],
 "loop": true,
 "name": &"default",
@@ -21,7 +21,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8n6a"]
 size = Vector2(48, 48)
 
-[node name="MovingPlatform" type="Area2D" unique_id=1270112246 groups=["platform"]]
+[node name="MovingPlatform" type="Area2D" unique_id=222987806 groups=["platform"]]
 script = ExtResource("1_x1c7q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1050821851]

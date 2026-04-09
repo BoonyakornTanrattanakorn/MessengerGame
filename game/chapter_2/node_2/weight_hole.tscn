@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ct7thtm6egkm1"]
 
-[ext_resource type="Script" uid="uid://dy4s40cc5d8lc" path="res://game/chapter_2/node2/weight_hole.gd" id="1_bejyj"]
+[ext_resource type="Script" uid="uid://dy4s40cc5d8lc" path="res://game/chapter_2/node_2/weight_hole.gd" id="1_bejyj"]
 [ext_resource type="Texture2D" uid="uid://bqebsvwe4pwi3" path="res://assets/sprites/maps/tilesets/Outside_A2.png" id="2_8fkjx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8fkjx"]
