@@ -10,10 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dppwqrmk0d0x4" path="res://assets/sprites/maps/tilesets/pressureplate.png" id="7_dwin6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_block"]
-size = Vector2(154, 177)
+size = Vector2(148.5, 169)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pushdetector"]
-size = Vector2(150.5, 171.5)
+size = Vector2(167.875, 191.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_plate"]
 size = Vector2(112.5, 107)
@@ -39,7 +39,7 @@ position = Vector2(348, 222)
 script = ExtResource("4_sandblock")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle1Manager/BlockA" unique_id=381920015]
-position = Vector2(2, -3.5)
+position = Vector2(1.75, -3.5)
 shape = SubResource("RectangleShape2D_block")
 
 [node name="Sprite2D" type="Sprite2D" parent="Puzzle1Manager/BlockA" unique_id=381920016]
@@ -49,7 +49,7 @@ texture = ExtResource("5_n0cwm")
 [node name="PushDetector" type="Area2D" parent="Puzzle1Manager/BlockA" unique_id=381920017]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle1Manager/BlockA/PushDetector" unique_id=381920018]
-position = Vector2(3.75, -5.75)
+position = Vector2(2.0625, -4.3125)
 shape = SubResource("RectangleShape2D_pushdetector")
 
 [node name="BlockB" type="CharacterBody2D" parent="Puzzle1Manager" unique_id=381920019 groups=["sand_block"]]

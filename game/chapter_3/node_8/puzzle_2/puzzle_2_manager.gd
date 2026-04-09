@@ -16,33 +16,32 @@ var _is_solved := false
 func _ready() -> void:
 	await get_tree().process_frame
 
-	for child in get_children():
+	# Search recursively so nested covers/symbols inside Symbol1/2/3 parents are found
+	_collect_nodes(self)
+
+	_set_symbols_active(false)
+
+	if exit_warp:
+		exit_warp.hide()
+
+	set_process(true)
+
+func _collect_nodes(node: Node) -> void:
+	for child in node.get_children():
 		if child.is_in_group("sand_cover"):
 			_sand_covers.append(child)
 		if child.is_in_group("floor_symbol"):
 			_symbols.append(child)
 			child.symbol_stepped_on.connect(_on_symbol_stepped_on)
-
-	_set_symbols_active(false)
-	_connect_sand_covers()
-
-	if exit_warp:
-		exit_warp.hide()
-
-func _connect_sand_covers() -> void:
-	for cover in _sand_covers:
-		if cover.has_signal("tree_exited"):
-			pass
-		# When all covers are cleared, activate symbols
-		# Each cover's clear_sand fires; we poll in process
-	# Instead, check via a timer each frame
-	set_process(true)
+		_collect_nodes(child)
 
 func _process(_delta: float) -> void:
 	if _is_solved:
 		return
+	if _sand_covers.size() == 0:
+		return
 	var all_cleared := _sand_covers.all(func(c): return not c.visible)
-	if all_cleared and _sand_covers.size() > 0:
+	if all_cleared:
 		_set_symbols_active(true)
 		set_process(false)
 

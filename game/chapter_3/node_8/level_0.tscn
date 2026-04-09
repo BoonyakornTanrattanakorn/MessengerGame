@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dbg7ut2mytwaa" path="res://assets/sprites/maps/tilesets/pyramid.png" id="5_840er"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5lu3"]
-size = Vector2(44.3125, 155)
+size = Vector2(44.3125, 94.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_840er"]
 size = Vector2(843, 847.5)
@@ -26,33 +26,37 @@ tile_map_data = PackedByteArray("AAAAAAAACwAqAAwAAAAAAAEACwAqAA0AAAAAAAIACwAqAA4
 tile_set = ExtResource("2_2yygb")
 
 [node name="WarpToLevel1" type="Area2D" parent="." unique_id=597248849]
+position = Vector2(345, 722)
 script = ExtResource("3_840er")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToLevel1" unique_id=1104683144]
-position = Vector2(327.15625, 725.5)
+position = Vector2(-11, -4)
 shape = SubResource("RectangleShape2D_s5lu3")
 
 [node name="WarpToNode9" type="Area2D" parent="." unique_id=2071488013]
+position = Vector2(1443, 719)
 script = ExtResource("4_7ndse")
 next_level_path = ""
 facing_direction_on_warp = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToNode9" unique_id=56870286]
-position = Vector2(1436, 719)
+position = Vector2(6, 1)
 shape = SubResource("RectangleShape2D_s5lu3")
 
 [node name="PyramidEntrance" type="Node2D" parent="." unique_id=1577696150]
 position = Vector2(344, 720)
 
 [node name="Pyramid" type="Node2D" parent="." unique_id=2032147636]
+position = Vector2(749, 735)
 
 [node name="Sprite2D" type="Sprite2D" parent="Pyramid" unique_id=1638862426]
-position = Vector2(737, 720)
+position = Vector2(-10, -15)
 scale = Vector2(2.1115897, 2.5497966)
 texture = ExtResource("5_840er")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=272066165]
+position = Vector2(748, 735)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=732983827]
-position = Vector2(747.5, 735.25)
+position = Vector2(-6, -2)
 shape = SubResource("RectangleShape2D_840er")
