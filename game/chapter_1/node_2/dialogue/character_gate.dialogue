@@ -1,25 +1,25 @@
 ~ paper_1
 Paper No.1: The paper is torn and faded.
 Paper No.1: "First blooms the rose where silence gently sleeps."
-Player: So the first line is talking about "Rose".
+Player [#sprite=wind/neutral]: So the first line is talking about "Rose".
 => END
 
 ~ paper_2
 Paper No.2: A brittle scrap of parchment.
 Paper No.2: "Then stands the helm, where duty vigil keeps."
-Player: The second one must be "Helmet".
+Player [#sprite=wind/neutral]: The second one must be "Helmet".
 => END
 
 ~ paper_3
 Paper No.3: Ink has run across the edges, but one line remains clear.
 Paper No.3: "The sword must follow, sharp with iron will."
-Player: "Sword" is the third line.
+Player [#sprite=wind/neutral]: "Sword" is the third line.
 => END
 
 ~ paper_4
 Paper No.4: The final fragment is nearly intact.
 Paper No.4: "And last the book, when all the world is still."
-Player: The fourth line must be "Book".
+Player [#sprite=wind/neutral]: The fourth line must be "Book".
 => END
 
 

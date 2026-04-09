@@ -1,6 +1,6 @@
 ~ start
-Player: Is this some kind of maze?
-Player: That lion is sleeping in front of the red gem.
-Player: I probably shouldn’t get too close.
-Player: Maybe that bell could scare it away.
+Player [#sprite=wind/neutral]: Is this some kind of maze?
+Player [#sprite=wind/neutral]: That lion is sleeping in front of the red gem.
+Player [#sprite=wind/neutral]: I probably shouldn’t get too close.
+Player [#sprite=wind/neutral]: Maybe that bell could scare it away.
 => END
