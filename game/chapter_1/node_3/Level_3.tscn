@@ -253,6 +253,14 @@ position = Vector2(594, 570)
 script = ExtResource("17_skg5l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToLevel0from3" unique_id=1228576262]
+position = Vector2(-689, -466)
+shape = SubResource("RectangleShape2D_kwlfy")
+
+[node name="Portal" type="Area2D" parent="." unique_id=230064757]
+position = Vector2(498, 673)
+script = ExtResource("10_rp52u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=1829106467]
 position = Vector2(-691, -473)
 shape = SubResource("RectangleShape2D_kwlfy")
 
@@ -264,8 +272,8 @@ script = ExtResource("7_ibgwb")
 position = Vector2(-96, 103)
 shape = SubResource("RectangleShape2D_kwlfy")
 
-[node name="PortalSprite" type="Sprite2D" parent="Portal" unique_id=1011295455]
-position = Vector2(-96, 90)
+[node name="PortalSprite" type="Sprite2D" parent="Portal" unique_id=1890870903]
+position = Vector2(0, -12.51)
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("18_t2w0l")
 hframes = 8
