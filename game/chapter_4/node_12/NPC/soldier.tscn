@@ -125,7 +125,7 @@ animations = [{
 size = Vector2(32, 32)
 
 [node name="Knight" type="CharacterBody2D" unique_id=269745531]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.333, 1.333)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1978601684]
 sprite_frames = SubResource("SpriteFrames_m235k")
