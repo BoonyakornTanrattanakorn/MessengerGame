@@ -26,7 +26,7 @@ func slow_walk_intro() -> void:
 	player.is_in_dialogue = true
 
 	# Set slow speed and animation
-	player.speed = 60.0
+	player.speed = 6000.0
 	if anim_sprite:
 		anim_sprite.speed_scale = 0.5
 
@@ -56,5 +56,19 @@ func slow_walk_intro() -> void:
 		anim_sprite.speed_scale = original_anim_speed
 		anim_sprite.play("idle " + player._facing_suffix(direction))
 
+	start_player_king_dialogue()
+
 	# Restore player input
 	player.is_in_dialogue = original_input_locked
+
+func start_player_king_dialogue() -> void:
+	# TODO: Replace with actual dialogue resource path for this scene
+	var dialogue_resource = load("res://game/chapter_4/node_12/dialogue/intro.dialogue")
+	if dialogue_resource == null:
+		push_error("Dialogue resource not found! Please set the correct path.")
+		return
+
+	var dialogue_manager = Engine.get_singleton("DialogueManager")
+	var balloon = dialogue_manager.show_dialogue_balloon(dialogue_resource)
+	# Wait for dialogue to finish
+	await dialogue_manager.dialogue_ended
