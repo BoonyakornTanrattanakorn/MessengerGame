@@ -122,6 +122,7 @@ position = Vector2(0, 843)
 position = Vector2(0, 127)
 
 [node name="Credit" type="Node2D" parent="." unique_id=1292322719]
+visible = false
 position = Vector2(0, 568)
 script = ExtResource("6_rhnue")
 

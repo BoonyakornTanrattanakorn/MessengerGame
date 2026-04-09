@@ -1,0 +1,8 @@
+~ start
+Player: I have a message from the [town???]
+King: Read it.
+Player: The town is under attack and we need back up.
+Player: ...
+King: I have heard enough. You did well to relay this message to me. You deserve to rest now.
+King: Guards! Show this man to his chamber!
+=> END
