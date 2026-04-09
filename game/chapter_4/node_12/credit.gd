@@ -8,7 +8,7 @@ func _ready() -> void:
 	area.body_entered.connect(_on_area_body_entered)
 	area.body_exited.connect(_on_area_body_exited)
 	# Hide credit by default
-	_hide_credit()
+	credit.hide()
 
 # Called when a body enters the Show Area
 func _on_area_body_entered(body):
@@ -32,3 +32,4 @@ func _hide_credit() -> void:
 	tween.tween_property(credit, "modulate:a", 0.0, 1.0)
 	await tween.finished
 	credit.hide()
+	credit.queue_free()
