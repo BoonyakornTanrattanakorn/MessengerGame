@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c5l285add1oxq" path="res://game/chapter_4/node_12/node_12_event_handler.gd" id="1_5xwdw"]
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="2_flfan"]
+[ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/king.tscn" id="3_otdus"]
+[ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/soldier.tscn" id="4_eymx0"]
 
 [node name="Node12" type="Node2D" unique_id=981344518]
 script = ExtResource("1_5xwdw")
@@ -35,3 +37,14 @@ tile_set = ExtResource("2_flfan")
 scale = Vector2(0.667, 0.667)
 tile_map_data = PackedByteArray("AAD+//z/BQAVABwAAAD+//3/BQAVAB0AAAD+//7/BQAVAB4AAAD+////BQAVAB8AAAD///z/BQAWABwAAAD///3/BQAWAB0AAAD///7/BQAWAB4AAAD/////BQAWAB8AAAAAAPz/BQAXABwAAAAAAP3/BQAXAB0AAAAAAP7/BQAXAB4AAAAAAP//BQAXAB8AAAABAPz/BQAYABwAAAABAP3/BQAYAB0AAAABAP7/BQAYAB4AAAABAP//BQAYAB8AAAA=")
 tile_set = ExtResource("2_flfan")
+
+[node name="King" parent="." unique_id=91915243 instance=ExtResource("3_otdus")]
+
+[node name="Soldier" parent="." unique_id=269745531 instance=ExtResource("4_eymx0")]
+position = Vector2(-45, 67)
+
+[node name="Soldier2" parent="." unique_id=818711593 instance=ExtResource("4_eymx0")]
+position = Vector2(-1, 66)
+
+[node name="Soldier3" parent="." unique_id=597062362 instance=ExtResource("4_eymx0")]
+position = Vector2(44, 66)
