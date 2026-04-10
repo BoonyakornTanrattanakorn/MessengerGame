@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://boou4wqx28utq" path="res://assets/sprites/maps/tilesets/World_A2.png" id="8_su4ry"]
 [ext_resource type="Texture2D" uid="uid://cjbqkhn02fl04" path="res://assets/sprites/maps/tilesets/World_C.png" id="9_8oaov"]
 [ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="10_81k3t"]
+[ext_resource type="Script" path="res://game/chapter_4/node_11/node_11_event_handler.gd" id="11_node11"]
 [ext_resource type="PackedScene" uid="uid://wgyiit14wfsd" path="res://game/chapter_4/node_11/NPC/cat.tscn" id="13_a8n8n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sdhpo"]
@@ -20423,6 +20424,7 @@ sources/6 = SubResource("TileSetAtlasSource_cuieq")
 size = Vector2(19.5, 29)
 
 [node name="Node11" type="Node2D" unique_id=1031944713]
+script = ExtResource("11_node11")
 
 [node name="Map" type="Node2D" parent="." unique_id=435959519]
 

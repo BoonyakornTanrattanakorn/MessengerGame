@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bm16ktuss7a23" path="res://assets/sprites/maps/tilesets/Inside_A4.png" id="1_8ebhh"]
 [ext_resource type="Texture2D" uid="uid://v38avbxmjmcy" path="res://assets/sprites/maps/tilesets/Outside_A3.png" id="2_0gmsd"]
 [ext_resource type="Texture2D" uid="uid://d8jxn6d34bfy" path="res://assets/sprites/maps/tilesets/Outside_B.png" id="3_0gmsd"]
+[ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="4_qhgts"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qhgts"]
 texture = ExtResource("1_8ebhh")
@@ -5421,6 +5422,9 @@ texture = ExtResource("3_0gmsd")
 [sub_resource type="TileSet" id="TileSet_l117g"]
 sources/0 = SubResource("TileSetAtlasSource_8rwfx")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rwfx"]
+size = Vector2(43.25, 36.5)
+
 [node name="Tower" type="Node2D" unique_id=1166412024]
 
 [node name="Map" type="Node2D" parent="." unique_id=705382107]
@@ -5436,3 +5440,12 @@ tile_set = SubResource("TileSet_q68e1")
 [node name="Door" type="TileMapLayer" parent="Map" unique_id=51079070]
 tile_map_data = PackedByteArray("AAAOAAMAAAASABgAAAAOAAQAAAASABkAAAAOAAUAAAASABoAAAAPAAMAAAATABgAAAAPAAQAAAATABkAAAAPAAUAAAATABoAAAAQAAMAAAAUABgAAAAQAAQAAAAUABkAAAAQAAUAAAAUABoAAAA=")
 tile_set = SubResource("TileSet_l117g")
+
+[node name="warp_to_tower" type="Area2D" parent="Map/Door" unique_id=1939900455]
+script = ExtResource("4_qhgts")
+metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Door/warp_to_tower" unique_id=1228345754]
+position = Vector2(249, 76)
+shape = SubResource("RectangleShape2D_8rwfx")
+disabled = true
