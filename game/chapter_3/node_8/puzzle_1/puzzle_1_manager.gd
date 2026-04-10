@@ -15,6 +15,8 @@ func _ready() -> void:
 			child.plate_activated.connect(_on_plate_activated)
 			child.plate_deactivated.connect(_on_plate_deactivated)
 
+	if not exit_warp:
+		exit_warp = get_parent().get_node_or_null("ExitWarp")
 	if exit_warp:
 		exit_warp.hide()
 

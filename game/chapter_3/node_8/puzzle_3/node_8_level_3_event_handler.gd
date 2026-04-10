@@ -3,9 +3,12 @@ extends LevelEventHandler
 @export var puzzle_manager: Node2D
 
 func _ready() -> void:
+	if not puzzle_manager:
+		puzzle_manager = get_node_or_null("Puzzle3Manager")
 	if Chap3Node8State.puzzle_3_completed and puzzle_manager:
-		if puzzle_manager.exit_warp:
-			puzzle_manager.exit_warp.show()
+		var exit_warp := get_node_or_null("ExitWarp")
+		if exit_warp:
+			exit_warp.show()
 		for trap in puzzle_manager._traps:
 			trap.queue_free()
 

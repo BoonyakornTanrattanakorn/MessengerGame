@@ -141,7 +141,7 @@ world_map={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://game/chapter_1/node_2/dialogue/character_gate.dialogue", "res://game/chapter_1/node_2/dialogue/node_2.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_1.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_2.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_3.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_0.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_1.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_2.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_3.dialogue")
+locale/translations_pot_files=PackedStringArray("res://game/chapter_1/node_2/dialogue/character_gate.dialogue", "res://game/chapter_1/node_2/dialogue/node_2.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_1.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_2.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_3.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_1.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_0.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_2.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_3.dialogue")
 
 [layer_names]
 

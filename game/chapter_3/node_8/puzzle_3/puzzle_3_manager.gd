@@ -21,6 +21,8 @@ func _ready() -> void:
 	if exit_lever and exit_lever.has_signal("lever_pulled"):
 		exit_lever.lever_pulled.connect(_on_lever_pulled)
 
+	if not exit_warp:
+		exit_warp = get_parent().get_node_or_null("ExitWarp")
 	if exit_warp:
 		exit_warp.hide()
 

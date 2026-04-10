@@ -21,6 +21,8 @@ func _ready() -> void:
 
 	_set_symbols_active(false)
 
+	if not exit_warp:
+		exit_warp = get_parent().get_node_or_null("ExitWarp")
 	if exit_warp:
 		exit_warp.hide()
 
