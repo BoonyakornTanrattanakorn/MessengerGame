@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://v38avbxmjmcy" path="res://assets/sprites/maps/tilesets/Outside_A3.png" id="2_0gmsd"]
 [ext_resource type="Texture2D" uid="uid://d8jxn6d34bfy" path="res://assets/sprites/maps/tilesets/Outside_B.png" id="3_0gmsd"]
 [ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="4_qhgts"]
+[ext_resource type="Script" uid="uid://cc1mnmus27fob" path="res://game/chapter_4/node_11/tower_event_handler.gd" id="5_tower_event_handler"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qhgts"]
 texture = ExtResource("1_8ebhh")
@@ -5426,6 +5427,7 @@ sources/0 = SubResource("TileSetAtlasSource_8rwfx")
 size = Vector2(25.375, 28.5)
 
 [node name="Tower" type="Node2D" unique_id=1166412024]
+script = ExtResource("5_tower_event_handler")
 
 [node name="Map" type="Node2D" parent="." unique_id=705382107]
 
@@ -5444,10 +5446,13 @@ tile_set = SubResource("TileSet_l117g")
 [node name="Warp" type="Node2D" parent="." unique_id=528099458]
 
 [node name="warp_to_tower" type="Area2D" parent="Warp" unique_id=1910313630]
+collision_layer = 2
 script = ExtResource("4_qhgts")
+next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
+spawn_position_in_next_level = Vector2(-104, 670)
+facing_direction_on_warp = Vector2(0, 1)
 metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_tower" unique_id=722536473]
 position = Vector2(248, 79)
 shape = SubResource("RectangleShape2D_qhgts")
-disabled = true
