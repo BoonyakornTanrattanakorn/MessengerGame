@@ -16,6 +16,8 @@ func _ready() -> void:
 			_traps.append(child)
 			child.player_hit.connect(_on_player_hit)
 
+	if not exit_lever:
+		exit_lever = get_parent().get_node_or_null("ExitLever")
 	if exit_lever and exit_lever.has_signal("lever_pulled"):
 		exit_lever.lever_pulled.connect(_on_lever_pulled)
 

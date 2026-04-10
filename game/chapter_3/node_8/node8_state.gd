@@ -29,7 +29,7 @@ func get_completed_count() -> int:
 
 func update_objective() -> void:
 	if all_puzzles_done():
-		ObjectiveManager.set_objective("Exit the pyramid")
+		ObjectiveManager.set_objective("Get out of pyramid")
 	else:
 		ObjectiveManager.set_objective("Solve pyramid puzzles (%d/3)" % get_completed_count())
 

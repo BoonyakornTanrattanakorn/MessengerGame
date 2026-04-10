@@ -25,7 +25,7 @@ y_sort_enabled = true
 position = Vector2(-138, -316)
 
 [node name="Level0" parent="LevelHolder" unique_id=1099882608 instance=ExtResource("8_m7xky")]
-position = Vector2(2880, 3479)
+position = Vector2(2854, 3485)
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
 position = Vector2(2778, 3902)
