@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cermfkvr5h5kb"
+path="res://.godot/imported/go_back.dialogue-9792b48f578ff8a9a75600b643cd7c7d.tres"
+
+[deps]
+
+source_file="res://game/chapter_2/node_6/dialogue/go_back.dialogue"
+dest_files=["res://.godot/imported/go_back.dialogue-9792b48f578ff8a9a75600b643cd7c7d.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dqrwlslqkedkt"]
+
+[ext_resource type="Script" uid="uid://cls66supdwuig" path="res://game/chapter_2/node_6/scripts/node_6_event_handler.gd" id="1_jqdej"]
+[ext_resource type="PackedScene" uid="uid://b48vavelubmdp" path="res://game/chapter_2/node_6/scenes/chapter2_node3.tscn" id="2_mi20c"]
+[ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://features/player/player.tscn" id="3_7wpxy"]
+[ext_resource type="Texture2D" uid="uid://dtan4iu1ggc8h" path="res://assets/sprites/maps/minimap_frame.png" id="4_o5rov"]
+[ext_resource type="Script" uid="uid://0iqe0tscjprc" path="res://features/minimap/panel_container.gd" id="5_axc36"]
+[ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://features/minimap/sub_viewport.gd" id="6_s463q"]
+[ext_resource type="Texture2D" uid="uid://bmnymc7ne7cep" path="res://assets/sprites/maps/border_frame.png" id="7_00d6q"]
+[ext_resource type="Texture2D" uid="uid://bdd4sm3nv5qpf" path="res://assets/sprites/icons/arrow.png" id="8_l2lnw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f61fk"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("4_o5rov")
+
+[node name="Test_Ch2N3" type="Node2D" unique_id=1065207152]
+script = ExtResource("1_jqdej")
+
+[node name="LevelHolder" type="Node2D" parent="." unique_id=2116405047]
+y_sort_enabled = true
+
+[node name="Chapter2_Node3" parent="LevelHolder" unique_id=1817499874 instance=ExtResource("2_mi20c")]
+
+[node name="Player" parent="." unique_id=417667803 instance=ExtResource("3_7wpxy")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1455318183]
+zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=83254362]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=326718362]
+clip_children = 1
+anchors_preset = -1
+anchor_left = 0.707
+anchor_top = 0.062000003
+anchor_right = 0.94200003
+anchor_bottom = 0.46
+offset_left = 114.03998
+offset_top = -20.640003
+offset_right = 53.23999
+offset_bottom = -67.20001
+theme_override_styles/panel = SubResource("StyleBoxTexture_f61fk")
+script = ExtResource("5_axc36")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/PanelContainer" unique_id=2079117271]
+visibility_layer = 3
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/PanelContainer/SubViewportContainer" unique_id=1112184062]
+handle_input_locally = false
+size = Vector2i(240, 240)
+render_target_update_mode = 4
+script = ExtResource("6_s463q")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=494078852]
+layout_mode = 2
+texture = ExtResource("7_00d6q")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PanelContainer" unique_id=189910443]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_l2lnw")
+expand_mode = 1

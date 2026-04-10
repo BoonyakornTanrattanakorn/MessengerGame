@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://dcuyxqq4755ov" path="res://game/chapter_1/node_2/scripts/triggers/trigger_3.gd" id="21_u6iai"]
 [ext_resource type="Script" uid="uid://c2msawgufevdj" path="res://game/chapter_1/node_2/scripts/triggers/trigger_2.gd" id="22_gk5ot"]
 [ext_resource type="Script" uid="uid://cv3wn8be2lgfs" path="res://game/chapter_1/node_2/scripts/triggers/trigger_1.gd" id="23_ewag5"]
-[ext_resource type="Script" uid="uid://c77mivnod5cyi" path="res://game/chapter_1/node_2/warp_to_node_3.gd" id="24_ac8l5"]
+[ext_resource type="Script" uid="uid://c77mivnod5cyi" path="res://game/chapter_1/node_2/scripts/warp_to_node_3.gd" id="24_ac8l5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uju0g"]
 texture = ExtResource("2_tu21h")
