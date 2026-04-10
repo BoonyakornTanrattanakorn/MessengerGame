@@ -2,16 +2,19 @@
 
 [ext_resource type="Script" uid="uid://b5wqjpoo4xp2i" path="res://game/chapter_3/node_8/puzzle_2/node_8_level_2_event_handler.gd" id="1_evhandler"]
 [ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_tileset"]
-[ext_resource type="Texture2D" uid="uid://cxnk64njbvxrh" path="res://assets/sprites/maps/tilesets/hint_stone.png" id="3_25jok"]
+[ext_resource type="Texture2D" uid="uid://dvnflryp0fvr7" path="res://game/chapter_3/node_8/additional_assets/hstone.png" id="3_dq3cv"]
 [ext_resource type="Script" uid="uid://c6mdqo88j33lv" path="res://game/chapter_3/node_8/puzzle_2/puzzle_2_manager.gd" id="3_p2manager"]
 [ext_resource type="Script" uid="uid://pdl4a6jud7ei" path="res://game/chapter_3/node_8/puzzle_2/sand_cover.gd" id="4_sandcover"]
 [ext_resource type="Script" uid="uid://dt6elw6mngusi" path="res://game/chapter_3/node_8/puzzle_2/floor_symbol.gd" id="5_floorsymbol"]
 [ext_resource type="Texture2D" uid="uid://cqtkoc45c8tvt" path="res://assets/sprites/maps/tilesets/sand_cover.png" id="6_8a21p"]
 [ext_resource type="Script" uid="uid://b5pcfc3vvb5gs" path="res://game/chapter_3/node_8/puzzle_2/warp_to_level_3.gd" id="6_warp"]
-[ext_resource type="Texture2D" uid="uid://dch2j15ohv1cn" path="res://assets/sprites/maps/tilesets/symbol_1.png" id="8_ukllt"]
-[ext_resource type="Texture2D" uid="uid://beyg2hbnr6s5l" path="res://assets/sprites/maps/tilesets/symbol_2.png" id="9_8rtgk"]
-[ext_resource type="Texture2D" uid="uid://b2xbsmq82b4ig" path="res://assets/sprites/maps/tilesets/symbol_3.png" id="10_dq3cv"]
+[ext_resource type="Texture2D" uid="uid://cvvbgkxd8tcg4" path="res://game/chapter_3/node_8/additional_assets/symbol-1-green.png" id="8_dq3cv"]
+[ext_resource type="Texture2D" uid="uid://7i6v7557ewbp" path="res://game/chapter_3/node_8/additional_assets/symbol-1.png" id="9_dq3cv"]
+[ext_resource type="Texture2D" uid="uid://bhis4m2fr2e2t" path="res://game/chapter_3/node_8/additional_assets/symbol-2-green.png.png" id="10_kl618"]
+[ext_resource type="Texture2D" uid="uid://d16w7pi12gfdk" path="res://game/chapter_3/node_8/additional_assets/symbol-2.png" id="11_kl618"]
 [ext_resource type="Texture2D" uid="uid://cb6wxnyjhtoje" path="res://assets/sprites/Portal/PORTALBLUEone.png" id="12_8a21p"]
+[ext_resource type="Texture2D" uid="uid://cu2jafdnfp0" path="res://game/chapter_3/node_8/additional_assets/symbol-3-green.png.png" id="12_hvu3v"]
+[ext_resource type="Texture2D" uid="uid://d2a7kjcwp5k08" path="res://game/chapter_3/node_8/additional_assets/symbol-3.png" id="13_hvu3v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cover"]
 size = Vector2(136.25, 131.75)
@@ -31,20 +34,19 @@ tile_map_data = PackedByteArray("AAAAAAAAAwABAA0AAAAAAAEAAwABAA4AAAAAAAIAAwABAA8
 tile_set = ExtResource("2_tileset")
 
 [node name="HintStone" type="Node2D" parent="." unique_id=482010003]
-position = Vector2(522, 279)
+position = Vector2(504, 299)
 
 [node name="Sprite2D" type="Sprite2D" parent="HintStone" unique_id=1943514416]
 position = Vector2(1.9999084, 0)
-scale = Vector2(1.8575951, 1.9722223)
-texture = ExtResource("3_25jok")
+scale = Vector2(1.7, 1.804)
+texture = ExtResource("3_dq3cv")
 
 [node name="Puzzle2Manager" type="Node2D" parent="." unique_id=482010004]
 script = ExtResource("3_p2manager")
 correct_sequence = Array[int]([2, 1, 3])
-exit_warp = NodePath("../ExitWarp")
 
 [node name="Symbol1" type="Node2D" parent="Puzzle2Manager" unique_id=482010005]
-position = Vector2(263, 538)
+position = Vector2(214, 820)
 
 [node name="Cover1" type="Area2D" parent="Puzzle2Manager/Symbol1" unique_id=482010006 groups=["sand_cover"]]
 script = ExtResource("4_sandcover")
@@ -61,16 +63,18 @@ texture = ExtResource("6_8a21p")
 
 [node name="FloorSymbol1" type="Area2D" parent="Puzzle2Manager/Symbol1" unique_id=482010009 groups=["floor_symbol"]]
 script = ExtResource("5_floorsymbol")
+activated_texture = ExtResource("8_dq3cv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle2Manager/Symbol1/FloorSymbol1" unique_id=482010010]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_symbol")
 
 [node name="Sprite2D" type="Sprite2D" parent="Puzzle2Manager/Symbol1/FloorSymbol1" unique_id=482010011]
-texture = ExtResource("8_ukllt")
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("9_dq3cv")
 
 [node name="Symbol2" type="Node2D" parent="Puzzle2Manager" unique_id=482010012]
-position = Vector2(488, 693)
+position = Vector2(519, 815)
 
 [node name="Cover2" type="Area2D" parent="Puzzle2Manager/Symbol2" unique_id=482010013 groups=["sand_cover"]]
 script = ExtResource("4_sandcover")
@@ -87,15 +91,17 @@ texture = ExtResource("6_8a21p")
 [node name="FloorSymbol2" type="Area2D" parent="Puzzle2Manager/Symbol2" unique_id=482010016 groups=["floor_symbol"]]
 script = ExtResource("5_floorsymbol")
 symbol_id = 2
+activated_texture = ExtResource("10_kl618")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle2Manager/Symbol2/FloorSymbol2" unique_id=482010017]
 shape = SubResource("RectangleShape2D_symbol")
 
 [node name="Sprite2D" type="Sprite2D" parent="Puzzle2Manager/Symbol2/FloorSymbol2" unique_id=482010018]
-texture = ExtResource("9_8rtgk")
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("11_kl618")
 
 [node name="Symbol3" type="Node2D" parent="Puzzle2Manager" unique_id=482010019]
-position = Vector2(723, 887)
+position = Vector2(823, 819)
 
 [node name="Cover3" type="Area2D" parent="Puzzle2Manager/Symbol3" unique_id=482010020 groups=["sand_cover"]]
 script = ExtResource("4_sandcover")
@@ -112,12 +118,14 @@ texture = ExtResource("6_8a21p")
 [node name="FloorSymbol3" type="Area2D" parent="Puzzle2Manager/Symbol3" unique_id=482010023 groups=["floor_symbol"]]
 script = ExtResource("5_floorsymbol")
 symbol_id = 3
+activated_texture = ExtResource("12_hvu3v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle2Manager/Symbol3/FloorSymbol3" unique_id=482010024]
 shape = SubResource("RectangleShape2D_symbol")
 
 [node name="Sprite2D" type="Sprite2D" parent="Puzzle2Manager/Symbol3/FloorSymbol3" unique_id=482010025]
-texture = ExtResource("10_dq3cv")
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("13_hvu3v")
 
 [node name="ExitWarp" type="Area2D" parent="." unique_id=482010026]
 visible = false

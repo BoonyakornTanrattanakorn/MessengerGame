@@ -65,16 +65,18 @@ func _on_symbol_stepped_on(symbol_id: int) -> void:
 		_reset_puzzle()
 		return
 
+	for sym in _symbols:
+		if sym.symbol_id == symbol_id and sym.has_method("set_activated_visual"):
+			sym.set_activated_visual()
+
 	if _player_sequence.size() == correct_sequence.size():
 		_on_puzzle_solved()
 
 func _reset_puzzle() -> void:
 	_player_sequence.clear()
-	for cover in _sand_covers:
-		if cover.has_method("reset_sand"):
-			cover.reset_sand()
-	_set_symbols_active(false)
-	set_process(true)
+	for sym in _symbols:
+		if sym.has_method("reset_visual"):
+			sym.reset_visual()
 
 func _on_puzzle_solved() -> void:
 	_is_solved = true
