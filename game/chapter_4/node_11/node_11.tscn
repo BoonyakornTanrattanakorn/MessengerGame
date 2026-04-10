@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://boou4wqx28utq" path="res://assets/sprites/maps/tilesets/World_A2.png" id="8_su4ry"]
 [ext_resource type="Texture2D" uid="uid://cjbqkhn02fl04" path="res://assets/sprites/maps/tilesets/World_C.png" id="9_8oaov"]
 [ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="10_81k3t"]
-[ext_resource type="Script" path="res://game/chapter_4/node_11/node_11_event_handler.gd" id="11_node11"]
+[ext_resource type="Script" uid="uid://k2xift2imvpg" path="res://game/chapter_4/node_11/node_11_event_handler.gd" id="11_node11"]
 [ext_resource type="PackedScene" uid="uid://wgyiit14wfsd" path="res://game/chapter_4/node_11/NPC/cat.tscn" id="13_a8n8n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sdhpo"]
@@ -20441,15 +20441,6 @@ tile_set = SubResource("TileSet_1f635")
 tile_map_data = PackedByteArray("AAD4/yIABQAMACoAAAD4/yMABQAMACsAAAD4/yQABQAMACwAAAD4/yUABQAMAC0AAAD4/yYABQAMAC4AAAD4/ycABQAMAC8AAAD5/yIABQANACoAAAD5/yMABQANACsAAAD5/yQABQANACwAAAD5/yUABQANAC0AAAD5/yYABQANAC4AAAD5/ycABQANAC8AAAD6/yIABQAOACoAAAD6/yMABQAOACsAAAD6/yQABQAOACwAAAD6/yUABQAOAC0AAAD6/yYABQAOAC4AAAD6/ycABQAOAC8AAAA=")
 tile_set = SubResource("TileSet_io7cs")
 
-[node name="warp_to_tower" type="Area2D" parent="Map/Warp" unique_id=527442863]
-script = ExtResource("10_81k3t")
-metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Warp/warp_to_tower" unique_id=967697032]
-position = Vector2(-104, 625)
-shape = SubResource("RectangleShape2D_f7ial")
-disabled = true
-
 [node name="StaticBody2D" type="StaticBody2D" parent="Map" unique_id=2038560893]
 
 [node name="Castle" type="Sprite2D" parent="Map/StaticBody2D" unique_id=1682452461]
@@ -20473,3 +20464,14 @@ position = Vector2(630, 154)
 
 [node name="Villager3" parent="NPC" unique_id=684424197 instance=ExtResource("13_a8n8n")]
 position = Vector2(-172, 642)
+
+[node name="Warp" type="Node2D" parent="." unique_id=258521233]
+
+[node name="warp_to_tower" type="Area2D" parent="Warp" unique_id=527442863]
+script = ExtResource("10_81k3t")
+metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_tower" unique_id=967697032]
+position = Vector2(-104, 625)
+shape = SubResource("RectangleShape2D_f7ial")
+disabled = true
