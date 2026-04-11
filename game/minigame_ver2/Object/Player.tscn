@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dw3wogc68gtmu"]
+
+[ext_resource type="Script" uid="uid://cgm4utq0f3lsx" path="res://game/minigame_ver2/Object/player.gd" id="1_16doh"]
+[ext_resource type="Texture2D" uid="uid://dn3bpkobeat7o" path="res://game/minigame_ver2/Sprite/Camel.png" id="2_b8twr"]
+[ext_resource type="Texture2D" uid="uid://b0n8wn44uerl6" path="res://game/minigame_ver2/Sprite/Camel_Jump.png" id="2_jigf3"]
+[ext_resource type="Texture2D" uid="uid://duxxlrudmd5sx" path="res://game/minigame_ver2/Sprite/Camel_Jump1.png" id="3_avts8"]
+[ext_resource type="Texture2D" uid="uid://cc3nqj72e1p6u" path="res://game/minigame_ver2/Sprite/Camel_Hurt.png" id="3_nfro5"]
+[ext_resource type="Texture2D" uid="uid://7e1iuo51640" path="res://game/minigame_ver2/Sprite/Camel_Walk.png" id="6_yh1tn"]
+[ext_resource type="Texture2D" uid="uid://dte3ortlr7qb8" path="res://game/minigame_ver2/Sprite/camel_slide2.png" id="7_nfro5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5c21v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jigf3")
+}],
+"loop": true,
+"name": &"double_jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nfro5")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_avts8")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b8twr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yh1tn")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_nfro5")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_axgyq"]
+radius = 9.0
+height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bant7"]
+radius = 8.0
+height = 16.0
+
+[node name="Player" type="CharacterBody2D" unique_id=356047695]
+script = ExtResource("1_16doh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1544685760]
+position = Vector2(0, -2.124999)
+scale = Vector2(0.126, 0.11100001)
+sprite_frames = SubResource("SpriteFrames_5c21v")
+animation = &"slide"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1074374733]
+shape = SubResource("CapsuleShape2D_axgyq")
+debug_color = Color(0.343614, 0.61538637, 0.2454026, 0.41960785)
+
+[node name="SlideShape" type="CollisionShape2D" parent="." unique_id=428628132]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_bant7")
+debug_color = Color(0.69227946, 0.4645599, 0.48563755, 0.41960785)

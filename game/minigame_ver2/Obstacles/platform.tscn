@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bw37rbp02m6p0"]
+
+[ext_resource type="Texture2D" uid="uid://hrdn0fevsswf" path="res://game/minigame_ver2/Sprite/sand_platform.png" id="1_y5a7p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8k2jk"]
+size = Vector2(92, 14)
+
+[node name="platform" type="StaticBody2D" unique_id=361015372]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1259959855]
+position = Vector2(0, -7)
+scale = Vector2(0.368, 0.368)
+texture = ExtResource("1_y5a7p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=205063171]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_8k2jk")
+one_way_collision = true
+one_way_collision_margin = 4.0

@@ -192,6 +192,7 @@ theme = ExtResource("8_mycat")
 text = "►"
 
 [node name="TopLeftGUI" type="HBoxContainer" parent="." unique_id=2124990455]
+unique_name_in_owner = true
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 380.0

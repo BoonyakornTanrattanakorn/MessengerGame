@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dvb7ga31jajbp"]
+
+[ext_resource type="Script" uid="uid://duov7e48w241i" path="res://game/minigame/obstacles/cactus_large.gd" id="1_6j2t0"]
+[ext_resource type="Texture2D" uid="uid://sgx8wio8iakm" path="res://game/minigame_ver2/Sprite/Stalactite.png" id="2_mvylt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8008j"]
+size = Vector2(24, 56)
+
+[node name="CactusLarge" type="StaticBody2D" unique_id=1799581070]
+script = ExtResource("1_6j2t0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1078471243]
+shape = SubResource("RectangleShape2D_8008j")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2010457050]
+position = Vector2(-2.842171e-14, -2)
+rotation = 3.1415927
+scale = Vector2(0.16543531, 0.24583529)
+texture = ExtResource("2_mvylt")
