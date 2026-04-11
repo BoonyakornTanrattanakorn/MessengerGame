@@ -11,6 +11,17 @@ class_name Chapter4MageBase
 @export var vulnerability_duration: float = 1.2
 @export var attack_range: float = 1000.0
 
+@export_group("Difficulty Tuning")
+@export var timing_multiplier: float = 1.0
+@export var cooldown_multiplier: float = 1.0
+@export var projectile_speed_multiplier: float = 1.0
+@export var attack_range_multiplier: float = 1.0
+@export var incoming_damage_multiplier: float = 1.0
+@export var reflected_damage_taken_multiplier: float = 1.0
+@export var projectile_windup_time: float = 0.28
+@export var reflected_speed_multiplier: float = 1.25
+@export var turn_pass_delay: float = 0.35
+
 var _hp: int = 0
 var _attack_cooldown: float = 0.0
 var _vulnerability_timer: float = 0.0
@@ -74,7 +85,7 @@ func _physics_process(delta: float) -> void:
 		if _player_ref == null:
 			return
 
-	if global_position.distance_to(_player_ref.global_position) > attack_range:
+	if global_position.distance_to(_player_ref.global_position) > attack_range * attack_range_multiplier:
 		return
 
 	_is_casting = true
@@ -82,19 +93,22 @@ func _physics_process(delta: float) -> void:
 
 func perform_attack_pattern() -> void:
 	# Implement in child scripts.
-	finish_casting(attack_interval)
+	finish_casting_scaled(attack_interval)
 
 func begin_vulnerability_window(duration_override: float = -1.0) -> void:
 	var duration := vulnerability_duration if duration_override < 0.0 else duration_override
-	_vulnerability_timer = max(_vulnerability_timer, duration)
+	_vulnerability_timer = max(_vulnerability_timer, scaled_time(duration))
 	modulate = Color(1.0, 0.8, 0.8)
 
 func finish_casting(next_cooldown: float = attack_interval) -> void:
-	_attack_cooldown = max(0.1, next_cooldown)
+	_attack_cooldown = max(0.1, scaled_cooldown(next_cooldown))
 	_is_casting = false
-	_pass_turn(0.35)
+	_pass_turn(turn_pass_delay)
 	if _vulnerability_timer <= 0.0:
 		modulate = Color(1, 1, 1)
+
+func finish_casting_scaled(next_cooldown: float = attack_interval) -> void:
+	finish_casting(next_cooldown)
 
 func _process(_delta: float) -> void:
 	if not _is_vulnerable() and modulate != Color(1, 1, 1):
@@ -112,7 +126,7 @@ func receive_reflected_hit(amount: int = 1, source_element: String = "wind") -> 
 		return
 	if required_reflect_element != "" and source_element != required_reflect_element:
 		return
-	_hp -= max(1, amount)
+	_hp -= _scale_int(amount, reflected_damage_taken_multiplier)
 	_update_health_bar_visual()
 	if _hp <= 0:
 		die()
@@ -130,16 +144,16 @@ func spawn_projectile(direction: Vector2, speed_scale: float = 1.0, life_time: f
 	var projectile := Area2D.new()
 	projectile.top_level = true
 	projectile.global_position = global_position
-	projectile.set("damage", attack_damage)
+	projectile.set("damage", _scale_int(attack_damage, incoming_damage_multiplier))
 	projectile.add_to_group("enemy_projectile")
 	projectile.collision_layer = 1
 	projectile.collision_mask = 9
-	projectile.set_meta("velocity", direction.normalized() * projectile_speed * speed_scale)
+	projectile.set_meta("velocity", direction.normalized() * projectile_speed * projectile_speed_multiplier * speed_scale)
 	projectile.set_meta("is_reflected", false)
 	projectile.set_meta("owner_mage", self)
 	projectile.set_meta("hit_radius", radius)
 	projectile.set_meta("source_element", mage_element)
-	projectile.set_meta("windup_time", 0.28)
+	projectile.set_meta("windup_time", scaled_time(projectile_windup_time))
 
 	var collision := CollisionShape2D.new()
 	var shape := CircleShape2D.new()
@@ -179,7 +193,7 @@ func spawn_projectile(direction: Vector2, speed_scale: float = 1.0, life_time: f
 			_reflect_projectile(projectile, poly, deflect_element, speed_scale)
 	)
 
-	_drive_projectile(projectile, life_time)
+	_drive_projectile(projectile, scaled_time(life_time))
 
 func spawn_delayed_burst(position: Vector2, delay: float, ring_count: int, speed_scale: float, tint: Color) -> void:
 	var marker := Node2D.new()
@@ -244,7 +258,7 @@ func summon_falling_strike(target_position: Vector2, delay: float = 0.7, radius:
 	var hitbox := Area2D.new()
 	hitbox.top_level = true
 	hitbox.global_position = target_position
-	hitbox.set("damage", attack_damage)
+	hitbox.set("damage", _scale_int(attack_damage, incoming_damage_multiplier))
 	hitbox.add_to_group("enemy_projectile")
 	hitbox.set_meta("source_element", mage_element)
 
@@ -400,7 +414,7 @@ func _reflect_projectile(projectile: Area2D, poly: Polygon2D, element: String, s
 	var owner = projectile.get_meta("owner_mage")
 	var new_velocity := -Vector2(projectile.get_meta("velocity")) * 1.2
 	if owner != null and is_instance_valid(owner):
-		new_velocity = (owner.global_position - projectile.global_position).normalized() * projectile_speed * speed_scale * 1.25
+		new_velocity = (owner.global_position - projectile.global_position).normalized() * projectile_speed * projectile_speed_multiplier * speed_scale * reflected_speed_multiplier
 	projectile.set_meta("velocity", new_velocity)
 	projectile.remove_from_group("enemy_projectile")
 
@@ -515,3 +529,15 @@ func _update_health_bar_visual() -> void:
 		Vector2(right, bar_h * 0.5),
 		Vector2(left, bar_h * 0.5)
 	])
+
+func scaled_time(seconds: float) -> float:
+	return max(0.01, seconds * timing_multiplier)
+
+func scaled_cooldown(seconds: float) -> float:
+	return max(0.05, seconds * cooldown_multiplier)
+
+func wait_scaled(seconds: float) -> void:
+	await get_tree().create_timer(scaled_time(seconds)).timeout
+
+func _scale_int(value: int, factor: float) -> int:
+	return max(1, int(round(float(max(1, value)) * factor)))

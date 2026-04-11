@@ -46,6 +46,7 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
+var _wind_dash_shift_was_down: bool = false
 
 var interact_with = null
 var current_dialog = 0
@@ -145,6 +146,10 @@ func _input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _physics_process(delta):
+	var wind_dash_shift_down := Input.is_key_pressed(KEY_SHIFT)
+	var wind_dash_just_pressed := wind_dash_shift_down and not _wind_dash_shift_was_down
+	_wind_dash_shift_was_down = wind_dash_shift_down
+
 	if _is_input_locked():
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -227,7 +232,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
-		if Input.is_action_just_pressed("lesser_magic"):
+		if wind_dash_just_pressed:
 			movement_component.request_dash(self, last_direction)
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_wind_wave()

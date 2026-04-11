@@ -3,6 +3,19 @@ extends Chapter4MageBase
 const TELEGRAPH_COLOR := Color(0.8, 0.6, 0.35, 0.35)
 const IMPACT_COLOR := Color(0.55, 0.35, 0.2, 1.0)
 
+@export_group("Earth Pattern Tuning")
+@export var ritual_windup: float = 1.25
+@export var vulnerability_recovery: float = 1.1
+@export var stage_delay: float = 0.22
+@export var end_lag: float = 0.25
+@export var next_attack_cooldown: float = 2.35
+@export var telegraph_radius: float = 16.0
+@export var impact_radius: float = 16.0
+@export var finisher_speed_scale: float = 0.9
+@export var finisher_life_time: float = 1.9
+@export var finisher_radius: float = 9.0
+@export var finisher_spread: float = 0.1
+
 func _ready() -> void:
 	mage_element = "earth"
 	weakness_element = "fire"
@@ -17,34 +30,33 @@ func perform_attack_pattern() -> void:
 	var center := predict_player_position(0.4)
 	var pattern_id := randi() % 4
 	var positions := _build_pattern_positions(pattern_id, center)
-	var windup := 1.25
 	positions.shuffle()
 
 	# Attack window starts during charge-up and lasts through recovery.
-	begin_vulnerability_window(windup + 1.1)
+	begin_vulnerability_window(ritual_windup + vulnerability_recovery)
 
-	var telegraphs := _spawn_telegraphs(positions, 16.0)
-	await get_tree().create_timer(windup).timeout
+	var telegraphs := _spawn_telegraphs(positions, telegraph_radius)
+	await wait_scaled(ritual_windup)
 
 	# Two-stage impact rewards quick dash repositioning.
 	for i in range(positions.size()):
 		if i % 2 == 0:
-			_spawn_impact(positions[i], 16.0)
-	await get_tree().create_timer(0.22).timeout
+			_spawn_impact(positions[i], impact_radius)
+	await wait_scaled(stage_delay)
 	for i in range(positions.size()):
 		if i % 2 == 1:
-			_spawn_impact(positions[i], 16.0)
+			_spawn_impact(positions[i], impact_radius)
 
 	for marker in telegraphs:
 		if is_instance_valid(marker):
 			marker.queue_free()
 
 	# Closing aimed shot catches greedy punish attempts.
-	var dir := get_direction_to_player().rotated(randf_range(-0.1, 0.1))
-	spawn_projectile(dir, 0.9, 1.9, 9.0, Color(0.62, 0.42, 0.24, 1.0))
+	var dir := get_direction_to_player().rotated(randf_range(-finisher_spread, finisher_spread))
+	spawn_projectile(dir, finisher_speed_scale, finisher_life_time, finisher_radius, Color(0.62, 0.42, 0.24, 1.0))
 
-	await get_tree().create_timer(0.25).timeout
-	finish_casting(2.35)
+	await wait_scaled(end_lag)
+	finish_casting_scaled(next_attack_cooldown)
 
 func _build_pattern_positions(pattern_id: int, center: Vector2) -> Array[Vector2]:
 	match pattern_id:

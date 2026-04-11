@@ -2,6 +2,14 @@ extends Chapter4MageBase
 
 const FIRE_COLOR := Color(1.0, 0.35, 0.15, 1.0)
 
+@export_group("Fire Pattern Tuning")
+@export var pattern_windup: float = 1.2
+@export var vulnerability_recovery: float = 1.35
+@export var end_lag: float = 0.2
+@export var next_attack_cooldown: float = 2.3
+@export var checker_gap: float = 0.2
+@export var finisher_spread: float = 0.2
+
 func _ready() -> void:
 	mage_element = "fire"
 	weakness_element = "water"
@@ -12,24 +20,23 @@ func _ready() -> void:
 	super._ready()
 
 func perform_attack_pattern() -> void:
-	var windup := 1.2
-	begin_vulnerability_window(windup + 1.35)
+	begin_vulnerability_window(pattern_windup + vulnerability_recovery)
 
 	match randi() % 3:
 		0:
-			await _pattern_meteor_stripes(windup)
+			await _pattern_meteor_stripes(pattern_windup)
 		1:
-			await _pattern_ring_collapse(windup)
+			await _pattern_ring_collapse(pattern_windup)
 		_:
-			await _pattern_checker_blast(windup)
+			await _pattern_checker_blast(pattern_windup)
 
 	# Finisher: tight aimed fan for pressure.
 	var base_dir := get_direction_to_player()
-	for offset in [-0.2, 0.0, 0.2]:
+	for offset in [-finisher_spread, 0.0, finisher_spread]:
 		spawn_projectile(base_dir.rotated(offset), 1.05, 1.4, 8.0, FIRE_COLOR)
 
-	await get_tree().create_timer(0.2).timeout
-	finish_casting(2.3)
+	await wait_scaled(end_lag)
+	finish_casting_scaled(next_attack_cooldown)
 
 func _pattern_checker_blast(windup: float) -> void:
 	# Checkerboard impact: first one color, then inverse cells.
@@ -43,13 +50,13 @@ func _pattern_checker_blast(windup: float) -> void:
 	for p in cells:
 		telegraphs.append(_spawn_fire_marker(p, 9.0))
 
-	await get_tree().create_timer(windup).timeout
+	await wait_scaled(windup)
 	for y in range(-2, 3):
 		for x in range(-2, 3):
 			if (x + y) % 2 != 0:
 				continue
 			await summon_falling_strike(center + Vector2(x * 28.0, y * 28.0), 0.1, 8.5, FIRE_COLOR, 95.0)
-	await get_tree().create_timer(0.2).timeout
+	await wait_scaled(checker_gap)
 	for y in range(-2, 3):
 		for x in range(-2, 3):
 			if (x + y) % 2 == 0:
@@ -71,7 +78,7 @@ func _pattern_meteor_stripes(windup: float) -> void:
 	for p in points:
 		telegraphs.append(_spawn_fire_marker(p, 12.0))
 
-	await get_tree().create_timer(windup).timeout
+	await wait_scaled(windup)
 	for i in range(points.size()):
 		if i % 2 == 0:
 			await summon_falling_strike(points[i], 0.18, 11.0, FIRE_COLOR, 110.0)
@@ -92,7 +99,7 @@ func _pattern_ring_collapse(windup: float) -> void:
 		var angle2 := TAU * float(i) / 6.0
 		telegraphs.append(_spawn_fire_marker(center + Vector2.RIGHT.rotated(angle2) * 36.0, 10.0))
 
-	await get_tree().create_timer(windup).timeout
+	await wait_scaled(windup)
 	for i in range(8):
 		var angle := TAU * float(i) / 8.0
 		await summon_falling_strike(center + Vector2.RIGHT.rotated(angle) * 70.0, 0.14, 10.0, FIRE_COLOR, 105.0)

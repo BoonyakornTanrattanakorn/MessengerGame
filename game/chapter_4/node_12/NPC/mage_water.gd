@@ -3,6 +3,16 @@ extends Chapter4MageBase
 const TELEGRAPH_COLOR := Color(0.35, 0.75, 1.0, 0.28)
 const WAVE_COLOR := Color(0.3, 0.65, 1.0, 1.0)
 
+@export_group("Water Pattern Tuning")
+@export var pattern_windup: float = 1.1
+@export var vulnerability_recovery: float = 1.3
+@export var end_lag: float = 0.18
+@export var next_attack_cooldown: float = 2.25
+@export var orbit_radius: float = 72.0
+@export var orbit_wave_gap: float = 0.18
+@export var wall_lane_gap: float = 0.16
+@export var lance_spread: float = 0.08
+
 func _ready() -> void:
 	mage_element = "water"
 	weakness_element = "wind"
@@ -13,19 +23,18 @@ func _ready() -> void:
 	super._ready()
 
 func perform_attack_pattern() -> void:
-	var windup := 1.1
-	begin_vulnerability_window(windup + 1.3)
+	begin_vulnerability_window(pattern_windup + vulnerability_recovery)
 
 	match randi() % 3:
 		0:
-			await _pattern_tide_wall(windup)
+			await _pattern_tide_wall(pattern_windup)
 		1:
-			await _pattern_rain_grid(windup)
+			await _pattern_rain_grid(pattern_windup)
 		_:
-			await _pattern_orbit_lances(windup)
+			await _pattern_orbit_lances(pattern_windup)
 
-	await get_tree().create_timer(0.18).timeout
-	finish_casting(2.25)
+	await wait_scaled(end_lag)
+	finish_casting_scaled(next_attack_cooldown)
 
 func _pattern_orbit_lances(windup: float) -> void:
 	# Orbiting rain with one rotating safe lane.
@@ -36,17 +45,17 @@ func _pattern_orbit_lances(windup: float) -> void:
 		if i == base_safe:
 			continue
 		var a := TAU * float(i) / 10.0
-		markers.append(_spawn_marker(center + Vector2.RIGHT.rotated(a) * 72.0, 8.0))
+		markers.append(_spawn_marker(center + Vector2.RIGHT.rotated(a) * orbit_radius, 8.0))
 
-	await get_tree().create_timer(windup).timeout
+	await wait_scaled(windup)
 	for wave in range(2):
 		var safe_idx := (base_safe + wave * 2) % 10
 		for i in range(10):
 			if i == safe_idx:
 				continue
 			var a := TAU * float(i) / 10.0
-			await summon_falling_strike(center + Vector2.RIGHT.rotated(a) * 72.0, 0.08, 8.0, WAVE_COLOR, 90.0)
-		await get_tree().create_timer(0.18).timeout
+			await summon_falling_strike(center + Vector2.RIGHT.rotated(a) * orbit_radius, 0.08, 8.0, WAVE_COLOR, 90.0)
+		await wait_scaled(orbit_wave_gap)
 
 	_cleanup_markers(markers)
 
@@ -73,12 +82,12 @@ func _pattern_tide_wall(windup: float) -> void:
 		lower.append(center + Vector2(x, 38.0))
 
 	var markers := _spawn_markers(upper + lower, 11.0)
-	await get_tree().create_timer(windup).timeout
+	await wait_scaled(windup)
 
 	for pos in upper:
 		var dir := (pos - global_position).normalized()
 		spawn_projectile(dir, 1.0, 1.8, 8.0, WAVE_COLOR)
-	await get_tree().create_timer(0.16).timeout
+	await wait_scaled(wall_lane_gap)
 	for pos in lower:
 		var dir2 := (pos - global_position).normalized()
 		spawn_projectile(dir2, 1.0, 1.8, 8.0, WAVE_COLOR)
@@ -94,13 +103,13 @@ func _pattern_rain_grid(windup: float) -> void:
 			points.append(center + Vector2(x * 34.0, y * 34.0))
 
 	var markers := _spawn_markers(points, 10.0)
-	await get_tree().create_timer(windup).timeout
+	await wait_scaled(windup)
 
 	for p in points:
 		await summon_falling_strike(p, 0.12, 9.5, Color(0.35, 0.75, 1.0, 1.0), 95.0)
 
 	# Targeted lance after player reacts to the grid.
-	var dir := get_direction_to_player().rotated(randf_range(-0.08, 0.08))
+	var dir := get_direction_to_player().rotated(randf_range(-lance_spread, lance_spread))
 	spawn_projectile(dir, 1.15, 1.6, 8.0, WAVE_COLOR)
 
 	_cleanup_markers(markers)
