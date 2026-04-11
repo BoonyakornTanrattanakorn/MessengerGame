@@ -51,6 +51,7 @@ size = Vector2(32, 32)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=614958511]
 sprite_frames = SubResource("SpriteFrames_lc2q3")
 animation = &"move_a_bit"
+autoplay = "move_a_bit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041560675]
 shape = SubResource("RectangleShape2D_rwv7s")

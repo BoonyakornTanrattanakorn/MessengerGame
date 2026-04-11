@@ -51,6 +51,7 @@ size = Vector2(32, 32)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1344047570]
 sprite_frames = SubResource("SpriteFrames_qp5b3")
 animation = &"idle"
+autoplay = "idle"
 frame_progress = 0.89576215
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404574336]

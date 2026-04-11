@@ -44,6 +44,7 @@ size = Vector2(32, 32)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=467022871]
 sprite_frames = SubResource("SpriteFrames_8vjio")
 animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=395892870]
 shape = SubResource("RectangleShape2D_wsraa")
