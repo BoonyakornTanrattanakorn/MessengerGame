@@ -17,7 +17,6 @@ const BOLT_COLOR := Color(0.65, 0.9, 1.0, 1.0)
 
 func _ready() -> void:
 	mage_element = "wind"
-	weakness_element = "earth"
 	required_reflect_element = "wind"
 	attack_interval = 2.5
 	vulnerability_duration = 1.7

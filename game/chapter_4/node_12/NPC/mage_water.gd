@@ -15,7 +15,6 @@ const WAVE_COLOR := Color(0.3, 0.65, 1.0, 1.0)
 
 func _ready() -> void:
 	mage_element = "water"
-	weakness_element = "wind"
 	required_reflect_element = "water"
 	attack_interval = 2.7
 	vulnerability_duration = 1.75

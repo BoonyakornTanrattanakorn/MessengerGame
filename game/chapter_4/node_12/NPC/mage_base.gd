@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name Chapter4MageBase
 
 @export var mage_element: String = "earth"
-@export var weakness_element: String = "fire"
 @export var required_reflect_element: String = "wind"
 @export var max_hp: int = 3
 @export var attack_damage: int = 1
@@ -12,9 +11,9 @@ class_name Chapter4MageBase
 @export var attack_range: float = 1000.0
 
 @export_group("Difficulty Tuning")
-@export var timing_multiplier: float = 1.0
-@export var cooldown_multiplier: float = 1.0
-@export var projectile_speed_multiplier: float = 1.0
+@export var timing_multiplier: float = 2.0
+@export var cooldown_multiplier: float = 2.0
+@export var projectile_speed_multiplier: float = 0.5
 @export var attack_range_multiplier: float = 1.0
 @export var incoming_damage_multiplier: float = 1.0
 @export var reflected_damage_taken_multiplier: float = 1.0
@@ -404,10 +403,9 @@ func _get_deflect_element_from_body(body: Node2D, projectile: Area2D) -> String:
 func _reflect_projectile(projectile: Area2D, poly: Polygon2D, element: String, speed_scale: float) -> void:
 	if bool(projectile.get_meta("is_reflected")):
 		return
-	if element == "earth":
-		var source_element := str(projectile.get_meta("source_element"))
-		if source_element != "earth":
-			return
+	var source_element := str(projectile.get_meta("source_element"))
+	if source_element != "" and element != source_element:
+		return
 	projectile.set_meta("is_reflected", true)
 	projectile.set_meta("reflected_element", element)
 	projectile.set_meta("windup_time", 0.0)

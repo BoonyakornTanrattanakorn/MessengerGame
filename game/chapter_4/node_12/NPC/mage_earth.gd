@@ -18,7 +18,6 @@ const IMPACT_COLOR := Color(0.55, 0.35, 0.2, 1.0)
 
 func _ready() -> void:
 	mage_element = "earth"
-	weakness_element = "fire"
 	required_reflect_element = "earth"
 	attack_interval = 2.8
 	vulnerability_duration = 1.9

@@ -12,7 +12,6 @@ const FIRE_COLOR := Color(1.0, 0.35, 0.15, 1.0)
 
 func _ready() -> void:
 	mage_element = "fire"
-	weakness_element = "water"
 	required_reflect_element = "fire"
 	attack_interval = 2.8
 	vulnerability_duration = 1.8

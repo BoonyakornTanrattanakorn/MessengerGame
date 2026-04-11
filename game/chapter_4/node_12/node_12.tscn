@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/NPC/mage.tscn" id="5_1x7oo"]
 [ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
 [ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
-[ext_resource type="Script" uid="uid://dgn0iitlicuk2" path="res://game/chapter_4/node_12/npc/mage_earth.gd" id="7_o0j4o"]
-[ext_resource type="Script" uid="uid://fw8yerxao6e" path="res://game/chapter_4/node_12/npc/mage_wind.gd" id="8_gbb5j"]
-[ext_resource type="Script" uid="uid://dphboj3wmoywp" path="res://game/chapter_4/node_12/npc/mage_fire.gd" id="9_n8nsa"]
-[ext_resource type="Script" uid="uid://b1aeadpyoisg6" path="res://game/chapter_4/node_12/npc/mage_water.gd" id="10_gju0t"]
+[ext_resource type="Script" uid="uid://dgn0iitlicuk2" path="res://game/chapter_4/node_12/NPC/mage_earth.gd" id="7_o0j4o"]
+[ext_resource type="Script" uid="uid://fw8yerxao6e" path="res://game/chapter_4/node_12/NPC/mage_wind.gd" id="8_gbb5j"]
+[ext_resource type="Script" uid="uid://dphboj3wmoywp" path="res://game/chapter_4/node_12/NPC/mage_fire.gd" id="9_n8nsa"]
+[ext_resource type="Script" uid="uid://b1aeadpyoisg6" path="res://game/chapter_4/node_12/NPC/mage_water.gd" id="10_gju0t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
 font = ExtResource("6_jvdkp")
@@ -69,19 +69,19 @@ position = Vector2(44, 66)
 [node name="Soldier4" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
 position = Vector2(-0.9999962, 67)
 
-[node name="Mage" parent="NPC" unique_id=716504541 instance=ExtResource("5_1x7oo")]
+[node name="EarthMage" parent="NPC" unique_id=716504541 instance=ExtResource("5_1x7oo")]
 position = Vector2(-223, 311)
 script = ExtResource("7_o0j4o")
 
-[node name="Mage2" parent="NPC" unique_id=1171257504 instance=ExtResource("5_1x7oo")]
+[node name="WindMage" parent="NPC" unique_id=1171257504 instance=ExtResource("5_1x7oo")]
 position = Vector2(1, 501.00003)
 script = ExtResource("8_gbb5j")
 
-[node name="Mage3" parent="NPC" unique_id=1662164182 instance=ExtResource("5_1x7oo")]
+[node name="FireMage" parent="NPC" unique_id=1662164182 instance=ExtResource("5_1x7oo")]
 position = Vector2(223, 314)
 script = ExtResource("9_n8nsa")
 
-[node name="Mage4" parent="NPC" unique_id=1665975675 instance=ExtResource("5_1x7oo")]
+[node name="WaterMage" parent="NPC" unique_id=1665975675 instance=ExtResource("5_1x7oo")]
 position = Vector2(-2, 123)
 script = ExtResource("10_gju0t")
 
