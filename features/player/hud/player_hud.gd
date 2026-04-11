@@ -32,6 +32,11 @@ const WORLD_MAP_SCENE = preload("res://features/worldmap/world_map_overlay.tscn"
 @export var torn_paper_2: Texture2D
 @export var torn_paper_3: Texture2D
 @export var torn_paper_4: Texture2D
+@export var statue_king: Texture2D
+@export var statue_princess: Texture2D
+@export var statue_knight: Texture2D
+@export var statue_villager: Texture2D
+@export var statue_scarab: Texture2D
 
 #cool gauge
 @onready var cool_gauge_ui = $TopLeftGUI/VBoxContainer/CoolGauge
@@ -306,6 +311,12 @@ func _use_selected_item() -> bool:
 		return true
 
 	return false
+	
+	if selected_item_name.begins_with("statue_"):
+		#to be added
+		return true
+
+	return false
 
 func refresh_items():
 	var player = get_tree().root.find_child("Player", true, false)
@@ -340,6 +351,11 @@ func get_icon(item_name: String) -> Texture2D:
 		"paper_2": return torn_paper_2
 		"paper_3": return torn_paper_3
 		"paper_4": return torn_paper_4
+		"statue_king": return statue_king
+		"statue_princess": return statue_princess
+		"statue_knight": return statue_knight
+		"statue_villager": return statue_villager
+		"statue_scarab": return statue_scarab
 	return null
 
 # =========================
