@@ -9,6 +9,7 @@ var source_element: String = "wind"
 func _ready():
 	# สั่งให้ลบตัวเองทิ้งเมื่อครบเวลา
 	add_to_group("wind_wave")
+	add_to_group("wind_reflector")
 	await get_tree().create_timer(lifetime).timeout
 	queue_free()
 

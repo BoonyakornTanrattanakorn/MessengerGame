@@ -9,6 +9,9 @@ var travel_distance = 200.0
 var traveled = 0.0
 var has_exploded = false
 
+func _ready() -> void:
+	add_to_group("fire_reflector")
+
 func _physics_process(delta):
 	if has_exploded:
 		return

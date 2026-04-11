@@ -7,6 +7,7 @@ extends StaticBody2D
 var is_floating = false
 
 func setup_pillar(on_water: bool):
+	add_to_group("earth_reflector")
 	is_floating = on_water
 	
 	if is_floating:
