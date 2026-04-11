@@ -12,22 +12,22 @@ func handle_intro_for_level() -> void:
 
 	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
 
-	# Hallway walk cutscene
-	await slow_walk_intro()
-	await show_player_thoughts()
-	await show_king_cutscene()
-	var outcome = await start_player_king_dialogue()
-	# Handle post-dialogue outcomes
-	match outcome:
-		"thanks_king":
-			await normal_ending()
-		"fight_begins":
-			await equip_fire_power()
-			await start_fight_sequence()
-		"player_killed":
-			await player_killed_sequence()
-	# Restore player input
-	player.is_in_dialogue = original_input_locked
+	## Hallway walk cutscene
+	#await slow_walk_intro()
+	#await show_player_thoughts()
+	#await show_king_cutscene()
+	#var outcome = await start_player_king_dialogue()
+	## Handle post-dialogue outcomes
+	#match outcome:
+		#"thanks_king":
+			#await normal_ending()
+		#"fight_begins":
+			#await equip_fire_power()
+			#await start_fight_sequence()
+		#"player_killed":
+			#await player_killed_sequence()
+	## Restore player input
+	#player.is_in_dialogue = original_input_locked
 
 func show_player_thoughts() -> void:
 	# Simulate player thinking (can be replaced with dialogue balloon or cutscene text)

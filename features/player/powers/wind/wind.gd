@@ -3,6 +3,8 @@ extends Area2D
 var speed = 400.0
 var direction = Vector2.RIGHT
 var lifetime = 1.0
+var damage = 1
+var source_element: String = "wind"
 
 func _ready():
 	# สั่งให้ลบตัวเองทิ้งเมื่อครบเวลา
@@ -44,6 +46,8 @@ func _on_body_entered(body):
 		return
 	if _is_water_collider(body):
 		return
+	if body != null and body.is_in_group("enemy") and body.has_method("take_damage"):
+		body.take_damage(damage, source_element)
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:

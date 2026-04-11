@@ -2,11 +2,15 @@
 
 [ext_resource type="Script" uid="uid://c5l285add1oxq" path="res://game/chapter_4/node_12/node_12_event_handler.gd" id="1_5xwdw"]
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="2_flfan"]
-[ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
-[ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
-[ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage.tscn" id="5_1x7oo"]
+[ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/NPC/king.tscn" id="3_otdus"]
+[ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/NPC/soldier.tscn" id="4_eymx0"]
+[ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/NPC/mage.tscn" id="5_1x7oo"]
 [ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
-[ext_resource type="Script" uid="uid://cghsow4bb82ep" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
+[ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
+[ext_resource type="Script" uid="uid://dgn0iitlicuk2" path="res://game/chapter_4/node_12/npc/mage_earth.gd" id="7_o0j4o"]
+[ext_resource type="Script" uid="uid://fw8yerxao6e" path="res://game/chapter_4/node_12/npc/mage_wind.gd" id="8_gbb5j"]
+[ext_resource type="Script" uid="uid://dphboj3wmoywp" path="res://game/chapter_4/node_12/npc/mage_fire.gd" id="9_n8nsa"]
+[ext_resource type="Script" uid="uid://b1aeadpyoisg6" path="res://game/chapter_4/node_12/npc/mage_water.gd" id="10_gju0t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
 font = ExtResource("6_jvdkp")
@@ -59,59 +63,27 @@ position = Vector2(0, -21)
 [node name="Soldier" parent="NPC" unique_id=269745531 instance=ExtResource("4_eymx0")]
 position = Vector2(-45, 67)
 
-[node name="Soldier4" parent="NPC" unique_id=2125515073 instance=ExtResource("4_eymx0")]
-position = Vector2(-125, 120)
-
-[node name="Soldier5" parent="NPC" unique_id=1047172901 instance=ExtResource("4_eymx0")]
-position = Vector2(-125, 163)
-
-[node name="Soldier6" parent="NPC" unique_id=1466048098 instance=ExtResource("4_eymx0")]
-position = Vector2(-125, 206)
-
-[node name="Soldier7" parent="NPC" unique_id=554631845 instance=ExtResource("4_eymx0")]
-position = Vector2(-125, 249)
-
-[node name="Soldier8" parent="NPC" unique_id=2062865584 instance=ExtResource("4_eymx0")]
-position = Vector2(-125, 292)
-
-[node name="Soldier9" parent="NPC" unique_id=1982781765 instance=ExtResource("4_eymx0")]
-position = Vector2(-125, 335)
-
-[node name="Soldier10" parent="NPC" unique_id=1007484429 instance=ExtResource("4_eymx0")]
-position = Vector2(135, 119)
-
-[node name="Soldier11" parent="NPC" unique_id=296287767 instance=ExtResource("4_eymx0")]
-position = Vector2(135, 162)
-
-[node name="Soldier12" parent="NPC" unique_id=2014850814 instance=ExtResource("4_eymx0")]
-position = Vector2(135, 205)
-
-[node name="Soldier13" parent="NPC" unique_id=920784085 instance=ExtResource("4_eymx0")]
-position = Vector2(135, 248)
-
-[node name="Soldier14" parent="NPC" unique_id=1442418044 instance=ExtResource("4_eymx0")]
-position = Vector2(135, 291)
-
-[node name="Soldier15" parent="NPC" unique_id=1742934895 instance=ExtResource("4_eymx0")]
-position = Vector2(135, 334)
-
-[node name="Soldier2" parent="NPC" unique_id=818711593 instance=ExtResource("4_eymx0")]
-position = Vector2(-1, 66)
-
 [node name="Soldier3" parent="NPC" unique_id=597062362 instance=ExtResource("4_eymx0")]
 position = Vector2(44, 66)
 
+[node name="Soldier4" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
+position = Vector2(-0.9999962, 67)
+
 [node name="Mage" parent="NPC" unique_id=716504541 instance=ExtResource("5_1x7oo")]
-position = Vector2(-62, -15)
+position = Vector2(-223, 311)
+script = ExtResource("7_o0j4o")
 
 [node name="Mage2" parent="NPC" unique_id=1171257504 instance=ExtResource("5_1x7oo")]
-position = Vector2(67, -15)
+position = Vector2(1, 501.00003)
+script = ExtResource("8_gbb5j")
 
 [node name="Mage3" parent="NPC" unique_id=1662164182 instance=ExtResource("5_1x7oo")]
-position = Vector2(127, -15)
+position = Vector2(223, 314)
+script = ExtResource("9_n8nsa")
 
 [node name="Mage4" parent="NPC" unique_id=1665975675 instance=ExtResource("5_1x7oo")]
-position = Vector2(-118, -14)
+position = Vector2(-2, 123)
+script = ExtResource("10_gju0t")
 
 [node name="Marker" type="Node" parent="." unique_id=15657992]
 

@@ -3,6 +3,7 @@ extends Area2D
 var direction: Vector2 = Vector2.RIGHT
 var level: int = 1
 var damage: int = 1
+var source_element: String = "water"
 
 # Per level: [speed, max_distance, scale]
 const LEVEL_SETTINGS = [
@@ -52,7 +53,8 @@ func _on_body_entered(body):
 	if body.is_in_group("player_hurtbox"):
 		return  # ignore player
 	if body.is_in_group("enemy"):
-		body.take_damage(damage)
+		if body.has_method("take_damage"):
+			body.take_damage(damage, source_element)
 	queue_free()
 
 func _on_expire():
