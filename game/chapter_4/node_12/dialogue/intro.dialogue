@@ -1,0 +1,50 @@
+~ start
+# Hallway walk cutscene
+Player: (I walk slowly through the grand hallway, the weight of my journey heavy on my mind.)
+Player: (So much has happened...)
+Player: (If only I had found more clues... maybe I could do something more here.)
+# If player has all clues, inner thought changes
+? [if game_state.clues_all_true] Player: (I have all the clues. If I act now, I might be able to stop the king...)
+
+# In front of the king
+Player: I have a message from the town.
+King: Read it.
+Player: The town is under attack and we need back up.
+Player: ...
+King: I understand the situation now. I will alert the army at once!
+King: You did well to relay this message to me. You deserve to rest now.
+King: Guards! Show this man to his chamber!
+
+# Player's choice (conditional)
+? What will you do?
+- Thank the king and go with the soldier => thanks_king
+- [if game_state.clues_all_true] Accuse the king of attacking the town => accuse_king
+
+~ thanks_king
+Player: Thank you, your majesty.
+Soldier: This way, please.
+Player: (I follow the soldier and die.)
+# Normal ending
+=> END
+
+~ accuse_king
+Player: I know the truth. You are the one who attacked my town!
+King: ...
+King: The messenger has gone mad! Soldier! Capture him dead or alive!
+# Auto-equip fire power (handled in script)
+Soldier: ...
+Soldier: (hesitates)
+King: What are you waiting for? Do it!
+? Do you attack the soldier?
+- Attack the soldier => fight_begins
+- Do not attack => player_killed
+
+~ fight_begins
+Player: (I unleash my fire power at the soldier!)
+# (Battle sequence begins)
+=> END
+
+~ player_killed
+Soldier: Forgive me...
+# (Soldiers kill the player)
+=> END

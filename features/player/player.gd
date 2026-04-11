@@ -46,6 +46,7 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
+var _wind_dash_shift_was_down: bool = false
 
 var interact_with = null
 var current_dialog = 0
@@ -145,6 +146,10 @@ func _input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _physics_process(delta):
+	var wind_dash_shift_down := Input.is_key_pressed(KEY_SHIFT)
+	var wind_dash_just_pressed := wind_dash_shift_down and not _wind_dash_shift_was_down
+	_wind_dash_shift_was_down = wind_dash_shift_down
+
 	if _is_input_locked():
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -227,7 +232,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
-		if Input.is_action_just_pressed("lesser_magic"):
+		if wind_dash_just_pressed:
 			movement_component.request_dash(self, last_direction)
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_wind_wave()
@@ -274,6 +279,8 @@ func _facing_suffix(dir: Vector2) -> String:
 		return "front" if dir.y > 0 else "back"
 
 func _update_animation(direction: Vector2) -> void:
+	if not animated_sprite:
+		return
 	var facing = _facing_suffix(last_direction)
 	var anim = ""
 
@@ -293,6 +300,12 @@ func set_facing_direction(direction: Vector2) -> void:
 		return
 	last_direction = direction.normalized()
 	_update_animation(last_direction)
+
+func get_aim_direction() -> Vector2:
+	var aim := get_global_mouse_position() - global_position
+	if aim.length() < 4.0:
+		return last_direction
+	return aim.normalized()
 
 # Called by minecart to mount the player
 func mount(minecart, mount_position):
