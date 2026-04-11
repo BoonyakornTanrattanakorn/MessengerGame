@@ -2170,6 +2170,7 @@ texture = ExtResource("1_8ebhh")
 47:44/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_8rwfx"]
+physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_qhgts")
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_8ebhh"]
@@ -5458,6 +5459,7 @@ texture = ExtResource("3_0gmsd")
 47:47/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_l117g"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_8rwfx")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhgts"]
