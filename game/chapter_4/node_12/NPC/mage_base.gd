@@ -94,13 +94,14 @@ func take_damage(amount: int = 1, source_element: String = "") -> void:
 		if player and player.has_method("get"):
 			inferred_element = str(player.get("playerAttribute"))
 
-	if inferred_element != weakness_element:
-		return
-
 	if _vulnerability_timer <= 0.0:
 		return
 
-	_hp -= max(1, amount)
+	var final_damage = max(1, amount)
+	if inferred_element == weakness_element:
+		final_damage += 1
+
+	_hp -= final_damage
 	if _hp <= 0:
 		die()
 
