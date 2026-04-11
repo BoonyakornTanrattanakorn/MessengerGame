@@ -11,6 +11,8 @@ var levels = [
 	"res://game/chapter_2/node_4/chapter_2_village.tscn",
 	"res://game/chapter_3/node_7/node_3_level.tscn",
 	"res://game/chapter_4/node_12/node_12.tscn"
+	"res://game/chapter_2/node_6/scenes/chapter2_node3.tscn",
+    "res://game/chapter_3/node_7/node_3_level.tscn"
 ]
 
 var loaded_count := 0

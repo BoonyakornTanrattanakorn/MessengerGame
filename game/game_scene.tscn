@@ -26,7 +26,7 @@ y_sort_enabled = true
 [node name="Node12" parent="LevelHolder" unique_id=981344518 instance=ExtResource("2_m7xky")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
-position = Vector2(8, 334)
+position = Vector2(2920, 4271)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1552768552]
 zoom = Vector2(2, 2)
