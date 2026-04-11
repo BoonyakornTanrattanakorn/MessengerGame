@@ -26,6 +26,9 @@ size = Vector2(1200, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7e4al"]
 size = Vector2(1200, 600)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4hsj"]
+size = Vector2(40, 600)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dac2"]
 size = Vector2(640, 360)
 
@@ -58,9 +61,12 @@ shape = SubResource("RectangleShape2D_gbkap")
 [node name="GoBackZone" type="CollisionShape2D" parent="GoBackZone" unique_id=1873234526]
 shape = SubResource("RectangleShape2D_ov4mv")
 
-[node name="BossFightZone" type="Area2D" parent="." unique_id=1577412828]
+[node name="BossFightZone" type="Area2D" parent="." unique_id=1577412828 node_paths=PackedStringArray("_zone_shape", "_trigger_area", "_borders")]
 position = Vector2(1400, 0)
 script = ExtResource("4_ov4mv")
+_zone_shape = NodePath("BossFightZone")
+_trigger_area = NodePath("BossFightTrigger")
+_borders = NodePath("BossFightZoneBorders")
 
 [node name="BossFightZoneBorders" type="StaticBody2D" parent="BossFightZone" unique_id=1029737312]
 
@@ -82,6 +88,11 @@ shape = SubResource("RectangleShape2D_6wfal")
 
 [node name="BossFightZone" type="CollisionShape2D" parent="BossFightZone" unique_id=1285314057]
 shape = SubResource("RectangleShape2D_7e4al")
+
+[node name="BossFightTrigger" type="Area2D" parent="BossFightZone" unique_id=735476316]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFightZone/BossFightTrigger" unique_id=1854690774]
+shape = SubResource("RectangleShape2D_t4hsj")
 
 [node name="mock_cam" type="CollisionShape2D" parent="." unique_id=870624223]
 position = Vector2(1400, -300)
