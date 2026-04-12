@@ -1,5 +1,10 @@
 extends LevelEventHandler
 
+@export var final_door: Node2D
+@export var wtl1: Node2D
+@export var wtl2: Node2D
+@export var wtl3: Node2D
+
 func on_level_loaded() -> void:
 	Node3State.start_node3_objective()
 
@@ -14,19 +19,15 @@ func handle_intro_for_level() -> void:
 
 		await DialogueManager.dialogue_ended
 
-		var final_door = get_node("FinalDoor")
 		player.focus_camera_to(final_door)
 		await get_tree().create_timer(1.0).timeout
 
-		var wtl1 = get_node("WarpToLevel1/CollisionShape2D")
 		player.focus_camera_to(wtl1)
 		await get_tree().create_timer(1.0).timeout
 
-		var wtl2 = get_node("WarpToLevel2/CollisionShape2D")
 		player.focus_camera_to(wtl2)
 		await get_tree().create_timer(1.0).timeout
 
-		var wtl3 = get_node("WarpToLevel3/CollisionShape2D")
 		player.focus_camera_to(wtl3)
 		await get_tree().create_timer(1.0).timeout
 

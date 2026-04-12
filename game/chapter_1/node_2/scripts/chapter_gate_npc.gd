@@ -40,7 +40,7 @@ func start_dialogue() -> void:
 	if (!first_talk):
 		first_talk = true
 		if (PuzzleState.found_fragments.size() <= 0):
-			ObjectiveManager.set_objective("Find all clues 0/4")
+			ObjectiveManager.set_objective("Find all clues (0/4)")
 
 func _on_body_entered(body: Node) -> void:
 	if body.name == player_node_name:
@@ -64,6 +64,9 @@ func submit_answer(answer: Array[String]) -> void:
 	if PuzzleState.check_answer(answer):
 		PuzzleState.puzzle_solved = true
 		ObjectiveManager.clear_memorized_keywords()
+		var player := get_tree().root.find_child(player_node_name, true, false)
+		if player != null and player.has_method("remove_items_by_prefix"):
+			player.remove_items_by_prefix("paper_")
 		open_next_door()
 	else:
 		# nothing else needed here;

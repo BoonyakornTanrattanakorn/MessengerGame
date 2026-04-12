@@ -46,6 +46,7 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
+var _wind_dash_shift_was_down: bool = false
 
 var interact_with = null
 var current_dialog = 0
@@ -78,6 +79,7 @@ var inventory = {
 }
 
 var is_in_dialogue = false
+var is_camera_panning: bool = false
 
 @export var save_id = "player" 
 @export var save_scope = "global" 
@@ -126,8 +128,29 @@ func _on_skill_changed(attribute: String):
 	playerAttribute = attribute
 	print("Switched to: ", attribute)
 
+func _is_input_locked() -> bool:
+	return is_in_dialogue or is_camera_panning
+
+func _input(event: InputEvent) -> void:
+	if not _is_input_locked():
+		return
+
+	if event.is_action("interact"):
+		return
+
+	if event is InputEventMouseButton:
+		var mb_event := event as InputEventMouseButton
+		if mb_event.button_index == MOUSE_BUTTON_LEFT:
+			return
+
+	get_viewport().set_input_as_handled()
+
 func _physics_process(delta):
-	if is_in_dialogue:
+	var wind_dash_shift_down := Input.is_key_pressed(KEY_SHIFT)
+	var wind_dash_just_pressed := wind_dash_shift_down and not _wind_dash_shift_was_down
+	_wind_dash_shift_was_down = wind_dash_shift_down
+
+	if _is_input_locked():
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
@@ -183,8 +206,8 @@ func _physics_process(delta):
 	if is_controlling_fairy:
 		fairy_timer -= delta
 	
-		# Cancel fairy with minor magic (C key)
-		if Input.is_action_just_pressed("minor magic"):
+		# Cancel fairy with lesser_magic (C key)
+		if Input.is_action_just_pressed("lesser_magic"):
 			print("[Fairy] Cancelled by player")
 			end_fairy()
 			return
@@ -204,38 +227,38 @@ func _physics_process(delta):
 		fairy_cooldown_timer -= delta
 	# Handle skill
 	if playerAttribute == "fire":
-		if Input.is_action_just_pressed("minor magic"):
+		if Input.is_action_just_pressed("lesser_magic"):
 			shoot_fire_small()
-		if Input.is_action_just_pressed("major magic"):
+		if Input.is_action_just_pressed("greater_magic"):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
-		if Input.is_action_just_pressed("minor magic"):
+		if wind_dash_just_pressed:
 			movement_component.request_dash(self, last_direction)
-		if Input.is_action_just_pressed("major magic"):
+		if Input.is_action_just_pressed("greater_magic"):
 			shoot_wind_wave()
 	elif playerAttribute == "water":
 		# Light skill — summon fairy
-		if Input.is_action_just_pressed("minor magic"):
+		if Input.is_action_just_pressed("lesser_magic"):
 			if is_controlling_fairy:
 				end_fairy()  # cancel fairy early
 			elif fairy_cooldown_timer <= 0 and cool_gauge < max_cool_gauge:
 				summon_fairy()
 		# Heavy skill — wave charge
-		if Input.is_action_just_pressed("major magic"):
+		if Input.is_action_just_pressed("greater_magic"):
 			is_charging_wave = true
 			wave_charge_timer = 0.0
-		if Input.is_action_pressed("major magic") and is_charging_wave:
+		if Input.is_action_pressed("greater_magic") and is_charging_wave:
 			wave_charge_timer += delta
 			var preview_level = get_wave_level()
 			hud.show_wave_charge_preview(cool_gauge + preview_level)
-		if Input.is_action_just_released("major magic") and is_charging_wave:
+		if Input.is_action_just_released("greater_magic") and is_charging_wave:
 			is_charging_wave = false
 			shoot_water_wave(get_wave_level())
 			hud.show_wave_charge_preview(-1)
 	elif playerAttribute == "earth":
-		if Input.is_action_just_pressed("minor magic"):
+		if Input.is_action_just_pressed("lesser_magic"):
 			activate_earth_shield()
-		if Input.is_action_just_pressed("major magic"):
+		if Input.is_action_just_pressed("greater_magic"):
 			spawn_rock_pillar()
 	#check water
 	var speed_multiplier = 1.0
@@ -259,6 +282,8 @@ func _facing_suffix(dir: Vector2) -> String:
 		return "front" if dir.y > 0 else "back"
 
 func _update_animation(direction: Vector2) -> void:
+	if not animated_sprite:
+		return
 	var facing = _facing_suffix(last_direction)
 	var anim = ""
 
@@ -278,6 +303,12 @@ func set_facing_direction(direction: Vector2) -> void:
 		return
 	last_direction = direction.normalized()
 	_update_animation(last_direction)
+
+func get_aim_direction() -> Vector2:
+	var aim := get_global_mouse_position() - global_position
+	if aim.length() < 4.0:
+		return last_direction
+	return aim.normalized()
 
 # Called by minecart to mount the player
 func mount(minecart, mount_position):
@@ -368,6 +399,18 @@ func add_item(item_name: String, amount: int = 1):
 	get_node("/root").find_child("PlayerHUD", true, false).refresh_items()
 
 
+func remove_items_by_prefix(prefix: String) -> void:
+	var items_to_remove: Array[String] = []
+	for item_name in inventory.keys():
+		if String(item_name).begins_with(prefix):
+			items_to_remove.append(String(item_name))
+
+	for item_name in items_to_remove:
+		inventory.erase(item_name)
+
+	get_node("/root").find_child("PlayerHUD", true, false).refresh_items()
+
+
 func die_in_minecart_and_respawn(minecart_respawn_position):
 	if current_mount != null:
 		current_mount.reset_position()
@@ -427,6 +470,7 @@ func _on_health_changed(new_hp: int) -> void:
 
 
 func focus_camera_to(target: Node2D):
+	is_camera_panning = true
 	camera.reparent(get_tree().current_scene) # detach from player
 
 	var tween = create_tween()
@@ -434,6 +478,7 @@ func focus_camera_to(target: Node2D):
 
 
 func return_camera():
+	is_camera_panning = false
 	camera.reparent(self)  # back to player
 	camera.position = Vector2.ZERO  # reset offset
 

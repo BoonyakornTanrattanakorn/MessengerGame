@@ -1,6 +1,10 @@
 extends CanvasLayer
 
 const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
+const TORN_PAPER_DIALOGUE_PATH := "res://game/chapter_1/node_2/dialogue/character_gate.dialogue"
+const WORLD_MAP_SCENE = preload("res://features/worldmap/world_map_overlay.tscn")
+const POWER_WHEEL_TIME_SCALE := 0.35
+const NORMAL_TIME_SCALE := 1.0
 
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
@@ -13,6 +17,7 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 @onready var item_icon = %ItemIcon
 @onready var item_count_label = %ItemCount
 @onready var top_left_gui = $TopLeftGUI
+@onready var power_wheel = $CenterContainer/PowerWheel
 
 # Objective UI
 @onready var objective_box = $ObjectiveBox
@@ -25,6 +30,10 @@ const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 @export var brave_stone: Texture2D
 @export var potion: Texture2D
 @export var antidote: Texture2D
+@export var torn_paper_1: Texture2D
+@export var torn_paper_2: Texture2D
+@export var torn_paper_3: Texture2D
+@export var torn_paper_4: Texture2D
 
 #cool gauge
 @onready var cool_gauge_ui = $TopLeftGUI/VBoxContainer/CoolGauge
@@ -51,11 +60,15 @@ var memorized_keyword_order: Dictionary = {}
 @export var save_id = "player_hud" 
 @export var save_scope = "global" 
 var pause_menu: PauseMenu
+var world_map_overlay: WorldMapOverlay
+var is_world_map_open: bool = false
+var _power_wheel_slowmo_active: bool = false
 
 signal skill_changed(attribute: String)
 
 func _exit_tree() -> void:
 	ObjectiveManager.unregister_hud(self)
+	_set_power_wheel_slowmo(false)
 var heat_gauge_value: float = 0.0
 var cool_gauge_value: int = 0
 var element_icons := {}
@@ -83,6 +96,10 @@ func _ready():
 	pause_menu.resume_requested.connect(_on_pause_resume_requested)
 	pause_menu.settings_requested.connect(_on_pause_settings_requested)
 	pause_menu.quit_requested.connect(_on_pause_quit_requested)
+
+	world_map_overlay = WORLD_MAP_SCENE.instantiate() as WorldMapOverlay
+	add_child(world_map_overlay)
+	world_map_overlay.close_requested.connect(_on_world_map_close_requested)
 
 	element_icons = {
 		"wind": wind_icon,
@@ -126,6 +143,9 @@ func _setup_health(player):
 	
 
 func _process(_delta):
+	if _power_wheel_slowmo_active and not Input.is_action_pressed("power_wheel"):
+		_set_power_wheel_slowmo(false)
+
 	if get_tree().paused:
 		return
 
@@ -150,14 +170,65 @@ func _process(_delta):
 		update_item_display()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("world_map"):
+		if is_world_map_open:
+			_close_world_map()
+		elif not get_tree().paused:
+			_open_world_map()
+		get_viewport().set_input_as_handled()
+		return
+
 	if event.is_action_pressed("pause_menu"):
-		if get_tree().paused:
+		if is_world_map_open:
+			_close_world_map()
+		elif get_tree().paused:
 			_resume_game()
 		else:
 			_pause_game()
 		get_viewport().set_input_as_handled()
+		return
+
+	if event.is_action_pressed("use_item"):
+		if _use_selected_item():
+			get_viewport().set_input_as_handled()
+
+	# Show power wheel while holding the assigned action
+	# Show power wheel while holding the assigned action.
+	if event.is_action_pressed("power_wheel"):
+		if power_wheel:
+			power_wheel.visible = true
+		_set_power_wheel_slowmo(true)
+		get_viewport().set_input_as_handled()
+		return
+
+	if event.is_action_released("power_wheel"):
+		if power_wheel:
+			var sel_idx = power_wheel.select_current()
+			if sel_idx >= 0 and sel_idx < skills.size():
+				skill_index = sel_idx
+				update_skill_display()
+				emit_signal("skill_changed", skills[skill_index]["attribute"])
+			power_wheel.visible = false
+		_set_power_wheel_slowmo(false)
+		get_viewport().set_input_as_handled()
+
+func _open_world_map() -> void:
+	_set_power_wheel_slowmo(false)
+	is_world_map_open = true
+	get_tree().paused = true
+	world_map_overlay.open()
+
+func _close_world_map() -> void:
+	is_world_map_open = false
+	world_map_overlay.close()
+	get_tree().paused = false
+
+func _on_world_map_close_requested() -> void:
+	if is_world_map_open:
+		_close_world_map()
 
 func _pause_game() -> void:
+	_set_power_wheel_slowmo(false)
 	get_tree().paused = true
 	pause_menu.open()
 
@@ -208,6 +279,45 @@ func update_item_display():
 	item_icon.texture = items[item_index]["icon"]
 	item_count_label.text = "x" + str(items[item_index]["count"])
 
+func get_selected_item_name() -> String:
+	if items.is_empty():
+		return ""
+	item_index = clamp(item_index, 0, items.size() - 1)
+	return String(items[item_index]["name"])
+
+func _use_selected_item() -> bool:
+	var selected_item_name := get_selected_item_name()
+	if selected_item_name.is_empty():
+		return false
+
+	if selected_item_name == "brave_stone":
+		var player := get_tree().root.find_child("Player", true, false)
+		if player == null or not player.health_component.has_method("increase_max_hp"):
+			return false
+		if player.inventory.get("brave_stone", 0) <= 0:
+			return false
+
+		player.inventory["brave_stone"] -= 1
+		if player.inventory["brave_stone"] <= 0:
+			player.inventory.erase("brave_stone")
+
+		player.health_component.increase_max_hp(1)
+		top_left_gui.set_max_health(player.health_component.max_hp)
+		top_left_gui.update_health(player.health_component.hp)
+		refresh_items()
+		return true
+
+	if selected_item_name.begins_with("paper_"):
+		var dialogue_resource := load(TORN_PAPER_DIALOGUE_PATH)
+		if dialogue_resource == null:
+			push_warning("Torn paper dialogue resource is missing.")
+			return false
+
+		DialogueManager.show_dialogue_balloon(dialogue_resource, selected_item_name)
+		return true
+
+	return false
+
 func refresh_items():
 	var player = get_tree().root.find_child("Player", true, false)
 	if not player:
@@ -237,6 +347,10 @@ func get_icon(item_name: String) -> Texture2D:
 		"brave_stone": return brave_stone
 		"potion": return potion
 		"antidote": return antidote
+		"paper_1": return torn_paper_1
+		"paper_2": return torn_paper_2
+		"paper_3": return torn_paper_3
+		"paper_4": return torn_paper_4
 	return null
 
 # =========================
@@ -395,3 +509,9 @@ func show_wave_charge_preview(preview_value: int):
 	else:
 		cool_gauge_ui.visible = true  # always show while charging
 		cool_gauge_ui.update_cool_preview(clamp(preview_value, 0, 3))
+
+func _set_power_wheel_slowmo(active: bool) -> void:
+	if _power_wheel_slowmo_active == active:
+		return
+	_power_wheel_slowmo_active = active
+	Engine.time_scale = POWER_WHEEL_TIME_SCALE if active else NORMAL_TIME_SCALE

@@ -26,3 +26,9 @@ func handle_trigger() -> void:
 	
 	
 	# ScriptedObjects/ChapterGateNpc
+	
+func save():
+	return {"has_triggered" : has_triggered}
+
+func load_game(data):
+	has_triggered = data.get("has_triggered", has_triggered)

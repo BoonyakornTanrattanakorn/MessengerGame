@@ -83,7 +83,7 @@ func stop_cart():
 
 func _physics_process(delta):
 	if player_mounted:
-		if Input.is_action_just_pressed("major magic") and in_turn_zone:
+		if Input.is_action_just_pressed("greater_magic") and in_turn_zone:
 			var dir = Vector2.ZERO
 			#if is_moving:
 			if Input.is_action_pressed(turn_input):

@@ -2,6 +2,8 @@ extends Area2D
 
 @export var player_node_name: String = "Player"
 @export var fragment_id: String = ""
+@export var item_name: String = ""
+@export var item_amount: int = 1
 @export var start_title: String = ""
 @export var dialogue_resource: DialogueResource
 
@@ -34,9 +36,23 @@ func read_paper() -> void:
 	is_talking = true
 	prompt_label.visible = false
 
+	var is_new_fragment := fragment_id != "" and fragment_id not in PuzzleState.found_fragments
 	PuzzleState.collect_fragment(fragment_id)
+	if is_new_fragment:
+		_grant_inventory_item()
 	_memorize_player_keywords_from_dialogue()
 	DialogueManager.show_dialogue_balloon(dialogue_resource, start_title)
+
+func _grant_inventory_item() -> void:
+	var player := get_tree().root.find_child(player_node_name, true, false)
+	if player == null or not player.has_method("add_item"):
+		return
+
+	var pickup_item_name := item_name.strip_edges()
+	if pickup_item_name == "":
+		pickup_item_name = fragment_id if fragment_id != "" else "torn_paper"
+
+	player.add_item(pickup_item_name, item_amount)
 
 func _memorize_player_keywords_from_dialogue() -> void:
 	var dialogue_path := dialogue_resource.resource_path

@@ -23,9 +23,10 @@ size = Vector2(81, 90)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lms4m"]
 size = Vector2(134, 53.75)
 
-[node name="Level_1" type="Node2D" unique_id=1663842289]
+[node name="Level_1" type="Node2D" unique_id=1663842289 node_paths=PackedStringArray("lion_guard")]
 y_sort_enabled = true
 script = ExtResource("1_ucg3a")
+lion_guard = NodePath("LionGuard")
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=1283785103]
 z_index = -1

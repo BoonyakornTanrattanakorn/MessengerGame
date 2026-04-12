@@ -13,6 +13,7 @@ func _ready():
 	start_timer()
 
 func setup_pillar(on_water: bool):
+	add_to_group("earth_reflector")
 	is_floating = on_water
 	if is_floating:
 		body.set_collision_layer_value(1, false)
@@ -38,3 +39,14 @@ func enter_hole():
 func start_timer():
 	await get_tree().create_timer(duration).timeout
 	queue_free()
+
+func start_damage_pulse() -> void:
+	while is_inside_tree():
+		for body in get_tree().get_nodes_in_group("enemy"):
+			if body == null:
+				continue
+			if global_position.distance_to(body.global_position) > pulse_radius:
+				continue
+			if body.has_method("take_damage"):
+				body.take_damage(pulse_damage, "earth")
+		await get_tree().create_timer(pulse_interval).timeout

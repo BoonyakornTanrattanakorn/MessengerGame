@@ -714,9 +714,13 @@ size = Vector2(159, 100.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owq4y"]
 size = Vector2(285, 758)
 
-[node name="Level_0" type="Node2D" unique_id=1186606688]
+[node name="Level_0" type="Node2D" unique_id=1186606688 node_paths=PackedStringArray("final_door", "wtl1", "wtl2", "wtl3")]
 y_sort_enabled = true
 script = ExtResource("1_o2bvy")
+final_door = NodePath("FinalDoor")
+wtl1 = NodePath("WarpToLevel1/CollisionShape2D")
+wtl2 = NodePath("WarpToLevel2/CollisionShape2D")
+wtl3 = NodePath("WarpToLevel3/CollisionShape2D")
 
 [node name="grass_and_mountain" type="TileMapLayer" parent="." unique_id=119897630]
 z_index = -1

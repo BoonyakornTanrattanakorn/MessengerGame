@@ -2,11 +2,23 @@ extends LevelEventHandler
 
 @onready var bridge_manager = $BridgeManager
 
+@export var golem_boss: Node2D
+@onready var warp_to_level_0 = $WarpToLevel0from3
+
 func _ready():
 	for node in get_all_children(self):
 		# Only connect nodes that have switch_activated signal
 		if node.has_method("activate") and node.has_signal("switch_activated"):
 			node.switch_activated.connect(bridge_manager.activate_color)
+
+	if golem_boss and golem_boss.has_signal("boss_defeated"):
+		golem_boss.boss_defeated.connect(_on_golem_boss_defeated)
+
+	if warp_to_level_0 and warp_to_level_0.has_method("hide_portal"):
+		warp_to_level_0.hide_portal()
+
+	if golem_boss and golem_boss.has_method("is_defeated") and golem_boss.is_defeated():
+		_on_golem_boss_defeated()
 
 func get_all_children(node: Node) -> Array:
 	var result = []
@@ -27,8 +39,11 @@ func handle_intro_for_level() -> void:
 
 		await DialogueManager.dialogue_ended
 
-		var golemboss = get_node("GolemBoss")
-		player.focus_camera_to(golemboss)
+		player.focus_camera_to(golem_boss)
 
 		await get_tree().create_timer(1.0).timeout
 		player.return_camera()
+
+func _on_golem_boss_defeated() -> void:
+	if warp_to_level_0 and warp_to_level_0.has_method("show_portal"):
+		warp_to_level_0.show_portal()

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal boss_defeated
+
 # States
 enum BossState {IDLE, ACTIVATING, ACTIVE, STUNNED, DYING, DEAD_WITH_DROP, DEAD}
 var state = BossState.IDLE
@@ -31,6 +33,7 @@ var is_blinking = false
 # Death blink
 var death_blink_timer = 0.0
 var death_blink_duration = 1.0
+var _defeat_signal_emitted := false
 
 @onready var sprite = $AnimatedSprite2D
 
@@ -65,6 +68,15 @@ func activate():
 
 func can_interact_check() -> bool:
 	return not has_meta("no_interact")
+
+func is_defeated() -> bool:
+	return state == BossState.DEAD_WITH_DROP or state == BossState.DEAD
+
+func _emit_boss_defeated_once() -> void:
+	if _defeat_signal_emitted:
+		return
+	_defeat_signal_emitted = true
+	boss_defeated.emit()
 
 func current_mode() -> String:
 	if current_hp_index >= hp_sequence.size():
@@ -132,6 +144,7 @@ func _physics_process(delta):
 				sprite.play()
 				print("Current animation: ", sprite.animation)  # ← confirm it changed
 				state = BossState.DEAD_WITH_DROP
+				_emit_boss_defeated_once()
 
 		BossState.DEAD_WITH_DROP:
 			pass  # just wait for player to press F
@@ -241,6 +254,11 @@ func load_data(data):
 
 		BossState.DEAD_WITH_DROP:
 			sprite.play("die_golem_wdrop")
+			_emit_boss_defeated_once()
 
 		BossState.DEAD:
 			sprite.play("die_golem")
+			_emit_boss_defeated_once()
+
+	if not is_defeated():
+		_defeat_signal_emitted = false

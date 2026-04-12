@@ -5,6 +5,12 @@ const TOTAL_GEMS := 3
 var collected_gems: Array[String] = []
 var intro_objective_started := false
 
+var save_scope := "global"    
+var save_id := "node3_state"
+
+func _ready() -> void:
+	add_to_group("savable")
+
 func start_node3_objective() -> void:
 	if intro_objective_started:
 		return
@@ -26,8 +32,21 @@ func update_objective() -> void:
 	if has_all_gems():
 		ObjectiveManager.set_objective("Interact with the final door")
 	else:
-		ObjectiveManager.set_objective("Collect gems %d/3" % get_gem_count())
+		ObjectiveManager.set_objective("Collect gems (%d/3)" % get_gem_count())
 
 func reset_node3_state() -> void:
 	collected_gems.clear()
 	intro_objective_started = false
+
+func save():
+	return {
+		"collected_gems": collected_gems.duplicate(),
+		"intro_objective_started": intro_objective_started
+	}
+
+func load_data(data) -> void:
+	if data.has("collected_gems"):
+		collected_gems.clear()
+		for gem in data.collected_gems:
+			collected_gems.append(str(gem)) 
+	intro_objective_started = data.get("intro_objective_started", false)

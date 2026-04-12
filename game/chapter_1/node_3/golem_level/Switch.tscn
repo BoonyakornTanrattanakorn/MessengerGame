@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2215xa1l24qs"]
 
-[ext_resource type="Script" uid="uid://cptir8rocgmww" path="res://game/chapter_1/node_3/golem_level/switch.gd" id="1_11x4n"]
+[ext_resource type="Script" uid="uid://cptir8rocgmww" path="res://game/chapter_1/node_3/golem_level/Switch.gd" id="1_11x4n"]
 [ext_resource type="Texture2D" uid="uid://braag636absr8" path="res://assets/sprites/golem_boss/switch.png" id="2_fism0"]
 [ext_resource type="Script" uid="uid://dykbpnwsppgw3" path="res://game/chapter_1/node_3/golem_level/interaction_area.gd" id="3_sblcj"]
 
