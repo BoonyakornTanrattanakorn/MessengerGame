@@ -9,7 +9,6 @@ var _direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("enemy_projectile")
-	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
 
 	if lifetime > 0.0:
@@ -28,10 +27,6 @@ func _physics_process(delta: float) -> void:
 	global_position += _direction * speed * delta
 
 
-func _on_body_entered(_body: Node) -> void:
-	queue_free()
-
-
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("player_hurtbox"):
+	if area.is_in_group("player_hurtbox") or area.is_in_group("enemy_projectile"):
 		queue_free()

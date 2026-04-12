@@ -114,7 +114,7 @@ func _ready():
 		player_hp = health_component.hp
 		health_component.connect("health_changed", Callable(self, "_on_health_changed"))
 	
-
+	
 func _on_dialogue_started(_arg = null):
 	is_in_dialogue = true
 	is_dashing = false
@@ -382,6 +382,13 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("enemy_projectile"):
 		return
+
+	if area.has_meta("shield_consumed"):
+		return
+
+	if skill_component != null and skill_component.try_consume_projectile_with_shield(area):
+		return
+	
 	var dmg = area.get("damage")
 	health_component.take_damage(int(dmg) if dmg != null else 1)
 
@@ -536,11 +543,6 @@ func shoot_water_wave(level: int):
 # Earth system
 var earth_gauge: float = 0.0
 var max_earth: float = 100.0
-
-# Minor: Shield
-@export var shield_max_hp = 2
-var current_shield_hp = 0
-var is_shield_active = false
 
 
 # Skill system (component)

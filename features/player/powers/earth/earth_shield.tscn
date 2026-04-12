@@ -56,7 +56,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oym75"]
 size = Vector2(82, 88)
 
-[node name="EarthShield" type="Node2D" unique_id=1471186977]
+[node name="EarthShield" type="Area2D" unique_id=1471186977]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_anjix")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=780066794]
