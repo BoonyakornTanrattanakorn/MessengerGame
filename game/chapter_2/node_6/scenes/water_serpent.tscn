@@ -90,6 +90,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8op0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8cox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilgj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wok1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldc6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcyfn")
+}],
+"loop": false,
+"name": &"rise",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wehoj")
 }, {
 "duration": 1.0,
@@ -114,5 +137,5 @@ script = ExtResource("1_pe236")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=275422144]
 sprite_frames = SubResource("SpriteFrames_bcyfn")
-animation = &"idle"
-autoplay = "idle"
+animation = &"rise"
+autoplay = "rise"

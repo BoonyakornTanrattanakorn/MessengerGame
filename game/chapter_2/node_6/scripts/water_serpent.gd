@@ -25,6 +25,7 @@ enum DiveState {
 @export var mid_anchor_lift: float = 22.0
 @export var top_anchor_lift: float = 30.0
 @export var dive_animation_name: StringName = &"dive"
+@export var rise_animation_name: StringName = &"rise"
 @export var idle_animation_name: StringName = &"idle"
 @export var right_side_flip_h: bool = true
 @export var left_side_flip_h: bool = false
@@ -43,6 +44,7 @@ var _has_last_camera_center: bool = false
 var _dive_state: DiveState = DiveState.NONE
 var _dive_target_anchor: PatrolAnchor = PatrolAnchor.MID_RIGHT
 var _active_dive_animation: StringName = StringName()
+var _active_rise_animation: StringName = StringName()
 var _is_awake: bool = false
 var _is_awakening_intro: bool = false
 var _is_forced_dive_to_right: bool = false
@@ -108,21 +110,53 @@ func awaken() -> void:
 	_update_dive_state(_anchors[_anchor_index])
 
 
+func prepare_intro_underwater() -> void:
+	if _sprite == null:
+		return
+
+	_is_awake = false
+	_is_awakening_intro = false
+	_dive_state = DiveState.NONE
+	_update_sprite_facing(_anchors[_anchor_index])
+
+	_active_dive_animation = _resolve_dive_animation_name()
+	if _active_dive_animation.is_empty():
+		# Fallback when no dive animation exists.
+		_sprite.visible = false
+		return
+
+	_sprite.visible = true
+	_sprite.play(_active_dive_animation)
+	var frame_count: int = _sprite.sprite_frames.get_frame_count(_active_dive_animation)
+	if frame_count > 0:
+		_sprite.frame = frame_count - 1
+	_sprite.pause()
+
+
 func play_intro_rise() -> void:
 	if _is_awakening_intro:
 		return
 
-	_active_dive_animation = _resolve_dive_animation_name()
-	if _sprite == null or _active_dive_animation.is_empty():
+	_active_rise_animation = _resolve_rise_animation_name()
+	if _sprite == null or _active_rise_animation.is_empty():
+		# Fallback for older content that only has dive.
+		_active_dive_animation = _resolve_dive_animation_name()
+		if _active_dive_animation.is_empty():
+			intro_rise_finished.emit()
+			return
+		_active_rise_animation = _active_dive_animation
+
+	if _sprite == null:
 		intro_rise_finished.emit()
 		return
 
 	_is_awake = false
 	_dive_state = DiveState.NONE
+	_sprite.visible = true
 
 	_update_sprite_facing(_anchors[_anchor_index])
 	_is_awakening_intro = true
-	_sprite.play(_active_dive_animation, -1.0, true)
+	_sprite.play(_active_rise_animation)
 
 
 func play_dive_to_right_and_awaken() -> void:
@@ -247,8 +281,9 @@ func _on_sprite_animation_finished() -> void:
 	if _sprite == null:
 		return
 
-	if _is_awakening_intro and _sprite.animation == _active_dive_animation:
+	if _is_awakening_intro and _sprite.animation == _active_rise_animation:
 		_is_awakening_intro = false
+		_active_rise_animation = StringName()
 		_active_dive_animation = StringName()
 		intro_rise_finished.emit()
 		return
@@ -300,6 +335,17 @@ func _resolve_dive_animation_name() -> StringName:
 
 	# Allow common naming variants to avoid accidental instant teleports.
 	for fallback in [&"dive", &"diving", &"Dive", &"Diving"]:
+		if _has_animation(fallback):
+			return fallback
+
+	return StringName()
+
+
+func _resolve_rise_animation_name() -> StringName:
+	if _has_animation(rise_animation_name):
+		return rise_animation_name
+
+	for fallback in [&"rise", &"Rise"]:
 		if _has_animation(fallback):
 			return fallback
 

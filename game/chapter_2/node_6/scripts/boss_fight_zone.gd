@@ -90,6 +90,11 @@ func _play_serpent_intro(player: Node2D) -> void:
 	if _water_serpent == null:
 		return
 
+	if _water_serpent.has_method("prepare_intro_underwater"):
+		_water_serpent.prepare_intro_underwater()
+		# Ensure submerged pose is applied before camera tween starts.
+		await get_tree().process_frame
+
 	if player != null and player.has_method("focus_camera_to"):
 		player.focus_camera_to(_water_serpent)
 		# player.focus_camera_to tweens over 0.5s in player.gd.

@@ -70,6 +70,8 @@ shape = SubResource("RectangleShape2D_ov4mv")
 
 [node name="BossFightZone" type="Area2D" parent="." unique_id=1577412828 node_paths=PackedStringArray("_zone_shape", "_trigger_area", "_borders")]
 position = Vector2(1400, 0)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("4_ov4mv")
 _zone_shape = NodePath("BossFightZone")
 _trigger_area = NodePath("BossFightTrigger")
