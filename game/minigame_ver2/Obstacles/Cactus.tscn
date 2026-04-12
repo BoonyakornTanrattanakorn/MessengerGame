@@ -1,7 +1,15 @@
 [gd_scene format=3 uid="uid://bd5aph3swdr0f"]
 
-[ext_resource type="Script" uid="uid://c7vgqve2uf2wr" path="res://game/minigame_ver2/Obstacles/cactus.gd" id="1_awc10"]
 [ext_resource type="Texture2D" uid="uid://c3hbjdg3rv1q0" path="res://game/minigame_ver2/Sprite/Cactus.png" id="2_rldf2"]
+
+[sub_resource type="GDScript" id="GDScript_latvo"]
+script/source = "# cactus.gd
+extends StaticBody2D
+
+func _on_hurt_zone_body_entered(body):
+	if body.has_method(\"take_damage\"):
+		body.take_damage()
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2if6r"]
 size = Vector2(20, 30)
@@ -10,7 +18,7 @@ size = Vector2(20, 30)
 size = Vector2(20, 30)
 
 [node name="Cactus" type="StaticBody2D" unique_id=2072287786]
-script = ExtResource("1_awc10")
+script = SubResource("GDScript_latvo")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=569974086]
 position = Vector2(-1, -2)

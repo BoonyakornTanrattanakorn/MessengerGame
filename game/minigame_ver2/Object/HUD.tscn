@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://features/player/hud/element_display.tscn" id="6_g1gjp"]
 [ext_resource type="PackedScene" uid="uid://ctxx46yi1gm4o" path="res://features/player/powers/water/cool_gauge.tscn" id="7_k7fp2"]
 [ext_resource type="PackedScene" uid="uid://b7q4tjsvib3gr" path="res://features/player/powers/fire/heat_gauge.tscn" id="8_mpuoo"]
+[ext_resource type="Texture2D" uid="uid://bs06khl30a0xj" path="res://game/minigame_ver2/Sprite/recharger.png" id="9_n178f"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1243381214]
 script = ExtResource("1_lfcsx")
@@ -72,6 +73,21 @@ offset_left = 35.0
 offset_top = 101.0
 offset_right = 140.0
 offset_bottom = 165.0
+
+[node name="ChargeRow" type="HBoxContainer" parent="VBoxContainer" unique_id=74694234]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="ChargeImage" type="TextureRect" parent="VBoxContainer/ChargeRow" unique_id=1901559649]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("9_n178f")
+expand_mode = 2
+
+[node name="ChargeLabel" type="Label" parent="VBoxContainer/ChargeRow" unique_id=852531898]
+layout_mode = 2
+text = "Charge
+"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=976843104]
 layout_mode = 2

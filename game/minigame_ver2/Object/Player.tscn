@@ -55,11 +55,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_axgyq"]
-radius = 9.0
+radius = 5.0
 height = 24.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bant7"]
-radius = 8.0
+radius = 5.0
 height = 16.0
 
 [node name="Player" type="CharacterBody2D" unique_id=356047695]
@@ -69,7 +69,7 @@ script = ExtResource("1_16doh")
 position = Vector2(0, -2.124999)
 scale = Vector2(0.126, 0.11100001)
 sprite_frames = SubResource("SpriteFrames_5c21v")
-animation = &"slide"
+animation = &"run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1074374733]
 shape = SubResource("CapsuleShape2D_axgyq")

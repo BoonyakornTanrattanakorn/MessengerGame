@@ -1,5 +1,4 @@
 extends CharacterBody2D
-
 signal gem_collected(amount)
 signal health_changed(new_health)
 signal player_died
@@ -9,6 +8,7 @@ const JUMP_FORCE = -320.0
 const DOUBLE_JUMP_FORCE = -300.0
 const SLIDE_DURATION = 0.6
 const RUN_SPEED = 100.0
+const COYOTE_TIME = 0.15
 
 @onready var anim = $AnimatedSprite2D
 @onready var stand_shape = $CollisionShape2D
@@ -21,10 +21,16 @@ var slide_timer = 0.0
 var health = 3
 var is_invincible = false
 var invincible_timer = 0.0
+var coyote_timer = 0.0
+var coyote_used = false  # ← prevents coyote from granting double jump
+
+func _ready():
+	add_to_group("player")
 
 func _physics_process(delta):
 	velocity.x = RUN_SPEED
 	apply_gravity(delta)
+	handle_coyote(delta)
 	handle_input(delta)
 	handle_timers(delta)
 	move_and_slide()
@@ -33,7 +39,6 @@ func _physics_process(delta):
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
-		# Cancel slide if player falls off a ledge
 		if state == State.SLIDE:
 			stop_slide()
 			state = State.JUMP
@@ -41,23 +46,33 @@ func apply_gravity(delta):
 		if state == State.JUMP or state == State.DOUBLE_JUMP:
 			state = State.RUN
 		can_double_jump = false
+		coyote_used = false  # ← reset when back on floor
+
+func handle_coyote(delta):
+	if is_on_floor():
+		coyote_timer = COYOTE_TIME
+	else:
+		if coyote_timer > 0:
+			coyote_timer -= delta
 
 func handle_input(delta):
 	if state == State.HURT:
 		return
 
-	# Jump / Double Jump
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or state == State.SLIDE:
+			# Normal jump from ground — enables double jump
 			jump()
+		elif coyote_timer > 0 and not coyote_used:
+			# Fell off ledge — coyote jump, NO double jump after
+			coyote_jump()
 		elif can_double_jump:
+			# Double jump — only after normal jump, not after coyote
 			double_jump()
 
-	# Slide — start when pressed
 	if Input.is_action_just_pressed("slide") and is_on_floor():
 		start_slide()
 
-	# Stop slide when released
 	if Input.is_action_just_released("slide") and state == State.SLIDE:
 		stop_slide()
 		state = State.RUN
@@ -65,8 +80,17 @@ func handle_input(delta):
 func jump():
 	velocity.y = JUMP_FORCE
 	state = State.JUMP
-	can_double_jump = true
+	can_double_jump = true   # ← normal jump allows double jump
+	coyote_used = true       # ← consume coyote
+	coyote_timer = 0
 	stop_slide()
+
+func coyote_jump():
+	velocity.y = JUMP_FORCE
+	state = State.JUMP
+	can_double_jump = false  # ← coyote jump does NOT allow double jump
+	coyote_used = true
+	coyote_timer = 0
 
 func double_jump():
 	velocity.y = DOUBLE_JUMP_FORCE
@@ -86,7 +110,6 @@ func stop_slide():
 func handle_timers(delta):
 	if is_invincible:
 		invincible_timer -= delta
-		# Flash effect
 		modulate.a = 0.5 if fmod(invincible_timer, 0.2) < 0.1 else 1.0
 		if invincible_timer <= 0:
 			is_invincible = false
@@ -103,7 +126,6 @@ func take_damage():
 	state = State.HURT
 	is_invincible = true
 	invincible_timer = 2.0
-	# Bounce back slightly
 	velocity.y = -300
 	await get_tree().create_timer(0.4).timeout
 	if state == State.HURT:

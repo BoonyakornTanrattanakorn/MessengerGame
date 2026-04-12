@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://u5epro1onubg"]
+
+[ext_resource type="Script" uid="uid://tbuvy83hc3ph" path="res://game/minigame_ver2/Obstacles/palm.gd" id="1_kcb23"]
+[ext_resource type="Texture2D" uid="uid://dgl7gfnlajcai" path="res://game/minigame_ver2/Sprite/palm.png" id="2_v22oq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3sad"]
+radius = 19.0
+height = 74.0
+
+[node name="palm" type="Area2D" unique_id=2020654464]
+script = ExtResource("1_kcb23")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1194774895]
+position = Vector2(1.9073486e-06, 0)
+scale = Vector2(0.398, 0.398)
+texture = ExtResource("2_v22oq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=296762344]
+position = Vector2(0, 12)
+shape = SubResource("CapsuleShape2D_e3sad")
+debug_color = Color(0.50969213, 0.57678586, 0.119298704, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
