@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://iq255vk6v3yr"]
 
+[ext_resource type="Script" uid="uid://c5rw7btl0g1e5" path="res://game/chapter_2/node_6/scripts/water_serpent.gd" id="1_pe236"]
 [ext_resource type="Texture2D" uid="uid://bvf8apu8qrrho" path="res://assets/sprites/water_serpent/idle.png" id="1_wqvgd"]
 [ext_resource type="Texture2D" uid="uid://nvdupfyv6c50" path="res://assets/sprites/water_serpent/swimming.png" id="2_pe236"]
 
@@ -101,10 +102,9 @@ animations = [{
 }]
 
 [node name="WaterSerpent" type="Node2D" unique_id=1998665961]
+script = ExtResource("1_pe236")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=275422144]
 sprite_frames = SubResource("SpriteFrames_bcyfn")
-animation = &"swimming"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.28199926
