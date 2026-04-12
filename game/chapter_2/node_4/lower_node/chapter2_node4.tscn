@@ -26203,14 +26203,17 @@ position = Vector2(55, 1654)
 [node name="Cat2" parent="." unique_id=1033722501 instance=ExtResource("11_t5248")]
 position = Vector2(721, 1928)
 cat_id = "cat_2"
+anim_name = "twerking"
 
 [node name="Cat3" parent="." unique_id=28448577 instance=ExtResource("11_t5248")]
 position = Vector2(1249, 1177)
 cat_id = "cat_3"
+anim_name = "jumping"
 
 [node name="Cat4" parent="." unique_id=1258756120 instance=ExtResource("11_t5248")]
 position = Vector2(1038, 2190)
 cat_id = "cat_4"
+anim_name = "waving"
 
 [node name="CatLady" type="Area2D" parent="." unique_id=664781082]
 position = Vector2(538, 1429)

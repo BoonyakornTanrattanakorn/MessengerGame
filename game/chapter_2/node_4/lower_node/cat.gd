@@ -1,13 +1,25 @@
 extends Area2D
 
 @export var cat_id: String = "cat_1"
+@export var anim_name: String = "idle"
 
 var _player_in_range: bool = false
 var _collected: bool = false
 
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+
+	# Play assigned animation
+	if anim.sprite_frames and anim.sprite_frames.has_animation(anim_name):
+		anim.play(anim_name)
+		
+		# Randomize start frame (so cats aren't synced)
+		anim.frame = randi() % anim.sprite_frames.get_frame_count(anim_name)
+	else:
+		anim.play("idle") # fallback
 
 func _process(_delta: float) -> void:
 	if _player_in_range and Input.is_action_just_pressed("interact"):
