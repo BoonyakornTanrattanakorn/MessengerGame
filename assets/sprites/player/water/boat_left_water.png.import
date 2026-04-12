@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvrlx2db8my0u"
-path="res://.godot/imported/MCIdleBack64x64-Sheet.png-6289797a74ce477fd971418156c9756c.ctex"
+uid="uid://88qn0pc0fuki"
+path="res://.godot/imported/boat_left_water.png-e713ee8aa8c83f93091b5a982ec17547.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/MCIdleBack64x64-Sheet.png"
-dest_files=["res://.godot/imported/MCIdleBack64x64-Sheet.png-6289797a74ce477fd971418156c9756c.ctex"]
+source_file="res://assets/sprites/player/water/boat_left_water.png"
+dest_files=["res://.godot/imported/boat_left_water.png-e713ee8aa8c83f93091b5a982ec17547.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs73glyadognw"
-path="res://.godot/imported/MCWalkFront64x64-Sheet.png-5c9bd1dcb3606d0c5204038f15da9cc4.ctex"
+uid="uid://d1dbjmc837mns"
+path="res://.godot/imported/walk_left_fire.png-5a9a26c49dc01f01c7157490b2746094.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/MCWalkFront64x64-Sheet.png"
-dest_files=["res://.godot/imported/MCWalkFront64x64-Sheet.png-5c9bd1dcb3606d0c5204038f15da9cc4.ctex"]
+source_file="res://assets/sprites/player/fire/walk_left_fire.png"
+dest_files=["res://.godot/imported/walk_left_fire.png-5a9a26c49dc01f01c7157490b2746094.ctex"]
 
 [params]
 

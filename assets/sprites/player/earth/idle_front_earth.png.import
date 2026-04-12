@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://otkmdgxtohbb"
-path="res://.godot/imported/MCWalkBack64x64-Sheet.png-e134f5bcaabb8e7a2134523c1c58dd4d.ctex"
+uid="uid://h67wrivr51it"
+path="res://.godot/imported/idle_front_earth.png-54e3b57de97f42abad108bee7969fba5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/MCWalkBack64x64-Sheet.png"
-dest_files=["res://.godot/imported/MCWalkBack64x64-Sheet.png-e134f5bcaabb8e7a2134523c1c58dd4d.ctex"]
+source_file="res://assets/sprites/player/earth/idle_front_earth.png"
+dest_files=["res://.godot/imported/idle_front_earth.png-54e3b57de97f42abad108bee7969fba5.ctex"]
 
 [params]
 

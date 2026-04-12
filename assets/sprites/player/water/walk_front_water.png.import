@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qgxqjnrygapf"
-path="res://.godot/imported/MCWalkRight64x64-Sheet.png-c0569b14e57e446f69b1ac18b6ff56fd.ctex"
+uid="uid://du23yhvewuixs"
+path="res://.godot/imported/walk_front_water.png-59cce7e79232616e096e0584e7ba7f0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/MCWalkRight64x64-Sheet.png"
-dest_files=["res://.godot/imported/MCWalkRight64x64-Sheet.png-c0569b14e57e446f69b1ac18b6ff56fd.ctex"]
+source_file="res://assets/sprites/player/water/walk_front_water.png"
+dest_files=["res://.godot/imported/walk_front_water.png-59cce7e79232616e096e0584e7ba7f0c.ctex"]
 
 [params]
 

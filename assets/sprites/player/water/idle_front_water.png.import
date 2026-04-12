@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw6hb7hyn6yb2"
-path="res://.godot/imported/MCWalkLeft64x64-Sheet.png-ea23301d9a348b615a60487a56a85545.ctex"
+uid="uid://ddmwerqc5n3f8"
+path="res://.godot/imported/idle_front_water.png-f677bf0b5649ea4dd0d3272108da4a52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/MCWalkLeft64x64-Sheet.png"
-dest_files=["res://.godot/imported/MCWalkLeft64x64-Sheet.png-ea23301d9a348b615a60487a56a85545.ctex"]
+source_file="res://assets/sprites/player/water/idle_front_water.png"
+dest_files=["res://.godot/imported/idle_front_water.png-f677bf0b5649ea4dd0d3272108da4a52.ctex"]
 
 [params]
 

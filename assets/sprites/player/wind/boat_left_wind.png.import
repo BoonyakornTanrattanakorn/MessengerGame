@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxvfieh7w5jt8"
-path="res://.godot/imported/MCIdleLeft64x64-Sheet.png-df1f448fad8267476730c0b4c3e42f10.ctex"
+uid="uid://cq5jn5u8d7500"
+path="res://.godot/imported/boat_left_wind.png-cee4040730c9c5882f0126b5636a42e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/MCIdleLeft64x64-Sheet.png"
-dest_files=["res://.godot/imported/MCIdleLeft64x64-Sheet.png-df1f448fad8267476730c0b4c3e42f10.ctex"]
+source_file="res://assets/sprites/player/wind/boat_left_wind.png"
+dest_files=["res://.godot/imported/boat_left_wind.png-cee4040730c9c5882f0126b5636a42e8.ctex"]
 
 [params]
 

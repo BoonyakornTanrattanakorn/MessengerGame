@@ -9,6 +9,7 @@ var dash_duration = 0.15
 var dash_cooldown = 0.5
 
 var playerAttribute = "wind" # make enum
+var is_boat_mode: bool = false
 
 #Heat gauge for fire element
 var heat_gauge: float = 0.0
@@ -284,6 +285,12 @@ func _update_animation(direction: Vector2) -> void:
 	var facing = _facing_suffix(last_direction)
 	var anim = ""
 
+	if is_boat_mode:
+		anim = _resolve_boat_animation(facing)
+		if animated_sprite.animation != anim:
+			animated_sprite.play(anim)
+		return
+
 	if is_dashing:
 		anim = "dash"
 		if not animated_sprite.sprite_frames.has_animation(anim):
@@ -292,8 +299,41 @@ func _update_animation(direction: Vector2) -> void:
 		var moving = direction.length() > 0.1
 		anim = ("walk " if moving else "idle ") + facing
 
+	anim = _resolve_attribute_animation(anim)
+
 	if animated_sprite.animation != anim:
 		animated_sprite.play(anim)
+
+
+func _resolve_attribute_animation(base_anim: String) -> String:
+	if not animated_sprite or not animated_sprite.sprite_frames:
+		return base_anim
+
+	var attr_anim := "%s %s" % [base_anim, playerAttribute]
+	if animated_sprite.sprite_frames.has_animation(attr_anim):
+		return attr_anim
+
+	return base_anim
+
+
+func _resolve_boat_animation(facing: String) -> String:
+	if not animated_sprite or not animated_sprite.sprite_frames:
+		return "idle " + facing
+
+	var boat_attr_anim := "boat %s %s" % [facing, playerAttribute]
+	if animated_sprite.sprite_frames.has_animation(boat_attr_anim):
+		return boat_attr_anim
+
+	var boat_anim := "boat " + facing
+	if animated_sprite.sprite_frames.has_animation(boat_anim):
+		return boat_anim
+
+	return _resolve_attribute_animation("idle " + facing)
+
+
+func set_boat_mode(enabled: bool) -> void:
+	is_boat_mode = enabled
+	_update_animation(Vector2.ZERO)
 
 func set_facing_direction(direction: Vector2) -> void:
 	if direction.length() == 0:
