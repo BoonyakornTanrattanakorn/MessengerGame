@@ -124,9 +124,24 @@ func _play_serpent_dive_to_right_and_awaken() -> void:
 
 func _play_post_win_cutscene() -> void:
 	await _play_serpent_defeat_rise_at_right()
+	_set_player_idle_right()
+	await _focus_camera_to_serpent()
 	await _play_dialogue(_win_dialogue_title)
 	await _play_serpent_final_dive()
 	await _play_dialogue(_win_2_dialogue_title)
+	if _tracked_player != null and _tracked_player.has_method("return_camera"):
+		_tracked_player.return_camera()
+	_set_player_cutscene_lock(false)
+
+
+func _focus_camera_to_serpent() -> void:
+	_bind_water_serpent()
+	if _water_serpent == null:
+		return
+
+	if _tracked_player != null and _tracked_player.has_method("focus_camera_to"):
+		_tracked_player.focus_camera_to(_water_serpent)
+		await get_tree().create_timer(0.55).timeout
 
 
 func _play_serpent_defeat_rise_at_right() -> void:
@@ -201,8 +216,28 @@ func _on_water_serpent_attack_set_completed(total_sets: int) -> void:
 		return
 
 	if _completed_attack_sets >= _required_attack_sets:
+		_set_player_cutscene_lock(true)
 		_is_resolving_victory = true
 		call_deferred("_resolve_set_based_victory")
+
+
+func _set_player_cutscene_lock(locked: bool) -> void:
+	if _tracked_player == null:
+		return
+
+	if _tracked_player.has_method("set"):
+		_tracked_player.set("is_in_dialogue", locked)
+
+	if locked and _tracked_player is CharacterBody2D:
+		(_tracked_player as CharacterBody2D).velocity = Vector2.ZERO
+
+
+func _set_player_idle_right() -> void:
+	if _tracked_player == null:
+		return
+
+	if _tracked_player.has_method("set_facing_direction"):
+		_tracked_player.set_facing_direction(Vector2.RIGHT)
 
 
 func _resolve_set_based_victory() -> void:
@@ -248,6 +283,7 @@ func _finish_boss_fight_win() -> void:
 
 	ObjectiveManager.set_objective("Continue to town")
 	boss_fight_won.emit(_tracked_player)
+	_set_player_cutscene_lock(false)
 
 	_tracked_player = null
 	_tracked_camera = null
