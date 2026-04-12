@@ -2,6 +2,10 @@ extends Node2D
 
 signal intro_rise_finished
 signal dive_to_right_finished
+signal defeat_sequence_finished
+signal defeat_rise_finished
+signal defeat_final_dive_finished
+signal attack_set_completed(total_sets: int)
 
 enum PatrolAnchor {
 	MID_RIGHT,
@@ -49,6 +53,10 @@ var _active_rise_animation: StringName = StringName()
 var _is_awake: bool = false
 var _is_awakening_intro: bool = false
 var _is_forced_dive_to_right: bool = false
+var _is_playing_defeat_sequence: bool = false
+var _set_has_left_to_right: bool = false
+var _set_has_right_to_left: bool = false
+var _completed_attack_sets: int = 0
 
 
 func _ready() -> void:
@@ -79,6 +87,9 @@ func _process(delta: float) -> void:
 		return
 
 	if not _is_awake:
+		return
+
+	if _is_playing_defeat_sequence:
 		return
 
 	var camera_center: Vector2 = _camera.get_screen_center_position()
@@ -176,6 +187,71 @@ func play_dive_to_right_and_awaken() -> void:
 	_start_dive_transition(PatrolAnchor.MID_RIGHT)
 
 
+func reset_attack_sets() -> void:
+	_set_has_left_to_right = false
+	_set_has_right_to_left = false
+	_completed_attack_sets = 0
+
+
+func play_defeat_rise_at_right() -> void:
+	if _is_playing_defeat_sequence:
+		return
+
+	_is_playing_defeat_sequence = true
+	_is_awake = false
+	_is_awakening_intro = false
+	_dive_state = DiveState.NONE
+
+	if _sprite == null:
+		defeat_sequence_finished.emit()
+		return
+
+	_sprite.visible = true
+
+	var dive_anim := _resolve_dive_animation_name()
+	var rise_anim := _resolve_rise_animation_name()
+
+	# Dive from current position.
+	if not dive_anim.is_empty():
+		_sprite.play(dive_anim)
+		await _sprite.animation_finished
+
+	# Re-emerge at mid-right.
+	global_position = _get_anchor_world_position(PatrolAnchor.MID_RIGHT)
+	_update_sprite_facing(PatrolAnchor.MID_RIGHT)
+	_anchor_index = 0
+	_previous_anchor = PatrolAnchor.MID_RIGHT
+
+	if not rise_anim.is_empty():
+		_sprite.play(rise_anim)
+		await _sprite.animation_finished
+
+	defeat_rise_finished.emit()
+
+
+func play_defeat_final_dive() -> void:
+	if _sprite == null:
+		_is_playing_defeat_sequence = false
+		defeat_final_dive_finished.emit()
+		defeat_sequence_finished.emit()
+		return
+
+	var dive_anim := _resolve_dive_animation_name()
+	if not dive_anim.is_empty():
+		_sprite.play(dive_anim)
+		await _sprite.animation_finished
+
+	_sprite.visible = false
+	_is_playing_defeat_sequence = false
+	defeat_final_dive_finished.emit()
+	defeat_sequence_finished.emit()
+
+
+func play_defeat_sequence() -> void:
+	await play_defeat_rise_at_right()
+	await play_defeat_final_dive()
+
+
 func _resolve_camera() -> Camera2D:
 	var viewport_camera := get_viewport().get_camera_2d()
 	if viewport_camera != null and viewport_camera.enabled:
@@ -241,6 +317,7 @@ func _go_to_next_anchor() -> void:
 
 func _update_dive_state(target_anchor: PatrolAnchor) -> void:
 	if _is_dive_segment(_previous_anchor, target_anchor):
+		_register_cross_side_transition(_previous_anchor, target_anchor)
 		_start_dive_transition(target_anchor)
 		return
 
@@ -402,6 +479,22 @@ func _find_player() -> Node2D:
 
 func _is_dive_segment(from_anchor: PatrolAnchor, to_anchor: PatrolAnchor) -> bool:
 	return (_is_left_anchor(from_anchor) and _is_right_anchor(to_anchor)) or (_is_right_anchor(from_anchor) and _is_left_anchor(to_anchor))
+
+
+func _register_cross_side_transition(from_anchor: PatrolAnchor, to_anchor: PatrolAnchor) -> void:
+	if _is_forced_dive_to_right or _is_playing_defeat_sequence or _is_awakening_intro:
+		return
+
+	if _is_left_anchor(from_anchor) and _is_right_anchor(to_anchor):
+		_set_has_left_to_right = true
+	elif _is_right_anchor(from_anchor) and _is_left_anchor(to_anchor):
+		_set_has_right_to_left = true
+
+	if _set_has_left_to_right and _set_has_right_to_left:
+		_completed_attack_sets += 1
+		attack_set_completed.emit(_completed_attack_sets)
+		_set_has_left_to_right = false
+		_set_has_right_to_left = false
 
 
 func _is_left_anchor(anchor: PatrolAnchor) -> bool:

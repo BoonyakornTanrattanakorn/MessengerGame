@@ -10,13 +10,16 @@ signal boss_fight_won(player: Node2D)
 @export var _borders: StaticBody2D = get_node_or_null("BossFightZoneBorders") as StaticBody2D
 @export var _water_serpent: Node2D
 @export var _encounter_dialogue_title: String = "start"
-@export var _debug_auto_win: bool = true
-@export_range(0.5, 30.0, 0.5) var _debug_win_delay: float = 10.0
+@export var _win_dialogue_title: String = "win"
+@export var _win_2_dialogue_title: String = "win_2"
+@export_range(1, 20, 1) var _required_attack_sets: int = 8
 
 var _tracked_player: Node2D = null
 var _tracked_camera: Camera2D = null
 var _has_started: bool = false
 var _has_won: bool = false
+var _is_resolving_victory: bool = false
+var _completed_attack_sets: int = 0
 
 var _saved_limit_left: int = 0
 var _saved_limit_right: int = 0
@@ -74,7 +77,7 @@ func _start_boss_fight(player: Node2D) -> void:
 	await _play_serpent_dive_to_right_and_awaken()
 
 	boss_fight_started.emit(player)
-	_start_debug_win_timer()
+	_reset_attack_set_progress()
 
 
 func _play_encounter_dialogue() -> void:
@@ -119,16 +122,53 @@ func _play_serpent_dive_to_right_and_awaken() -> void:
 		_water_serpent.awaken()
 
 
-func _start_debug_win_timer() -> void:
-	if not _debug_auto_win:
+func _play_post_win_cutscene() -> void:
+	await _play_serpent_defeat_rise_at_right()
+	await _play_dialogue(_win_dialogue_title)
+	await _play_serpent_final_dive()
+	await _play_dialogue(_win_2_dialogue_title)
+
+
+func _play_serpent_defeat_rise_at_right() -> void:
+	_bind_water_serpent()
+	if _water_serpent == null:
 		return
 
-	await get_tree().create_timer(_debug_win_delay).timeout
-	if _has_started and not _has_won:
-		print("Water Serpent defeated")
-		# In mock/debug defeat flow, drop arena borders immediately.
-		_set_borders_enabled(false)
-		_finish_boss_fight_win()
+	if _water_serpent.has_method("play_defeat_rise_at_right"):
+		_water_serpent.play_defeat_rise_at_right()
+		if _water_serpent.has_signal("defeat_rise_finished"):
+			await _water_serpent.defeat_rise_finished
+		return
+
+	if _water_serpent.has_method("play_defeat_sequence"):
+		_water_serpent.play_defeat_sequence()
+		if _water_serpent.has_signal("defeat_sequence_finished"):
+			await _water_serpent.defeat_sequence_finished
+
+
+func _play_serpent_final_dive() -> void:
+	_bind_water_serpent()
+	if _water_serpent == null:
+		return
+
+	if _water_serpent.has_method("play_defeat_final_dive"):
+		_water_serpent.play_defeat_final_dive()
+		if _water_serpent.has_signal("defeat_final_dive_finished"):
+			await _water_serpent.defeat_final_dive_finished
+		return
+
+	if _water_serpent.has_method("play_defeat_sequence"):
+		_water_serpent.play_defeat_sequence()
+		if _water_serpent.has_signal("defeat_sequence_finished"):
+			await _water_serpent.defeat_sequence_finished
+
+
+func _play_dialogue(title: String) -> void:
+	if dialogue == null:
+		return
+
+	DialogueManager.show_dialogue_balloon(dialogue, title)
+	await DialogueManager.dialogue_ended
 
 
 func _bind_water_serpent() -> void:
@@ -142,8 +182,36 @@ func _bind_water_serpent() -> void:
 		_water_serpent.connect("boss_defeated", Callable(self, "_on_water_serpent_defeated"))
 	if _water_serpent.has_signal("defeated") and not _water_serpent.is_connected("defeated", Callable(self, "_on_water_serpent_defeated")):
 		_water_serpent.connect("defeated", Callable(self, "_on_water_serpent_defeated"))
+	if _water_serpent.has_signal("attack_set_completed") and not _water_serpent.is_connected("attack_set_completed", Callable(self, "_on_water_serpent_attack_set_completed")):
+		_water_serpent.connect("attack_set_completed", Callable(self, "_on_water_serpent_attack_set_completed"))
 	if not _water_serpent.is_connected("tree_exited", Callable(self, "_on_water_serpent_tree_exited")):
 		_water_serpent.tree_exited.connect(_on_water_serpent_tree_exited)
+
+
+func _reset_attack_set_progress() -> void:
+	_completed_attack_sets = 0
+	_bind_water_serpent()
+	if _water_serpent != null and _water_serpent.has_method("reset_attack_sets"):
+		_water_serpent.reset_attack_sets()
+
+
+func _on_water_serpent_attack_set_completed(total_sets: int) -> void:
+	_completed_attack_sets = total_sets
+	if _is_resolving_victory or _has_won or not _has_started:
+		return
+
+	if _completed_attack_sets >= _required_attack_sets:
+		_is_resolving_victory = true
+		call_deferred("_resolve_set_based_victory")
+
+
+func _resolve_set_based_victory() -> void:
+	if _has_won or not _has_started:
+		_is_resolving_victory = false
+		return
+
+	await _play_post_win_cutscene()
+	_finish_boss_fight_win()
 
 
 func _awaken_water_serpent() -> void:
@@ -170,6 +238,7 @@ func _finish_boss_fight_win() -> void:
 
 	_has_won = true
 	_has_started = false
+	_is_resolving_victory = false
 
 	if _tracked_camera != null:
 		_restore_camera_limits(_tracked_camera)
