@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bmsw7owjtv1um"]
 
-[ext_resource type="Script" uid="uid://82n0ge3wbjet" path="res://game/chapter_2/node_2/moving_platform.gd" id="1_x1c7q"]
+[ext_resource type="Script" uid="uid://82n0ge3wbjet" path="res://game/chapter_2/node_4/upper_node/moving_platform.gd" id="1_x1c7q"]
 [ext_resource type="Texture2D" uid="uid://d8jxn6d34bfy" path="res://assets/sprites/maps/tilesets/Outside_B.png" id="2_hs5s4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hs5s4"]
