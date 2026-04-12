@@ -1,8 +1,40 @@
 [gd_scene format=3 uid="uid://iq255vk6v3yr"]
 
 [ext_resource type="Script" uid="uid://c5rw7btl0g1e5" path="res://game/chapter_2/node_6/scripts/water_serpent.gd" id="1_pe236"]
-[ext_resource type="Texture2D" uid="uid://bvf8apu8qrrho" path="res://assets/sprites/water_serpent/idle.png" id="1_wqvgd"]
-[ext_resource type="Texture2D" uid="uid://nvdupfyv6c50" path="res://assets/sprites/water_serpent/swimming.png" id="2_pe236"]
+[ext_resource type="Texture2D" uid="uid://bvf8apu8qrrho" path="res://assets/sprites/water_serpent/shoot_n_idle.png" id="1_wqvgd"]
+[ext_resource type="Texture2D" uid="uid://bfafjo0rvnc7y" path="res://assets/sprites/water_serpent/dive.png" id="2_wehoj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcyfn"]
+atlas = ExtResource("2_wehoj")
+region = Rect2(0, 0, 180, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldc6l"]
+atlas = ExtResource("2_wehoj")
+region = Rect2(180, 0, 180, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wok1h"]
+atlas = ExtResource("2_wehoj")
+region = Rect2(360, 0, 180, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilgj5"]
+atlas = ExtResource("2_wehoj")
+region = Rect2(540, 0, 180, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8cox"]
+atlas = ExtResource("2_wehoj")
+region = Rect2(720, 0, 180, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8op0i"]
+atlas = ExtResource("2_wehoj")
+region = Rect2(900, 0, 180, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vi2ot"]
+atlas = ExtResource("2_wehoj")
+region = Rect2(1080, 0, 180, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe236"]
+atlas = ExtResource("1_wqvgd")
+region = Rect2(0, 0, 180, 180)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wehoj"]
 atlas = ExtResource("1_wqvgd")
@@ -20,40 +52,42 @@ region = Rect2(360, 0, 180, 180)
 atlas = ExtResource("1_wqvgd")
 region = Rect2(720, 0, 180, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cfkuh"]
-atlas = ExtResource("2_pe236")
-region = Rect2(0, 0, 180, 180)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2yfcy"]
-atlas = ExtResource("2_pe236")
-region = Rect2(180, 0, 180, 180)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pdfni"]
-atlas = ExtResource("2_pe236")
-region = Rect2(360, 0, 180, 180)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4drdd"]
-atlas = ExtResource("2_pe236")
-region = Rect2(540, 0, 180, 180)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sui1m"]
-atlas = ExtResource("2_pe236")
-region = Rect2(720, 0, 180, 180)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_puser"]
-atlas = ExtResource("2_pe236")
-region = Rect2(900, 0, 180, 180)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dawcl"]
-atlas = ExtResource("2_pe236")
-region = Rect2(1080, 0, 180, 180)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g3k4a"]
-atlas = ExtResource("2_pe236")
-region = Rect2(1260, 0, 180, 180)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_bcyfn"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcyfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldc6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wok1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilgj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8cox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8op0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi2ot")
+}],
+"loop": false,
+"name": &"dive",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe236")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wehoj")
@@ -66,39 +100,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2tqq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wehoj")
 }],
-"loop": true,
-"name": &"idle",
+"loop": false,
+"name": &"shoot",
 "speed": 6.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cfkuh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2yfcy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pdfni")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4drdd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sui1m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_puser")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dawcl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g3k4a")
-}],
-"loop": true,
-"name": &"swimming",
-"speed": 10.0
 }]
 
 [node name="WaterSerpent" type="Node2D" unique_id=1998665961]

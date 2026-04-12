@@ -63,6 +63,7 @@ func _start_boss_fight(player: Node2D) -> void:
 	_set_borders_enabled(true)
 	_save_camera_limits(camera)
 	_apply_zone_limits(camera)
+	_awaken_water_serpent()
 
 	ObjectiveManager.set_objective("Defeat the Water Serpent!")
 	boss_fight_started.emit(player)
@@ -92,6 +93,15 @@ func _bind_water_serpent() -> void:
 		_water_serpent.connect("defeated", Callable(self, "_on_water_serpent_defeated"))
 	if not _water_serpent.is_connected("tree_exited", Callable(self, "_on_water_serpent_tree_exited")):
 		_water_serpent.tree_exited.connect(_on_water_serpent_tree_exited)
+
+
+func _awaken_water_serpent() -> void:
+	_bind_water_serpent()
+	if _water_serpent == null:
+		return
+
+	if _water_serpent.has_method("awaken"):
+		_water_serpent.call_deferred("awaken")
 
 
 func _on_water_serpent_defeated() -> void:

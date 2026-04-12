@@ -10,13 +10,23 @@ enum PatrolAnchor {
 	MID_LEFT,
 }
 
+enum DiveState {
+	NONE,
+	SINKING,
+	RISING,
+}
+
 @export var camera_path: NodePath = NodePath("../../Player/Camera2D")
 @export var swim_speed: float = 140.0
-@export var dive_speed_multiplier: float = 1.8
-@export var arrival_distance: float = 18.0
+@export var arrival_distance: float = 2.0
 @export var border_padding: Vector2 = Vector2(88.0, 72.0)
 @export var mid_anchor_lift: float = 22.0
 @export var top_anchor_lift: float = 30.0
+@export var dive_animation_name: StringName = &"dive"
+@export var idle_animation_name: StringName = &"idle"
+@export var right_side_flip_h: bool = true
+@export var left_side_flip_h: bool = false
+@export var start_awake: bool = false
 @export var use_randomized_path: bool = false
 @export var reshuffle_each_loop: bool = true
 
@@ -28,6 +38,10 @@ var _anchor_index: int = 0
 var _previous_anchor: PatrolAnchor = PatrolAnchor.MID_RIGHT
 var _last_camera_center: Vector2 = Vector2.ZERO
 var _has_last_camera_center: bool = false
+var _dive_state: DiveState = DiveState.NONE
+var _dive_target_anchor: PatrolAnchor = PatrolAnchor.MID_RIGHT
+var _active_dive_animation: StringName = StringName()
+var _is_awake: bool = false
 
 
 func _ready() -> void:
@@ -37,6 +51,10 @@ func _ready() -> void:
 		push_warning("WaterSerpent: Camera2D not found. The serpent will keep trying to bind in _process.")
 		return
 
+	if _sprite != null and not _sprite.animation_finished.is_connected(_on_sprite_animation_finished):
+		_sprite.animation_finished.connect(_on_sprite_animation_finished)
+
+	_is_awake = start_awake
 	_update_dive_state(_anchors[_anchor_index])
 	_last_camera_center = _camera.get_screen_center_position()
 	_has_last_camera_center = true
@@ -53,6 +71,9 @@ func _process(delta: float) -> void:
 	if _anchors.is_empty():
 		return
 
+	if not _is_awake:
+		return
+
 	var camera_center: Vector2 = _camera.get_screen_center_position()
 	if _has_last_camera_center:
 		# Keep serpent anchored to the camera space while still swimming between anchors.
@@ -60,14 +81,27 @@ func _process(delta: float) -> void:
 	_last_camera_center = camera_center
 	_has_last_camera_center = true
 
+	if _dive_state != DiveState.NONE:
+		return
+
 	var target_anchor: PatrolAnchor = _anchors[_anchor_index]
 	var target_position: Vector2 = _get_anchor_world_position(target_anchor)
-	var move_speed: float = swim_speed * (dive_speed_multiplier if _is_dive_segment(_previous_anchor, target_anchor) else 1.0)
-	global_position = global_position.move_toward(target_position, move_speed * delta)
+	global_position = global_position.move_toward(target_position, swim_speed * delta)
 
 	if global_position.distance_to(target_position) <= arrival_distance:
 		_go_to_next_anchor()
 		_update_dive_state(_anchors[_anchor_index])
+
+
+func awaken() -> void:
+	if _is_awake:
+		return
+
+	_is_awake = true
+	if _camera != null:
+		_last_camera_center = _camera.get_screen_center_position()
+		_has_last_camera_center = true
+	_update_dive_state(_anchors[_anchor_index])
 
 
 func _resolve_camera() -> Camera2D:
@@ -134,10 +168,85 @@ func _go_to_next_anchor() -> void:
 
 
 func _update_dive_state(target_anchor: PatrolAnchor) -> void:
+	if _is_dive_segment(_previous_anchor, target_anchor):
+		_start_dive_transition(target_anchor)
+		return
+
+	_update_sprite_facing(target_anchor)
+	_play_surface_animation()
+
+
+func _update_sprite_facing(target_anchor: PatrolAnchor) -> void:
 	if _sprite == null:
 		return
 
-	_sprite.visible = not _is_dive_segment(_previous_anchor, target_anchor)
+	if _is_right_anchor(target_anchor):
+		_sprite.flip_h = right_side_flip_h
+	elif _is_left_anchor(target_anchor):
+		_sprite.flip_h = left_side_flip_h
+
+
+func _start_dive_transition(target_anchor: PatrolAnchor) -> void:
+	# Sink animation should face based on the side we are currently on.
+	_update_sprite_facing(_previous_anchor)
+
+	_active_dive_animation = _resolve_dive_animation_name()
+	if _sprite == null or _active_dive_animation.is_empty():
+		global_position = _get_anchor_world_position(target_anchor)
+		_dive_state = DiveState.NONE
+		_update_sprite_facing(target_anchor)
+		_play_surface_animation()
+		return
+
+	_dive_target_anchor = target_anchor
+	_dive_state = DiveState.SINKING
+	_sprite.play(_active_dive_animation)
+
+
+func _on_sprite_animation_finished() -> void:
+	if _sprite == null:
+		return
+
+	if _dive_state == DiveState.SINKING and _sprite.animation == _active_dive_animation:
+		global_position = _get_anchor_world_position(_dive_target_anchor)
+		# After teleport, face based on destination side for the reverse animation.
+		_update_sprite_facing(_dive_target_anchor)
+		_dive_state = DiveState.RISING
+		_sprite.play(_active_dive_animation, -1.0, true)
+		return
+
+	if _dive_state == DiveState.RISING and _sprite.animation == _active_dive_animation:
+		_dive_state = DiveState.NONE
+		_active_dive_animation = StringName()
+		_play_surface_animation()
+
+
+func _play_surface_animation() -> void:
+	if _sprite == null:
+		return
+
+	if _has_animation(idle_animation_name):
+		if _sprite.animation != idle_animation_name or not _sprite.is_playing():
+			_sprite.play(idle_animation_name)
+
+
+func _has_animation(animation_name: StringName) -> bool:
+	if _sprite == null or _sprite.sprite_frames == null:
+		return false
+
+	return _sprite.sprite_frames.has_animation(animation_name)
+
+
+func _resolve_dive_animation_name() -> StringName:
+	if _has_animation(dive_animation_name):
+		return dive_animation_name
+
+	# Allow common naming variants to avoid accidental instant teleports.
+	for fallback in [&"dive", &"diving", &"Dive", &"Diving"]:
+		if _has_animation(fallback):
+			return fallback
+
+	return StringName()
 
 
 func _is_dive_segment(from_anchor: PatrolAnchor, to_anchor: PatrolAnchor) -> bool:

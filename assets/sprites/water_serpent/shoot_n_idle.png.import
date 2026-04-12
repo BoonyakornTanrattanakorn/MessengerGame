@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvf8apu8qrrho"
-path="res://.godot/imported/idle.png-a208721b74820fe7aaae8b8d7bc4bec9.ctex"
+path="res://.godot/imported/shoot_n_idle.png-2b54593333c610edcb1f233a907e4ffc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/water_serpent/idle.png"
-dest_files=["res://.godot/imported/idle.png-a208721b74820fe7aaae8b8d7bc4bec9.ctex"]
+source_file="res://assets/sprites/water_serpent/shoot_n_idle.png"
+dest_files=["res://.godot/imported/shoot_n_idle.png-2b54593333c610edcb1f233a907e4ffc.ctex"]
 
 [params]
 
