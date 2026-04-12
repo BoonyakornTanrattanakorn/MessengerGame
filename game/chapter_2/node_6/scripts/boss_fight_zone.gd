@@ -68,7 +68,7 @@ func _start_boss_fight(player: Node2D) -> void:
 	_set_borders_enabled(true)
 	_save_camera_limits(camera)
 	_apply_zone_limits(camera)
-	ObjectiveManager.set_objective("Defeat the Water Serpent!")
+	ObjectiveManager.set_objective("Survive the Water Serpent!")
 	if player.has_method("return_camera"):
 		player.return_camera()
 	await _play_serpent_dive_to_right_and_awaken()

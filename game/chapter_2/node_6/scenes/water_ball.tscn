@@ -1,6 +1,17 @@
 [gd_scene format=3 uid="uid://c41ah3558j3eh"]
 
 [ext_resource type="Script" uid="uid://dpqec8m763xix" path="res://game/chapter_2/node_6/scripts/water_ball.gd" id="1_p0qfy"]
+[ext_resource type="Texture2D" uid="uid://ddmwqie31s00j" path="res://assets/sprites/water_serpent/water_ball.png" id="2_eopd2"]
 
-[node name="WaterBall" type="Node2D" unique_id=1841102751]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3sp6u"]
+size = Vector2(118, 96)
+
+[node name="WaterBall" type="Area2D" unique_id=1841102751]
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_p0qfy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1174540969]
+texture = ExtResource("2_eopd2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1681908990]
+shape = SubResource("RectangleShape2D_3sp6u")

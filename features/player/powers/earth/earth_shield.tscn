@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://ckdintdovtmdc"]
+
+[ext_resource type="Script" uid="uid://wxf720qk5bxu" path="res://features/player/powers/earth/earth_shield.gd" id="1_anjix"]
+[ext_resource type="Texture2D" uid="uid://bltqbquc4fooh" path="res://assets/sprites/earth_shield/earth_shield.png" id="2_k5ihu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty064"]
+atlas = ExtResource("2_k5ihu")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qofe8"]
+atlas = ExtResource("2_k5ihu")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0x1w"]
+atlas = ExtResource("2_k5ihu")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhjxa"]
+atlas = ExtResource("2_k5ihu")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jch38"]
+atlas = ExtResource("2_k5ihu")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfoex"]
+atlas = ExtResource("2_k5ihu")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ohnx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty064")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qofe8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0x1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhjxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jch38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfoex")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oym75"]
+size = Vector2(82, 88)
+
+[node name="EarthShield" type="Node2D" unique_id=1471186977]
+script = ExtResource("1_anjix")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=780066794]
+sprite_frames = SubResource("SpriteFrames_1ohnx")
+frame_progress = 0.8674052
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2143679496]
+shape = SubResource("RectangleShape2D_oym75")

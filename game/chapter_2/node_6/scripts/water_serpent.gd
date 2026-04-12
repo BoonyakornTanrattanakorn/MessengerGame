@@ -27,6 +27,7 @@ enum DiveState {
 @export var dive_animation_name: StringName = &"dive"
 @export var rise_animation_name: StringName = &"rise"
 @export var idle_animation_name: StringName = &"idle"
+@export var water_ball_scene: PackedScene = preload("res://game/chapter_2/node_6/scenes/water_ball.tscn")
 @export var right_side_flip_h: bool = true
 @export var left_side_flip_h: bool = false
 @export var start_awake: bool = false
@@ -95,6 +96,8 @@ func _process(delta: float) -> void:
 	global_position = global_position.move_toward(target_position, swim_speed * delta)
 
 	if global_position.distance_to(target_position) <= arrival_distance:
+		if _should_shoot_at_anchor(target_anchor):
+			_shoot_water_ball(target_anchor)
 		_go_to_next_anchor()
 		_update_dive_state(_anchors[_anchor_index])
 
@@ -350,6 +353,51 @@ func _resolve_rise_animation_name() -> StringName:
 			return fallback
 
 	return StringName()
+
+
+func _should_shoot_at_anchor(anchor: PatrolAnchor) -> bool:
+	return anchor == PatrolAnchor.TOP_RIGHT or anchor == PatrolAnchor.TOP_LEFT or anchor == PatrolAnchor.BOTTOM_RIGHT or anchor == PatrolAnchor.BOTTOM_LEFT
+
+
+func _shoot_water_ball(anchor: PatrolAnchor) -> void:
+	if water_ball_scene == null:
+		return
+
+	var water_ball := water_ball_scene.instantiate()
+	if water_ball == null:
+		return
+
+	var direction: Vector2 = _get_water_ball_direction(anchor)
+	if water_ball.has_method("initialize"):
+		water_ball.initialize(global_position, direction)
+	else:
+		water_ball.global_position = global_position
+
+	get_tree().current_scene.add_child(water_ball)
+
+
+func _get_water_ball_direction(anchor: PatrolAnchor) -> Vector2:
+	var player := _find_player()
+	if player != null:
+		var to_player: Vector2 = player.global_position - global_position
+		if to_player.length() > 0.001:
+			return to_player.normalized()
+
+	if _is_right_anchor(anchor):
+		return Vector2.LEFT
+	return Vector2.RIGHT
+
+
+func _find_player() -> Node2D:
+	var current_scene := get_tree().current_scene
+	if current_scene == null:
+		return null
+
+	var player := current_scene.find_child("Player", true, false)
+	if player is Node2D:
+		return player as Node2D
+
+	return null
 
 
 func _is_dive_segment(from_anchor: PatrolAnchor, to_anchor: PatrolAnchor) -> bool:
