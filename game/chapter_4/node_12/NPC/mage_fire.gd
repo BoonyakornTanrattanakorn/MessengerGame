@@ -5,9 +5,7 @@ const FIRE_COLOR := Color(1.0, 0.35, 0.15, 1.0)
 func _ready() -> void:
 	mage_element = "fire"
 	required_reflect_element = "fire"
-	attack_interval = 2.8
-	vulnerability_duration = 1.8
-	projectile_speed = 240.0
+	projectile_speed = 150.0
 	super._ready()
 
 func perform_attack_pattern() -> void:

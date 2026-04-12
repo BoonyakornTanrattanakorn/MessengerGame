@@ -133,3 +133,15 @@ animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1244478987]
 shape = SubResource("RectangleShape2D_u5n88")
+
+[node name="Barrier" type="Node2D" parent="." unique_id=1174806569]
+
+[node name="Fill" type="Polygon2D" parent="Barrier" unique_id=1759847605]
+
+[node name="Ring" type="Line2D" parent="Barrier" unique_id=785910195]
+
+[node name="Health" type="Node2D" parent="." unique_id=1086917557]
+
+[node name="BG" type="Polygon2D" parent="Health" unique_id=1587559129]
+
+[node name="Fill" type="Polygon2D" parent="Health" unique_id=597571381]

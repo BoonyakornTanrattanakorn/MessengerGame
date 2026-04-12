@@ -6,9 +6,7 @@ const IMPACT_COLOR := Color(0.55, 0.35, 0.2, 1.0)
 func _ready() -> void:
 	mage_element = "earth"
 	required_reflect_element = "earth"
-	attack_interval = 2.8
-	vulnerability_duration = 1.9
-	projectile_speed = 230.0
+	projectile_speed = 100.0
 	super._ready()
 
 func perform_attack_pattern() -> void:

@@ -6,9 +6,7 @@ const BOLT_COLOR := Color(0.0, 0.796, 0.0, 1.0)
 func _ready() -> void:
 	mage_element = "wind"
 	required_reflect_element = "wind"
-	attack_interval = 2.5
-	vulnerability_duration = 1.7
-	projectile_speed = 220.0
+	projectile_speed = 200.0
 	super._ready()
 
 func perform_attack_pattern() -> void:
