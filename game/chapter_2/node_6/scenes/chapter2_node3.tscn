@@ -117,6 +117,6 @@ position = Vector2(0, -280)
 shape = SubResource("RectangleShape2D_lhdtu")
 
 [node name="WaterSerpent" parent="." unique_id=1998665961 instance=ExtResource("5_lynql")]
-position = Vector2(1800, 0)
+position = Vector2(1900, 0)
 
 [connection signal="area_entered" from="GoBackZone" to="GoBackZone" method="_on_area_entered"]

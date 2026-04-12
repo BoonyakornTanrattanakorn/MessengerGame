@@ -1,5 +1,7 @@
 extends Node2D
 
+signal intro_rise_finished
+signal dive_to_right_finished
 
 enum PatrolAnchor {
 	MID_RIGHT,
@@ -42,6 +44,8 @@ var _dive_state: DiveState = DiveState.NONE
 var _dive_target_anchor: PatrolAnchor = PatrolAnchor.MID_RIGHT
 var _active_dive_animation: StringName = StringName()
 var _is_awake: bool = false
+var _is_awakening_intro: bool = false
+var _is_forced_dive_to_right: bool = false
 
 
 func _ready() -> void:
@@ -81,7 +85,7 @@ func _process(delta: float) -> void:
 	_last_camera_center = camera_center
 	_has_last_camera_center = true
 
-	if _dive_state != DiveState.NONE:
+	if _dive_state != DiveState.NONE or _is_awakening_intro:
 		return
 
 	var target_anchor: PatrolAnchor = _anchors[_anchor_index]
@@ -94,7 +98,7 @@ func _process(delta: float) -> void:
 
 
 func awaken() -> void:
-	if _is_awake:
+	if _is_awake or _is_awakening_intro:
 		return
 
 	_is_awake = true
@@ -102,6 +106,37 @@ func awaken() -> void:
 		_last_camera_center = _camera.get_screen_center_position()
 		_has_last_camera_center = true
 	_update_dive_state(_anchors[_anchor_index])
+
+
+func play_intro_rise() -> void:
+	if _is_awakening_intro:
+		return
+
+	_active_dive_animation = _resolve_dive_animation_name()
+	if _sprite == null or _active_dive_animation.is_empty():
+		intro_rise_finished.emit()
+		return
+
+	_is_awake = false
+	_dive_state = DiveState.NONE
+
+	_update_sprite_facing(_anchors[_anchor_index])
+	_is_awakening_intro = true
+	_sprite.play(_active_dive_animation, -1.0, true)
+
+
+func play_dive_to_right_and_awaken() -> void:
+	if _sprite == null:
+		_is_awake = true
+		dive_to_right_finished.emit()
+		return
+
+	if _dive_state != DiveState.NONE or _is_awakening_intro:
+		return
+
+	_is_awake = false
+	_is_forced_dive_to_right = true
+	_start_dive_transition(PatrolAnchor.MID_RIGHT)
 
 
 func _resolve_camera() -> Camera2D:
@@ -195,6 +230,11 @@ func _start_dive_transition(target_anchor: PatrolAnchor) -> void:
 		global_position = _get_anchor_world_position(target_anchor)
 		_dive_state = DiveState.NONE
 		_update_sprite_facing(target_anchor)
+		if _is_forced_dive_to_right:
+			_is_forced_dive_to_right = false
+			_is_awake = true
+			dive_to_right_finished.emit()
+			return
 		_play_surface_animation()
 		return
 
@@ -205,6 +245,12 @@ func _start_dive_transition(target_anchor: PatrolAnchor) -> void:
 
 func _on_sprite_animation_finished() -> void:
 	if _sprite == null:
+		return
+
+	if _is_awakening_intro and _sprite.animation == _active_dive_animation:
+		_is_awakening_intro = false
+		_active_dive_animation = StringName()
+		intro_rise_finished.emit()
 		return
 
 	if _dive_state == DiveState.SINKING and _sprite.animation == _active_dive_animation:
@@ -218,6 +264,17 @@ func _on_sprite_animation_finished() -> void:
 	if _dive_state == DiveState.RISING and _sprite.animation == _active_dive_animation:
 		_dive_state = DiveState.NONE
 		_active_dive_animation = StringName()
+		if _is_forced_dive_to_right:
+			_is_forced_dive_to_right = false
+			_is_awake = true
+			_anchor_index = 0
+			_previous_anchor = PatrolAnchor.MID_RIGHT
+			if _camera != null:
+				_last_camera_center = _camera.get_screen_center_position()
+				_has_last_camera_center = true
+			dive_to_right_finished.emit()
+			_update_dive_state(_anchors[_anchor_index])
+			return
 		_play_surface_animation()
 
 

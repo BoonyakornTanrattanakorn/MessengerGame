@@ -1,5 +1,7 @@
 extends Area2D
 
+var dialogue = load("res://game/chapter_2/node_6/dialogue/water_serpent_encounter.dialogue")
+
 signal boss_fight_started(player: Node2D)
 signal boss_fight_won(player: Node2D)
 
@@ -7,6 +9,7 @@ signal boss_fight_won(player: Node2D)
 @export var _trigger_area: Area2D = get_node_or_null("BossFightTrigger") as Area2D
 @export var _borders: StaticBody2D = get_node_or_null("BossFightZoneBorders") as StaticBody2D
 @export var _water_serpent: Node2D
+@export var _encounter_dialogue_title: String = "start"
 @export var _debug_auto_win: bool = true
 @export_range(0.5, 30.0, 0.5) var _debug_win_delay: float = 10.0
 
@@ -60,14 +63,55 @@ func _start_boss_fight(player: Node2D) -> void:
 	_has_started = true
 	_tracked_player = player
 	_tracked_camera = camera
+	await _play_serpent_intro(player)
+	await _play_encounter_dialogue()
 	_set_borders_enabled(true)
 	_save_camera_limits(camera)
 	_apply_zone_limits(camera)
-	_awaken_water_serpent()
-
 	ObjectiveManager.set_objective("Defeat the Water Serpent!")
+	if player.has_method("return_camera"):
+		player.return_camera()
+	await _play_serpent_dive_to_right_and_awaken()
+
 	boss_fight_started.emit(player)
 	_start_debug_win_timer()
+
+
+func _play_encounter_dialogue() -> void:
+	if dialogue == null:
+		return
+
+	DialogueManager.show_dialogue_balloon(dialogue, _encounter_dialogue_title)
+	await DialogueManager.dialogue_ended
+
+
+func _play_serpent_intro(player: Node2D) -> void:
+	_bind_water_serpent()
+	if _water_serpent == null:
+		return
+
+	if player != null and player.has_method("focus_camera_to"):
+		player.focus_camera_to(_water_serpent)
+		# player.focus_camera_to tweens over 0.5s in player.gd.
+		await get_tree().create_timer(0.55).timeout
+
+	if _water_serpent.has_method("play_intro_rise"):
+		_water_serpent.play_intro_rise()
+		if _water_serpent.has_signal("intro_rise_finished"):
+			await _water_serpent.intro_rise_finished
+
+
+func _play_serpent_dive_to_right_and_awaken() -> void:
+	_bind_water_serpent()
+	if _water_serpent == null:
+		return
+
+	if _water_serpent.has_method("play_dive_to_right_and_awaken"):
+		_water_serpent.play_dive_to_right_and_awaken()
+		if _water_serpent.has_signal("dive_to_right_finished"):
+			await _water_serpent.dive_to_right_finished
+	elif _water_serpent.has_method("awaken"):
+		_water_serpent.awaken()
 
 
 func _start_debug_win_timer() -> void:
@@ -77,6 +121,8 @@ func _start_debug_win_timer() -> void:
 	await get_tree().create_timer(_debug_win_delay).timeout
 	if _has_started and not _has_won:
 		print("Water Serpent defeated")
+		# In mock/debug defeat flow, drop arena borders immediately.
+		_set_borders_enabled(false)
 		_finish_boss_fight_win()
 
 
