@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var next_level_path: String = "res://game/chapter_2/node_4/chapter_2_village.tscn"
-@export var spawn_position_in_next_level: Vector2 = Vector2(575, 500)
+@export var spawn_position_in_next_level: Vector2 = Vector2(705, 775)
 @export var facing_direction_on_warp: Vector2 = Vector2.DOWN
 
 func _ready() -> void:

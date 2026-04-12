@@ -3,7 +3,11 @@ extends Node2D
 @onready var body = $StaticBody2D
 @onready var area = $Area2D
 
-@export var duration = 10
+@export var duration: float = 10.0
+@export var pulse_radius: float = 42.0
+@export var pulse_interval: float = 0.65
+@export var pulse_damage: int = 1
+
 var is_in_hole = false
 var is_floating = false
 
