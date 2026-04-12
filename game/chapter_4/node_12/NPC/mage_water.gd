@@ -6,9 +6,8 @@ const WAVE_COLOR := Color(0.3, 0.65, 1.0, 1.0)
 func _ready() -> void:
 	mage_element = "water"
 	required_reflect_element = "water"
-	attack_interval = 2.7
-	vulnerability_duration = 1.75
-	projectile_speed = 180.0
+
+	projectile_speed = 125.0
 	super._ready()
 
 func perform_attack_pattern() -> void:

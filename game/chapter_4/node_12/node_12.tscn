@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" uid="uid://c5l285add1oxq" path="res://game/chapter_4/node_12/node_12_event_handler.gd" id="1_5xwdw"]
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="2_flfan"]
-[ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/NPC/king.tscn" id="3_otdus"]
-[ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/NPC/soldier.tscn" id="4_eymx0"]
-[ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/NPC/mage.tscn" id="5_1x7oo"]
+[ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
+[ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
+[ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage.tscn" id="5_1x7oo"]
 [ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
 [ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
-[ext_resource type="Script" uid="uid://dgn0iitlicuk2" path="res://game/chapter_4/node_12/NPC/mage_earth.gd" id="7_o0j4o"]
-[ext_resource type="Script" uid="uid://fw8yerxao6e" path="res://game/chapter_4/node_12/NPC/mage_wind.gd" id="8_gbb5j"]
-[ext_resource type="Script" uid="uid://dphboj3wmoywp" path="res://game/chapter_4/node_12/NPC/mage_fire.gd" id="9_n8nsa"]
-[ext_resource type="Script" uid="uid://b1aeadpyoisg6" path="res://game/chapter_4/node_12/NPC/mage_water.gd" id="10_gju0t"]
+[ext_resource type="Script" uid="uid://dgn0iitlicuk2" path="res://game/chapter_4/node_12/npc/mage_earth.gd" id="7_o0j4o"]
+[ext_resource type="Script" uid="uid://fw8yerxao6e" path="res://game/chapter_4/node_12/npc/mage_wind.gd" id="8_gbb5j"]
+[ext_resource type="Script" uid="uid://dphboj3wmoywp" path="res://game/chapter_4/node_12/npc/mage_fire.gd" id="9_n8nsa"]
+[ext_resource type="Script" uid="uid://b1aeadpyoisg6" path="res://game/chapter_4/node_12/npc/mage_water.gd" id="10_gju0t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
 font = ExtResource("6_jvdkp")
