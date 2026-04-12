@@ -1,24 +1,42 @@
-extends StaticBody2D
+extends Node2D
 
-@export var duration = 5.0
-@export var pulse_radius: float = 42.0
-@export var pulse_interval: float = 0.65
-@export var pulse_damage: int = 1
+@onready var body = $StaticBody2D
+@onready var area = $Area2D
+
+@export var duration = 10
+var is_in_hole = false
 var is_floating = false
+
+func _ready():
+	add_to_group("rock_pillar_main") 
+	area.add_to_group("rock_pillar")
+	start_timer()
 
 func setup_pillar(on_water: bool):
 	add_to_group("earth_reflector")
 	is_floating = on_water
-	
 	if is_floating:
-		set_collision_layer_value(1, false)
-		set_collision_mask_value(1, false)
-		print("Pillar: Floating mode")
+		body.set_collision_layer_value(1, false)
+		body.set_collision_mask_value(1, false)
+		print("Pillar: Floating mode (Walkable)")
 	else:
+		body.set_collision_layer_value(1, true)
+		body.set_collision_mask_value(1, true)
 		print("Pillar: Block mode")
 
-	start_damage_pulse()
+func enter_hole():
+	if is_in_hole: return
+	is_in_hole = true
+	
+	body.set_collision_layer_value(1, false)
+	area.monitoring = false
+	
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "modulate:a", 0.0, 0.3)
+	tween.tween_property(self, "scale", Vector2(0.5, 0.5), 0.3)
 
+func start_timer():
 	await get_tree().create_timer(duration).timeout
 	queue_free()
 

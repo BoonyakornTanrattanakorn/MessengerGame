@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://p538ajuhwe1h"
+path="res://.godot/imported/village_chief.dialogue-00d844dd5f1d72d63359f09f4e061234.tres"
+
+[deps]
+
+source_file="res://game/chapter_2/node_4/dialogue/village_chief.dialogue"
+dest_files=["res://.godot/imported/village_chief.dialogue-00d844dd5f1d72d63359f09f4e061234.tres"]
+
+[params]
+
+defaults=true

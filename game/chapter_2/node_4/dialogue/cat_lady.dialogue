@@ -1,0 +1,45 @@
+~ before_chief
+Cat Lady: Oh... hello there.
+Cat Lady: If you're looking for village business, you should speak to the village chief first.
+=> END
+
+~ start
+Cat Lady: Oh no... my cats have scattered all over the area.
+Cat Lady: I was supposed to safeguard this insignia, but I cannot leave until they are safe.
+Cat Lady: Please, find all four of them for me.
+- I'll help.
+	=> accept
+- Not now.
+	Cat Lady: Please come back if you change your mind.
+	=> END
+
+~ accept
+do Node4State.start_cat_lady_quest()
+Cat Lady: Thank you. Please bring all four back safely.
+=> END
+
+~ in_progress
+Cat Lady: Have you found my cats yet?
+Cat Lady: You have found {Node4State.cats_found} out of {Node4State.total_cats}.
+=> END
+
+~ all_found
+Cat Lady: You found them... all of them...
+Cat Lady: Thank you, truly.
+Cat Lady: As promised, this insignia is yours.
+do Node4State.obtain_second_insignia()
+=> after_give_reward
+
+~ after_give_reward
+Cat Lady: Please take it to the village chief.
+=> END
+
+~ reward
+Cat Lady: I already gave you the insignia.
+Cat Lady: Please take it to the village chief.
+=> END
+
+~ after_reward_all_done
+Cat Lady: You have both insignias now.
+Cat Lady: You should return to the village chief.
+=> END
