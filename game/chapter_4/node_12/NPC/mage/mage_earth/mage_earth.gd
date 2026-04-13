@@ -11,7 +11,6 @@ enum projectile_attack_state {
 }
 
 @export var telegraph_duration: float = 0.0
-@export var vulnerable_timeout: float = 0.1
 
 @export_group("Projectile Config")
 @export var projectile_count: int = 3
@@ -99,10 +98,8 @@ func _state_shoot(spawned: Array[Area2D], fallback_dir: Vector2) -> void:
 
 func _state_vulnerable_wait() -> void:
 	modulate = Color(1.0, 0.8, 0.8, 1.0)
-	var timeout_left = max(0.0, vulnerable_timeout)
-	while has_active_projectiles() and timeout_left > 0.0 and _hp > 0:
+	while has_active_projectiles() and _hp > 0:
 		await get_tree().process_frame
-		timeout_left -= get_process_delta_time()
 	modulate = Color(1, 1, 1, 1)
 
 func _spawn_earth_projectile(spawn_position: Vector2, direction: Vector2) -> Area2D:
