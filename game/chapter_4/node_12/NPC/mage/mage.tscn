@@ -1,57 +1,57 @@
 [gd_scene format=3 uid="uid://3l3qq4g6omou"]
 
-[ext_resource type="Texture2D" uid="uid://0y7revq8i8p8" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Soldier/Soldier 07-1.png" id="1_q6mat"]
+[ext_resource type="Texture2D" uid="uid://0y7revq8i8p8" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Soldier/Soldier 07-1.png" id="1_qmp6u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayddp"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_st7ad"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_plafx"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ip1f4"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4pce"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4lum"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqatu"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1etr2"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ni2p2"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jrd2g"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aln0i"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w2b6o"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mfj2i"]
-atlas = ExtResource("1_q6mat")
+atlas = ExtResource("1_qmp6u")
 region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m235k"]
