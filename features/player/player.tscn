@@ -12,8 +12,8 @@
 [ext_resource type="Script" uid="uid://baccvsovwuvvb" path="res://features/player/components/health_component.gd" id="12_5rlqq"]
 [ext_resource type="Script" uid="uid://co7you35ckwe3" path="res://features/player/components/skill_component.gd" id="13_4kvd7"]
 [ext_resource type="PackedScene" uid="uid://bt83ehltqgd07" path="res://features/player/hud/player_hud.tscn" id="13_72p1y"]
-[ext_resource type="Script" path="res://features/player/components/movement_component.gd" id="13_yptax"]
-[ext_resource type="Script" uid="uid://805xyy3ememl" path="res://features/player/player.gd" id="14_player"]
+[ext_resource type="Script" uid="uid://b33cchplplyhp" path="res://features/player/components/movement_component.gd" id="13_yptax"]
+[ext_resource type="Script" uid="uid://c0io81kk6o7gw" path="res://features/player/player.gd" id="14_player"]
 [ext_resource type="PackedScene" uid="uid://oxmcfsdchgpc" path="res://features/player/powers/wind/wind.tscn" id="14_x3ag6"]
 [ext_resource type="PackedScene" uid="uid://dhx5nknyw30h4" path="res://features/player/powers/fire/fire_small.tscn" id="15_jec2r"]
 [ext_resource type="PackedScene" uid="uid://c0m86g4tkr1t5" path="res://features/player/powers/fire/fire_heavy.tscn" id="16_lrnek"]
@@ -422,7 +422,7 @@ height = 42.0
 visibility_layer = 2
 z_index = 1
 y_sort_enabled = true
-collision_mask = 15
+collision_mask = 63
 script = ExtResource("14_player")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=913524806]

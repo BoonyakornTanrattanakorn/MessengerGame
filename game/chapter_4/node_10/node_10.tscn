@@ -2975,7 +2975,6 @@ size = Vector2(64, 26)
 
 [node name="Node2D" type="Node2D" unique_id=862201448 node_paths=PackedStringArray("ice_layer")]
 y_sort_enabled = true
-position = Vector2(16, -16)
 script = ExtResource("1_sbhue")
 ice_layer = NodePath("Ice")
 
@@ -3030,6 +3029,7 @@ level_manager = NodePath("../../LevelManager")
 shape = SubResource("RectangleShape2D_bcujh")
 
 [node name="Room2" type="Node2D" parent="." unique_id=2012577955]
+y_sort_enabled = true
 
 [node name="Rock" parent="Room2" unique_id=1639772731 instance=ExtResource("6_7vylc")]
 position = Vector2(1072, -416)
@@ -3070,6 +3070,7 @@ level_manager = NodePath("../../LevelManager")
 shape = SubResource("RectangleShape2D_bcujh")
 
 [node name="Room3" type="Node2D" parent="." unique_id=1745725420]
+y_sort_enabled = true
 
 [node name="IceBlock" parent="Room3" unique_id=2046404792 instance=ExtResource("5_pnn34")]
 position = Vector2(1872, -752)
@@ -3090,6 +3091,7 @@ level_manager = NodePath("../../LevelManager")
 shape = SubResource("RectangleShape2D_bcujh")
 
 [node name="Room4" type="Node2D" parent="." unique_id=1881423349]
+y_sort_enabled = true
 
 [node name="IceBlock3" parent="Room4" unique_id=1315871666 instance=ExtResource("5_pnn34")]
 position = Vector2(1776, -1456)

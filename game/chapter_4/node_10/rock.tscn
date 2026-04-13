@@ -8,7 +8,7 @@
 [node name="Rock" type="StaticBody2D" unique_id=933825536]
 y_sort_enabled = true
 scale = Vector2(1.6, 1.6)
-collision_layer = 8
+collision_layer = 32
 script = ExtResource("1_e2w46")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1044519821]
