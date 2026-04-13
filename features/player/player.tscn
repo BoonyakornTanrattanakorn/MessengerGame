@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bq8fy4b0jdi2"]
 
 [ext_resource type="Texture2D" uid="uid://dvrlx2db8my0u" path="res://assets/sprites/player/MCIdleBack64x64-Sheet.png" id="3_hr31g"]
-[ext_resource type="Texture2D" uid="uid://b2alm6ygq1gsk" path="res://assets/sprites/chapter1_node2/Untitled-1.png" id="3_lqp71"]
+[ext_resource type="Texture2D" uid="uid://153r2eu0q42y" path="res://assets/sprites/chapter1_node2/Untitled-1.png" id="3_lqp71"]
 [ext_resource type="Texture2D" uid="uid://5dqq1n7d1827" path="res://assets/sprites/player/MCIdleFront64x64-Sheet.png" id="4_lqp71"]
 [ext_resource type="Texture2D" uid="uid://dxvfieh7w5jt8" path="res://assets/sprites/player/MCIdleLeft64x64-Sheet.png" id="5_vuhga"]
 [ext_resource type="Texture2D" uid="uid://cu14gmt65pt45" path="res://assets/sprites/player/MCIdleRight64x64-Sheet.png" id="6_muf2e"]
@@ -422,6 +422,7 @@ height = 42.0
 visibility_layer = 2
 z_index = 1
 y_sort_enabled = true
+collision_mask = 15
 script = ExtResource("14_player")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=913524806]

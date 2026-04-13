@@ -17,9 +17,11 @@ var init_data = {
 
 var init_scene_path = "res://game/game_scene.tscn"
 
+var level_scene = null
+
 
 func save_game():
-	var level_scene = get_level_scene()
+	level_scene = get_level_scene()
 	if level_scene == null:
 		return
 
@@ -111,7 +113,7 @@ func restore_objects():
 	
 	GameState.new_game()
 	
-	var level_scene = get_level_scene()
+	level_scene = get_level_scene()
 
 	if level_scene == null:
 		return
@@ -169,7 +171,7 @@ func restore_level_objects():
 		return
 	await get_tree().process_frame
 	
-	var level_scene = get_level_scene()
+	level_scene = get_level_scene()
 	if level_scene == null:
 		return
 

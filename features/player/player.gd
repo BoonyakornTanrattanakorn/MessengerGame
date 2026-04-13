@@ -50,6 +50,10 @@ var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
 var interact_with = null
 var current_dialog = 0
 
+# Ice slide
+var is_sliding := false
+var slide_direction := Vector2.ZERO
+
 # Mount system
 var is_mounted = false
 var current_mount = null
@@ -178,6 +182,7 @@ func _physics_process(delta):
 		return
 	
 	# Update last direction if there's input
+	if(is_sliding): direction = slide_direction 
 	if direction.length() > 0:
 		last_direction = direction.normalized()
 
@@ -574,3 +579,36 @@ func is_standing_on_pillar(pos: Vector2) -> bool:
 			if pos.distance_to(pillar.global_position) < 25.0:
 				return true
 	return false
+
+func can_move_in_direction(direction: Vector2) -> bool:
+
+	if direction == Vector2.ZERO:
+		return true
+
+	if test_move(global_transform, direction * 4):
+
+		var collision = move_and_collide(direction * 4, true)
+		var collider = collision.get_collider()
+		print("Collision point:", collision.get_position())
+		print("Current position:", global_position)
+
+		if collider.is_in_group("ice_block"):
+			if collider.start_slide(direction):
+				is_sliding = false
+				velocity = Vector2.ZERO
+		
+		return false
+
+	return true
+
+func is_on_ice_tile() -> bool:
+
+	var level = SaveManager.get_level_scene()
+	if level == null:
+		return false
+
+	if not "ice_layer" in level:
+		return false
+	if level.ice_layer == null:
+		return false
+	return level.ice_layer.is_on_ice(global_position)

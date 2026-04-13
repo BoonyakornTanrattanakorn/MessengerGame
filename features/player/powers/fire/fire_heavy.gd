@@ -1,4 +1,5 @@
 extends Area2D
+class_name Fire_heavy
 
 var speed = 180.0
 var direction = Vector2.RIGHT
