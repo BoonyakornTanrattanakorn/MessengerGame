@@ -55,6 +55,7 @@ region = Rect2(32, 96, 32, 32)
 atlas = ExtResource("1_drjcm")
 ========
 [ext_resource type="Texture2D" uid="uid://0y7revq8i8p8" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Soldier/Soldier 07-1.png" id="1_qmp6u"]
+<<<<<<< HEAD
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayddp"]
 atlas = ExtResource("1_qmp6u")
@@ -107,6 +108,67 @@ region = Rect2(32, 96, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mfj2i"]
 atlas = ExtResource("1_qmp6u")
 >>>>>>>> fe1da4c (remove vibecode mage):game/chapter_4/node_12/NPC/mage/mage.tscn
+=======
+========
+[ext_resource type="Texture2D" uid="uid://0y7revq8i8p8" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Soldier/Soldier 07-1.png" id="1_drjcm"]
+>>>>>>>> 28ec560 (feat: implement mage earth projectile attack pattern):game/chapter_4/node_12/NPC/mage/mage_earth/mage_earth.tscn
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayddp"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_st7ad"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plafx"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip1f4"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4pce"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4lum"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqatu"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1etr2"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ni2p2"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrd2g"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aln0i"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2b6o"]
+atlas = ExtResource("1_drjcm")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfj2i"]
+<<<<<<<< HEAD:game/chapter_4/node_12/NPC/mage/mage.tscn
+atlas = ExtResource("1_qmp6u")
+>>>>>>>> fe1da4c (remove vibecode mage):game/chapter_4/node_12/NPC/mage/mage.tscn
+========
+atlas = ExtResource("1_drjcm")
+>>>>>>>> 28ec560 (feat: implement mage earth projectile attack pattern):game/chapter_4/node_12/NPC/mage/mage_earth/mage_earth.tscn
+>>>>>>> 28ec560 (feat: implement mage earth projectile attack pattern)
 region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m235k"]
@@ -189,6 +251,7 @@ animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1244478987]
 shape = SubResource("RectangleShape2D_u5n88")
+<<<<<<< HEAD
 
 [node name="Barrier" type="Node2D" parent="." unique_id=1174806569]
 
@@ -201,3 +264,5 @@ shape = SubResource("RectangleShape2D_u5n88")
 [node name="BG" type="Polygon2D" parent="Health" unique_id=1587559129]
 
 [node name="Fill" type="Polygon2D" parent="Health" unique_id=597571381]
+=======
+>>>>>>> 28ec560 (feat: implement mage earth projectile attack pattern)

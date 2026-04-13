@@ -5,9 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
 [ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
 [ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
-[ext_resource type="PackedScene" uid="uid://dk5clku1rco51" path="res://game/chapter_4/node_12/npc/mage/mage_water/mage_water.tscn" id="5_rhnue"]
-[ext_resource type="PackedScene" uid="uid://rlxghj7ppkr0" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.tscn" id="6_flvrn"]
-[ext_resource type="PackedScene" uid="uid://cmlw3sah421gh" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.tscn" id="7_unbsp"]
+[ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
+[ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
+[ext_resource type="Script" uid="uid://d7anika6vqw" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.gd" id="7_o0j4o"]
+[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_wind.gd" id="8_gbb5j"]
+[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_fire.gd" id="9_n8nsa"]
+[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_water.gd" id="10_gju0t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
+font = ExtResource("6_jvdkp")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fjm0"]
 size = Vector2(357.5, 20)
