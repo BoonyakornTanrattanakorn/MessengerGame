@@ -5,6 +5,7 @@
 [ext_resource type="TileSet" uid="uid://oor3xx5ie02p" path="res://game/chapter_1/node_3/tres/tiles.tres" id="3_j1b6p"]
 [ext_resource type="TileSet" uid="uid://cakd4038gdvlg" path="res://game/chapter_1/node_3/tres/bridge_shuffle.tres" id="5_dh3pg"]
 [ext_resource type="TileSet" uid="uid://dartk06cv4tgy" path="res://game/chapter_1/node_3/tres/invisible_collision.tres" id="8_r8158"]
+[ext_resource type="Script" uid="uid://chtulehi3neye" path="res://game/chapter_1/node_3/golem_level/portal.gd" id="10_rp52u"]
 [ext_resource type="TileSet" uid="uid://cy24m54pcr32o" path="res://game/chapter_1/node_3/tres/rope.tres" id="11_ifk54"]
 [ext_resource type="TileSet" uid="uid://cwwldao25tjb0" path="res://game/chapter_1/node_3/tres/Switch.tres" id="12_moxjk"]
 [ext_resource type="PackedScene" uid="uid://2215xa1l24qs" path="res://game/chapter_1/node_3/golem_level/Switch.tscn" id="13_frly1"]
@@ -257,11 +258,18 @@ position = Vector2(594, 570)
 script = ExtResource("17_skg5l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToLevel0from3" unique_id=1228576262]
-position = Vector2(-96, 103)
+position = Vector2(-689, -466)
 shape = SubResource("RectangleShape2D_kwlfy")
 
-[node name="PortalSprite" type="Sprite2D" parent="WarpToLevel0from3" unique_id=1023538981]
-position = Vector2(-96, 90)
+[node name="Portal" type="Area2D" parent="." unique_id=230064757]
+position = Vector2(498, 673)
+script = ExtResource("10_rp52u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=1829106467]
+shape = SubResource("RectangleShape2D_kwlfy")
+
+[node name="PortalSprite" type="Sprite2D" parent="Portal" unique_id=1890870903]
+position = Vector2(0, -12.51)
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("18_t2w0l")
 hframes = 8

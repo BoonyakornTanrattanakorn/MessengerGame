@@ -46,6 +46,7 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
+var _wind_dash_shift_was_down: bool = false
 
 var interact_with = null
 var current_dialog = 0
@@ -149,6 +150,10 @@ func _input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _physics_process(delta):
+	var wind_dash_shift_down := Input.is_key_pressed(KEY_SHIFT)
+	var wind_dash_just_pressed := wind_dash_shift_down and not _wind_dash_shift_was_down
+	_wind_dash_shift_was_down = wind_dash_shift_down
+
 	if _is_input_locked():
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -232,7 +237,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
-		if Input.is_action_just_pressed("lesser_magic"):
+		if wind_dash_just_pressed:
 			movement_component.request_dash(self, last_direction)
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_wind_wave()
@@ -268,6 +273,9 @@ func _physics_process(delta):
 	if check_if_water_at(check_pos):
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
+	if check_if_void_at(global_position):
+		if not check_if_platform_at(global_position):
+			speed_multiplier = 0.0
 	# Movement + dash handled by movement component
 	movement_component.process_movement(self, direction, speed_multiplier, delta)
 	_update_animation(direction)
@@ -279,6 +287,8 @@ func _facing_suffix(dir: Vector2) -> String:
 		return "front" if dir.y > 0 else "back"
 
 func _update_animation(direction: Vector2) -> void:
+	if not animated_sprite:
+		return
 	var facing = _facing_suffix(last_direction)
 	var anim = ""
 
@@ -298,6 +308,12 @@ func set_facing_direction(direction: Vector2) -> void:
 		return
 	last_direction = direction.normalized()
 	_update_animation(last_direction)
+
+func get_aim_direction() -> Vector2:
+	var aim := get_global_mouse_position() - global_position
+	if aim.length() < 4.0:
+		return last_direction
+	return aim.normalized()
 
 # Called by minecart to mount the player
 func mount(minecart, mount_position):
@@ -578,6 +594,29 @@ func is_standing_on_pillar(pos: Vector2) -> bool:
 		if is_instance_valid(pillar):
 			if pos.distance_to(pillar.global_position) < 25.0:
 				return true
+	return false
+	
+func check_if_void_at(pos: Vector2) -> bool:
+	var tilemap = get_tree().current_scene.find_child("Ground", true, false)
+	
+	if tilemap == null:
+		return false
+
+	var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
+	var tile_data = tilemap.get_cell_tile_data(map_pos)
+	
+	if tile_data:
+		return tile_data.get_custom_data("is_void") == true
+			
+	return false
+
+func check_if_platform_at(_pos: Vector2) -> bool:
+	var overlapping_areas = $Hurtbox.get_overlapping_areas()
+	
+	for area in overlapping_areas:
+		if area.is_in_group("platform"):
+			return true
+			
 	return false
 
 func can_move_in_direction(direction: Vector2) -> bool:

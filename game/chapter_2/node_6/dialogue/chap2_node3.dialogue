@@ -1,0 +1,9 @@
+~ start
+Player [#sprite=earth/neutral]: ...
+Player [#sprite=earth/neutral]: I think I can see the town from here now!
+=> END
+
+~ start_2
+Player [#sprite=earth/neutral]: But that means that the 'monster' that the mayor told me should be near, right?.
+Player [#sprite=earth/neutral]: Let's hope that I don't get to face it.
+=> END

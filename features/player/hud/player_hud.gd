@@ -3,6 +3,8 @@ extends CanvasLayer
 const PAUSE_MENU_SCENE = preload("res://ui/pause_menu/pause_menu.tscn")
 const TORN_PAPER_DIALOGUE_PATH := "res://game/chapter_1/node_2/dialogue/character_gate.dialogue"
 const WORLD_MAP_SCENE = preload("res://features/worldmap/world_map_overlay.tscn")
+const POWER_WHEEL_TIME_SCALE := 0.35
+const NORMAL_TIME_SCALE := 1.0
 
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
@@ -60,11 +62,13 @@ var memorized_keyword_order: Dictionary = {}
 var pause_menu: PauseMenu
 var world_map_overlay: WorldMapOverlay
 var is_world_map_open: bool = false
+var _power_wheel_slowmo_active: bool = false
 
 signal skill_changed(attribute: String)
 
 func _exit_tree() -> void:
 	ObjectiveManager.unregister_hud(self)
+	_set_power_wheel_slowmo(false)
 var heat_gauge_value: float = 0.0
 var cool_gauge_value: int = 0
 var element_icons := {}
@@ -139,6 +143,9 @@ func _setup_health(player):
 	
 
 func _process(_delta):
+	if _power_wheel_slowmo_active and not Input.is_action_pressed("power_wheel"):
+		_set_power_wheel_slowmo(false)
+
 	if get_tree().paused:
 		return
 
@@ -190,6 +197,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("power_wheel"):
 		if power_wheel:
 			power_wheel.visible = true
+		_set_power_wheel_slowmo(true)
 		get_viewport().set_input_as_handled()
 		return
 
@@ -201,9 +209,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				update_skill_display()
 				emit_signal("skill_changed", skills[skill_index]["attribute"])
 			power_wheel.visible = false
+		_set_power_wheel_slowmo(false)
 		get_viewport().set_input_as_handled()
 
 func _open_world_map() -> void:
+	_set_power_wheel_slowmo(false)
 	is_world_map_open = true
 	get_tree().paused = true
 	world_map_overlay.open()
@@ -218,6 +228,7 @@ func _on_world_map_close_requested() -> void:
 		_close_world_map()
 
 func _pause_game() -> void:
+	_set_power_wheel_slowmo(false)
 	get_tree().paused = true
 	pause_menu.open()
 
@@ -498,3 +509,9 @@ func show_wave_charge_preview(preview_value: int):
 	else:
 		cool_gauge_ui.visible = true  # always show while charging
 		cool_gauge_ui.update_cool_preview(clamp(preview_value, 0, 3))
+
+func _set_power_wheel_slowmo(active: bool) -> void:
+	if _power_wheel_slowmo_active == active:
+		return
+	_power_wheel_slowmo_active = active
+	Engine.time_scale = POWER_WHEEL_TIME_SCALE if active else NORMAL_TIME_SCALE

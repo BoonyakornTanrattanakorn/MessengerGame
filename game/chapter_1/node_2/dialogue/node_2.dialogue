@@ -1,12 +1,12 @@
 ~ start
-Player: ...
-Player: Wow... I didn't know such dungeons existed beneath the castle.
-Player: I need to find a way out of here.
-Player: That switch on the left side of the room looks familiar...
-Player: Maybe I can flip it with my wind power.
+Player [#sprite=wind/neutral]: ... 
+Player [#sprite=wind/neutral]: Wow... I didn't know such dungeons existed beneath the castle. 
+Player [#sprite=wind/neutral]: I need to find a way out of here.
+Player [#sprite=wind/neutral]: That switch on the left side of the room looks familiar...
+Player [#sprite=wind/neutral]: Maybe I can flip it with my wind power.
 => END
 
 ~ after_first_room
-Player: ...
-Player: More switches
+Player [#sprite=wind/neutral]: ...
+Player [#sprite=wind/neutral]: More switches
 => END

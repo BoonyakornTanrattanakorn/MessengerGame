@@ -1,0 +1,28 @@
+~ start
+Village Chief: Ah, traveler... our village is in need of aid.
+Village Chief: Two insignias must be recovered before we may proceed.
+Village Chief: One lies in the upper ruins, guarded by an ancient mechanism.
+Village Chief: The other is held by the cat lady, though she may ask for your help first.
+Village Chief: Recover both insignias and return to me.
+=> accept_quest
+
+~ accept_quest
+do Node4State.talk_to_village_chief()
+Village Chief: Seek out the two insignias and bring them back to me.
+=> END
+
+~ progress
+Village Chief: You still have work to do.
+Village Chief: Recover both insignias and return to me.
+=> END
+
+~ after_one
+Village Chief: Good. You have recovered one insignia already.
+Village Chief: Find the remaining one and return to me.
+=> END
+
+~ after_both
+Village Chief: You have done it. Both insignias are now in our hands.
+Village Chief: The path forward can finally be opened.
+do get_tree().get_first_node_in_group("level_event_handler").trigger_exit_open()
+=> END

@@ -134,7 +134,13 @@ func apply_dialogue_line() -> void:
 
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
-	var portrait_path: String = "res://assets/portraits/%s/portrait.png" % dialogue_line.character
+	
+	# Get sprite name from tag, default to "portrait"
+	var sprite_name: String = dialogue_line.get_tag_value("sprite")
+	if sprite_name.is_empty():
+		sprite_name = "portrait"
+	
+	var portrait_path: String = "res://assets/portraits/%s/%s.png" % [dialogue_line.character, sprite_name]
 	if ResourceLoader.exists(portrait_path):
 		portrait.texture = load(portrait_path)
 		portrait.show()
