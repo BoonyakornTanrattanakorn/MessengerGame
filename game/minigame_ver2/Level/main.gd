@@ -10,7 +10,7 @@ func _ready():
 	hud.show_charge_ui(false)
 	hud.set_max_health(player.health)
 	hud.update_health(player.health)
-	
+	hud.set_label_color(Color.BLACK)
 	player.health_changed.connect(hud.update_health)
 	player.gem_collected.connect(hud.update_gems)
 	player.player_died.connect(_on_player_died)

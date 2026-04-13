@@ -48,6 +48,9 @@ func update_gems(amount):
 	gems += amount
 	gem_label.text = "x" + str(gems)
 
+func set_label_color(color: Color):
+	gem_label.add_theme_color_override("font_color", color)
+	charge_label.add_theme_color_override("font_color", color)
 # ← add these 2 functions
 func update_charges(current: int):
 	charge_label.text = "x" + str(current)

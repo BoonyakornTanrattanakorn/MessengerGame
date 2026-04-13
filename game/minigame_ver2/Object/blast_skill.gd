@@ -4,7 +4,7 @@ extends Node2D
 signal charge_changed(current_charge)
 
 const MAX_CHARGE = 10
-const BLAST_RADIUS = 100.0
+const BLAST_RADIUS = 20.0
 
 @onready var indicator = $SkillIndicator
 @onready var circle = $SkillIndicator/RadiusCircle  # ← your circle sprite node name
@@ -65,7 +65,10 @@ func blast(pos: Vector2):
 	for result in results:
 		var obj = result.collider
 		if obj.is_in_group("breakable"):
-			obj.break_obstacle()
+			if obj.has_method("take_hit"):
+				obj.take_hit()          # ← multi-hit breakable
+			elif obj.has_method("break_obstacle"):
+				obj.break_obstacle() 
 
 func add_charge(amount: int = 1):
 	current_charge = min(current_charge + amount, MAX_CHARGE)

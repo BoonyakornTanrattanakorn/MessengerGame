@@ -11,6 +11,7 @@ size = Vector2(59, 146)
 size = Vector2(59, 146)
 
 [node name="BreakableObstacle" type="StaticBody2D" unique_id=1529554925]
+scale = Vector2(0.5, 0.5)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_gmcdk")

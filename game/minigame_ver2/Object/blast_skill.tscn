@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cyi1r3xmie10t" path="res://game/minigame_ver2/Object/skill_indicator.tscn" id="2_oau6y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wid2b"]
-radius = 80.024994
+radius = 40.024994
 
 [node name="BlastSkill" type="Node2D" unique_id=1453903704]
 script = ExtResource("1_257dl")

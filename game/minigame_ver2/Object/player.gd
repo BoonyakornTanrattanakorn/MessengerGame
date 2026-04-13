@@ -150,3 +150,8 @@ func update_animation():
 			anim.play("slide")
 		State.HURT:
 			anim.play("hurt")
+
+func stop():
+	print("stop called")  # ← does this print?
+	set_physics_process(false)
+	velocity = Vector2.ZERO

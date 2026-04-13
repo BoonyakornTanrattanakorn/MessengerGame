@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://chwye2b1l5mri" path="res://game/minigame_ver2/Object/endpoint.gd" id="1_yt3ha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvunm"]
-size = Vector2(30, 38)
+size = Vector2(30, 106)
 
 [node name="endpoint" type="Area2D" unique_id=317329225]
 script = ExtResource("1_yt3ha")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1694830517]
+position = Vector2(0, -34)
 shape = SubResource("RectangleShape2D_cvunm")
 debug_color = Color(0, 0.6415703, 0.33717844, 0.41960785)

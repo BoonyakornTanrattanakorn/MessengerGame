@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://can0fmon46bwv"]
+
+[ext_resource type="Script" uid="uid://6blvgaup1x0f" path="res://game/minigame_ver2/Obstacles/scorpion.gd" id="1_dqoiv"]
+[ext_resource type="Texture2D" uid="uid://dgbmhkpqo5owe" path="res://game/minigame_ver2/Sprite/scorpion.png" id="2_02v13"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqoiv"]
+radius = 29.999996
+height = 60.999992
+
+[node name="Scorpion" type="Area2D" unique_id=484904391]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_dqoiv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1113939753]
+scale = Vector2(0.3421875, 0.3421875)
+texture = ExtResource("2_02v13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=838181144]
+position = Vector2(0, -0.5)
+shape = SubResource("CapsuleShape2D_dqoiv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
