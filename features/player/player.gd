@@ -589,8 +589,6 @@ func can_move_in_direction(direction: Vector2) -> bool:
 
 		var collision = move_and_collide(direction * 4, true)
 		var collider = collision.get_collider()
-		print("Collision point:", collision.get_position())
-		print("Current position:", global_position)
 
 		if collider.is_in_group("ice_block"):
 			if collider.start_slide(direction):

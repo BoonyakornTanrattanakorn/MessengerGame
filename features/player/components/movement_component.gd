@@ -40,7 +40,6 @@ func process_movement(character: CharacterBody2D, direction: Vector2, speed_mult
 		_slide_block_timer -= delta
 		return
 
-	#print(character.is_sliding)
 	if not character.is_sliding:
 
 		if direction != Vector2.ZERO:
@@ -53,14 +52,12 @@ func process_movement(character: CharacterBody2D, direction: Vector2, speed_mult
 						direction = Vector2(0, sign(direction.y))
 					character.is_sliding = true
 					character.slide_direction = direction
-
-	print("a")
+	
 	if character.is_sliding:
 
 		if "can_move_in_direction" in character:
 			
 			if not character.can_move_in_direction(character.slide_direction):
-				print("aa")
 				character.is_sliding = false
 				character.velocity = Vector2.ZERO
 				_slide_block_timer = 0.1

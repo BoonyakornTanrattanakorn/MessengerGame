@@ -43,7 +43,6 @@ func start_slide(direction: Vector2) -> bool:
 	return true
 
 func _physics_process(delta):
-	#print("IceBlock z:", z_index)
 
 	if is_on_ice_tile(global_position):
 		speed = slide_speed
@@ -127,7 +126,6 @@ func push_from_player(player):
 
 func _on_area_entered(area):
 	if area is Fire_heavy or area is Fire_small:
-		print(area)
 		hide()
 		$CollisionShape2D.set_deferred("disabled", true)
 		$Area2D.set_deferred("monitoring", false)
