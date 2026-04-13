@@ -36,7 +36,6 @@ func _input(event):
 
 	if event.is_action_pressed("reset_level"):
 		reset_room()
-		print("reset")
 
 
 func reset_room():
@@ -57,7 +56,6 @@ func reset_room():
 			node.recover()
 
 		node.visible = state["visible"]
-		print("reset", node.name)
 
 
 	var player = get_player()
