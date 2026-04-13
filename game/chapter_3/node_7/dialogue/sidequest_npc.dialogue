@@ -1,0 +1,27 @@
+~ quest_start
+
+Merchant: Sorry — you startled me. I have been on edge since the attack three days ago.
+Merchant: That alley to the east, I use it as a shortcut to the market every day.
+Merchant: Something moved in after the demons hit. Bigger than sand demons. Much bigger.
+Merchant: I have been stuck on this side ever since.
+Merchant: Clear them out for me and I will reward you well. Deal?
+=> END
+
+~ quest_reminder
+
+Merchant: They are still in there. Alley to the east. Do not underestimate them.
+=> END
+
+~ quest_complete
+
+Merchant: You actually did it. I heard the fighting and barely dared to look.
+Merchant: Here — desert gold. Spends anywhere in the region including the market through that alley.
+Merchant: There are trading posts on the road east as well. You will find supplies all the way to the next city.
+Merchant: Safe travels, outsider.
+=> END
+
+~ quest_repeat
+
+Merchant: The alley is clear thanks to you. First time I have been able to breathe easy in three days.
+Merchant: If you need supplies before you head out the market is open to you. Just take the alley east.
+=> END

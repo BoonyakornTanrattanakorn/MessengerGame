@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cqky784c5372x"]
+
+[ext_resource type="Script" uid="uid://c5sx08707p382" path="res://game/chapter_3/node_7/scenes/sidequest_npc.gd" id="1_7hqvx"]
+[ext_resource type="Texture2D" uid="uid://b5pb27sgld7hm" path="res://assets/sprites/npc/chapter3_npc2_transparent.png" id="1_vp446"]
+[ext_resource type="Resource" uid="uid://brgka2xabbdla" path="res://game/chapter_3/node_7/dialogue/sidequest_npc.dialogue" id="2_biocr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sch7"]
+size = Vector2(140, 206)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bn1bc"]
+size = Vector2(60, 85)
+
+[node name="sidequest_npc" type="Node2D" unique_id=1041488578]
+script = ExtResource("1_7hqvx")
+dialogue_resource = ExtResource("2_biocr")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=264034820]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1524461349]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_8sch7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1582408111]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1927808899]
+position = Vector2(1, -15.5)
+shape = SubResource("RectangleShape2D_bn1bc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1799971793]
+position = Vector2(0, -15.999999)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_vp446")
+region_enabled = true
+region_rect = Rect2(20.312653, 14.098907, 278.6667, 403.38458)

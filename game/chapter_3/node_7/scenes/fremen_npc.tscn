@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cj7ga4ua5ovvb"]
 
 [ext_resource type="Texture2D" uid="uid://b5srg3xvvnps6" path="res://assets/sprites/npc/Fremen guard.png" id="1_l2caw"]
+[ext_resource type="Script" uid="uid://btgi1misbbn3q" path="res://game/chapter_3/node_7/script/npc/fremen_guard.gd" id="1_pnjll"]
+[ext_resource type="Resource" uid="uid://djtw143k7xq4n" path="res://game/chapter_3/node_7/dialogue/fremen_guard.dialogue" id="2_0krso"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fclmt"]
 size = Vector2(120, 206)
@@ -9,6 +11,8 @@ size = Vector2(120, 206)
 size = Vector2(53, 127)
 
 [node name="FremenGuard" type="Node2D" unique_id=980384197]
+script = ExtResource("1_pnjll")
+dialogue_resource = ExtResource("2_0krso")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=920996592]
 
@@ -22,6 +26,7 @@ offset_top = -88.0
 offset_right = 58.0
 offset_bottom = -65.0
 text = "Press F to talk"
+metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1422616039]
 scale = Vector2(0.1, 0.1)

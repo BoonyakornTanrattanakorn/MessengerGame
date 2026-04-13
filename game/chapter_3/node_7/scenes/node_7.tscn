@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://boou4wqx28utq" path="res://assets/sprites/maps/tilesets/World_A2.png" id="2_llbfv"]
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="3_2yfee"]
 [ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="3_u2f67"]
-[ext_resource type="Script" uid="uid://bg33rtkqd4i4m" path="res://game/chapter_3/node_7/script/statue_slot.gd" id="4_kdpop"]
+[ext_resource type="Script" uid="uid://bg33rtkqd4i4m" path="res://game/chapter_3/node_7/script/statues/statue_slot.gd" id="4_kdpop"]
 [ext_resource type="Texture2D" uid="uid://xoqdjaqi0ihe" path="res://assets/sprites/maps/tilesets/Readable_stone.tres" id="4_o2gls"]
 [ext_resource type="Texture2D" uid="uid://bc7mutn1t47gy" path="res://assets/sprites/maps/tilesets/Desert cactus.png" id="4_ypko5"]
-[ext_resource type="Script" uid="uid://dydynu8t4ndbs" path="res://game/chapter_3/node_7/script/statue_king_pickup.gd" id="5_u2f67"]
+[ext_resource type="Script" uid="uid://dydynu8t4ndbs" path="res://game/chapter_3/node_7/script/statues/statue_king_pickup.gd" id="5_u2f67"]
 [ext_resource type="Texture2D" uid="uid://cdyln7766rm6m" path="res://assets/sprites/maps/tilesets/Desert rock.png" id="5_ypko5"]
 [ext_resource type="PackedScene" uid="uid://cj7ga4ua5ovvb" path="res://game/chapter_3/node_7/scenes/fremen_npc.tscn" id="6_61u12"]
 [ext_resource type="Texture2D" uid="uid://ckpo542dxa4lg" path="res://assets/sprites/maps/tilesets/statue_king.png" id="6_o2gls"]
@@ -15,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://bvg7a5bb1btco" path="res://assets/sprites/icons/statue_princess.png" id="8_kdpop"]
 [ext_resource type="Texture2D" uid="uid://de30tiop3d72d" path="res://assets/sprites/icons/statue_scarab.png" id="9_txgt1"]
 [ext_resource type="Texture2D" uid="uid://qmhmbctqud61" path="res://assets/sprites/icons/statue_villager.png" id="10_wshas"]
+[ext_resource type="PackedScene" uid="uid://hsu2vtbubrbr" path="res://game/chapter_3/node_7/scenes/city_governor.tscn" id="16_4rx55"]
+[ext_resource type="Resource" uid="uid://cj1o73li58nyl" path="res://game/chapter_3/node_7/dialogue/city_governor.dialogue" id="17_lgg8b"]
+[ext_resource type="PackedScene" uid="uid://cpbtw8i3pebom" path="res://game/chapter_3/node_7/scenes/city_npc.tscn" id="18_g7ind"]
+[ext_resource type="PackedScene" uid="uid://cqky784c5372x" path="res://game/chapter_3/node_7/scenes/sidequest_npc.tscn" id="19_t0347"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cnd0f"]
 texture = ExtResource("1_a40ew")
@@ -3818,3 +3822,14 @@ shape = SubResource("RectangleShape2D_82lg5")
 [node name="Rock12" type="CollisionShape2D" parent="MapCollision" unique_id=1142485586]
 position = Vector2(2519, 2157)
 shape = SubResource("RectangleShape2D_82lg5")
+
+[node name="CityGovernor" parent="." unique_id=1072223380 instance=ExtResource("16_4rx55")]
+position = Vector2(4075, 966)
+dialogue_resource = ExtResource("17_lgg8b")
+
+[node name="city_npc" parent="." unique_id=482488305 instance=ExtResource("18_g7ind")]
+position = Vector2(3065, 1992)
+
+[node name="sidequest_npc" parent="." unique_id=1041488578 instance=ExtResource("19_t0347")]
+position = Vector2(5144, 1363)
+script = null
