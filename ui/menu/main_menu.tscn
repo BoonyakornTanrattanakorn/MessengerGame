@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b615vigg075s8"]
 
-[ext_resource type="Script" path="res://ui/menu/main_menu.gd" id="1_f0u20"]
+[ext_resource type="Script" uid="uid://ca45ivxeqdlwc" path="res://ui/menu/main_menu.gd" id="1_f0u20"]
 [ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_or6mk"]
 [ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="3_gvx18"]
 

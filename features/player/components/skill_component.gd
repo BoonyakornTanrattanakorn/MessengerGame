@@ -50,10 +50,15 @@ func shoot_wind_wave() -> void:
 	var player = _get_player()
 	if wind_scene == null:
 		return
+	var aim_dir: Vector2 = player.last_direction
+	if player.has_method("get_aim_direction"):
+		aim_dir = player.get_aim_direction()
+	if aim_dir.length() > 0.0:
+		player.last_direction = aim_dir
 	var wave = wind_scene.instantiate()
-	wave.direction = player.last_direction
+	wave.direction = aim_dir
 	wave.global_position = player.global_position
-	wave.rotation = player.last_direction.angle()
+	wave.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(wave)
 
 
@@ -61,10 +66,15 @@ func shoot_fire_small() -> void:
 	var player = _get_player()
 	if fire_small_scene == null:
 		return
+	var aim_dir: Vector2 = player.last_direction
+	if player.has_method("get_aim_direction"):
+		aim_dir = player.get_aim_direction()
+	if aim_dir.length() > 0.0:
+		player.last_direction = aim_dir
 	var ball = fire_small_scene.instantiate()
-	ball.direction = player.last_direction
+	ball.direction = aim_dir
 	ball.global_position = player.global_position
-	ball.rotation = player.last_direction.angle()
+	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
 		player.add_heat(20.0)
@@ -74,10 +84,15 @@ func shoot_fire_heavy() -> void:
 	var player = _get_player()
 	if fire_heavy_scene == null:
 		return
+	var aim_dir: Vector2 = player.last_direction
+	if player.has_method("get_aim_direction"):
+		aim_dir = player.get_aim_direction()
+	if aim_dir.length() > 0.0:
+		player.last_direction = aim_dir
 	var ball = fire_heavy_scene.instantiate()
-	ball.direction = player.last_direction
+	ball.direction = aim_dir
 	ball.global_position = player.global_position
-	ball.rotation = player.last_direction.angle()
+	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
 		player.add_heat(40.0)
@@ -140,11 +155,16 @@ func shoot_water_wave(level: int) -> void:
 		cost = level
 	if player.has_method("add_cool"):
 		player.add_cool(cost)
+	var aim_dir: Vector2 = player.last_direction
+	if player.has_method("get_aim_direction"):
+		aim_dir = player.get_aim_direction()
+	if aim_dir.length() > 0.0:
+		player.last_direction = aim_dir
 	if water_wave_scene != null:
 		var wave = water_wave_scene.instantiate()
-		wave.global_position = player.global_position + player.last_direction * 40.0
-		wave.direction = player.last_direction
-		wave.rotation = player.last_direction.angle()
+		wave.global_position = player.global_position + aim_dir * 40.0
+		wave.direction = aim_dir
+		wave.rotation = aim_dir.angle()
 		wave.level = level
 		get_tree().current_scene.add_child(wave)
 

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c41ah3558j3eh"]
+
+[ext_resource type="Script" uid="uid://dpqec8m763xix" path="res://game/chapter_2/node_6/scripts/water_ball.gd" id="1_p0qfy"]
+
+[node name="WaterBall" type="Node2D" unique_id=1841102751]
+script = ExtResource("1_p0qfy")
