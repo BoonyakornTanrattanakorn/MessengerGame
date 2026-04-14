@@ -9,16 +9,22 @@ enum state {
 
 @export var mage_element: String = "earth"
 @export var required_reflect_element: String = "earth"
-@export var max_hp: int = 3
-@export var attack_damage: int = 1
+@export var max_hp: float = 3
 @export var attack_interval: float = 1.0
 @export var attack_range: float = 2000.0
 @export var projectile_speed: float = 220.0
+@export_group("HP Bar")
+@export var show_hp_bar: bool = true
+@export var hp_bar_width: float = 28.0
+@export var hp_bar_height: float = 4.0
+@export var hp_bar_offset: Vector2 = Vector2(-14, -26)
+@export var hp_bar_bg_color: Color = Color(0.12, 0.12, 0.12, 0.9)
+@export var hp_bar_fill_color: Color = Color(0.95, 0.25, 0.25, 0.95)
 
 static var _turn_roster: Array[Node12MageBase] = []
 static var _turn_index: int = 0
 
-var _hp: int = 0
+var _hp: float = 0
 var _attack_cooldown: float = 0.0
 var _is_casting: bool = false
 var _player_ref: CharacterBody2D
@@ -29,6 +35,7 @@ func _ready() -> void:
 	_hp = max_hp
 	add_to_group("enemy")
 	_register_in_turn_roster()
+	queue_redraw()
 	
 	_player_ref = _find_player()
 	assert(_player_ref != null, "Can't find player!")
@@ -104,19 +111,37 @@ func _prune_projectiles() -> void:
 			pruned.append(projectile)
 	_active_projectiles = pruned
 
-func receive_reflected_hit(amount: int = 1, source_element: String = "") -> void:
+func receive_reflected_hit(damage: float = 1, source_element: String = "") -> void:
 	if _hp <= 0:
 		return
 	if required_reflect_element != "" and source_element != required_reflect_element:
 		return
-	_hp -= max(1, amount)
+	_hp -= damage
+	queue_redraw()
 	if _hp <= 0:
 		die()
 
 func die() -> void:
 	_hp = 0
+	queue_redraw()
 	_unregister_from_turn_roster()
 	queue_free()
+
+func _draw() -> void:
+	if not show_hp_bar:
+		return
+	if max_hp <= 0:
+		return
+
+	var ratio := clampf(float(_hp) / float(max_hp), 0.0, 1.0)
+	var bg_rect := Rect2(hp_bar_offset, Vector2(hp_bar_width, hp_bar_height))
+	draw_rect(bg_rect, hp_bar_bg_color, true)
+
+	if ratio <= 0.0:
+		return
+
+	var fill_rect := Rect2(hp_bar_offset, Vector2(hp_bar_width * ratio, hp_bar_height))
+	draw_rect(fill_rect, hp_bar_fill_color, true)
 
 func _find_player() -> Node2D:
 	var root := get_tree().current_scene

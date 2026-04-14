@@ -40,13 +40,11 @@ func _exit_tree() -> void:
 	super._exit_tree()
 
 func perform_pattern_attack() -> void:
-	_play_mage_sfx("mage.cast.wind")
 	modulate = Color(0.78, 0.92, 1.0, 1.0)
 	await get_tree().create_timer(0.3).timeout
 	modulate = Color(1, 1, 1, 1)
 
 func perform_projectile_attack() -> void:
-	_play_mage_sfx("mage.cast.wind")
 	_projectile_phase = projectile_attack_state.SUMMON_PROJECTILE
 
 	var base_dir := get_direction_to_player()

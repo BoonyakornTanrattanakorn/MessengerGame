@@ -5,7 +5,7 @@ class_name Node12MageBaseProjectile
 @export var base_speed: float = 300.0
 @export var despawn_radius: float = 1000.0
 
-var damage: int = 1
+var damage: float = 1
 var source_element: String = ""
 var owner_mage: Node = null
 var launch_direction: Vector2 = Vector2.RIGHT
@@ -77,7 +77,7 @@ func _physics_process(delta: float) -> void:
 			hit_radius = (_collision.shape as CircleShape2D).radius + 12.0
 		if global_position.distance_to(owner_mage.global_position) <= hit_radius:
 			if owner_mage.has_method("receive_reflected_hit"):
-				owner_mage.call("receive_reflected_hit", 1, _reflected_element)
+				owner_mage.call("receive_reflected_hit", damage, _reflected_element)
 			queue_free()
 			return
 
