@@ -64,6 +64,13 @@ func _physics_process(delta: float) -> void:
 
 	if not _is_reflected:
 		_update_guidance(delta)
+	elif owner_mage != null and is_instance_valid(owner_mage):
+		var to_owner = owner_mage.global_position - global_position
+		if to_owner.length_squared() > 0.0001:
+			var reflected_speed = max(base_speed * 1.25, _velocity.length())
+			launch_direction = to_owner.normalized()
+			_velocity = launch_direction * reflected_speed
+			rotation = launch_direction.angle()
 
 	var start_pos := global_position
 	var end_pos := start_pos + _velocity * delta
@@ -179,9 +186,14 @@ func _reflect_to_owner(element: String) -> void:
 		_sprite.modulate = _get_reflected_tint()
 
 	if owner_mage != null and is_instance_valid(owner_mage):
-		_velocity = (owner_mage.global_position - global_position).normalized() * base_speed * 1.25
+		launch_direction = (owner_mage.global_position - global_position).normalized()
+		_velocity = launch_direction * base_speed * 1.25
+		rotation = launch_direction.angle()
 	else:
 		_velocity = -_velocity * 1.2
+		if _velocity.length_squared() > 0.0001:
+			launch_direction = _velocity.normalized()
+			rotation = launch_direction.angle()
 
 func _get_aim_direction(target_position: Vector2) -> Vector2:
 	return target_position - global_position
