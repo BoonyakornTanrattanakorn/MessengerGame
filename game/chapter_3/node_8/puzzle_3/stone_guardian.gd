@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 signal guardian_defeated
 
-var hp: int = 15
-var max_hp: int = 15
+var hp: int = 10
+var max_hp: int = 10
 var player: Node2D = null
 var speed: float = 60.0
 
