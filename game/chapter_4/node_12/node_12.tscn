@@ -8,9 +8,6 @@
 [ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
 [ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
 [ext_resource type="Script" uid="uid://d7anika6vqw" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.gd" id="7_o0j4o"]
-[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_wind.gd" id="8_gbb5j"]
-[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_fire.gd" id="9_n8nsa"]
-[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_water.gd" id="10_gju0t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
 font = ExtResource("6_jvdkp")
@@ -45,6 +42,7 @@ point_count = 5
 script = ExtResource("1_5xwdw")
 
 [node name="Map" type="Node2D" parent="." unique_id=312261264]
+visible = false
 
 [node name="Wall" type="TileMapLayer" parent="Map" unique_id=544466136]
 scale = Vector2(0.667, 0.667)
@@ -110,7 +108,24 @@ position = Vector2(-1, 67)
 
 [node name="Mage" type="Node2D" parent="." unique_id=2142568931]
 
-[node name="MageWater" parent="Mage" unique_id=887899565 instance=ExtResource("5_rhnue")]
+[node name="WindMage" parent="NPC" unique_id=1171257504 instance=ExtResource("5_1x7oo")]
+position = Vector2(1, 501.00003)
+
+[node name="FireMage" parent="NPC" unique_id=1662164182 instance=ExtResource("5_1x7oo")]
+position = Vector2(223, 314)
+
+[node name="WaterMage" parent="NPC" unique_id=1665975675 instance=ExtResource("5_1x7oo")]
+position = Vector2(-2, 123)
+
+[node name="Marker" type="Node" parent="." unique_id=15657992]
+
+[node name="Start Walk" type="Marker2D" parent="Marker" unique_id=1547786553]
+position = Vector2(0, 843)
+
+[node name="End Walk" type="Marker2D" parent="Marker" unique_id=1040511458]
+position = Vector2(0, 127)
+
+[node name="Credit" type="Node2D" parent="." unique_id=1292322719]
 visible = false
 position = Vector2(0, 200)
 
