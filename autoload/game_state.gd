@@ -7,6 +7,7 @@ var chap1_node3_2_shown := false
 var chap1_node3_3_shown := false
 var chap2_node4_shown := false
 var chap2_node3_shown := false
+var chap4_node1_shown := false
 
 @export var save_id = "game_state"
 @export var save_scope = "global"
@@ -21,6 +22,7 @@ func new_game():
 	chap1_node3_2_shown = false
 	chap1_node3_3_shown = false
 	chap2_node3_shown = false
+	chap4_node1_shown = false
 
 func save():
 	return {

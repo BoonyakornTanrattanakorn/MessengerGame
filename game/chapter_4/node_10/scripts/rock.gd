@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 class_name Rock
 
 @export var tile_size := 16

@@ -22,6 +22,18 @@ func _physics_process(delta):
 	if traveled >= travel_distance:
 		explode()
 
+func _belongs_to_player(node: Node) -> bool:
+	if node == null:
+		return false
+	if node.is_in_group("player"):
+		return true
+	var parent := node.get_parent()
+	while parent != null:
+		if parent.is_in_group("player"):
+			return true
+		parent = parent.get_parent()
+	return false
+
 func explode():
 	has_exploded = true
 	# damage enemies in blast_range
@@ -33,5 +45,9 @@ func explode():
 	queue_free()
 
 func _on_body_entered(body):
+	if _belongs_to_player(body):
+		return
 	if not has_exploded:
 		explode()
+
+	queue_free()

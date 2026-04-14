@@ -1,0 +1,16 @@
+~ start
+Player [#sprite=fire/neutral]: It's freezing in here...
+Player [#sprite=fire/neutral]: The floor feels slippery.
+Player [#sprite=fire/neutral]: I might not be able to stop once I start moving.
+=> END
+
+~ checkpoint
+System: Checkpoint activated.
+System: Press R to reset the room.
+=> END
+
+~ ice_block_found
+Player [#sprite=fire/neutral]: An ice block?
+Player [#sprite=fire/neutral]: It's blocking the path.
+Player [#sprite=fire/neutral]: Maybe I can use fire to melt it.
+	
