@@ -8,6 +8,7 @@ class_name SkillComponent
 @export var water_wave_scene: PackedScene
 @export var rock_pillar_scene: PackedScene
 
+var spawn_offset := Vector2(0, -12)
 var scenes = {}
 
 func _ready():
@@ -50,6 +51,8 @@ func shoot_wind_wave() -> void:
 	var player = _get_player()
 	if wind_scene == null:
 		return
+	if player.skill_locked:
+		return
 	var aim_dir: Vector2 = player.last_direction
 	if player.has_method("get_aim_direction"):
 		aim_dir = player.get_aim_direction()
@@ -57,7 +60,7 @@ func shoot_wind_wave() -> void:
 		player.last_direction = aim_dir
 	var wave = wind_scene.instantiate()
 	wave.direction = aim_dir
-	wave.global_position = player.global_position
+	wave.global_position = player.global_position + spawn_offset
 	wave.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(wave)
 
@@ -66,6 +69,8 @@ func shoot_fire_small() -> void:
 	var player = _get_player()
 	if fire_small_scene == null:
 		return
+	if player.skill_locked:
+		return
 	var aim_dir: Vector2 = player.last_direction
 	if player.has_method("get_aim_direction"):
 		aim_dir = player.get_aim_direction()
@@ -73,7 +78,7 @@ func shoot_fire_small() -> void:
 		player.last_direction = aim_dir
 	var ball = fire_small_scene.instantiate()
 	ball.direction = aim_dir
-	ball.global_position = player.global_position
+	ball.global_position = player.global_position + spawn_offset
 	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
@@ -84,6 +89,8 @@ func shoot_fire_heavy() -> void:
 	var player = _get_player()
 	if fire_heavy_scene == null:
 		return
+	if player.skill_locked:
+		return
 	var aim_dir: Vector2 = player.last_direction
 	if player.has_method("get_aim_direction"):
 		aim_dir = player.get_aim_direction()
@@ -91,7 +98,7 @@ func shoot_fire_heavy() -> void:
 		player.last_direction = aim_dir
 	var ball = fire_heavy_scene.instantiate()
 	ball.direction = aim_dir
-	ball.global_position = player.global_position
+	ball.global_position = player.global_position + spawn_offset
 	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
@@ -101,6 +108,8 @@ func shoot_fire_heavy() -> void:
 func summon_fairy() -> void:
 	var player = _get_player()
 	if player.cool_gauge + 1 > player.max_cool_gauge:
+		return
+	if player.skill_locked:
 		return
 	if player.has_method("add_cool"):
 		player.add_cool(1)
@@ -147,6 +156,8 @@ func handle_fairy_movement(delta: float) -> void:
 
 func shoot_water_wave(level: int) -> void:
 	var player = _get_player()
+	if player.skill_locked:
+		return
 	var cost = level
 	if player.cool_gauge + cost > player.max_cool_gauge:
 		level = player.max_cool_gauge - player.cool_gauge
@@ -173,6 +184,8 @@ func activate_earth_shield() -> void:
 	var player = _get_player()
 	if player.is_shield_active:
 		return
+	if player.skill_locked:
+		return
 	player.current_shield_hp = player.shield_max_hp
 	player.is_shield_active = true
 	print("Earth Shield Activated! HP: ", player.current_shield_hp)
@@ -183,6 +196,8 @@ func activate_earth_shield() -> void:
 func spawn_rock_pillar() -> void:
 	var player = _get_player()
 	if rock_pillar_scene == null:
+		return
+	if player.skill_locked:
 		return
 		
 	player.active_pillars = player.active_pillars.filter(func(p): return is_instance_valid(p))

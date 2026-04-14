@@ -54,6 +54,7 @@ var current_dialog = 0
 # Ice slide
 var is_sliding := false
 var slide_direction := Vector2.ZERO
+var skill_locked := false
 
 # Mount system
 var is_mounted = false
@@ -186,8 +187,12 @@ func _physics_process(delta):
 		global_position = current_mount.mount_point.global_position
 		return
 	
+	# Lock dir, skill when slide
+	if(is_sliding): 
+		direction = slide_direction 
+	skill_locked = is_sliding
+	
 	# Update last direction if there's input
-	if(is_sliding): direction = slide_direction 
 	if direction.length() > 0:
 		last_direction = direction.normalized()
 
