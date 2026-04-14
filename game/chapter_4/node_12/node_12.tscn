@@ -7,17 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
 [ext_resource type="PackedScene" uid="uid://dk5clku1rco51" path="res://game/chapter_4/node_12/npc/mage/mage_water/mage_water.tscn" id="5_rhnue"]
 [ext_resource type="PackedScene" uid="uid://rlxghj7ppkr0" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.tscn" id="6_flvrn"]
-[ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
-[ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
 [ext_resource type="PackedScene" uid="uid://cmlw3sah421gh" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.tscn" id="7_unbsp"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
-font = ExtResource("6_jvdkp")
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fjm0"]
-size = Vector2(85, 174)
 
 [node name="Node12" type="Node2D" unique_id=981344518]
 script = ExtResource("1_5xwdw")
@@ -69,6 +59,7 @@ position = Vector2(44, 66)
 position = Vector2(-0.9999962, 67)
 
 [node name="Mage" type="Node2D" parent="." unique_id=2142568931]
+visible = false
 
 [node name="MageWater" parent="Mage" unique_id=887899565 instance=ExtResource("5_rhnue")]
 position = Vector2(1, 140)
@@ -88,26 +79,4 @@ position = Vector2(-168, 285)
 position = Vector2(0, 843)
 
 [node name="End Walk" type="Marker2D" parent="Marker" unique_id=1040511458]
-position = Vector2(0, 127)
-
-[node name="Credit" type="Node2D" parent="." unique_id=1292322719]
-visible = false
-position = Vector2(0, 568)
-script = ExtResource("6_rhnue")
-
-[node name="Label" type="Label" parent="Credit" unique_id=1584828309]
-offset_left = -113.0
-offset_top = -29.0
-offset_right = 107.0
-offset_bottom = 26.0
-text = "Written and Directed by
-Boonyakorn Tanrattanakorn"
-label_settings = SubResource("LabelSettings_rhnue")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Show Area" type="Area2D" parent="Credit" unique_id=46122905]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Credit/Show Area" unique_id=1852219220]
-shape = SubResource("RectangleShape2D_7fjm0")
+position = Vector2(0, 149)
