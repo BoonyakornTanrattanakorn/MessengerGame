@@ -19,6 +19,7 @@ var traveled: float = 0.0
 @onready var collision = $CollisionShape2D
 
 func _ready():
+	add_to_group("water_wave")
 	var settings = LEVEL_SETTINGS[level - 1]
 	speed        = settings["speed"]
 	max_distance = settings["distance"]

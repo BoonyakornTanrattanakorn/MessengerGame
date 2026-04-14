@@ -2,36 +2,28 @@ extends Node2D
 
 signal puzzle_completed
 
-@export var exit_lever: Node2D
+@export var guardian: Node2D
 @export var exit_warp: Node2D
-@export var player_reset_position: Vector2 = Vector2.ZERO
-
-var _traps: Array[Node2D] = []
 
 func _ready() -> void:
 	await get_tree().process_frame
 
-	for child in get_children():
-		if child.is_in_group("moving_trap"):
-			_traps.append(child)
-			child.player_hit.connect(_on_player_hit)
-
-	if not exit_lever:
-		exit_lever = get_parent().get_node_or_null("ExitLever")
-	if exit_lever and exit_lever.has_signal("lever_pulled"):
-		exit_lever.lever_pulled.connect(_on_lever_pulled)
-
+	if not guardian:
+		guardian = get_parent().get_node_or_null("StoneGuardian")
 	if not exit_warp:
 		exit_warp = get_parent().get_node_or_null("ExitWarp")
+
 	if exit_warp:
 		exit_warp.hide()
 
-func _on_player_hit(_trap: Node2D) -> void:
-	var player := get_tree().get_first_node_in_group("player")
-	if player:
-		player.global_position = player_reset_position
+	if guardian:
+		guardian.guardian_defeated.connect(_on_guardian_defeated)
 
-func _on_lever_pulled() -> void:
+func activate_guardian() -> void:
+	if guardian:
+		guardian.set_physics_process(true)
+
+func _on_guardian_defeated() -> void:
 	puzzle_completed.emit()
 	Chap3Node8State.complete_puzzle(3)
 	if exit_warp:

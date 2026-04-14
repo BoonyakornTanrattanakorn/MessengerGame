@@ -5,12 +5,14 @@ extends LevelEventHandler
 func _ready() -> void:
 	if not puzzle_manager:
 		puzzle_manager = get_node_or_null("Puzzle3Manager")
-	if Chap3Node8State.puzzle_3_completed and puzzle_manager:
+
+	if Chap3Node8State.puzzle_3_completed:
 		var exit_warp := get_node_or_null("ExitWarp")
 		if exit_warp:
 			exit_warp.show()
-		for trap in puzzle_manager._traps:
-			trap.queue_free()
+		var guardian := get_node_or_null("StoneGuardian")
+		if guardian:
+			guardian.queue_free()
 
 func handle_intro_for_level() -> void:
 	GameState.chap3_node8_3_shown = false  # temp: remove before commit
@@ -24,16 +26,11 @@ func handle_intro_for_level() -> void:
 
 		await DialogueManager.dialogue_ended
 
-		var trap1 := get_node_or_null("Puzzle3Manager/Trap1")
-		var trap2 := get_node_or_null("Puzzle3Manager/Trap2")
-		var lever := get_node_or_null("ExitLever")
-		if trap1:
-			player.focus_camera_to(trap1)
-			await get_tree().create_timer(1.0).timeout
-		if trap2:
-			player.focus_camera_to(trap2)
-			await get_tree().create_timer(1.0).timeout
-		if lever:
-			player.focus_camera_to(lever)
-			await get_tree().create_timer(1.0).timeout
+		var guardian := get_node_or_null("StoneGuardian")
+		if guardian:
+			player.focus_camera_to(guardian)
+			await get_tree().create_timer(1.5).timeout
 		player.return_camera()
+
+		if puzzle_manager and puzzle_manager.has_method("activate_guardian"):
+			puzzle_manager.activate_guardian()
