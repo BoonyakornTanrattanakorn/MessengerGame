@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="2_flfan"]
 [ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
 [ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
-[ext_resource type="PackedScene" uid="uid://cmlw3sah421gh" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.tscn" id="5_rhnue"]
+[ext_resource type="PackedScene" uid="uid://dk5clku1rco51" path="res://game/chapter_4/node_12/npc/mage/mage_water/mage_water.tscn" id="5_rhnue"]
 [ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
 [ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
 
@@ -104,8 +104,8 @@ position = Vector2(44, 66)
 [node name="SoldierEscort" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
 position = Vector2(-1, 67)
 
-[node name="MageFire" parent="NPC" unique_id=1895058492 instance=ExtResource("5_rhnue")]
-position = Vector2(-1, 155)
+[node name="MageWater" parent="NPC" unique_id=887899565 instance=ExtResource("5_rhnue")]
+position = Vector2(1, 140)
 
 [node name="Marker" type="Node" parent="." unique_id=15657992]
 
