@@ -575,6 +575,12 @@ func check_if_water_at(pos: Vector2) -> bool:
 		#print("No tile at", map_pos)
 		return false
 	else:
+		var tileset: TileSet = tilemap.tile_set
+		if tileset == null:
+			return false
+		if tileset.get_custom_data_layer_by_name("is_water") == -1:
+			return false
+
 		var is_water = tile_data.get_custom_data("is_water")
 
 		if is_water == true:
