@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dqhwrc7j1ul2"]
+
+[ext_resource type="Script" uid="uid://bkedi6ol7mu2d" path="res://game/chapter_4/node_12/npc/mage/mage_earth/earth_projectile.gd" id="1_mlx88"]
+[ext_resource type="Texture2D" uid="uid://153r2eu0q42y" path="res://assets/sprites/chapter1_node2/Untitled-1.png" id="2_jhkqg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8twpv"]
+radius = 4.0
+
+[node name="WindProjectile" type="Area2D" unique_id=1223153570]
+scale = Vector2(2, 2)
+script = ExtResource("1_mlx88")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=199153392]
+shape = SubResource("CircleShape2D_8twpv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=237652286]
+scale = Vector2(0.1504383, 0.1504383)
+texture = ExtResource("2_jhkqg")
