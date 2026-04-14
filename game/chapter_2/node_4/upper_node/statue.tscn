@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://daalpk2tyx4q4"]
+
+[ext_resource type="Texture2D" uid="uid://bu57udwrf0l1x" path="res://assets/sprites/maps/tilesets/Dungeon_B.png" id="1_0vxjo"]
+[ext_resource type="Script" uid="uid://cdfi4n3mejlwi" path="res://game/chapter_2/node_4/upper_node/statue.gd" id="1_1jgcs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jgcs"]
+atlas = ExtResource("1_0vxjo")
+region = Rect2(480, 333, 48, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mb4sh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jgcs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1or6j"]
+size = Vector2(64, 100)
+
+[node name="Statue" type="Area2D" unique_id=888969861]
+script = ExtResource("1_1jgcs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1117924343]
+sprite_frames = SubResource("SpriteFrames_mb4sh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1975401071]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_1or6j")
