@@ -122,7 +122,6 @@ func _spawn_earth_projectile(direction: Vector2) -> Area2D:
 	projectile.z_as_relative = false
 	projectile.z_index = 20
 
-	projectile.set("damage", attack_damage)
 	projectile.set("source_element", mage_element)
 	projectile.set("owner_mage", self)
 	projectile.set("launch_direction", direction.normalized())

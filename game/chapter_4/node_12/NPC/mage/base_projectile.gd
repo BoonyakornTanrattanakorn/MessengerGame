@@ -83,9 +83,7 @@ func _physics_process(delta: float) -> void:
 		if _collision != null and _collision.shape is CircleShape2D:
 			hit_radius = (_collision.shape as CircleShape2D).radius + 12.0
 		if global_position.distance_to(owner_mage.global_position) <= hit_radius:
-			if owner_mage.has_method("receive_reflected_hit"):
-				owner_mage.call("receive_reflected_hit", damage, _reflected_element)
-			queue_free()
+			_consume_reflected_owner_hit()
 			return
 
 	if owner_mage == null or global_position.distance_to(owner_mage.global_position) >= despawn_radius:
@@ -137,6 +135,9 @@ func _handle_shape_hits_at(sample_pos: Vector2, radius: float) -> bool:
 
 		if collider is Node2D:
 			var body := collider as Node2D
+			if _is_reflected and owner_mage != null and is_instance_valid(owner_mage) and body == owner_mage:
+				_consume_reflected_owner_hit()
+				return true
 			if not _is_reflected and _can_reflect_from_body(body):
 				_reflect_to_owner(_get_reflect_element())
 				return true
@@ -194,6 +195,12 @@ func _reflect_to_owner(element: String) -> void:
 		if _velocity.length_squared() > 0.0001:
 			launch_direction = _velocity.normalized()
 			rotation = launch_direction.angle()
+
+func _consume_reflected_owner_hit() -> void:
+	if owner_mage != null and is_instance_valid(owner_mage):
+		if owner_mage.has_method("receive_reflected_hit"):
+			owner_mage.call("receive_reflected_hit", damage, _reflected_element)
+	queue_free()
 
 func _get_aim_direction(target_position: Vector2) -> Vector2:
 	return target_position - global_position

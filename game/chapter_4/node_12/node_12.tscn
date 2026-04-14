@@ -4,9 +4,12 @@
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="2_flfan"]
 [ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
 [ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
+[ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
 [ext_resource type="PackedScene" uid="uid://dk5clku1rco51" path="res://game/chapter_4/node_12/npc/mage/mage_water/mage_water.tscn" id="5_rhnue"]
+[ext_resource type="PackedScene" uid="uid://rlxghj7ppkr0" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.tscn" id="6_flvrn"]
 [ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
 [ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
+[ext_resource type="PackedScene" uid="uid://cmlw3sah421gh" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.tscn" id="7_unbsp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
 font = ExtResource("6_jvdkp")
@@ -104,8 +107,19 @@ position = Vector2(44, 66)
 [node name="SoldierEscort" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
 position = Vector2(-1, 67)
 
-[node name="MageWater" parent="NPC" unique_id=887899565 instance=ExtResource("5_rhnue")]
+[node name="Mage" type="Node2D" parent="." unique_id=2142568931]
+
+[node name="MageWater" parent="Mage" unique_id=887899565 instance=ExtResource("5_rhnue")]
 position = Vector2(1, 140)
+
+[node name="MageWind" parent="Mage" unique_id=2017671401 instance=ExtResource("6_flvrn")]
+position = Vector2(0, 432.00003)
+
+[node name="MageFire" parent="Mage" unique_id=1440830669 instance=ExtResource("7_unbsp")]
+position = Vector2(190, 291)
+
+[node name="MageEarth" parent="Mage" unique_id=10372308 instance=ExtResource("5_1x7oo")]
+position = Vector2(-168, 285)
 
 [node name="Marker" type="Node" parent="." unique_id=15657992]
 
