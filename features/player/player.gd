@@ -73,6 +73,7 @@ var invincible_timer: float = 0.0
 var invincible_duration: float = 1.0
 
 var respawn_position = Vector2(110, 115)
+var skill_offset := Vector2(0, -12)
 
 var inventory = {
 	"red_gem": 0,
@@ -315,7 +316,7 @@ func set_facing_direction(direction: Vector2) -> void:
 	_update_animation(last_direction)
 
 func get_aim_direction() -> Vector2:
-	var aim := get_global_mouse_position() - global_position
+	var aim := get_global_mouse_position() - (global_position + skill_offset)
 	if aim.length() < 4.0:
 		return last_direction
 	return aim.normalized()

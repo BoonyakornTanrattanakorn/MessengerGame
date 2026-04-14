@@ -6,6 +6,8 @@ class_name IceBlock
 @export var height_in_tiles := 2
 @export var slide_speed := 200 
 @export var push_speed := 100
+@export var save_id = ""
+@export var save_scope = "scene"
 
 var speed := 200
 var sliding := false
@@ -17,6 +19,9 @@ var level = null
 var level_scene : Node2D
 
 func _ready():
+	add_to_group("savable")
+	if save_id == "" :
+		save_id = get_save_id()
 	level_scene = get_node(level_scene_path)
 	level = get_parent()
 	$Area2D.area_entered.connect(_on_area_entered)
@@ -126,10 +131,7 @@ func push_from_player(player):
 
 func _on_area_entered(area):
 	if area is Fire_heavy or area is Fire_small:
-		hide()
-		$CollisionShape2D.set_deferred("disabled", true)
-		$Area2D.set_deferred("monitoring", false)
-		$Area2D.set_deferred("monitorable", false)
+		melt()
 		area.queue_free()
 		
 func recover():
@@ -144,3 +146,35 @@ func recover():
 
 	$Area2D.set_deferred("monitoring", true)
 	$Area2D.set_deferred("monitorable", true)
+	
+func melt():
+	hide()
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Area2D.set_deferred("monitoring", false)
+	$Area2D.set_deferred("monitorable", false)
+	
+func get_save_id() -> String:
+	var room_name = get_parent().name
+	return room_name + "/" + name
+
+func save():
+	return {
+		"position": {
+			"x": global_position.x,
+			"y": global_position.y
+		},
+		"visible": visible
+	}
+
+func load_data(data) -> void:
+	var pos = data.get("position", null)
+	
+	if pos:
+		global_position = Vector2(pos["x"], pos["y"])
+		
+	var visible = data.get("visible", null)
+	if visible != null:
+		if visible == true:
+			recover()
+		else:
+			melt()

@@ -195,6 +195,7 @@ func restore_level_objects():
 			continue
 
 		node.load_data(data)
+		print(node.name)
 		print(data)
 		
 func restore_global_objects():

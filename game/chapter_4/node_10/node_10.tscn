@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bkihiu26d6r0j" path="res://game/chapter_4/node_10/scripts/room_manager.gd" id="7_bcujh"]
 [ext_resource type="PackedScene" uid="uid://05acn6y4wcy5" path="res://game/chapter_1/node_2/scenes/trigger.tscn" id="10_i1hpl"]
 [ext_resource type="Script" uid="uid://d2hf0y2vdftmo" path="res://game/chapter_4/node_10/scripts/node_10_trigger.gd" id="11_2dx0m"]
+[ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="11_ve5wd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ghb4q"]
 texture = ExtResource("4_pnn34")
@@ -2975,6 +2976,8 @@ sources/0 = SubResource("TileSetAtlasSource_61hw6")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bcujh"]
 size = Vector2(64, 26)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sjf8"]
+
 [node name="Node2D" type="Node2D" unique_id=862201448 node_paths=PackedStringArray("ice_layer")]
 y_sort_enabled = true
 script = ExtResource("1_sbhue")
@@ -3166,6 +3169,7 @@ script = ExtResource("7_bcujh")
 
 [node name="IceBlock4" parent="." unique_id=2046404792 instance=ExtResource("5_pnn34")]
 position = Vector2(1056, 192)
+save_id = "Example_block"
 level_scene_path = NodePath("..")
 
 [node name="Trigger" parent="." unique_id=1049504828 node_paths=PackedStringArray("IceBlock") instance=ExtResource("10_i1hpl")]
@@ -3174,3 +3178,12 @@ script = ExtResource("11_2dx0m")
 save_id = "node_10_trigger"
 save_scope = "scene"
 IceBlock = NodePath("../IceBlock4")
+
+[node name="Exit" type="Area2D" parent="." unique_id=1749724821]
+z_index = 1
+position = Vector2(2249, -1528)
+script = ExtResource("11_ve5wd")
+next_level_path = "res://ui/coming_soon.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" unique_id=2105304042]
+shape = SubResource("RectangleShape2D_8sjf8")

@@ -6,7 +6,7 @@ Player [#sprite=fire/neutral]: I might not be able to stop once I start moving.
 
 ~ checkpoint
 System: Checkpoint activated.
-System: Press R to reset the room.
+System: Press R to reset current room.
 => END
 
 ~ ice_block_found

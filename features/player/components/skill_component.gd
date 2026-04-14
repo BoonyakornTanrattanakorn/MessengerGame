@@ -8,7 +8,6 @@ class_name SkillComponent
 @export var water_wave_scene: PackedScene
 @export var rock_pillar_scene: PackedScene
 
-var spawn_offset := Vector2(0, -12)
 var scenes = {}
 
 func _ready():
@@ -60,7 +59,7 @@ func shoot_wind_wave() -> void:
 		player.last_direction = aim_dir
 	var wave = wind_scene.instantiate()
 	wave.direction = aim_dir
-	wave.global_position = player.global_position + spawn_offset
+	wave.global_position = player.global_position + player.skill_offset
 	wave.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(wave)
 
@@ -78,7 +77,7 @@ func shoot_fire_small() -> void:
 		player.last_direction = aim_dir
 	var ball = fire_small_scene.instantiate()
 	ball.direction = aim_dir
-	ball.global_position = player.global_position + spawn_offset
+	ball.global_position = player.global_position + player.skill_offset
 	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
@@ -98,7 +97,7 @@ func shoot_fire_heavy() -> void:
 		player.last_direction = aim_dir
 	var ball = fire_heavy_scene.instantiate()
 	ball.direction = aim_dir
-	ball.global_position = player.global_position + spawn_offset
+	ball.global_position = player.global_position + player.skill_offset
 	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):

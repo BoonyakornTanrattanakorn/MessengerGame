@@ -6,14 +6,17 @@ var current_room : Node = null
 var player_checkpoint_position
 
 @export var room_nodes : Array[Node]
+@export var save_id = "level_manager"
+@export var save_scope = "scene"
 
 func _ready():
-
+	add_to_group("savable")
 	if room_nodes.is_empty():
-		room_nodes = get_parent().get_children()
+		for child in get_parent().get_children():
+			if child.name.begins_with("Room"):
+				room_nodes.append(child)
 
 	store_initial_states()
-
 
 func store_initial_states():
 
@@ -55,7 +58,8 @@ func reset_room():
 		if node.has_method("recover"):
 			node.recover()
 
-		node.visible = state["visible"]
+		if not node.has_method("recover"):
+			node.visible = state["visible"]
 
 
 	var player = get_player()
@@ -66,3 +70,40 @@ func reset_room():
 func get_player():
 
 	return get_tree().get_first_node_in_group("player")
+
+func save():
+
+	var data = {
+		"current_room": "",
+		"player_checkpoint_position": null
+	}
+
+	if current_room != null:
+		data["current_room"] = current_room.name
+
+	if player_checkpoint_position != null:
+		data["player_checkpoint_position"] = {
+			"x": player_checkpoint_position.x,
+			"y": player_checkpoint_position.y
+		}
+
+	return data
+func load_data(data):
+
+	var room_name = data.get("current_room", "")
+
+	if room_name != "":
+		for room in room_nodes:
+			if room.name == room_name:
+				current_room = room
+				break
+
+	var pos = data.get("player_checkpoint_position", null)
+
+	if pos != null:
+		player_checkpoint_position = Vector2(pos.x, pos.y)
+		
+	if player_checkpoint_position:
+		var player = get_player()
+		if player:
+			player.global_position = player_checkpoint_position
