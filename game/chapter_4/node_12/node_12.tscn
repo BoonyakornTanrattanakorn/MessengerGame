@@ -7,38 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
 [ext_resource type="PackedScene" uid="uid://dk5clku1rco51" path="res://game/chapter_4/node_12/npc/mage/mage_water/mage_water.tscn" id="5_rhnue"]
 [ext_resource type="PackedScene" uid="uid://rlxghj7ppkr0" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.tscn" id="6_flvrn"]
-[ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
-[ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
 [ext_resource type="PackedScene" uid="uid://cmlw3sah421gh" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.tscn" id="7_unbsp"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
-font = ExtResource("6_jvdkp")
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fjm0"]
-size = Vector2(357.5, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jugk"]
-size = Vector2(20, 258)
-
-[sub_resource type="Curve2D" id="Curve2D_7fjm0"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 857, 0, 0, 0, 0, 0, 132)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_1jugk"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 143, 0, 0, 0, 0, 0, 859)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_flvrn"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 67, 0, 0, 0, 0, -1, 21, 0, 0, 0, 0, -1, 96, 0, 0, 0, 0, -60, 146, 0, 0, 0, 0, -65, 861)
-}
-point_count = 5
 
 [node name="Node12" type="Node2D" unique_id=981344518]
 script = ExtResource("1_5xwdw")
@@ -108,6 +77,7 @@ position = Vector2(44, 66)
 position = Vector2(-1, 67)
 
 [node name="Mage" type="Node2D" parent="." unique_id=2142568931]
+visible = false
 
 [node name="MageWater" parent="Mage" unique_id=887899565 instance=ExtResource("5_rhnue")]
 position = Vector2(1, 140)
@@ -127,57 +97,4 @@ position = Vector2(-168, 285)
 position = Vector2(0, 843)
 
 [node name="End Walk" type="Marker2D" parent="Marker" unique_id=1040511458]
-position = Vector2(0, 127)
-
-[node name="Credit" type="Node2D" parent="." unique_id=1292322719]
-visible = false
-position = Vector2(0, 200)
-
-[node name="MageWind" parent="Mage" unique_id=2017671401 instance=ExtResource("6_flvrn")]
-visible = false
-position = Vector2(0, 500)
-
-[node name="MageFire" parent="Mage" unique_id=1440830669 instance=ExtResource("7_unbsp")]
-visible = false
-position = Vector2(200, 350)
-
-[node name="MageEarth" parent="Mage" unique_id=10372308 instance=ExtResource("5_1x7oo")]
-visible = false
-position = Vector2(-200, 350)
-
-[node name="Bound" type="StaticBody2D" parent="Mage" unique_id=1596107552]
-collision_layer = 2
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mage/Bound" unique_id=569099066]
-position = Vector2(0.25, 489)
-shape = SubResource("RectangleShape2D_7fjm0")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Mage/Bound" unique_id=1440180519]
-position = Vector2(0.25, 211)
-shape = SubResource("RectangleShape2D_7fjm0")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Mage/Bound" unique_id=1723466058]
-position = Vector2(-189, 350)
-shape = SubResource("RectangleShape2D_1jugk")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Mage/Bound" unique_id=2142080275]
-position = Vector2(190, 350)
-shape = SubResource("RectangleShape2D_1jugk")
-
-[node name="PathAndMarker" type="Node" parent="." unique_id=15657992]
-
-[node name="FightBegin" type="Marker2D" parent="PathAndMarker" unique_id=1076872350]
-position = Vector2(0, 350)
-
-[node name="IntroWalk" type="Path2D" parent="PathAndMarker" unique_id=762211134]
-curve = SubResource("Curve2D_7fjm0")
-
-[node name="PlayerBadEndWalk" type="Path2D" parent="PathAndMarker" unique_id=1249498335]
-curve = SubResource("Curve2D_1jugk")
-
-[node name="Throne" type="Marker2D" parent="PathAndMarker" unique_id=1400489890]
-position = Vector2(0, -14)
-
-[node name="SolderEscortKing" type="Path2D" parent="PathAndMarker" unique_id=230827901]
-curve = SubResource("Curve2D_flvrn")
+position = Vector2(0, 149)

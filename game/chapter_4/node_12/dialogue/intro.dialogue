@@ -1,10 +1,10 @@
 ~ hallway_thoughts
 Player: (The hallway feels longer than ever.)
 Player: (Every step here carries the weight of my journey.)
-if can_accuse_king()
-	Player: (I have enough proof. If I speak now, I can end this.)
+if PuzzleState.has_all_fragments()
+	Player: (I found every clue. If I speak now, I can end this.)
 else
-	Player: (I still don't have enough proof... maybe I can't stop what comes next.)
+	Player: (If only I had all the clues... maybe I could stop what comes next.)
 => END
 
 ~ throne_intro
@@ -12,36 +12,27 @@ Player: Your majesty, I bring a message from the town.
 King: Speak.
 Player: The town is under attack. We need reinforcements now.
 King: I understand the situation. I will alert the army at once.
-King: You have done your duty, messenger. You may leave and take a rest after your long journey.
+King: You have done your duty, messenger.
+King: Guards, take him to reset.
 
-if can_accuse_king()
-	What will you do?
-	- Leave the throne room.
-		do choose_thanks_king()
-		=> END
-	- Accuse the king.
-		do choose_accuse_king()
-		=> accuse_king
-else
-	What will you do?
-	- Go with the soldier.
-		do choose_thanks_king()
-		=> END
-
+? What will you do?
+- Go with the soldier.
+	do set_intro_outcome("thanks_king")
+	=> thanks_king
+- [if PuzzleState.has_all_fragments()] Accuse the king.
+	do set_intro_outcome("fight_begins")
+	=> accuse_king
 
 ~ thanks_king
 Player: Understood, your majesty.
-if can_accuse_king()
-	Player: What am I doing!? That was my only chance and now it's gone forever.
+Soldier: This way. Keep moving.
 Player: (I leave the hall, and the monsters retreat for now...)
 Player: (...but they will return again and again.)
 => END
 
 ~ accuse_king
 Player: No. You are the one behind the attacks.
-King: The messenger has gone mad! Call in the royal mages! 
-do _fade_to_black_then_warp_player()
-King: My royal mages! Capture him dead or alive!
-do _reveal_mages_with_camera_pan()
-do! start_fight_sequence()
+Soldier: How could a mere messenger use magic?
+King: The messenger has gone mad! Soldier! Capture him dead or alive!
+Player: (Flames answer my call.)
 => END
