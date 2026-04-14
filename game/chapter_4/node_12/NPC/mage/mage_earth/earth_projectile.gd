@@ -40,8 +40,16 @@ func aim_at(target_position: Vector2) -> void:
 	var aim_dir := target_position - global_position
 	if aim_dir.length_squared() <= 0.0001:
 		return
-	launch_direction = aim_dir.normalized()
+	set_launch_direction(aim_dir.normalized())
+
+func set_launch_direction(direction: Vector2) -> void:
+	if _is_reflected:
+		return
+	if direction.length_squared() <= 0.0001:
+		return
+	launch_direction = direction.normalized()
 	_velocity = launch_direction * base_speed
+	rotation = launch_direction.angle()
 
 func shoot() -> void:
 	set_telegraph(false)
