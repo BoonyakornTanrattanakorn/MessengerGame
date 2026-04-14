@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 				owner_mage.call("receive_reflected_hit", 1, _reflected_element)
 			queue_free()
 			
-	if global_position.distance_to(owner_mage.global_position) >= despawn_radius:
+	if owner_mage == null or global_position.distance_to(owner_mage.global_position) >= despawn_radius:
 		queue_free()
 
 func _check_swept_hits(start_pos: Vector2, end_pos: Vector2) -> bool:
@@ -132,6 +132,7 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	if area.is_in_group("player_hurtbox") and not _is_reflected:
 		queue_free()
+		
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == null:

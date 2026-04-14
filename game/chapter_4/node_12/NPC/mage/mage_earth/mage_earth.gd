@@ -13,8 +13,8 @@ enum projectile_attack_state {
 @export var telegraph_duration: float = 0.0
 
 @export_group("Projectile Config")
-@export var projectile_count: int = 3
-@export var spread_degrees: float = 10.0
+@export var projectile_count: int = 10
+@export var spread_degrees: float = 30.0
 @export var summon_distance: float = 50.0
 @export var summon_duration: float = 1.0
 
@@ -36,7 +36,7 @@ func perform_attack_pattern() -> void:
 	await _state_telegraph(spawned)
 
 	_projectile_phase = projectile_attack_state.SHOOT
-	_state_shoot(spawned, base_dir)
+	_state_shoot(spawned)
 
 	_projectile_phase = projectile_attack_state.VULNERABLE
 	await _state_vulnerable_wait()
@@ -69,32 +69,18 @@ func _state_telegraph(spawned: Array[Area2D]) -> void:
 			continue
 		if projectile.has_method("set_telegraph"):
 			projectile.call("set_telegraph", true)
-	_aim_projectiles_at_player(spawned)
 	if telegraph_duration <= 0.0:
 		return
 
 	var remaining := telegraph_duration
 	while remaining > 0.0:
 		await get_tree().process_frame
-		_aim_projectiles_at_player(spawned)
 		remaining -= get_process_delta_time()
 
-func _aim_projectiles_at_player(spawned: Array[Area2D]) -> void:
-	for projectile in spawned:
-		if projectile == null or not is_instance_valid(projectile):
-			continue
-		if projectile.has_method("aim_at"):
-			projectile.call("aim_at", _player_ref.global_position)
 
-func _state_shoot(spawned: Array[Area2D], fallback_dir: Vector2) -> void:
-	_aim_projectiles_at_player(spawned)
+func _state_shoot(spawned: Array[Area2D]) -> void:
 	for projectile in spawned:
-		if projectile == null or not is_instance_valid(projectile):
-			continue
-		if projectile.has_method("shoot"):
-			projectile.call("shoot")
-		else:
-			projectile.set("velocity", fallback_dir * projectile_speed)
+		projectile.shoot()
 
 func _state_vulnerable_wait() -> void:
 	modulate = Color(1.0, 0.8, 0.8, 1.0)
