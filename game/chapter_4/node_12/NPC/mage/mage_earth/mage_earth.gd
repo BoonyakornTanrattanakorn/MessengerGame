@@ -36,7 +36,12 @@ func _exit_tree() -> void:
 		projectile_container.queue_free()
 	super._exit_tree()
 
-func perform_attack_pattern() -> void:
+func perform_pattern_attack() -> void:
+	modulate = Color(0.9, 0.85, 0.72, 1.0)
+	await get_tree().create_timer(0.35).timeout
+	modulate = Color(1, 1, 1, 1)
+
+func perform_projectile_attack() -> void:
 	_projectile_phase = projectile_attack_state.SUMMON_PROJECTILE
 
 	var base_dir := get_direction_to_player()
@@ -50,8 +55,6 @@ func perform_attack_pattern() -> void:
 
 	_projectile_phase = projectile_attack_state.VULNERABLE
 	await _state_vulnerable_wait()
-
-	finish_casting(attack_interval)
 
 func _state_summon_projectiles(base_dir: Vector2) -> void:
 	_ensure_projectile_container()

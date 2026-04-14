@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://rlxghj7ppkr0"]
 
 [ext_resource type="Texture2D" uid="uid://0y7revq8i8p8" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Soldier/Soldier 07-1.png" id="1_n83dj"]
-[ext_resource type="Script" uid="uid://cri18wxbdmxo8" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.gd" id="2_tq6n5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayddp"]
 atlas = ExtResource("1_n83dj")
@@ -127,7 +126,6 @@ size = Vector2(32, 32)
 
 [node name="MageWind" type="CharacterBody2D" unique_id=269745531]
 scale = Vector2(1.333, 1.333)
-script = ExtResource("2_tq6n5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1978601684]
 sprite_frames = SubResource("SpriteFrames_m235k")

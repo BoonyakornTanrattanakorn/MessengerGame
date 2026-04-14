@@ -23,6 +23,7 @@ var _attack_cooldown: float = 0.0
 var _is_casting: bool = false
 var _player_ref: CharacterBody2D
 var _active_projectiles: Array[Area2D] = []
+var _next_attack_state: state = state.PATTERN_ATTACK
 
 func _ready() -> void:
 	_hp = max_hp
@@ -58,7 +59,20 @@ func _physics_process(delta: float) -> void:
 	await perform_attack_pattern()
 
 func perform_attack_pattern() -> void:
+	if _next_attack_state == state.PATTERN_ATTACK:
+		await perform_pattern_attack()
+		_next_attack_state = state.PROJECTILE_ATTACK
+	else:
+		await perform_projectile_attack()
+		_next_attack_state = state.PATTERN_ATTACK
+
 	finish_casting(attack_interval)
+
+func perform_pattern_attack() -> void:
+	push_error("%s must implement perform_pattern_attack()" % name)
+
+func perform_projectile_attack() -> void:
+	push_error("%s must implement perform_projectile_attack()" % name)
 
 func begin_casting_state() -> void:
 	_is_casting = true

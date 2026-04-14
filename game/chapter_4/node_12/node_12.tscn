@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
 [ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
 [ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
+[ext_resource type="PackedScene" uid="uid://rlxghj7ppkr0" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.tscn" id="5_rhnue"]
 [ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="6_jvdkp"]
 [ext_resource type="Script" path="res://game/chapter_4/node_12/credit.gd" id="6_rhnue"]
-[ext_resource type="Script" uid="uid://d7anika6vqw" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.gd" id="7_o0j4o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhnue"]
 font = ExtResource("6_jvdkp")
@@ -106,16 +106,11 @@ position = Vector2(44, 66)
 [node name="SoldierEscort" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
 position = Vector2(-1, 67)
 
-[node name="Mage" type="Node2D" parent="." unique_id=2142568931]
+[node name="MageWind" parent="NPC" unique_id=334263748 instance=ExtResource("5_rhnue")]
+position = Vector2(0, 209)
 
-[node name="WindMage" parent="NPC" unique_id=1171257504 instance=ExtResource("5_1x7oo")]
-position = Vector2(1, 501.00003)
-
-[node name="FireMage" parent="NPC" unique_id=1662164182 instance=ExtResource("5_1x7oo")]
-position = Vector2(223, 314)
-
-[node name="WaterMage" parent="NPC" unique_id=1665975675 instance=ExtResource("5_1x7oo")]
-position = Vector2(-2, 123)
+[node name="MageEarth" parent="NPC" unique_id=1582498592 instance=ExtResource("5_1x7oo")]
+position = Vector2(-279, 391)
 
 [node name="Marker" type="Node" parent="." unique_id=15657992]
 

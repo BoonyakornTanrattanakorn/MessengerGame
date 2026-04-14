@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dqhwrc7j1ul2"]
 
-[ext_resource type="Script" uid="uid://blqm1y5jcchh5" path="res://game/chapter_4/node_12/npc/mage/mage_wind/wind_projectile.gd" id="1_mlx88"]
+[ext_resource type="Script" uid="uid://bkedi6ol7mu2d" path="res://game/chapter_4/node_12/npc/mage/mage_earth/earth_projectile.gd" id="1_mlx88"]
 [ext_resource type="Texture2D" uid="uid://153r2eu0q42y" path="res://assets/sprites/chapter1_node2/Untitled-1.png" id="2_jhkqg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8twpv"]

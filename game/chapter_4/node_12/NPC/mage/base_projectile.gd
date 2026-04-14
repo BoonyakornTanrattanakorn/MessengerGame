@@ -5,7 +5,7 @@ class_name Node12MageBaseProjectile
 @export var base_speed: float = 300.0
 @export var despawn_radius: float = 1000.0
 
-var damage: float = 1
+var damage: int = 1
 var source_element: String = ""
 var owner_mage: Node = null
 var launch_direction: Vector2 = Vector2.RIGHT
@@ -36,8 +36,6 @@ func set_telegraph(enabled: bool) -> void:
 		_sprite.modulate = _get_telegraph_tint() if enabled else Color(1, 1, 1, 1)
 
 func shoot() -> void:
-	if SFXManager != null:
-		SFXManager.play_event("mage.projectile.shoot")
 	set_telegraph(false)
 
 func aim_at(target_position: Vector2) -> void:
@@ -66,13 +64,6 @@ func _physics_process(delta: float) -> void:
 
 	if not _is_reflected:
 		_update_guidance(delta)
-	elif owner_mage != null and is_instance_valid(owner_mage):
-		var to_owner = owner_mage.global_position - global_position
-		if to_owner.length_squared() > 0.0001:
-			var reflected_speed = max(base_speed * 1.25, _velocity.length())
-			launch_direction = to_owner.normalized()
-			_velocity = launch_direction * reflected_speed
-			rotation = launch_direction.angle()
 
 	var start_pos := global_position
 	var end_pos := start_pos + _velocity * delta
@@ -85,7 +76,9 @@ func _physics_process(delta: float) -> void:
 		if _collision != null and _collision.shape is CircleShape2D:
 			hit_radius = (_collision.shape as CircleShape2D).radius + 12.0
 		if global_position.distance_to(owner_mage.global_position) <= hit_radius:
-			_consume_reflected_owner_hit()
+			if owner_mage.has_method("receive_reflected_hit"):
+				owner_mage.call("receive_reflected_hit", 1, _reflected_element)
+			queue_free()
 			return
 
 	if owner_mage == null or global_position.distance_to(owner_mage.global_position) >= despawn_radius:
@@ -137,9 +130,6 @@ func _handle_shape_hits_at(sample_pos: Vector2, radius: float) -> bool:
 
 		if collider is Node2D:
 			var body := collider as Node2D
-			if _is_reflected and owner_mage != null and is_instance_valid(owner_mage) and body == owner_mage:
-				_consume_reflected_owner_hit()
-				return true
 			if not _is_reflected and _can_reflect_from_body(body):
 				_reflect_to_owner(_get_reflect_element())
 				return true
@@ -189,20 +179,9 @@ func _reflect_to_owner(element: String) -> void:
 		_sprite.modulate = _get_reflected_tint()
 
 	if owner_mage != null and is_instance_valid(owner_mage):
-		launch_direction = (owner_mage.global_position - global_position).normalized()
-		_velocity = launch_direction * base_speed * 1.25
-		rotation = launch_direction.angle()
+		_velocity = (owner_mage.global_position - global_position).normalized() * base_speed * 1.25
 	else:
 		_velocity = -_velocity * 1.2
-		if _velocity.length_squared() > 0.0001:
-			launch_direction = _velocity.normalized()
-			rotation = launch_direction.angle()
-
-func _consume_reflected_owner_hit() -> void:
-	if owner_mage != null and is_instance_valid(owner_mage):
-		if owner_mage.has_method("receive_reflected_hit"):
-			owner_mage.call("receive_reflected_hit", damage, _reflected_element)
-	queue_free()
 
 func _get_aim_direction(target_position: Vector2) -> Vector2:
 	return target_position - global_position
