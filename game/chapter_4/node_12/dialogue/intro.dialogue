@@ -41,8 +41,6 @@ Player: (...but they will return again and again.)
 ~ accuse_king
 Player: No. You are the one behind the attacks.
 do equip_fire_power()
-Soldier: How could a mere messenger use magic?
-King: The messenger has gone mad! Soldier! Capture him dead or alive!
-do _soldier_back_away()
-Player: (Flames answer my call.)
+Soldier: How could a mere messenger use magic!?
+King: The messenger has gone mad! The royal mages! Capture him dead or alive!
 => END
