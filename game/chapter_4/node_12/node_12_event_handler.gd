@@ -14,7 +14,7 @@ const FINALE_DIALOGUE := preload("res://game/chapter_4/node_12/dialogue/finale.d
 @export_group("Debug")
 @export var debug_skip_mage_fight: bool = false
 @export_group("Cutscene Fast Forward")
-@export var hold_ctrl_walk_speed_multiplier: float = 2.5
+@export var hold_ctrl_walk_speed_multiplier: float = 10.0
 @export var hold_ctrl_dialogue_speed_multiplier: float = 10.0
 
 var _intro_outcome: String = ""
@@ -291,12 +291,51 @@ func _soldier_back_away() -> void:
 func _escort_player_by_soldier() -> void:
 	if soldier_center == null:
 		return
-	var player_target := player.global_position + Vector2(0, 180)
-	var soldier_target := soldier_center.global_position + Vector2(0, 180)
+	
+	var original_speed = player.speed
+	var anim_sprite = player.animated_sprite
+	var original_anim_speed = anim_sprite.speed_scale if anim_sprite != null else 1.0
+
+	player.speed = 70.0
+	if anim_sprite:
+		anim_sprite.speed_scale = 0.75
+
+	var direction = Vector2.DOWN
+	player.set_facing_direction(direction)
+	var facing = player._facing_suffix(direction)
+	var walk_anim = "walk " + facing
+
+	if anim_sprite:
+		if anim_sprite.animation != walk_anim:
+			anim_sprite.play(walk_anim)
+
+	var player_target := player.global_position + Vector2(0, 500)
+	var soldier_target := soldier_center.global_position + Vector2(0, 500)
+	
+	var distance = player.global_position.distance_to(player_target)
+	var duration = distance / maxf(1.0, player.speed)
+	
 	var tween := create_tween()
-	tween.tween_property(soldier_center, "global_position", soldier_target, 1.6)
-	tween.parallel().tween_property(player, "global_position", player_target, 1.6)
-	await tween.finished
+	tween.tween_property(soldier_center, "global_position", soldier_target, duration)
+	tween.parallel().tween_property(player, "global_position", player_target, duration)
+
+	while tween.is_running():
+		var speed_multiplier := hold_ctrl_walk_speed_multiplier if _is_fast_forward_pressed() else 1.0
+		tween.set_speed_scale(speed_multiplier)
+		if anim_sprite:
+			anim_sprite.speed_scale = 0.75 * speed_multiplier
+			if anim_sprite.animation != walk_anim:
+				anim_sprite.play(walk_anim)
+		await get_tree().process_frame
+
+	player.global_position = player_target
+	soldier_center.global_position = soldier_target
+	player.velocity = Vector2.ZERO
+
+	player.speed = original_speed
+	if anim_sprite:
+		anim_sprite.speed_scale = original_anim_speed
+		anim_sprite.play("idle " + player._facing_suffix(direction))
 
 func _show_ending_banner(text: String) -> void:
-	pass
+	get_tree().change_scene_to_file("res://game/chapter_4/ending/ending.tscn")
