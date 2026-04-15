@@ -15,13 +15,14 @@ const FINALE_DIALOGUE := preload("res://game/chapter_4/node_12/dialogue/finale.d
 @export var debug_skip_mage_fight: bool = false
 @export_group("Cutscene Fast Forward")
 @export var hold_ctrl_walk_speed_multiplier: float = 2.5
-@export var hold_ctrl_dialogue_speed_multiplier: float = 4.0
+@export var hold_ctrl_dialogue_speed_multiplier: float = 10.0
 
 var _intro_outcome: String = ""
 var _waiting_for_hallway_thoughts: bool = false
 var _hallway_thoughts_done: bool = false
 var _fast_forward_enabled: bool = false
 var _fast_forward_balloons: Array[Node] = []
+var _accusation_branch_unlocked: bool = true
 
 func _ready() -> void:
 	assert(start_walk != null)
@@ -36,6 +37,7 @@ func handle_intro_for_level() -> void:
 	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
 	player.is_in_dialogue = true
 	player.is_camera_panning = true
+	_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
 	_fast_forward_enabled = true
 	_track_fast_forward_loop()
 
@@ -50,9 +52,12 @@ func handle_intro_for_level() -> void:
 		"thanks_king":
 			await normal_ending()
 		"fight_begins":
-			await equip_fire_power()
-			await start_fight_sequence()
-			await start_post_fight_cutscene()
+			if _can_start_accusation_branch():
+				await start_fight_sequence()
+				await start_post_fight_cutscene()
+			else:
+				push_warning("Blocked fight branch because accusation branch is not unlocked.")
+				await normal_ending()
 
 	_fast_forward_enabled = false
 	_fast_forward_balloons.clear()
@@ -101,7 +106,6 @@ func equip_fire_power() -> void:
 
 func start_fight_sequence() -> void:
 	_set_mage_group_visible(true)
-	await _soldier_back_away()
 
 	if debug_skip_mage_fight:
 		_force_clear_mages()
@@ -177,7 +181,23 @@ func start_player_king_dialogue() -> String:
 	return _intro_outcome
 
 func set_intro_outcome(outcome: String) -> void:
+	if outcome == "fight_begins" and not _can_start_accusation_branch():
+		_intro_outcome = "thanks_king"
+		return
 	_intro_outcome = outcome
+
+func can_accuse_king() -> bool:
+	return _can_start_accusation_branch()
+
+func _can_start_accusation_branch() -> bool:
+	return _accusation_branch_unlocked
+
+func _resolve_accusation_branch_unlock() -> bool:
+	return _check_required_clues_placeholder()
+
+func _check_required_clues_placeholder() -> bool:
+	# TODO: Implement node_12-specific clue/flag validation.
+	return true
 
 func start_post_fight_cutscene() -> void:
 	if FINALE_DIALOGUE != null:
