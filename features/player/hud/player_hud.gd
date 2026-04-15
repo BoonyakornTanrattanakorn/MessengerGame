@@ -270,6 +270,20 @@ func _hide_all_element_icons() -> void:
 func get_current_skill() -> String:
 	return skills[skill_index]["attribute"]
 
+func set_current_skill(attribute: String) -> void:
+	if skills.is_empty():
+		return
+
+	var normalized_attribute := attribute.to_lower()
+	for i in range(skills.size()):
+		if String(skills[i]["attribute"]).to_lower() == normalized_attribute:
+			skill_index = i
+			update_skill_display()
+			emit_signal("skill_changed", skills[skill_index]["attribute"])
+			return
+
+	push_warning("Unknown skill attribute requested: %s" % attribute)
+
 func update_item_display():
 	if items.size() == 0:
 		item_icon.texture = null

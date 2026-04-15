@@ -1,10 +1,10 @@
 ~ hallway_thoughts
 Player: (The hallway feels longer than ever.)
 Player: (Every step here carries the weight of my journey.)
-if PuzzleState.has_all_fragments()
-	Player: (I found every clue. If I speak now, I can end this.)
+if can_accuse_king()
+	Player: (I have enough proof. If I speak now, I can end this.)
 else
-	Player: (If only I had all the clues... maybe I could stop what comes next.)
+	Player: (I still don't have enough proof... maybe I can't stop what comes next.)
 => END
 
 ~ throne_intro
@@ -13,15 +13,23 @@ King: Speak.
 Player: The town is under attack. We need reinforcements now.
 King: I understand the situation. I will alert the army at once.
 King: You have done your duty, messenger.
-King: Guards, take him to reset.
+King: Guards, take him to rest.
 
-? What will you do?
-- Go with the soldier.
-	do set_intro_outcome("thanks_king")
-	=> thanks_king
-- [if PuzzleState.has_all_fragments()] Accuse the king.
-	do set_intro_outcome("fight_begins")
-	=> accuse_king
+
+if can_accuse_king()
+	What will you do?
+	- Go with the soldier.
+		do set_intro_outcome("thanks_king")
+		=> thanks_king
+	- Accuse the king.
+		do set_intro_outcome("fight_begins")
+		=> accuse_king
+else
+	What will you do?
+	- Go with the soldier.
+		do set_intro_outcome("thanks_king")
+		=> thanks_king
+
 
 ~ thanks_king
 Player: Understood, your majesty.
@@ -32,7 +40,9 @@ Player: (...but they will return again and again.)
 
 ~ accuse_king
 Player: No. You are the one behind the attacks.
+do equip_fire_power()
 Soldier: How could a mere messenger use magic?
 King: The messenger has gone mad! Soldier! Capture him dead or alive!
+do _soldier_back_away()
 Player: (Flames answer my call.)
 => END
