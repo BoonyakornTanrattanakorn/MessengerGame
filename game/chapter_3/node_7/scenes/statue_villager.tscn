@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bcu00ffucqs2r"]
+
+[ext_resource type="Texture2D" uid="uid://qmhmbctqud61" path="res://assets/sprites/icons/statue_villager.png" id="1_sbwvw"]
+
+[node name="statue_villager" type="Node2D" unique_id=731213278]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1129728794]
+position = Vector2(0, -31)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_sbwvw")

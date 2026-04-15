@@ -1,23 +1,74 @@
 extends Node
 
+const TOTAL_BIG_SANDMONSTERS := 3
+var big_sandmonsters_killed := 0
 const TOTAL_STATUES := 5
 var collected_statues: Array[String] = []
+var talked_to_guard := false
 var riddle_solved := false
-var intro_objective_started := false
 var talked_to_governor := false
-var city_exploration_started := false
+var intro_objective_started := false
 var sandmonster_quest_accepted := false
 var sandmonster_quest_complete := false
-var save_scope := "global"
-var save_id := "node7_state"
+var talked_to_guard_after_riddle := false
+var sandmonster_quest_turned_in := false
+var visited_shop := false
 
-func _ready() -> void:
-	add_to_group("savable")
+func update_objective() -> void:
+	if sandmonster_quest_turned_in:
+		ObjectiveManager.set_objective("Head to the next city")
+	elif sandmonster_quest_complete:
+		ObjectiveManager.set_objective("Return to the quest giver")
+	elif sandmonster_quest_accepted:
+		ObjectiveManager.set_objective(
+			"Defeat big sand monsters (%d/%d)" % [big_sandmonsters_killed, TOTAL_BIG_SANDMONSTERS]
+		)
+	elif talked_to_governor:
+		ObjectiveManager.set_objective("Explore the city")
+	elif riddle_solved and talked_to_guard_after_riddle:
+		ObjectiveManager.set_objective("Talk to the city governor")
+	elif riddle_solved:
+		ObjectiveManager.set_objective("Talk to the guard again")
+	elif talked_to_guard:
+		if has_all_statues():
+			ObjectiveManager.set_objective("Solve the riddle of the five statues")
+		else:
+			ObjectiveManager.set_objective(
+				"Find the missing statues (%d/%d)" % [get_statue_count(), TOTAL_STATUES]
+			)
+	else:
+		ObjectiveManager.set_objective("Talk to the Fremen Guard")
+
+func accept_quest() -> void:
+	if sandmonster_quest_accepted:
+		return
+	sandmonster_quest_accepted = true
+	big_sandmonsters_killed = 0
+	update_objective()
+	get_tree().call_group("quest_blocker", "update_blocker")
+		
+func on_big_sandmonster_killed() -> void:
+	if not sandmonster_quest_accepted or sandmonster_quest_complete:
+		return
+
+	big_sandmonsters_killed += 1
+	print("Big monsters killed: ", big_sandmonsters_killed)
+
+	if big_sandmonsters_killed >= TOTAL_BIG_SANDMONSTERS:
+		sandmonster_quest_complete = true
+		print("Side quest complete!")
+		
+	update_objective()
+	get_tree().call_group("portal", "update_portal_state")
 
 func start_desert_objective() -> void:
 	if intro_objective_started:
 		return
 	intro_objective_started = true
+	update_objective()
+
+func talk_to_guard_done() -> void:
+	talked_to_guard = true
 	update_objective()
 
 func collect_statue(statue_id: String) -> void:
@@ -26,70 +77,33 @@ func collect_statue(statue_id: String) -> void:
 	update_objective()
 
 func solve_riddle() -> void:
-	if not has_all_statues():
-		return
 	riddle_solved = true
 	update_objective()
 
-func enter_city() -> void:
-	if city_exploration_started:
-		return
+func talk_to_guard_after_riddle_done() -> void:
+	talked_to_guard_after_riddle = true
 	update_objective()
-
+	
+# Add a reset function and separate the two flags
 func talk_to_governor() -> void:
 	talked_to_governor = true
-	city_exploration_started = true
 	update_objective()
 
-func complete_sandmonster_quest() -> void:
-	sandmonster_quest_complete = true
+# Add a reset so stale state doesn't bleed across sessions
+func reset() -> void:
+	collected_statues.clear()
+	talked_to_guard = false
+	riddle_solved = false
+	talked_to_governor = false
+	intro_objective_started = false
+	sandmonster_quest_accepted = false
+	sandmonster_quest_complete = false
+	talked_to_guard_after_riddle = false
+	visited_shop = false
+	big_sandmonsters_killed = 0
 
 func has_all_statues() -> bool:
 	return collected_statues.size() >= TOTAL_STATUES
 
 func get_statue_count() -> int:
 	return collected_statues.size()
-
-func update_objective() -> void:
-	if city_exploration_started:
-		ObjectiveManager.set_objective("Explore the city")
-	elif riddle_solved and not talked_to_governor:
-		ObjectiveManager.set_objective("Talk to the city governor")
-	elif riddle_solved:
-		ObjectiveManager.set_objective("Head to the city")
-	elif has_all_statues():
-		ObjectiveManager.set_objective("Solve the riddle of the five statues")
-	else:
-		ObjectiveManager.set_objective("Find the missing statues (%d/5)" % get_statue_count())
-
-func reset_desert_state() -> void:
-	collected_statues.clear()
-	riddle_solved = false
-	intro_objective_started = false
-	talked_to_governor = false
-	city_exploration_started = false
-	sandmonster_quest_accepted = false
-	sandmonster_quest_complete = false
-
-func save():
-	return {
-		"collected_statues": collected_statues.duplicate(),
-		"riddle_solved": riddle_solved,
-		"intro_objective_started": intro_objective_started,
-		"talked_to_governor": talked_to_governor,
-		"city_exploration_started": city_exploration_started,
-		"sandmonster_quest_accepted": sandmonster_quest_accepted,
-		"sandmonster_quest_complete": sandmonster_quest_complete
-	}
-
-func load_data(data) -> void:
-	if data.has("collected_statues"):
-		collected_statues.clear()
-		for statue in data.collected_statues:
-			collected_statues.append(str(statue))
-	riddle_solved = data.get("riddle_solved", false)
-	intro_objective_started = data.get("intro_objective_started", false)
-	talked_to_governor = data.get("talked_to_governor", false)
-	city_exploration_started = data.get("city_exploration_started", false)
-	sandmonster_quest_accepted = data.get("sandmonster_quest_accepted", false)
-	sandmonster_quest_complete = data.get("sandmonster_quest_complete", false)

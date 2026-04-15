@@ -1,0 +1,11 @@
+~ shop_first
+
+Shopkeeper: A traveller! You look like you have been through the desert and back.
+Shopkeeper: I deal in desert crystals only. None of that foreign coin here.
+Shopkeeper: Take a look at what I have. Everything is fairly priced, I promise.
+=> END
+
+~ shop_repeat
+
+Shopkeeper: Back again? Good taste. Browse as long as you like.
+=> END

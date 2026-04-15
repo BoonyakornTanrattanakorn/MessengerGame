@@ -39,6 +39,7 @@ const NORMAL_TIME_SCALE := 1.0
 @export var statue_knight: Texture2D
 @export var statue_villager: Texture2D
 @export var statue_scarab: Texture2D
+@export var desert_crystal: Texture2D
 
 #cool gauge
 @onready var cool_gauge_ui = $TopLeftGUI/VBoxContainer/CoolGauge
@@ -68,6 +69,7 @@ var pause_menu: PauseMenu
 var world_map_overlay: WorldMapOverlay
 var is_world_map_open: bool = false
 var _power_wheel_slowmo_active: bool = false
+var puzzle_finished_triggered = false
 
 signal skill_changed(attribute: String)
 
@@ -366,6 +368,7 @@ func get_icon(item_name: String) -> Texture2D:
 		"statue_knight": return statue_knight
 		"statue_villager": return statue_villager
 		"statue_scarab": return statue_scarab
+		"desert_crystal": return desert_crystal
 	return null
 
 # =========================
@@ -541,12 +544,19 @@ func _check_statue_puzzle(player: Node) -> void:
 		if placed == expected:
 			Node7State.collect_statue(placed)
 
-	if StatuePuzzleChecker.is_puzzle_complete(get_tree()):
+	if StatuePuzzleChecker.is_puzzle_complete(get_tree()) and not puzzle_finished_triggered:
+		puzzle_finished_triggered = true
 		Node7State.solve_riddle()
+
+		DialogueManager.show_dialogue_balloon(
+			load("res://game/chapter_3/node_7/dialogue/statue_confirm.dialogue"),
+	        "confirm"
+		)
+		await DialogueManager.dialogue_ended
 		_notify_guards()
 
 func _notify_guards() -> void:
 	var guards = get_tree().get_nodes_in_group("fremen_guard")
 	for guard in guards:
-		if guard.has_method("_solve"):
-			guard._solve()
+		if guard.has_method("_step_aside"):
+			guard._step_aside()

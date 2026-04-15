@@ -26,9 +26,10 @@ y_sort_enabled = true
 [node name="Ch3n1" parent="LevelHolder" unique_id=1752183892 instance=ExtResource("2_m7xky")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
-position = Vector2(2920, 4271)
+position = Vector2(478, 1666)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1552768552]
+y_sort_enabled = true
 zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=957682362]

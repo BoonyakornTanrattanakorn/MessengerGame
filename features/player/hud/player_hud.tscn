@@ -18,6 +18,11 @@
 [ext_resource type="Texture2D" uid="uid://cjg8bkpprjhax" path="res://assets/sprites/icons/torn_paper_2.png" id="9_aq8ub"]
 [ext_resource type="Texture2D" uid="uid://dgsj18hqmm1ow" path="res://assets/sprites/icons/torn_paper_3.png" id="10_yi150"]
 [ext_resource type="Texture2D" uid="uid://cp1vhpdbob6ey" path="res://assets/sprites/icons/torn_paper_4.png" id="11_whfbj"]
+[ext_resource type="Texture2D" uid="uid://ckpo542dxa4lg" path="res://assets/sprites/maps/tilesets/statue_king.png" id="12_7pefh"]
+[ext_resource type="Texture2D" uid="uid://bvg7a5bb1btco" path="res://assets/sprites/icons/statue_princess.png" id="13_8ij47"]
+[ext_resource type="Texture2D" uid="uid://c2oqy50y1iab4" path="res://assets/sprites/icons/statue_knight.png" id="14_du0tl"]
+[ext_resource type="Texture2D" uid="uid://qmhmbctqud61" path="res://assets/sprites/icons/statue_villager.png" id="15_d2r6w"]
+[ext_resource type="Texture2D" uid="uid://de30tiop3d72d" path="res://assets/sprites/icons/statue_scarab.png" id="16_6qjy5"]
 [ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/sprites/icons/elements/wind_icon.png" id="16_qtp52"]
 [ext_resource type="Script" uid="uid://0mpy01q3e3yo" path="res://features/player/hud/power_wheel.gd" id="20_circ"]
 [ext_resource type="Texture2D" uid="uid://dvh3xjhdehycg" path="res://assets/sprites/icons/elements/fire_icon.png" id="21_61gxr"]
@@ -63,6 +68,11 @@ torn_paper_1 = ExtResource("8_61gxr")
 torn_paper_2 = ExtResource("9_aq8ub")
 torn_paper_3 = ExtResource("10_yi150")
 torn_paper_4 = ExtResource("11_whfbj")
+statue_king = ExtResource("12_7pefh")
+statue_princess = ExtResource("13_8ij47")
+statue_knight = ExtResource("14_du0tl")
+statue_villager = ExtResource("15_d2r6w")
+statue_scarab = ExtResource("16_6qjy5")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=526628163]
 anchors_preset = 3

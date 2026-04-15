@@ -26,7 +26,7 @@ static func place_statue_on_platform(statue_name: String, player: Node2D) -> boo
 		print("This platform spot is already occupied.")
 		return false
 
-	var statue_path = "res://statues/%s.tscn" % statue_name
+	var statue_path = "res://game/chapter_3/node_7/scenes/%s.tscn" % statue_name
 	if not ResourceLoader.exists(statue_path):
 		print("Statue scene not found: ", statue_path)
 		return false
@@ -34,8 +34,7 @@ static func place_statue_on_platform(statue_name: String, player: Node2D) -> boo
 	var statue_scene = load(statue_path)
 	var statue_instance = statue_scene.instantiate()
 
-	var statue_offset = Vector2(0, -statue_instance.get_node("Sprite2D").texture.get_height() / 2.0)
-	statue_instance.global_position = nearest_zone.global_position + statue_offset
+	statue_instance.global_position = nearest_zone.global_position
 
 	statue_instance.set_meta("statue_name", statue_name)
 	statue_instance.set_meta("home_zone", nearest_zone)

@@ -76,6 +76,7 @@ var inventory = {
 	"brave_stone": 0,
 	"potion": 3,
 	"antidote": 2,
+	"desert_crystal": 0
 }
 
 var is_in_dialogue = false
@@ -162,25 +163,23 @@ func _physics_process(delta):
 			if current_mount.can_dismount:
 				current_mount.dismount_player()
 		else:
-			# Try picking up a placed statue first (if puzzle not complete)
-			var picked_up = StatuePlacer.try_pickup_statue(self, StatuePuzzleChecker.is_puzzle_complete(get_tree()))
-			if picked_up:
-				hud.refresh_items()
-			elif interact_with != null:
-				print("Pressing F on: ", interact_with.name)
-			if interact_with.has_method("activate"):
-				interact_with.activate()
-				interact_with = null
-			elif interact_with.has_method("can_interact"):
-				var dialogue_path = "res://dialogue/conversations/" + interact_with.name + ".dialogue"
-				if ResourceLoader.exists(dialogue_path):
-					DialogueManager.show_dialogue_balloon(
-						load(dialogue_path),
-						"_" + str(current_dialog)
-					)
-				else:
-					print("No dialogue for: ", interact_with.name)
-	
+			# 1. TRY TO USE/PLACE ITEM FROM HUD FIRST
+			var item_used = hud._use_selected_item()
+			
+			if item_used:
+				# Placement was successful!
+				print("Statue placed via HUD logic.")
+			else:
+				# 2. IF NO ITEM WAS USED, TRY TO PICK UP A PLACED STATUE
+				var picked_up = StatuePlacer.try_pickup_statue(self, StatuePuzzleChecker.is_puzzle_complete(get_tree()))
+				if picked_up:
+					hud.refresh_items()
+				elif interact_with != null:
+					# 3. IF NO PICKUP, TRY DIALOGUE/ACTIVATION
+					if interact_with.has_method("activate"):
+						interact_with.activate()
+						interact_with = null
+
 	# If mounted, skip all movement and just follow the cart
 	if is_mounted:
 		global_position = current_mount.mount_point.global_position
