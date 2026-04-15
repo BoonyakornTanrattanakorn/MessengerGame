@@ -14,6 +14,9 @@ func _ready() -> void:
 		if guardian:
 			guardian.queue_free()
 
+func on_level_loaded() -> void:
+	Chap3Node8State.update_objective()
+
 func handle_intro_for_level() -> void:
 	GameState.chap3_node8_3_shown = false  # temp: remove before commit
 	if not GameState.chap3_node8_3_shown:
