@@ -3,6 +3,7 @@ extends Area2D
 var direction: Vector2 = Vector2.RIGHT
 var level: int = 1
 var damage: int = 1
+var source: String = "water_lv1"
 
 # Per level: [speed, max_distance, scale]
 const LEVEL_SETTINGS = [
@@ -25,6 +26,7 @@ func _ready():
 	max_distance = settings["distance"]
 	scale        = settings["scale"]
 	damage       = level
+	source       = "water_lv%d" % level
 
 	# Rotate entire node to face direction
 	rotation = direction.angle()

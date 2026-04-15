@@ -1,15 +1,11 @@
 extends "res://game/chapter_3/sandmonster/sandmonster.gd"
 
-const ATTACK_RANGE: float = 80.0
-const ATTACK_DAMAGE: int = 2
-const ATTACK_COOLDOWN: float = 2.0
-
-var attacking: bool = false
-var attack_timer: float = 0.0
-
 func _ready():
 	hp = 15
 	move_speed = 40.0
+	ATTACK_RANGE = 80.0
+	ATTACK_DAMAGE = 2
+	ATTACK_COOLDOWN = 2.0
 	super._ready()
 
 func _physics_process(delta):

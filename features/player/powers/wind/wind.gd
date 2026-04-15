@@ -3,6 +3,8 @@ extends Area2D
 var speed = 400.0
 var direction = Vector2.RIGHT
 var lifetime = 1.0
+var damage: int = 0
+var source: String = "wind"
 
 func _ready():
 	# สั่งให้ลบตัวเองทิ้งเมื่อครบเวลา
