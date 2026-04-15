@@ -7,6 +7,7 @@ const FINALE_DIALOGUE := preload("res://game/chapter_4/node_12/dialogue/finale.d
 
 @onready var start_walk: Marker2D = $"Marker/Start Walk"
 @onready var end_walk: Marker2D = $"Marker/End Walk"
+@onready var fight_begin: Marker2D = $"Marker/Fight Begin"
 @onready var king: CharacterBody2D = $"NPC/King"
 @onready var soldier_center: CharacterBody2D = $"NPC/Soldier4"
 @onready var mage_root: Node2D = $"Mage"
@@ -25,10 +26,17 @@ var _fast_forward_balloons: Array[Node] = []
 var _accusation_branch_unlocked: bool = true
 
 func _ready() -> void:
+
 	assert(start_walk != null)
 	assert(end_walk != null)
 	_set_mage_group_visible(false)
 	_set_mage_ai_active(false)
+	
+	var minimap = get_node_or_null("/root/GameScene/Minimap")
+	if not minimap:
+		minimap = get_tree().current_scene.get_node_or_null("Minimap")
+	if minimap:
+		minimap.hide()
 	
 func handle_intro_for_level() -> void:
 	var original_input_locked = player.is_in_dialogue
@@ -95,9 +103,7 @@ func show_king_cutscene() -> void:
 
 func normal_ending() -> void:
 	await _escort_player_by_soldier()
-	await _show_ending_banner(
-		"Normal Ending\n\nThe messenger leaves the throne room in silence.\nThe monsters retreat for now, but the cycle will return."
-	)
+	_show_ending_banner()
 
 func equip_fire_power() -> void:
 	player.playerAttribute = "fire"
@@ -112,6 +118,7 @@ func start_fight_sequence() -> void:
 		await get_tree().create_timer(0.25).timeout
 		return
 
+	player.global_position = fight_begin.global_position
 	_set_mage_ai_active(true)
 	player.is_in_dialogue = false
 	player.is_camera_panning = false
@@ -121,7 +128,7 @@ func start_fight_sequence() -> void:
 	_set_mage_ai_active(false)
 
 func player_killed_sequence() -> void:
-	await _show_ending_banner("Bad Ending\n\nThe messenger falls before changing the kingdom's fate.")
+	_show_ending_banner()
 
 func slow_walk_intro() -> void:
 	player.global_position = start_walk.global_position
@@ -204,9 +211,7 @@ func start_post_fight_cutscene() -> void:
 		var balloon := DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE)
 		_register_fast_forward_balloon(balloon)
 		await DialogueManager.dialogue_ended
-	await _show_ending_banner(
-		"True Ending\n\nThe rightful king ascends the throne\nand orders immediate mobilization of the army."
-	)
+	_show_ending_banner()
 
 func _track_fast_forward_loop() -> void:
 	while _fast_forward_enabled:
@@ -337,5 +342,5 @@ func _escort_player_by_soldier() -> void:
 		anim_sprite.speed_scale = original_anim_speed
 		anim_sprite.play("idle " + player._facing_suffix(direction))
 
-func _show_ending_banner(text: String) -> void:
+func _show_ending_banner() -> void:
 	get_tree().change_scene_to_file("res://game/chapter_4/ending/ending.tscn")

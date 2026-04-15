@@ -422,6 +422,7 @@ height = 42.0
 visibility_layer = 2
 z_index = 1
 y_sort_enabled = true
+collision_mask = 3
 script = ExtResource("14_player")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=913524806]
