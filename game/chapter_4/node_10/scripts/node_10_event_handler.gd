@@ -2,6 +2,8 @@ extends LevelEventHandler
 
 @export var ice_layer: IceLayer
 
+
+
 func _ready() -> void:
 	add_to_group("level_event_handler")
 
@@ -19,3 +21,5 @@ func handle_intro_for_level() -> void:
 		)
 
 		await DialogueManager.dialogue_ended
+		
+		ObjectiveManager.set_objective("Explore the frozen cave")

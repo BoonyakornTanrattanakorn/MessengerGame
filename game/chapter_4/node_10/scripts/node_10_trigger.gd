@@ -6,7 +6,8 @@ extends Trigger
 
 func handle_trigger():
 	var player = get_tree().get_first_node_in_group("player")
-
+	
+	IceBlock.recover()
 	player.focus_camera_to(IceBlock)
 
 	await get_tree().create_timer(1.0).timeout
@@ -19,3 +20,5 @@ func handle_trigger():
 	await DialogueManager.dialogue_ended
 
 	player.return_camera()
+	
+	ObjectiveManager.set_objective("Use fire to melt the ice block")
