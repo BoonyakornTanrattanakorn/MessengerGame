@@ -42,8 +42,11 @@ func _ready() -> void:
 		minimap = get_tree().current_scene.get_node_or_null("Minimap")
 	if minimap:
 		minimap.hide()
+		
 	
 func handle_intro_for_level() -> void:
+	#start_fight_sequence()
+	#return
 	var original_input_locked = player.is_in_dialogue
 	var original_camera_pan = player.is_camera_panning
 	var original_input_locked = player.is_in_dialogue

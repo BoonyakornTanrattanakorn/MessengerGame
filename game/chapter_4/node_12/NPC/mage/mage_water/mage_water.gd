@@ -5,15 +5,14 @@ const WATER_PROJECTILE_SCENE := preload("res://game/chapter_4/node_12/npc/mage/m
 
 @export var telegraph_duration: float = 0.5
 @export var projectile_count: int = 3
-@export var summon_radius: float = 300.0
 @export var spawn_ring_radius: float = 200.0
-@export var shot_delay: float = 1.0
+@export var shot_delay: float = 1.2
 @export var pre_shot_warning_duration: float = 0.1
 
 func _ready() -> void:
 	mage_element = "water"
 	required_reflect_element = "water"
-	projectile_speed = 800.0
+	projectile_speed = 1000.0
 	max_hp = 5.0
 	randomize()
 	super._ready()
