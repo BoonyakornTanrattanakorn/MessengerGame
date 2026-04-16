@@ -31,20 +31,6 @@ const SFX_EVENTS := {
 	"ui.equip": SFX_BASE + "/10_UI_Menu_SFX/070_Equip_10.ogg",
 	"ui.pause": SFX_BASE + "/10_UI_Menu_SFX/092_Pause_04.ogg",
 	"ui.unpause": SFX_BASE + "/10_UI_Menu_SFX/098_Unpause_04.ogg",
-
-	# Node 12 cutscene / encounter
-	"node12.cutscene.fade": SFX_BASE + "/12_Player_Movement_SFX/88_Teleport_02.ogg",
-	"node12.cutscene.reveal": SFX_BASE + "/10_Battle_SFX/55_Encounter_02.ogg",
-
-	# Node 12 mages
-	"mage.cast.fire": SFX_BASE + "/12_Player_Movement_SFX/56_Attack_03.ogg",
-	"mage.cast.water": SFX_BASE + "/8_Atk_Magic_SFX/22_Water_02.ogg",
-	"mage.cast.wind": SFX_BASE + "/8_Atk_Magic_SFX/25_Wind_01.ogg",
-	"mage.cast.earth": SFX_BASE + "/8_Atk_Magic_SFX/30_Earth_02.ogg",
-	"mage.projectile.warn": SFX_BASE + "/8_Atk_Magic_SFX/45_Charge_05.ogg",
-	"mage.projectile.shoot": SFX_BASE + "/10_Battle_SFX/22_Slash_04.ogg",
-	"mage.hit": SFX_BASE + "/10_Battle_SFX/15_Impact_flesh_02.ogg",
-	"mage.death": SFX_BASE + "/10_Battle_SFX/69_Enemy_death_01.ogg",
 }
 
 var _stream_cache: Dictionary = {}
@@ -72,7 +58,28 @@ func play_event(event_key: String) -> AudioStreamPlayer:
 	return play_sfx(String(SFX_EVENTS[event_key]))
 
 func play_sfx(sfx_path: String) -> AudioStreamPlayer:
+func has_event(event_key: String) -> bool:
+	return SFX_EVENTS.has(event_key)
+
+func list_event_keys() -> PackedStringArray:
+	var keys := PackedStringArray()
+	for event_key in SFX_EVENTS.keys():
+		keys.append(String(event_key))
+	return keys
+
+func play_event(event_key: String) -> AudioStreamPlayer:
+	if not SFX_EVENTS.has(event_key):
+		push_warning("Unknown SFX event key: %s" % event_key)
+		return null
+	return play_sfx(String(SFX_EVENTS[event_key]))
+
+func play_sfx(sfx_path: String) -> AudioStreamPlayer:
 	var audio_player = AudioStreamPlayer.new()
+	var audio_stream: AudioStream = _stream_cache.get(sfx_path, null)
+	if audio_stream == null:
+		audio_stream = load(sfx_path)
+		if audio_stream != null:
+			_stream_cache[sfx_path] = audio_stream
 	var audio_stream: AudioStream = _stream_cache.get(sfx_path, null)
 	if audio_stream == null:
 		audio_stream = load(sfx_path)
@@ -85,10 +92,13 @@ func play_sfx(sfx_path: String) -> AudioStreamPlayer:
 	
 	audio_player.stream = audio_stream
 	audio_player.volume_db = 0.0
+	audio_player.volume_db = 0.0
 	audio_player.bus = "SFX"
 	add_child(audio_player)
 	audio_player.finished.connect(audio_player.queue_free)
+	audio_player.finished.connect(audio_player.queue_free)
 	audio_player.play()
+
 
 	return audio_player
 
