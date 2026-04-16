@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c5l285add1oxq" path="res://game/chapter_4/node_12/node_12_event_handler.gd" id="1_5xwdw"]
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="2_flfan"]
-[ext_resource type="PackedScene" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
-[ext_resource type="PackedScene" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
-[ext_resource type="PackedScene" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
+[ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
+[ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
+[ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
 [ext_resource type="PackedScene" uid="uid://dk5clku1rco51" path="res://game/chapter_4/node_12/npc/mage/mage_water/mage_water.tscn" id="5_rhnue"]
 [ext_resource type="PackedScene" uid="uid://rlxghj7ppkr0" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.tscn" id="6_flvrn"]
 [ext_resource type="PackedScene" uid="uid://cmlw3sah421gh" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.tscn" id="7_unbsp"]
@@ -14,6 +14,18 @@ size = Vector2(357.5, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jugk"]
 size = Vector2(20, 258)
+
+[sub_resource type="Curve2D" id="Curve2D_7fjm0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 857, 0, 0, 0, 0, 0, 132)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_1jugk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 143, 0, 0, 0, 0, 0, 859)
+}
+point_count = 2
 
 [node name="Node12" type="Node2D" unique_id=981344518]
 script = ExtResource("1_5xwdw")
@@ -79,7 +91,7 @@ position = Vector2(195, 70)
 [node name="Soldier3" parent="NPC" unique_id=597062362 instance=ExtResource("4_eymx0")]
 position = Vector2(44, 66)
 
-[node name="SoldierEscort" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
+[node name="Soldier4" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
 position = Vector2(-1, 67)
 
 [node name="Mage" type="Node2D" parent="." unique_id=2142568931]
@@ -116,13 +128,13 @@ shape = SubResource("RectangleShape2D_1jugk")
 position = Vector2(190, 350)
 shape = SubResource("RectangleShape2D_1jugk")
 
-[node name="Marker" type="Node" parent="." unique_id=15657992]
+[node name="PathAndMarker" type="Node" parent="." unique_id=15657992]
 
-[node name="Start Walk" type="Marker2D" parent="Marker" unique_id=1547786553]
-position = Vector2(0, 843)
-
-[node name="End Walk" type="Marker2D" parent="Marker" unique_id=1040511458]
-position = Vector2(0, 146)
-
-[node name="Fight Begin" type="Marker2D" parent="Marker" unique_id=1076872350]
+[node name="FightBegin" type="Marker2D" parent="PathAndMarker" unique_id=1076872350]
 position = Vector2(0, 350)
+
+[node name="IntroWalk" type="Path2D" parent="PathAndMarker" unique_id=762211134]
+curve = SubResource("Curve2D_7fjm0")
+
+[node name="PlayerBadEndWalk" type="Path2D" parent="PathAndMarker" unique_id=1249498335]
+curve = SubResource("Curve2D_1jugk")
