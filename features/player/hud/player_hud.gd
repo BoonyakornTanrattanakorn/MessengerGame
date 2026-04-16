@@ -5,17 +5,6 @@ const TORN_PAPER_DIALOGUE_PATH := "res://game/chapter_1/node_2/dialogue/characte
 const WORLD_MAP_SCENE = preload("res://features/worldmap/world_map_overlay.tscn")
 const POWER_WHEEL_TIME_SCALE := 0.35
 const NORMAL_TIME_SCALE := 1.0
-const SFX_BASE := "res://assets/audio/sfx/RPG_Essentials_Free"
-const UI_SFX := {
-	"hover": SFX_BASE + "/10_UI_Menu_SFX/001_Hover_01.ogg",
-	"confirm": SFX_BASE + "/10_UI_Menu_SFX/013_Confirm_03.ogg",
-	"decline": SFX_BASE + "/10_UI_Menu_SFX/029_Decline_09.ogg",
-	"denied": SFX_BASE + "/10_UI_Menu_SFX/033_Denied_03.ogg",
-	"use_item": SFX_BASE + "/10_UI_Menu_SFX/051_use_item_01.ogg",
-	"equip": SFX_BASE + "/10_UI_Menu_SFX/070_Equip_10.ogg",
-	"pause": SFX_BASE + "/10_UI_Menu_SFX/092_Pause_04.ogg",
-	"unpause": SFX_BASE + "/10_UI_Menu_SFX/098_Unpause_04.ogg",
-}
 
 # References to current selected labels/icons
 #@onready var skill_label = %SkillName
@@ -164,63 +153,63 @@ func _process(_delta):
 	if Input.is_action_just_pressed("element_rotate_left"):
 		skill_index = (skill_index - 1 + skills.size()) % skills.size()
 		update_skill_display()
-		_play_ui_sfx("hover", -12.0)
+		_play_ui_sfx("ui.hover")
 		emit_signal("skill_changed", skills[skill_index]["attribute"])
 
 	if Input.is_action_just_pressed("element_rotate_right"):
 		skill_index = (skill_index + 1) % skills.size()
 		update_skill_display()
-		_play_ui_sfx("hover", -12.0)
+		_play_ui_sfx("ui.hover")
 		emit_signal("skill_changed", skills[skill_index]["attribute"])
 
 	# Item bar — left/right
 	if items.size() > 0 and Input.is_action_just_pressed("item_rotate_left"):
 		item_index = (item_index - 1 + items.size()) % items.size()
 		update_item_display()
-		_play_ui_sfx("hover", -12.0)
+		_play_ui_sfx("ui.hover")
 
 	if items.size() > 0 and Input.is_action_just_pressed("item_rotate_right"):
 		item_index = (item_index + 1) % items.size()
 		update_item_display()
-		_play_ui_sfx("hover", -12.0)
+		_play_ui_sfx("ui.hover")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("world_map"):
 		if is_world_map_open:
 			_close_world_map()
-			_play_ui_sfx("unpause", -9.0)
+			_play_ui_sfx("ui.unpause")
 		elif not get_tree().paused:
 			_open_world_map()
-			_play_ui_sfx("pause", -9.0)
+			_play_ui_sfx("ui.pause")
 		get_viewport().set_input_as_handled()
 		return
 
 	if event.is_action_pressed("pause_menu"):
 		if is_world_map_open:
 			_close_world_map()
-			_play_ui_sfx("unpause", -9.0)
+			_play_ui_sfx("ui.unpause")
 		elif get_tree().paused:
 			_resume_game()
-			_play_ui_sfx("unpause", -9.0)
+			_play_ui_sfx("ui.unpause")
 		else:
 			_pause_game()
-			_play_ui_sfx("pause", -9.0)
+			_play_ui_sfx("ui.pause")
 		get_viewport().set_input_as_handled()
 		return
 
 	if event.is_action_pressed("use_item"):
 		if _use_selected_item():
-			_play_ui_sfx("use_item", -8.0)
+			_play_ui_sfx("ui.use_item")
 			get_viewport().set_input_as_handled()
 		else:
-			_play_ui_sfx("denied", -10.0)
+			_play_ui_sfx("ui.denied")
 
 	# Show power wheel while holding the assigned action
 	# Show power wheel while holding the assigned action.
 	if event.is_action_pressed("power_wheel"):
 		if power_wheel:
 			power_wheel.visible = true
-		_play_ui_sfx("hover", -14.0)
+		_play_ui_sfx("ui.hover")
 		_set_power_wheel_slowmo(true)
 		get_viewport().set_input_as_handled()
 		return
@@ -231,10 +220,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			if sel_idx >= 0 and sel_idx < skills.size():
 				skill_index = sel_idx
 				update_skill_display()
-				_play_ui_sfx("equip", -8.0)
+				_play_ui_sfx("ui.equip")
 				emit_signal("skill_changed", skills[skill_index]["attribute"])
 			else:
-				_play_ui_sfx("decline", -10.0)
+				_play_ui_sfx("ui.decline")
 			power_wheel.visible = false
 		_set_power_wheel_slowmo(false)
 		get_viewport().set_input_as_handled()
@@ -557,9 +546,7 @@ func _set_power_wheel_slowmo(active: bool) -> void:
 	_power_wheel_slowmo_active = active
 	Engine.time_scale = POWER_WHEEL_TIME_SCALE if active else NORMAL_TIME_SCALE
 
-func _play_ui_sfx(key: String, volume_db: float = 0.0) -> void:
-	if not UI_SFX.has(key):
-		return
+func _play_ui_sfx(event_key: String) -> void:
 	if SFXManager == null:
 		return
-	SFXManager.play_sfx(String(UI_SFX[key]), volume_db)
+	SFXManager.play_event(event_key)

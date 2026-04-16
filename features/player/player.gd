@@ -1,22 +1,5 @@
 extends CharacterBody2D
 
-const SFX_BASE := "res://assets/audio/sfx/RPG_Essentials_Free"
-const SFX_PATHS := {
-	"step_grass": SFX_BASE + "/12_Player_Movement_SFX/03_Step_grass_03.ogg",
-	"step_water": SFX_BASE + "/12_Player_Movement_SFX/14_Step_water_02.ogg",
-	"dash": SFX_BASE + "/12_Player_Movement_SFX/30_Jump_03.ogg",
-	"wind_cast": SFX_BASE + "/8_Atk_Magic_SFX/25_Wind_01.ogg",
-	"fire_small": SFX_BASE + "/12_Player_Movement_SFX/56_Attack_03.ogg",
-	"fire_heavy": SFX_BASE + "/8_Atk_Magic_SFX/04_Fire_explosion_04_medium.ogg",
-	"water_cast": SFX_BASE + "/8_Atk_Magic_SFX/22_Water_02.ogg",
-	"wave_charge": SFX_BASE + "/8_Atk_Magic_SFX/45_Charge_05.ogg",
-	"earth_cast": SFX_BASE + "/8_Atk_Magic_SFX/30_Earth_02.ogg",
-	"shield_up": SFX_BASE + "/8_Buffs_Heals_SFX/17_Def_buff_01.ogg",
-	"player_hit": SFX_BASE + "/12_Player_Movement_SFX/61_Hit_03.ogg",
-	"player_death": SFX_BASE + "/10_Battle_SFX/69_Enemy_death_01.ogg",
-	"interact": SFX_BASE + "/10_UI_Menu_SFX/013_Confirm_03.ogg",
-}
-
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var movement_component: MovementComponent = $MovementComponent
 
@@ -180,7 +163,7 @@ func _physics_process(delta):
 	
 	# Mount/Dismount
 	if Input.is_action_just_pressed("interact"):
-		_play_sfx("interact", -3.0)
+		_play_sfx("player.interact")
 		if is_mounted:
 			if current_mount.can_dismount:
 				current_mount.dismount_player()
@@ -255,7 +238,7 @@ func _physics_process(delta):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
 		if wind_dash_just_pressed:
-			_play_sfx("dash", -2.0)
+			_play_sfx("player.dash")
 			movement_component.request_dash(self, last_direction)
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_wind_wave()
@@ -270,7 +253,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("greater_magic"):
 			is_charging_wave = true
 			wave_charge_timer = 0.0
-			_play_sfx("wave_charge", -8.0)
+			_play_sfx("skill.water.charge")
 		if Input.is_action_pressed("greater_magic") and is_charging_wave:
 			wave_charge_timer += delta
 			var preview_level = get_wave_level()
@@ -446,7 +429,7 @@ func die_in_minecart_and_respawn(minecart_respawn_position):
 
 func shoot_wind_wave():
 	if skill_component:
-		_play_sfx("wind_cast", -3.0)
+		_play_sfx("skill.wind.cast")
 		skill_component.shoot_wind_wave()
 
 func save():
@@ -490,10 +473,10 @@ func _on_health_changed(new_hp: int) -> void:
 	if _last_health_for_sfx == -1:
 		_last_health_for_sfx = new_hp
 	if new_hp < _last_health_for_sfx:
-		_play_sfx("player_hit", -2.0)
+		_play_sfx("player.hit")
 	if new_hp <= 0 and not _death_sfx_played:
 		_death_sfx_played = true
-		_play_sfx("player_death", -1.0)
+		_play_sfx("player.death")
 	elif new_hp > 0:
 		_death_sfx_played = false
 	_last_health_for_sfx = new_hp
@@ -520,13 +503,13 @@ func return_camera():
 
 func shoot_fire_small():
 	if skill_component:
-		_play_sfx("fire_small", -3.0)
+		_play_sfx("skill.fire.small")
 		skill_component.shoot_fire_small()
 
 
 func shoot_fire_heavy():
 	if skill_component:
-		_play_sfx("fire_heavy", -2.0)
+		_play_sfx("skill.fire.heavy")
 		skill_component.shoot_fire_heavy()
 
 
@@ -558,12 +541,12 @@ func get_wave_cost(level: int) -> int:
 
 func summon_fairy():
 	if skill_component:
-		_play_sfx("water_cast", -4.0)
+		_play_sfx("skill.water.cast")
 		skill_component.summon_fairy()
 
 func end_fairy():
 	if skill_component:
-		_play_sfx("water_cast", -7.0)
+		_play_sfx("skill.water.cast")
 		skill_component.end_fairy()
 
 func handle_fairy_movement(delta: float):
@@ -572,7 +555,7 @@ func handle_fairy_movement(delta: float):
 
 func shoot_water_wave(level: int):
 	if skill_component:
-		_play_sfx("water_cast", -2.0)
+		_play_sfx("skill.water.cast")
 		skill_component.shoot_water_wave(level)
 
 
@@ -593,20 +576,18 @@ var max_pillars = 3
 
 func activate_earth_shield():
 	if skill_component:
-		_play_sfx("shield_up", -3.0)
+		_play_sfx("skill.shield.up")
 		skill_component.activate_earth_shield()
 
 func spawn_rock_pillar():
 	if skill_component:
-		_play_sfx("earth_cast", -2.0)
+		_play_sfx("skill.earth.cast")
 		skill_component.spawn_rock_pillar()
 
-func _play_sfx(key: String, volume_db: float = 0.0) -> void:
-	if not SFX_PATHS.has(key):
-		return
+func _play_sfx(event_key: String) -> void:
 	if SFXManager == null:
 		return
-	SFXManager.play_sfx(String(SFX_PATHS[key]), volume_db)
+	SFXManager.play_event(event_key)
 
 func _update_footstep_sfx(direction: Vector2, speed_multiplier: float, delta: float, is_on_water: bool) -> void:
 	var is_moving := direction.length() > 0.1 and speed_multiplier > 0.0 and not is_dashing and not is_controlling_fairy
@@ -619,9 +600,9 @@ func _update_footstep_sfx(direction: Vector2, speed_multiplier: float, delta: fl
 		return
 
 	if is_on_water:
-		_play_sfx("step_water", -9.0)
+		_play_sfx("player.step_water")
 	else:
-		_play_sfx("step_grass", -9.0)
+		_play_sfx("player.step_grass")
 
 	_footstep_timer = 0.30
 
