@@ -1,19 +1,21 @@
 extends LevelEventHandler
 
 signal hallway_thoughts_finished
+signal bad_end_dialogue_finished
 
 const INTRO_DIALOGUE := preload("res://game/chapter_4/node_12/dialogue/intro.dialogue")
 const FINALE_DIALOGUE := preload("res://game/chapter_4/node_12/dialogue/finale.dialogue")
+const NODE_12_EVENT_UTILS := preload("res://game/chapter_4/node_12/node_12_event_utils.gd")
 
-@onready var start_walk: Marker2D = $"Marker/Start Walk"
-@onready var end_walk: Marker2D = $"Marker/End Walk"
-@onready var fight_begin: Marker2D = $"Marker/Fight Begin"
+@onready var player_bad_end_walk: Path2D = $PathAndMarker/PlayerBadEndWalk
+@onready var intro_walk: Path2D = $"PathAndMarker/IntroWalk"
+@onready var fight_begin: Marker2D = $"PathAndMarker/FightBegin"
 @onready var king: CharacterBody2D = $"NPC/King"
 @onready var soldier_center: CharacterBody2D = $"NPC/Soldier4"
 @onready var mage_root: Node2D = $"Mage"
 
 @export_group("Debug")
-@export var debug_skip_mage_fight: bool = false
+@export var debug_skip_mage_fight: bool = true
 @export_group("Cutscene Fast Forward")
 @export var hold_ctrl_walk_speed_multiplier: float = 10.0
 @export var hold_ctrl_dialogue_speed_multiplier: float = 10.0
@@ -21,14 +23,15 @@ const FINALE_DIALOGUE := preload("res://game/chapter_4/node_12/dialogue/finale.d
 var _intro_outcome: String = ""
 var _waiting_for_hallway_thoughts: bool = false
 var _hallway_thoughts_done: bool = false
+var _waiting_for_bad_end_dialogue: bool = false
+var _bad_end_dialogue_done: bool = false
 var _fast_forward_enabled: bool = false
 var _fast_forward_balloons: Array[Node] = []
 var _accusation_branch_unlocked: bool = true
 
 func _ready() -> void:
 
-	assert(start_walk != null)
-	assert(end_walk != null)
+	assert(intro_walk != null)
 	_set_mage_group_visible(false)
 	_set_mage_ai_active(false)
 	
@@ -42,7 +45,7 @@ func handle_intro_for_level() -> void:
 	var original_input_locked = player.is_in_dialogue
 	var original_camera_pan = player.is_camera_panning
 
-	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
+	# BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
 	player.is_in_dialogue = true
 	player.is_camera_panning = true
 	_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
@@ -102,8 +105,35 @@ func show_king_cutscene() -> void:
 	await get_tree().create_timer(0.4).timeout
 
 func normal_ending() -> void:
-	await _escort_player_by_soldier()
+	_show_bad_end_walk_out_dialogue()
+	await _bad_end_walk_out()
+	if _waiting_for_bad_end_dialogue and not _bad_end_dialogue_done:
+		await bad_end_dialogue_finished
 	_show_ending_banner()
+
+func _show_bad_end_walk_out_dialogue() -> void:
+	if INTRO_DIALOGUE == null:
+		_bad_end_dialogue_done = true
+		_waiting_for_bad_end_dialogue = false
+		return
+
+	_bad_end_dialogue_done = false
+	_waiting_for_bad_end_dialogue = true
+	if not DialogueManager.dialogue_ended.is_connected(_on_bad_end_dialogue_ended):
+		DialogueManager.dialogue_ended.connect(_on_bad_end_dialogue_ended)
+	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "thanks_king", [self])
+	_register_fast_forward_balloon(balloon)
+
+func _on_bad_end_dialogue_ended(resource: DialogueResource) -> void:
+	if not _waiting_for_bad_end_dialogue:
+		return
+	if resource != INTRO_DIALOGUE:
+		return
+	_waiting_for_bad_end_dialogue = false
+	_bad_end_dialogue_done = true
+	if DialogueManager.dialogue_ended.is_connected(_on_bad_end_dialogue_ended):
+		DialogueManager.dialogue_ended.disconnect(_on_bad_end_dialogue_ended)
+	bad_end_dialogue_finished.emit()
 
 func equip_fire_power() -> void:
 	player.playerAttribute = "fire"
@@ -131,48 +161,15 @@ func player_killed_sequence() -> void:
 	_show_ending_banner()
 
 func slow_walk_intro() -> void:
-	player.global_position = start_walk.global_position
-
-	var original_speed = player.speed
-	var anim_sprite = player.animated_sprite
-	var original_anim_speed = anim_sprite.speed_scale if anim_sprite != null else 1.0
-
 	player.is_in_dialogue = true
-
-	player.speed = 70.0
-	if anim_sprite:
-		anim_sprite.speed_scale = 0.75
-
-	var direction = (end_walk.global_position - start_walk.global_position).normalized()
-	player.set_facing_direction(direction)
-	var facing = player._facing_suffix(direction)
-	var walk_anim = "walk " + facing
-
-	if anim_sprite:
-		if anim_sprite.animation != walk_anim:
-			anim_sprite.play(walk_anim)
-
-	var distance = player.global_position.distance_to(end_walk.global_position)
-	var duration = distance / maxf(1.0, player.speed)
-	var tween := create_tween()
-	tween.tween_property(player, "global_position", end_walk.global_position, duration)
-
-	while tween.is_running():
-		var speed_multiplier := hold_ctrl_walk_speed_multiplier if _is_fast_forward_pressed() else 1.0
-		tween.set_speed_scale(speed_multiplier)
-		if anim_sprite:
-			anim_sprite.speed_scale = 0.75 * speed_multiplier
-			if anim_sprite.animation != walk_anim:
-				anim_sprite.play(walk_anim)
-		await get_tree().process_frame
-
-	player.global_position = end_walk.global_position
-	player.velocity = Vector2.ZERO
-
-	player.speed = original_speed
-	if anim_sprite:
-		anim_sprite.speed_scale = original_anim_speed
-		anim_sprite.play("idle " + player._facing_suffix(direction))
+	await NODE_12_EVENT_UTILS.walk_entity_along_path(
+		self,
+		player,
+		intro_walk,
+		70.0,
+		hold_ctrl_walk_speed_multiplier,
+		0.75
+	)
 
 func start_player_king_dialogue() -> String:
 	if INTRO_DIALOGUE == null:
@@ -215,42 +212,15 @@ func start_post_fight_cutscene() -> void:
 
 func _track_fast_forward_loop() -> void:
 	while _fast_forward_enabled:
-		_apply_fast_forward_to_dialogues()
+		_fast_forward_balloons = NODE_12_EVENT_UTILS.apply_fast_forward_to_dialogues(
+			_fast_forward_balloons,
+			hold_ctrl_dialogue_speed_multiplier,
+			NODE_12_EVENT_UTILS.is_fast_forward_pressed()
+		)
 		await get_tree().process_frame
 
 func _register_fast_forward_balloon(balloon: Node) -> void:
-	if balloon == null:
-		return
-	if _fast_forward_balloons.has(balloon):
-		return
-	_fast_forward_balloons.append(balloon)
-
-func _apply_fast_forward_to_dialogues() -> void:
-	var still_valid: Array[Node] = []
-	var is_fast := _is_fast_forward_pressed()
-
-	for balloon in _fast_forward_balloons:
-		if balloon == null or not is_instance_valid(balloon):
-			continue
-		still_valid.append(balloon)
-
-		var dialogue_label: Node = balloon.find_child("DialogueLabel", true, false)
-		if dialogue_label == null:
-			continue
-		if not dialogue_label.has_method("set"):
-			continue
-
-		if is_fast:
-			dialogue_label.set("seconds_per_step", 0.02 / maxf(1.0, hold_ctrl_dialogue_speed_multiplier))
-			dialogue_label.set("seconds_per_pause_step", 0.30 / maxf(1.0, hold_ctrl_dialogue_speed_multiplier))
-		else:
-			dialogue_label.set("seconds_per_step", 0.02)
-			dialogue_label.set("seconds_per_pause_step", 0.30)
-
-	_fast_forward_balloons = still_valid
-
-func _is_fast_forward_pressed() -> bool:
-	return Input.is_key_pressed(KEY_CTRL)
+	_fast_forward_balloons = NODE_12_EVENT_UTILS.register_fast_forward_balloon(_fast_forward_balloons, balloon)
 
 func _wait_until_all_mages_defeated() -> void:
 	while _count_alive_mages() > 0:
@@ -293,54 +263,15 @@ func _soldier_back_away() -> void:
 	tween.tween_property(soldier_center, "global_position", retreat_target, 0.8)
 	await tween.finished
 
-func _escort_player_by_soldier() -> void:
-	if soldier_center == null:
-		return
-	
-	var original_speed = player.speed
-	var anim_sprite = player.animated_sprite
-	var original_anim_speed = anim_sprite.speed_scale if anim_sprite != null else 1.0
-
-	player.speed = 70.0
-	if anim_sprite:
-		anim_sprite.speed_scale = 0.75
-
-	var direction = Vector2.DOWN
-	player.set_facing_direction(direction)
-	var facing = player._facing_suffix(direction)
-	var walk_anim = "walk " + facing
-
-	if anim_sprite:
-		if anim_sprite.animation != walk_anim:
-			anim_sprite.play(walk_anim)
-
-	var player_target := player.global_position + Vector2(0, 500)
-	var soldier_target := soldier_center.global_position + Vector2(0, 500)
-	
-	var distance = player.global_position.distance_to(player_target)
-	var duration = distance / maxf(1.0, player.speed)
-	
-	var tween := create_tween()
-	tween.tween_property(soldier_center, "global_position", soldier_target, duration)
-	tween.parallel().tween_property(player, "global_position", player_target, duration)
-
-	while tween.is_running():
-		var speed_multiplier := hold_ctrl_walk_speed_multiplier if _is_fast_forward_pressed() else 1.0
-		tween.set_speed_scale(speed_multiplier)
-		if anim_sprite:
-			anim_sprite.speed_scale = 0.75 * speed_multiplier
-			if anim_sprite.animation != walk_anim:
-				anim_sprite.play(walk_anim)
-		await get_tree().process_frame
-
-	player.global_position = player_target
-	soldier_center.global_position = soldier_target
-	player.velocity = Vector2.ZERO
-
-	player.speed = original_speed
-	if anim_sprite:
-		anim_sprite.speed_scale = original_anim_speed
-		anim_sprite.play("idle " + player._facing_suffix(direction))
+func _bad_end_walk_out() -> void:
+	await NODE_12_EVENT_UTILS.walk_entity_along_path(
+		self,
+		player,
+		player_bad_end_walk,
+		70.0,
+		hold_ctrl_walk_speed_multiplier,
+		0.75
+	)
 
 func _show_ending_banner() -> void:
 	get_tree().change_scene_to_file("res://game/chapter_4/ending/ending.tscn")

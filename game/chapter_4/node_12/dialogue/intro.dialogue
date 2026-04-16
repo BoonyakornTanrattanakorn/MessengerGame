@@ -20,7 +20,7 @@ if can_accuse_king()
 	What will you do?
 	- Go with the soldier.
 		do set_intro_outcome("thanks_king")
-		=> thanks_king
+		=> END
 	- Accuse the king.
 		do set_intro_outcome("fight_begins")
 		=> accuse_king
@@ -28,12 +28,13 @@ else
 	What will you do?
 	- Go with the soldier.
 		do set_intro_outcome("thanks_king")
-		=> thanks_king
+		=> END
 
 
 ~ thanks_king
 Player: Understood, your majesty.
-Soldier: This way. Keep moving.
+if can_accuse_king()
+	Player: What am I doing!? That was my only chance and now it's gone forever.
 Player: (I leave the hall, and the monsters retreat for now...)
 Player: (...but they will return again and again.)
 => END
