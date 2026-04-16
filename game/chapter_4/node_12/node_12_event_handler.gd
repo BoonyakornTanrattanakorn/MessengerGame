@@ -125,6 +125,8 @@ func _on_hallway_thoughts_dialogue_ended(resource: DialogueResource) -> void:
 	hallway_thoughts_finished.emit()
 
 func show_king_cutscene() -> void:
+	if SFXManager != null:
+		SFXManager.play_event("ui.confirm")
 	if king != null and king.has_node("AnimatedSprite2D"):
 		var sprite: AnimatedSprite2D = king.get_node("AnimatedSprite2D")
 		sprite.play("idle")
@@ -171,6 +173,9 @@ func start_fight_sequence() -> void:
 	if _fight_sequence_done:
 		fight_sequence_finished.emit()
 		return
+
+	if SFXManager != null:
+		SFXManager.play_event("node12.cutscene.reveal")
 
 	_set_mage_group_visible(true)
 	_set_mage_ai_active(false)
@@ -314,6 +319,8 @@ func _fade_to_black_then_warp_player() -> void:
 	scene_root.add_child(fade_layer)
 
 	var fade_in_tween := create_tween()
+	if SFXManager != null:
+		SFXManager.play_event("node12.cutscene.fade")
 	fade_in_tween.tween_property(fade_rect, "color:a", 1.0, 0.25)
 	await fade_in_tween.finished
 
@@ -358,6 +365,9 @@ func _reveal_mages_with_camera_pan() -> void:
 			var pan_tween := create_tween()
 			pan_tween.tween_property(camera, "global_position", mage.global_position, 0.45)
 			await pan_tween.finished
+
+		if SFXManager != null:
+			SFXManager.play_event("node12.cutscene.reveal")
 
 		var reveal_tween := create_tween()
 		reveal_tween.tween_property(mage, "modulate:a", 1.0, 0.35)

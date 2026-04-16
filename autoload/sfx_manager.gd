@@ -31,6 +31,20 @@ const SFX_EVENTS := {
 	"ui.equip": SFX_BASE + "/10_UI_Menu_SFX/070_Equip_10.ogg",
 	"ui.pause": SFX_BASE + "/10_UI_Menu_SFX/092_Pause_04.ogg",
 	"ui.unpause": SFX_BASE + "/10_UI_Menu_SFX/098_Unpause_04.ogg",
+
+	# Node 12 cutscene / encounter
+	"node12.cutscene.fade": SFX_BASE + "/12_Player_Movement_SFX/88_Teleport_02.ogg",
+	"node12.cutscene.reveal": SFX_BASE + "/10_Battle_SFX/55_Encounter_02.ogg",
+
+	# Node 12 mages
+	"mage.cast.fire": SFX_BASE + "/12_Player_Movement_SFX/56_Attack_03.ogg",
+	"mage.cast.water": SFX_BASE + "/8_Atk_Magic_SFX/22_Water_02.ogg",
+	"mage.cast.wind": SFX_BASE + "/8_Atk_Magic_SFX/25_Wind_01.ogg",
+	"mage.cast.earth": SFX_BASE + "/8_Atk_Magic_SFX/30_Earth_02.ogg",
+	"mage.projectile.warn": SFX_BASE + "/8_Atk_Magic_SFX/45_Charge_05.ogg",
+	"mage.projectile.shoot": SFX_BASE + "/10_Battle_SFX/22_Slash_04.ogg",
+	"mage.hit": SFX_BASE + "/10_Battle_SFX/15_Impact_flesh_02.ogg",
+	"mage.death": SFX_BASE + "/10_Battle_SFX/69_Enemy_death_01.ogg",
 }
 
 var _stream_cache: Dictionary = {}

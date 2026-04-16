@@ -117,15 +117,22 @@ func receive_reflected_hit(damage: float = 1, source_element: String = "") -> vo
 	if required_reflect_element != "" and source_element != required_reflect_element:
 		return
 	_hp -= damage
+	_play_mage_sfx("mage.hit")
 	queue_redraw()
 	if _hp <= 0:
 		die()
 
 func die() -> void:
 	_hp = 0
+	_play_mage_sfx("mage.death")
 	queue_redraw()
 	_unregister_from_turn_roster()
 	queue_free()
+
+func _play_mage_sfx(event_key: String) -> void:
+	if SFXManager == null:
+		return
+	SFXManager.play_event(event_key)
 
 func _draw() -> void:
 	if not show_hp_bar:

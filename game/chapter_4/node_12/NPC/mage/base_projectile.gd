@@ -36,6 +36,8 @@ func set_telegraph(enabled: bool) -> void:
 		_sprite.modulate = _get_telegraph_tint() if enabled else Color(1, 1, 1, 1)
 
 func shoot() -> void:
+	if SFXManager != null:
+		SFXManager.play_event("mage.projectile.shoot")
 	set_telegraph(false)
 
 func aim_at(target_position: Vector2) -> void:
