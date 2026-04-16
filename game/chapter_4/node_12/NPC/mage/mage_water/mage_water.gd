@@ -18,11 +18,13 @@ func _ready() -> void:
 	super._ready()
 
 func perform_pattern_attack() -> void:
+	_play_mage_sfx("mage.cast.water")
 	modulate = Color(0.72, 0.9, 1.0, 1.0)
 	await get_tree().create_timer(0.3).timeout
 	modulate = Color(1, 1, 1, 1)
 
 func perform_projectile_attack() -> void:
+	_play_mage_sfx("mage.cast.water")
 	modulate = Color(0.88, 0.96, 1.0, 1.0)
 	var count = max(1, projectile_count)
 	for i in range(count):

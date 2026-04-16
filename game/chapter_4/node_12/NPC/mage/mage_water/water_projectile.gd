@@ -62,6 +62,8 @@ func _draw() -> void:
 func play_pre_shoot_warning(duration: float = 0.08) -> void:
 	if duration <= 0.0:
 		return
+	if SFXManager != null:
+		SFXManager.play_event("mage.projectile.warn")
 	_warning_active = true
 	queue_redraw()
 	await get_tree().create_timer(duration).timeout
