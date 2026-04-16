@@ -19,15 +19,15 @@ King: Guards, take him to rest.
 if can_accuse_king()
 	What will you do?
 	- Go with the soldier.
-		do set_intro_outcome("thanks_king")
+		do choose_thanks_king()
 		=> END
 	- Accuse the king.
-		do set_intro_outcome("fight_begins")
+		do choose_accuse_king()
 		=> accuse_king
 else
 	What will you do?
 	- Go with the soldier.
-		do set_intro_outcome("thanks_king")
+		do choose_thanks_king()
 		=> END
 
 
@@ -43,5 +43,9 @@ Player: (...but they will return again and again.)
 Player: No. You are the one behind the attacks.
 do equip_fire_power()
 Soldier: How could a mere messenger use magic!?
-King: The messenger has gone mad! The royal mages! Capture him dead or alive!
+King: The messenger has gone mad! Call in the royal mages! 
+do _fade_to_black_then_warp_player()
+King: My royal mages! Capture him dead or alive!
+do _reveal_mages_with_camera_pan()
+do! start_fight_sequence()
 => END

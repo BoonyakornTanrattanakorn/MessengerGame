@@ -97,15 +97,19 @@ position = Vector2(-1, 67)
 [node name="Mage" type="Node2D" parent="." unique_id=2142568931]
 
 [node name="MageWater" parent="Mage" unique_id=887899565 instance=ExtResource("5_rhnue")]
+visible = false
 position = Vector2(0, 200)
 
 [node name="MageWind" parent="Mage" unique_id=2017671401 instance=ExtResource("6_flvrn")]
+visible = false
 position = Vector2(0, 500)
 
 [node name="MageFire" parent="Mage" unique_id=1440830669 instance=ExtResource("7_unbsp")]
+visible = false
 position = Vector2(200, 350)
 
 [node name="MageEarth" parent="Mage" unique_id=10372308 instance=ExtResource("5_1x7oo")]
+visible = false
 position = Vector2(-200, 350)
 
 [node name="Bound" type="StaticBody2D" parent="Mage" unique_id=1596107552]

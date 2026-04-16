@@ -2,6 +2,7 @@ extends LevelEventHandler
 
 signal hallway_thoughts_finished
 signal bad_end_dialogue_finished
+signal fight_sequence_finished
 
 const INTRO_DIALOGUE := preload("res://game/chapter_4/node_12/dialogue/intro.dialogue")
 const FINALE_DIALOGUE := preload("res://game/chapter_4/node_12/dialogue/finale.dialogue")
@@ -20,11 +21,12 @@ const NODE_12_EVENT_UTILS := preload("res://game/chapter_4/node_12/node_12_event
 @export var hold_ctrl_walk_speed_multiplier: float = 10.0
 @export var hold_ctrl_dialogue_speed_multiplier: float = 10.0
 
-var _intro_outcome: String = ""
 var _waiting_for_hallway_thoughts: bool = false
 var _hallway_thoughts_done: bool = false
 var _waiting_for_bad_end_dialogue: bool = false
 var _bad_end_dialogue_done: bool = false
+var _fight_sequence_started: bool = false
+var _fight_sequence_done: bool = false
 var _fast_forward_enabled: bool = false
 var _fast_forward_balloons: Array[Node] = []
 var _accusation_branch_unlocked: bool = true
@@ -49,6 +51,8 @@ func handle_intro_for_level() -> void:
 	player.is_in_dialogue = true
 	player.is_camera_panning = true
 	_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
+	_fight_sequence_started = false
+	_fight_sequence_done = false
 	_fast_forward_enabled = true
 	_track_fast_forward_loop()
 
@@ -57,18 +61,14 @@ func handle_intro_for_level() -> void:
 	if _waiting_for_hallway_thoughts and not _hallway_thoughts_done:
 		await hallway_thoughts_finished
 	await show_king_cutscene()
-	var outcome = await start_player_king_dialogue()
+	await start_player_king_dialogue()
 
-	match outcome:
-		"thanks_king":
-			await normal_ending()
-		"fight_begins":
-			if _can_start_accusation_branch():
-				await start_fight_sequence()
-				await start_post_fight_cutscene()
-			else:
-				push_warning("Blocked fight branch because accusation branch is not unlocked.")
-				await normal_ending()
+	if _fight_sequence_started:
+		if not _fight_sequence_done:
+			await fight_sequence_finished
+		await start_post_fight_cutscene()
+	else:
+		await normal_ending()
 
 	_fast_forward_enabled = false
 	_fast_forward_balloons.clear()
@@ -141,21 +141,29 @@ func equip_fire_power() -> void:
 		player.hud.set_current_skill("fire")
 
 func start_fight_sequence() -> void:
-	_set_mage_group_visible(true)
-
-	if debug_skip_mage_fight:
-		_force_clear_mages()
-		await get_tree().create_timer(0.25).timeout
+	_fight_sequence_started = true
+	if _fight_sequence_done:
+		fight_sequence_finished.emit()
 		return
 
-	player.global_position = fight_begin.global_position
+	_set_mage_group_visible(true)
+	_set_mage_ai_active(false)
+
 	_set_mage_ai_active(true)
 	player.is_in_dialogue = false
 	player.is_camera_panning = false
+	
+	if debug_skip_mage_fight:
+		await get_tree().create_timer(10.0).timeout
+		_force_clear_mages()
+		await get_tree().process_frame
+		
 	await _wait_until_all_mages_defeated()
 	player.is_in_dialogue = true
 	player.is_camera_panning = true
 	_set_mage_ai_active(false)
+	_fight_sequence_done = true
+	fight_sequence_finished.emit()
 
 func player_killed_sequence() -> void:
 	_show_ending_banner()
@@ -171,24 +179,21 @@ func slow_walk_intro() -> void:
 		0.75
 	)
 
-func start_player_king_dialogue() -> String:
+func start_player_king_dialogue() -> void:
 	if INTRO_DIALOGUE == null:
 		push_error("Dialogue resource not found: intro.dialogue")
-		return "error"
+		return
 
-	_intro_outcome = ""
 	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "throne_intro", [self])
 	_register_fast_forward_balloon(balloon)
 	await DialogueManager.dialogue_ended
-	if _intro_outcome.is_empty():
-		return "thanks_king"
-	return _intro_outcome
 
-func set_intro_outcome(outcome: String) -> void:
-	if outcome == "fight_begins" and not _can_start_accusation_branch():
-		_intro_outcome = "thanks_king"
+func choose_thanks_king() -> void:
+	pass
+
+func choose_accuse_king() -> void:
+	if not _can_start_accusation_branch():
 		return
-	_intro_outcome = outcome
 
 func can_accuse_king() -> bool:
 	return _can_start_accusation_branch()
@@ -201,7 +206,7 @@ func _resolve_accusation_branch_unlock() -> bool:
 
 func _check_required_clues_placeholder() -> bool:
 	# TODO: Implement node_12-specific clue/flag validation.
-	return true
+	return _accusation_branch_unlocked
 
 func start_post_fight_cutscene() -> void:
 	if FINALE_DIALOGUE != null:
@@ -253,7 +258,89 @@ func _force_clear_mages() -> void:
 		return
 	for child in mage_root.get_children():
 		if child is Node12MageBase:
-			child.queue_free()
+			(child as Node12MageBase).die()
+
+func _get_mages_for_reveal() -> Array[Node12MageBase]:
+	var mages: Array[Node12MageBase] = []
+	if mage_root == null:
+		return mages
+	for child in mage_root.get_children():
+		if child is Node12MageBase and is_instance_valid(child):
+			mages.append(child as Node12MageBase)
+	return mages
+
+func _fade_to_black_then_warp_player() -> void:
+	if fight_begin == null:
+		return
+
+	var scene_root := get_tree().current_scene
+	if scene_root == null:
+		player.global_position = fight_begin.global_position
+		return
+
+	var fade_layer := CanvasLayer.new()
+	fade_layer.layer = 50
+	var fade_rect := ColorRect.new()
+	fade_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_rect.color = Color(0.0, 0.0, 0.0, 0.0)
+	fade_layer.add_child(fade_rect)
+	scene_root.add_child(fade_layer)
+
+	var fade_in_tween := create_tween()
+	fade_in_tween.tween_property(fade_rect, "color:a", 1.0, 0.25)
+	await fade_in_tween.finished
+
+	player.global_position = fight_begin.global_position
+	player.velocity = Vector2.ZERO
+	await get_tree().process_frame
+
+	var fade_out_tween := create_tween()
+	fade_out_tween.tween_property(fade_rect, "color:a", 0.0, 0.25)
+	await fade_out_tween.finished
+
+	fade_layer.queue_free()
+
+func _reveal_mages_with_camera_pan() -> void:
+	_set_mage_group_visible(true)
+	await get_tree().process_frame
+
+	var mages := _get_mages_for_reveal()
+	if mages.is_empty():
+		return
+
+	for mage in mages:
+		mage.visible = true
+		mage.modulate.a = 0.0
+
+	var camera: Camera2D = player.get_node_or_null("Camera2D")
+	var scene_root := get_tree().current_scene
+	var camera_was_reparented := false
+
+	if camera != null and scene_root != null and camera.get_parent() != scene_root:
+		camera.reparent(scene_root)
+		camera_was_reparented = true
+
+	if camera != null:
+		player.is_camera_panning = true
+
+	for mage in mages:
+		if not is_instance_valid(mage):
+			continue
+
+		if camera != null:
+			var pan_tween := create_tween()
+			pan_tween.tween_property(camera, "global_position", mage.global_position, 0.45)
+			await pan_tween.finished
+
+		var reveal_tween := create_tween()
+		reveal_tween.tween_property(mage, "modulate:a", 1.0, 0.35)
+		await reveal_tween.finished
+		await get_tree().create_timer(0.1).timeout
+
+	if camera != null and camera_was_reparented:
+		camera.reparent(player)
+		camera.position = Vector2.ZERO
 
 func _soldier_back_away() -> void:
 	if soldier_center == null:
