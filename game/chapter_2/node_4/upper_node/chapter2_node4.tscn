@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://8earegi2rapj" path="res://game/chapter_2/node_4/upper_node/insignia.gd" id="14_ch7hf"]
 [ext_resource type="Texture2D" uid="uid://c88hxk11qr18n" path="res://assets/sprites/insignia/insignia_left.png" id="14_pwvnp"]
 [ext_resource type="PackedScene" uid="uid://daalpk2tyx4q4" path="res://game/chapter_2/node_4/upper_node/statue.tscn" id="16_exbpy"]
+[ext_resource type="Texture2D" uid="uid://boqbe58pwln44" path="res://assets/sprites/quest_marker/quest_marker.png" id="19_bxsvo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ax3c5"]
 texture = ExtResource("1_adnnq")
@@ -29245,6 +29246,11 @@ move_step = 64.0
 
 [node name="Statue" parent="." unique_id=888969861 instance=ExtResource("16_exbpy")]
 position = Vector2(775, 1141)
+
+[node name="QuestMarker" type="Sprite2D" parent="Statue" unique_id=1862680824]
+position = Vector2(-0.99998474, -67.999985)
+scale = Vector2(0.6718755, 0.6718755)
+texture = ExtResource("19_bxsvo")
 
 [node name="WarpToMain2" type="Area2D" parent="." unique_id=196953323]
 script = ExtResource("12_yprkj")
