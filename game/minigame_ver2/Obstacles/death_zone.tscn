@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://1l3ntg8oejno"]
+
+[ext_resource type="Script" uid="uid://bj3yi1y07ikij" path="res://game/minigame_ver2/Obstacles/death_zone.gd" id="1_hrlxv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdb66"]
+size = Vector2(200, 20)
+
+[node name="DeathZone" type="Area2D" unique_id=590299632]
+script = ExtResource("1_hrlxv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=303189827]
+shape = SubResource("RectangleShape2D_qdb66")
+debug_color = Color(0.99450713, 0, 0.22832125, 0.41960785)

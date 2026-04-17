@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bgu4m8ejsh4dv"]
+
+[ext_resource type="Script" uid="uid://b4ij2wiiljvgv" path="res://game/chapter_3/node_3/pressure_plate.gd" id="1_d72m2"]
+[ext_resource type="Texture2D" uid="uid://btbktb7cr5ipv" path="res://game/chapter_3/node_3/press1.png" id="2_65hsj"]
+[ext_resource type="Texture2D" uid="uid://dav7hk4piv0yu" path="res://game/chapter_3/node_3/press2.png" id="3_g5b8d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0hqy"]
+radius = 8.062258
+
+[node name="PressurePlate" type="Area2D" unique_id=362404253]
+script = ExtResource("1_d72m2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=87849399]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_65hsj")
+
+[node name="GlowSprite" type="Sprite2D" parent="." unique_id=2081765877]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_g5b8d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=753736237]
+shape = SubResource("CircleShape2D_g0hqy")
+debug_color = Color(0.8337355, 0.3346406, 0.5274872, 0.41960785)

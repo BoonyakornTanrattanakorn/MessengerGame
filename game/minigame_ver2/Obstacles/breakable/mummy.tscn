@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b5wvmu5na4c6x"]
+
+[ext_resource type="Script" uid="uid://c2rex5pymvb5n" path="res://game/minigame_ver2/Obstacles/breakable/mummy.gd" id="1_jmhob"]
+[ext_resource type="Texture2D" uid="uid://x5xc8200565v" path="res://game/minigame_ver2/Sprite/mummy.png" id="2_6cqpn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n833w"]
+radius = 19.0
+height = 92.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bp8n7"]
+radius = 28.0
+height = 96.0
+
+[node name="Mummy" type="StaticBody2D" unique_id=1115297320]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_jmhob")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=201194651]
+position = Vector2(-3.8146973e-06, -3.8146973e-06)
+scale = Vector2(0.20468749, 0.20468749)
+texture = ExtResource("2_6cqpn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2106136210]
+light_mask = 4
+visibility_layer = 4
+shape = SubResource("CapsuleShape2D_n833w")
+
+[node name="HurtZone" type="Area2D" parent="." unique_id=1548798698]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=746889926]
+z_index = 1
+shape = SubResource("CapsuleShape2D_bp8n7")
+debug_color = Color(0.99874693, 0, 0.1458736, 0.41960785)

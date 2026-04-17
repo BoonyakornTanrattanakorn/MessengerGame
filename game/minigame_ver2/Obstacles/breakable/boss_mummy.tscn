@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dutpsadxesy2c"]
+
+[ext_resource type="Script" uid="uid://cb551yis2m2po" path="res://game/minigame_ver2/Obstacles/breakable/boss_mummy.gd" id="1_mfomc"]
+[ext_resource type="Texture2D" uid="uid://dfjq45sljhgqb" path="res://game/minigame_ver2/Sprite/mummy3.png" id="1_voug5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfomc"]
+size = Vector2(68, 103)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q68i1"]
+size = Vector2(77, 103)
+
+[node name="BossMummy" type="StaticBody2D" unique_id=715474124]
+script = ExtResource("1_mfomc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=202943635]
+scale = Vector2(0.19453126, 0.19453126)
+texture = ExtResource("1_voug5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=785761093]
+position = Vector2(11, -0.5)
+shape = SubResource("RectangleShape2D_mfomc")
+
+[node name="HurtZone" type="Area2D" parent="." unique_id=1810659383]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=113174349]
+position = Vector2(6.5, -0.5)
+shape = SubResource("RectangleShape2D_q68i1")
+debug_color = Color(0.9196833, 0.20372602, 0.49908024, 0.41960785)
