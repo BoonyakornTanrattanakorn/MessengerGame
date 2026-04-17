@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cj1o73li58nyl"
+path="res://.godot/imported/city_governor.dialogue-c4d646cb6a5191a18e7f5c6d1abb1fa7.tres"
+
+[deps]
+
+source_file="res://game/chapter_3/node_7/dialogue/city_governor.dialogue"
+dest_files=["res://.godot/imported/city_governor.dialogue-c4d646cb6a5191a18e7f5c6d1abb1fa7.tres"]
+
+[params]
+
+defaults=true

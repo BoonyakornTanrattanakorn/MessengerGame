@@ -46,6 +46,7 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var last_direction: Vector2 = Vector2.RIGHT  # Track last faced direction
+var _wind_dash_shift_was_down: bool = false
 
 var interact_with = null
 var current_dialog = 0
@@ -75,6 +76,7 @@ var inventory = {
 	"brave_stone": 0,
 	"potion": 3,
 	"antidote": 2,
+	"desert_crystal": 0
 }
 
 var is_in_dialogue = false
@@ -145,6 +147,10 @@ func _input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 func _physics_process(delta):
+	var wind_dash_shift_down := Input.is_key_pressed(KEY_SHIFT)
+	var wind_dash_just_pressed := wind_dash_shift_down and not _wind_dash_shift_was_down
+	_wind_dash_shift_was_down = wind_dash_shift_down
+
 	if _is_input_locked():
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -152,26 +158,28 @@ func _physics_process(delta):
 		
 	var direction = Input.get_vector("left", "right", "up", "down")
 	
-	# Mount/Dismount
 	if Input.is_action_just_pressed("interact"):
 		if is_mounted:
 			if current_mount.can_dismount:
 				current_mount.dismount_player()
-		elif interact_with != null:
-			print("Pressing F on: ", interact_with.name)
-			if interact_with.has_method("activate"):
-				interact_with.activate()
-				interact_with = null
-			elif interact_with.has_method("can_interact"):
-				var dialogue_path = "res://dialogue/conversations/" + interact_with.name + ".dialogue"
-				if ResourceLoader.exists(dialogue_path):
-					DialogueManager.show_dialogue_balloon(
-						load(dialogue_path),
-						"_" + str(current_dialog)
-					)
-				else:
-					print("No dialogue for: ", interact_with.name)
-	
+		else:
+			# 1. TRY TO USE/PLACE ITEM FROM HUD FIRST
+			var item_used = hud._use_selected_item()
+			
+			if item_used:
+				# Placement was successful!
+				print("Statue placed via HUD logic.")
+			else:
+				# 2. IF NO ITEM WAS USED, TRY TO PICK UP A PLACED STATUE
+				var picked_up = StatuePlacer.try_pickup_statue(self, StatuePuzzleChecker.is_puzzle_complete(get_tree()))
+				if picked_up:
+					hud.refresh_items()
+				elif interact_with != null:
+					# 3. IF NO PICKUP, TRY DIALOGUE/ACTIVATION
+					if interact_with.has_method("activate"):
+						interact_with.activate()
+						interact_with = null
+
 	# If mounted, skip all movement and just follow the cart
 	if is_mounted:
 		global_position = current_mount.mount_point.global_position
@@ -227,7 +235,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
-		if Input.is_action_just_pressed("lesser_magic"):
+		if wind_dash_just_pressed:
 			movement_component.request_dash(self, last_direction)
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_wind_wave()
@@ -274,6 +282,8 @@ func _facing_suffix(dir: Vector2) -> String:
 		return "front" if dir.y > 0 else "back"
 
 func _update_animation(direction: Vector2) -> void:
+	if not animated_sprite:
+		return
 	var facing = _facing_suffix(last_direction)
 	var anim = ""
 
@@ -293,6 +303,12 @@ func set_facing_direction(direction: Vector2) -> void:
 		return
 	last_direction = direction.normalized()
 	_update_animation(last_direction)
+
+func get_aim_direction() -> Vector2:
+	var aim := get_global_mouse_position() - global_position
+	if aim.length() < 4.0:
+		return last_direction
+	return aim.normalized()
 
 # Called by minecart to mount the player
 func mount(minecart, mount_position):

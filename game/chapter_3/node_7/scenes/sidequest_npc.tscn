@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cqky784c5372x"]
+
+[ext_resource type="Script" uid="uid://ba3wdwra8qn1b" path="res://game/chapter_3/node_7/script/npc/sidequest_npc.gd" id="1_7hqvx"]
+[ext_resource type="Texture2D" uid="uid://b5pb27sgld7hm" path="res://assets/sprites/npc/chapter3_npc2_transparent.png" id="1_vp446"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hqvx"]
+size = Vector2(140, 206)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_biocr"]
+size = Vector2(39, 65)
+
+[node name="sidequest_npc" type="Node2D" unique_id=339893093]
+script = ExtResource("1_7hqvx")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2010813677]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=462273172]
+position = Vector2(-32, -6)
+shape = SubResource("RectangleShape2D_7hqvx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=616406314]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1432130886]
+position = Vector2(-0.5, -16.5)
+shape = SubResource("RectangleShape2D_biocr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2020579925]
+position = Vector2(0, -15.999999)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_vp446")
+region_enabled = true
+region_rect = Rect2(38.487007, -2.5566864, 265.00214, 415.80444)
+
+[node name="PromptLabel" type="Label" parent="." unique_id=1781491900]
+offset_left = -50.0
+offset_top = -88.0
+offset_right = 58.0
+offset_bottom = -65.0
+text = "Press F to talk"
+metadata/_edit_use_anchors_ = true

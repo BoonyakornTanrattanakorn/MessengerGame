@@ -21,6 +21,7 @@ var traveled: float = 0.0
 
 func _ready():
 	add_to_group("water_wave")
+	add_to_group("player_projectile")
 	var settings = LEVEL_SETTINGS[level - 1]
 	speed        = settings["speed"]
 	max_distance = settings["distance"]

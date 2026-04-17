@@ -25,10 +25,24 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 
-	if player != null and attack_timer <= 0.0:
+	if player != null:
 		var dist = global_position.distance_to(player.global_position)
-		if dist <= ATTACK_RANGE:
+
+		if dist > AGGRO_RANGE * 1.5:
+			is_aggro = false
+
+		if dist <= DETECTION_RANGE:
+			is_aggro = true
+
+		var current_range = AGGRO_RANGE if is_aggro else DETECTION_RANGE
+
+		if dist <= ATTACK_RANGE and attack_timer <= 0.0:
 			_start_attack()
+			return
+
+		if dist > current_range:
+			velocity = Vector2.ZERO
+			move_and_slide()
 			return
 
 	super._physics_process(delta)
@@ -39,6 +53,8 @@ func _start_attack():
 	animated_sprite.play("attack")
 	await animated_sprite.animation_finished
 	_do_attack_hit()
+	await get_tree().create_timer(1.0).timeout
+	attacking = false
 
 func _do_attack_hit():
 	if player != null and is_instance_valid(player):
@@ -48,7 +64,12 @@ func _do_attack_hit():
 				player.get_node("HealthComponent").take_damage(ATTACK_DAMAGE)
 			elif player.has_method("take_damage"):
 				player.take_damage(ATTACK_DAMAGE)
-	attacking = false
 	attack_timer = ATTACK_COOLDOWN
 	if state == State.NORMAL:
 		animated_sprite.play("normal")
+
+func _die():
+	Node7State.on_big_sandmonster_killed()
+	_set_state(State.DUST)
+	await animated_sprite.animation_finished
+	queue_free()

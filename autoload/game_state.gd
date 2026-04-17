@@ -1,11 +1,11 @@
 extends Node
 
-# TODO: remove these
 var chap1_node2_shown := false
 var chap1_node3_shown := false
 var chap1_node3_1_shown := false
 var chap1_node3_2_shown := false
 var chap1_node3_3_shown := false
+var chap2_node3_shown := false
 
 # Chapter 3 Node 8
 var chap3_node8_shown := false
@@ -29,6 +29,7 @@ func new_game():
 	chap3_node8_1_shown = false
 	chap3_node8_2_shown = false
 	chap3_node8_3_shown = false
+	chap2_node3_shown = false
 
 func save():
 	return {
@@ -41,6 +42,7 @@ func save():
 		"chap3_node8_1_shown": chap3_node8_1_shown,
 		"chap3_node8_2_shown": chap3_node8_2_shown,
 		"chap3_node8_3_shown": chap3_node8_3_shown,
+		"chap2_node3_shown": chap2_node3_shown
 	}
 
 func load_data(data):
@@ -53,3 +55,4 @@ func load_data(data):
 	chap3_node8_1_shown = data.get("chap3_node8_1_shown", false)
 	chap3_node8_2_shown = data.get("chap3_node8_2_shown", false)
 	chap3_node8_3_shown = data.get("chap3_node8_3_shown", false)
+	chap2_node3_shown = data.get("chap2_node3_shown", false)

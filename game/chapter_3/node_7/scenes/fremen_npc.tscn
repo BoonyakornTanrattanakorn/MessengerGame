@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cj7ga4ua5ovvb"]
+
+[ext_resource type="Texture2D" uid="uid://b5srg3xvvnps6" path="res://assets/sprites/npc/Fremen guard.png" id="1_l2caw"]
+[ext_resource type="Script" uid="uid://btgi1misbbn3q" path="res://game/chapter_3/node_7/script/npc/fremen_guard.gd" id="1_pnjll"]
+[ext_resource type="Resource" uid="uid://djtw143k7xq4n" path="res://game/chapter_3/node_7/dialogue/fremen_guard.dialogue" id="2_0krso"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fclmt"]
+size = Vector2(120, 206)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pnjll"]
+size = Vector2(53, 127)
+
+[node name="FremenGuard" type="Node2D" unique_id=980384197]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_pnjll")
+dialogue_resource = ExtResource("2_0krso")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=920996592]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1043527359]
+position = Vector2(-50, 3)
+shape = SubResource("RectangleShape2D_fclmt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1422616039]
+position = Vector2(0, 29)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("1_l2caw")
+offset = Vector2(0, -450)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1220183113]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=247304159]
+position = Vector2(3.5, 3.5)
+shape = SubResource("RectangleShape2D_pnjll")
+
+[node name="PromptLabel" type="Label" parent="." unique_id=1905252114]
+offset_left = -50.0
+offset_top = -88.0
+offset_right = 58.0
+offset_bottom = -65.0
+text = "Press F to talk"
+metadata/_edit_use_anchors_ = true

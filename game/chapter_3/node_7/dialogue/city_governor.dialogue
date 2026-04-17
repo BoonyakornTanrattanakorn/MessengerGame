@@ -1,0 +1,19 @@
+~ governor_first
+
+Governor: A stranger who restores the Statue Plaza on the way into the city. Unusual.
+Governor: The guards told me what you did out there. Well done.
+Governor: But I doubt you crossed the desert just to move statues. What brings you to Arenthis?
+Player [#sprite=water/neutral]: My name is Jarn Thorian. I carry a message from King Aldric of Valdenmoor.
+Player [#sprite=water/neutral]: The monsters are spreading beyond the desert and other city as well.
+Player [#sprite=water/neutral]: King Aldric believes something is driving them. No kingdom can stop this alone.
+Player [#sprite=water/neutral]: He asks for an alliance.
+Governor: Three days ago sand demons hit our eastern gate. We lost good soldiers that night.
+Governor: If they are pushing beyond the desert now then your king is right to be worried.
+Governor: Arenthis will stand with Valdenmoor. You have my word.
+Governor: Rest here. Speak to the people. When you are ready to move on come back to me.
+=> END
+
+~ governor_after
+
+Governor: The alliance stands. Travel safe, Jarn Thorian.
+=> END

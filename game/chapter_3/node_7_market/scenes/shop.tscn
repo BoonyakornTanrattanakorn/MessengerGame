@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cxhrf1g0wlye1"]
+
+[ext_resource type="Script" uid="uid://d0r4f2t3ejiao" path="res://game/chapter_3/node_7_market/scripts/shop.gd" id="1_fnj5y"]
+[ext_resource type="Texture2D" uid="uid://bsee2etv10hpe" path="res://assets/sprites/maps/tilesets/shop.png" id="1_gyyf5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekvny"]
+size = Vector2(2204, 1104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdrdr"]
+size = Vector2(1254, 525)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66f3k"]
+size = Vector2(169, 74)
+
+[node name="Shop" type="Node2D" unique_id=252210878]
+y_sort_enabled = true
+script = ExtResource("1_fnj5y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1091232846]
+texture = ExtResource("1_gyyf5")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1754722624]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=462492761]
+position = Vector2(9, 261)
+shape = SubResource("RectangleShape2D_ekvny")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=726415563]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=110698377]
+position = Vector2(-31, -21.5)
+shape = SubResource("RectangleShape2D_tdrdr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1953898686]
+position = Vector2(-164.5, 346)
+shape = SubResource("RectangleShape2D_66f3k")
+
+[node name="ShopUI" type="CanvasLayer" parent="." unique_id=1983643958]
+process_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="ShopUI" unique_id=1885552746]
+offset_right = 537.0
+offset_bottom = 371.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopUI/PanelContainer" unique_id=636403079]
+layout_mode = 2

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cpbtw8i3pebom"]
+
+[ext_resource type="Script" uid="uid://b45ar50ynph36" path="res://game/chapter_3/node_7/script/npc/city_npc.gd" id="1_n8t0n"]
+[ext_resource type="Resource" uid="uid://dchi2whlgtctr" path="res://game/chapter_3/node_7/dialogue/city_npc1.dialogue" id="2_cuce4"]
+[ext_resource type="Texture2D" uid="uid://b5pb27sgld7hm" path="res://assets/sprites/npc/chapter3_npc2_transparent.png" id="3_s76jo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sch7"]
+size = Vector2(140, 206)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bn1bc"]
+size = Vector2(28, 60)
+
+[node name="city_npc" type="Node2D" unique_id=482488305]
+y_sort_enabled = true
+script = ExtResource("1_n8t0n")
+dialogue_resource = ExtResource("2_cuce4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1114335187]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1725827106]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_8sch7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1331495130]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=479709361]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_bn1bc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=914546811]
+position = Vector2(0, -15.999999)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_s76jo")
+region_enabled = true
+region_rect = Rect2(2254.7178, 13.757874, 233.92603, 403.40228)
+
+[node name="PromptLabel" type="Label" parent="." unique_id=1998218507]
+offset_left = -52.0
+offset_top = -73.0
+offset_right = 56.0
+offset_bottom = -50.0
+text = "Press F to talk"

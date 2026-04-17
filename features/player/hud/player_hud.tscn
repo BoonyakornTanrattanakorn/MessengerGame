@@ -18,11 +18,16 @@
 [ext_resource type="Texture2D" uid="uid://cjg8bkpprjhax" path="res://assets/sprites/icons/torn_paper_2.png" id="9_aq8ub"]
 [ext_resource type="Texture2D" uid="uid://dgsj18hqmm1ow" path="res://assets/sprites/icons/torn_paper_3.png" id="10_yi150"]
 [ext_resource type="Texture2D" uid="uid://cp1vhpdbob6ey" path="res://assets/sprites/icons/torn_paper_4.png" id="11_whfbj"]
+[ext_resource type="Texture2D" uid="uid://ckpo542dxa4lg" path="res://assets/sprites/maps/tilesets/statue_king.png" id="12_7pefh"]
+[ext_resource type="Texture2D" uid="uid://bvg7a5bb1btco" path="res://assets/sprites/icons/statue_princess.png" id="13_8ij47"]
+[ext_resource type="Texture2D" uid="uid://c2oqy50y1iab4" path="res://assets/sprites/icons/statue_knight.png" id="14_du0tl"]
+[ext_resource type="Texture2D" uid="uid://qmhmbctqud61" path="res://assets/sprites/icons/statue_villager.png" id="15_d2r6w"]
+[ext_resource type="Texture2D" uid="uid://de30tiop3d72d" path="res://assets/sprites/icons/statue_scarab.png" id="16_6qjy5"]
 [ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/sprites/icons/elements/wind_icon.png" id="16_qtp52"]
-[ext_resource type="Texture2D" uid="uid://cqlnvte1gqur0" path="res://assets/sprites/icons/earth.jpg" id="17_h3xpv"]
-[ext_resource type="Texture2D" uid="uid://20sisqtolg2q" path="res://assets/sprites/icons/water.png" id="18_egdw0"]
-[ext_resource type="Texture2D" uid="uid://ccg4ruvsxhn1n" path="res://assets/sprites/icons/fire.png" id="19_q63r6"]
 [ext_resource type="Script" uid="uid://0mpy01q3e3yo" path="res://features/player/hud/power_wheel.gd" id="20_circ"]
+[ext_resource type="Texture2D" uid="uid://dvh3xjhdehycg" path="res://assets/sprites/icons/elements/fire_icon.png" id="21_61gxr"]
+[ext_resource type="Texture2D" uid="uid://cxr6xgmyk66c5" path="res://assets/sprites/icons/elements/water_icon.png" id="22_aq8ub"]
+[ext_resource type="Texture2D" uid="uid://fcp8l2ylrcd3" path="res://assets/sprites/icons/elements/earth_icon.png" id="23_yi150"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -63,6 +68,11 @@ torn_paper_1 = ExtResource("8_61gxr")
 torn_paper_2 = ExtResource("9_aq8ub")
 torn_paper_3 = ExtResource("10_yi150")
 torn_paper_4 = ExtResource("11_whfbj")
+statue_king = ExtResource("12_7pefh")
+statue_princess = ExtResource("13_8ij47")
+statue_knight = ExtResource("14_du0tl")
+statue_villager = ExtResource("15_d2r6w")
+statue_scarab = ExtResource("16_6qjy5")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=526628163]
 anchors_preset = 3
@@ -310,18 +320,18 @@ expand_mode = 3
 [node name="Power_1" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999997]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("19_q63r6")
+texture = ExtResource("21_61gxr")
 expand_mode = 3
 
 [node name="Power_2" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999996]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("18_egdw0")
+texture = ExtResource("22_aq8ub")
 expand_mode = 3
 
 [node name="Power_3" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999995]
 z_index = 100
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("17_h3xpv")
+texture = ExtResource("23_yi150")
 expand_mode = 3

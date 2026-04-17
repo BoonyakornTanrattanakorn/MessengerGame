@@ -1,0 +1,24 @@
+~ guard_start
+Guard: Halt. Outsiders are not permitted beyond this point.
+Guard: I don't recognize your face. You're not from this city.
+Guard: ...However, the high council left a standing order. Anyone who can restore the Statue Plaza may earn passage.
+Guard: Five statues were stolen from their pedestals by sand demons.
+Guard: Each statue belongs to a specific pedestal — the King, the Princess, the Knight, the Villager, and the Scarab.
+Guard: Find them. Place each one on the correct platform. Then come back and speak to me.
+Guard: Until then, I cannot let you through.
+=> END
+
+~ guard_hint
+Player [#sprite=water/neutral]: Sand monsters... with a combination of water and wind, I should be able to wash them away.
+Player [#sprite=water/neutral]: That stone I passed on the way here... there must be some clues on it.
+=> END
+
+~ guard_not_solved
+Guard: The statues are still out of place. I can't let you through until every pedestal is filled correctly.
+Guard: Take your time. The stone plaza doesn't lie.
+=> END
+
+~ guard_after_solved
+Guard: You've already proven yourself. The city is open to you.
+Guard: Travel safe, stranger.
+=> END
