@@ -11,6 +11,7 @@ size = Vector2(140, 206)
 size = Vector2(39, 65)
 
 [node name="CityGovernor" type="Node2D" unique_id=1072223380]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_lq1md")
 dialogue_resource = ExtResource("2_lvsxy")

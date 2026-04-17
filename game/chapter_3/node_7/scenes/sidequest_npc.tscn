@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ba3wdwra8qn1b" path="res://game/chapter_3/node_7/script/npc/sidequest_npc.gd" id="1_7hqvx"]
 [ext_resource type="Texture2D" uid="uid://b5pb27sgld7hm" path="res://assets/sprites/npc/chapter3_npc2_transparent.png" id="1_vp446"]
+[ext_resource type="Resource" uid="uid://brgka2xabbdla" path="res://game/chapter_3/node_7/dialogue/sidequest_npc.dialogue" id="2_biocr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7hqvx"]
 size = Vector2(140, 206)
@@ -10,7 +11,10 @@ size = Vector2(140, 206)
 size = Vector2(39, 65)
 
 [node name="sidequest_npc" type="Node2D" unique_id=339893093]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_7hqvx")
+dialogue_resource = ExtResource("2_biocr")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2010813677]
 

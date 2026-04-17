@@ -8,6 +8,20 @@ func _ready():
 	ATTACK_COOLDOWN = 2.0
 	super._ready()
 
+func _check_fairy_proximity() -> void:
+	pass  # big sandmonster is not affected by the water fairy
+
+func _handle_damage_normal(amount: int, source: String) -> void:
+	match source:
+		"water_lv2":
+			_set_state(State.DRIED)
+		"fire":
+			_reduce_hp(amount)
+		"wind":
+			pass
+		_:
+			_reduce_hp(amount)
+
 func _physics_process(delta):
 	if state == State.DUST:
 		return

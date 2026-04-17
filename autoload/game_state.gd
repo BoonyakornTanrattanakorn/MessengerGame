@@ -1,5 +1,10 @@
 extends Node
 
+# Session-only: set before change_scene_to_file("game_scene.tscn") to override the default starting level
+var pending_level: String = ""
+var pending_spawn: Vector2 = Vector2.ZERO
+var pending_facing: Vector2 = Vector2.ZERO
+
 var chap1_node2_shown := false
 var chap1_node3_shown := false
 var chap1_node3_1_shown := false

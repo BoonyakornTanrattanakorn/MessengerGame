@@ -56,7 +56,7 @@ func _on_body_entered(body):
 	if body.is_in_group("player_hurtbox"):
 		return  # ignore player
 	if body.is_in_group("enemy"):
-		body.take_damage(damage)
+		body.take_damage(damage, source)
 	queue_free()
 
 func _on_expire():

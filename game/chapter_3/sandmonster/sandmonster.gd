@@ -20,12 +20,22 @@ var attack_timer: float = 0.0
 @onready var hurtbox = $Hurtbox
 
 func _ready():
+	add_to_group("enemy")
 	hurtbox.add_to_group("enemy_hurtbox")
+	hurtbox.collision_mask |= 4  # include wind's collision layer (layer 3)
 	hurtbox.area_entered.connect(_on_hurtbox_area_entered)
 	player = get_tree().root.find_child("Player", true, false)
 	_update_state_visuals()
 
+func _check_fairy_proximity() -> void:
+	for fairy in get_tree().get_nodes_in_group("water_fairy"):
+		if global_position.distance_to(fairy.global_position) < 40.0:
+			take_damage(1, "water_lv1")
+			return
+
 func _physics_process(delta):
+	if state == State.NORMAL:
+		_check_fairy_proximity()
 	match state:
 		State.NORMAL:
 			if attack_timer > 0.0:
@@ -107,7 +117,7 @@ func take_damage(amount: int, source: String = ""):
 
 func _handle_damage_normal(amount: int, source: String):
 	match source:
-		"water_lv1", "water_lv2", "water_lv3":
+		"water_lv1":
 			_set_state(State.DRIED)
 		"fire":
 			_reduce_hp(amount)

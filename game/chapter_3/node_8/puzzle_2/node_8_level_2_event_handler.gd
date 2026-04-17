@@ -15,7 +15,6 @@ func on_level_loaded() -> void:
 	Chap3Node8State.update_objective()
 
 func handle_intro_for_level() -> void:
-	GameState.chap3_node8_2_shown = false  # temp: remove before commit
 	if not GameState.chap3_node8_2_shown:
 		GameState.chap3_node8_2_shown = true
 

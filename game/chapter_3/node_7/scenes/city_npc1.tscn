@@ -11,6 +11,7 @@ size = Vector2(140, 206)
 size = Vector2(28, 60)
 
 [node name="city_npc" type="Node2D" unique_id=482488305]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_n8t0n")
 dialogue_resource = ExtResource("2_cuce4")

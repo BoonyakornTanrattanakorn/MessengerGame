@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://dgc4m2wuoyn4j"]
 
 [ext_resource type="Script" uid="uid://dteinbbiiebdt" path="res://game/level_controller.gd" id="1_2fs4p"]
+[ext_resource type="PackedScene" uid="uid://dm6mcss0wylso" path="res://game/chapter_3/node_7_sidequest/scenes/node7_sidequest.tscn" id="2_j3oqh"]
 [ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://features/player/player.tscn" id="4_2lugc"]
+[ext_resource type="PackedScene" uid="uid://oxmcfsdchgpc" path="res://features/player/powers/wind/wind.tscn" id="4_j3oqh"]
+[ext_resource type="PackedScene" uid="uid://dhx5nknyw30h4" path="res://features/player/powers/fire/fire_small.tscn" id="5_kq3sm"]
 [ext_resource type="Texture2D" uid="uid://dtan4iu1ggc8h" path="res://assets/sprites/maps/minimap_frame.png" id="5_w17wa"]
+[ext_resource type="PackedScene" uid="uid://c0m86g4tkr1t5" path="res://features/player/powers/fire/fire_heavy.tscn" id="6_e27mp"]
 [ext_resource type="Script" uid="uid://0iqe0tscjprc" path="res://features/minimap/panel_container.gd" id="6_j3oqh"]
 [ext_resource type="Script" uid="uid://cmsfmb1hxucbt" path="res://features/minimap/sub_viewport.gd" id="7_kq3sm"]
+[ext_resource type="PackedScene" uid="uid://cadd8ara6sth3" path="res://features/player/powers/water/water_fairy.tscn" id="7_xqlo7"]
+[ext_resource type="PackedScene" uid="uid://crc6o4ptyhtga" path="res://features/player/powers/water/water_wave.tscn" id="8_6itmo"]
 [ext_resource type="Texture2D" uid="uid://bmnymc7ne7cep" path="res://assets/sprites/maps/border_frame.png" id="8_e27mp"]
-[ext_resource type="PackedScene" uid="uid://dc8ddf0j4nnby" path="res://game/chapter_3/node_8/level_0.tscn" id="8_m7xky"]
+[ext_resource type="PackedScene" uid="uid://bvu7tsbbwku3y" path="res://features/player/powers/earth/rock_pillar.tscn" id="9_flnok"]
 [ext_resource type="Texture2D" uid="uid://bdd4sm3nv5qpf" path="res://assets/sprites/icons/arrow.png" id="9_xqlo7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sreuk"]
@@ -23,10 +29,16 @@ script = ExtResource("1_2fs4p")
 [node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
 y_sort_enabled = true
 
-[node name="Ch3n1" parent="LevelHolder" unique_id=1752183892 instance=ExtResource("2_m7xky")]
+[node name="Node7Sidequest" parent="LevelHolder" unique_id=896734931 instance=ExtResource("2_j3oqh")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
-position = Vector2(442, 1673)
+position = Vector2(-268, 611)
+wind_scene = ExtResource("4_j3oqh")
+fire_small_scene = ExtResource("5_kq3sm")
+fire_heavy_scene = ExtResource("6_e27mp")
+water_fairy_scene = ExtResource("7_xqlo7")
+water_wave_scene = ExtResource("8_6itmo")
+rock_pillar_scene = ExtResource("9_flnok")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1552768552]
 y_sort_enabled = true

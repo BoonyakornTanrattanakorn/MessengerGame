@@ -7,6 +7,7 @@ extends Area2D
 var _is_cleared := false
 
 func _ready() -> void:
+	collision_mask |= 4  # include wind's collision layer (layer 3)
 	area_entered.connect(_on_area_entered)
 	# Auto-find the sibling FloorSymbol if export wasn't set
 	if not symbol_node:

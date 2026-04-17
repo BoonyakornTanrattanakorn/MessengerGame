@@ -51,4 +51,7 @@ func _on_level_completed():
 	_handle_completion()
 
 func _handle_completion():
-	pass
+	GameState.pending_level = "res://game/chapter_3/node_3/node_3.tscn"
+	GameState.pending_spawn = Vector2(0, 100)
+	GameState.pending_facing = Vector2.DOWN
+	get_tree().change_scene_to_file("res://game/game_scene.tscn")

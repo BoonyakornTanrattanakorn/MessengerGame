@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var next_level_path: String = "res://game/chapter_3/node_9/level_0.tscn"
+@export var next_level_path: String = "res://game/chapter_3/node_3/node_3.tscn"
 @export var spawn_position_in_next_level: Vector2 = Vector2(0, 0)
 @export var facing_direction_on_warp: Vector2 = Vector2.RIGHT
 
@@ -14,12 +14,7 @@ func _on_body_entered(body: Node) -> void:
 	if body.name != "Player":
 		return
 	SaveManager.save_game()
-	get_tree().current_scene.call_deferred(
-		"load_level",
-		next_level_path,
-		spawn_position_in_next_level,
-		facing_direction_on_warp
-	)
+	get_tree().change_scene_to_file("res://game/minigame_ver2/Level/main2.tscn")
 
 func show_portal() -> void:
 	show()
