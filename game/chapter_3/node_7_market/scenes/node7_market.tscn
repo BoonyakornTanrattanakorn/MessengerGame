@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://s5jp4ujrd0lm" path="res://assets/sprites/maps/tilesets/coconut palm tree.png" id="3_p5fv4"]
 [ext_resource type="PackedScene" uid="uid://cxhrf1g0wlye1" path="res://game/chapter_3/node_7_market/scenes/shop.tscn" id="4_q68fo"]
 [ext_resource type="Resource" uid="uid://cdpcfqe3oli8l" path="res://game/chapter_3/node_7_market/dialogue/shopkeeper.dialogue" id="5_enhc4"]
-[ext_resource type="Script" uid="uid://7wdlobvdkmlj" path="res://game/chapter_3/node_7/script/warp_back_to_city.gd" id="5_p5fv4"]
+[ext_resource type="Script" uid="uid://duih8h0vr7ryv" path="res://game/chapter_3/node_7_market/scripts/warp_back_from_market.gd" id="7_8k15y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q68fo"]
 size = Vector2(38, 705)
@@ -417,7 +417,7 @@ shape = SubResource("RectangleShape2D_enhc4")
 [node name="WarpToCity" type="Area2D" parent="." unique_id=885843663]
 y_sort_enabled = true
 position = Vector2(-587, 636)
-script = ExtResource("5_p5fv4")
+script = ExtResource("7_8k15y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToCity" unique_id=2131532463]
 y_sort_enabled = true

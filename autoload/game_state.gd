@@ -5,6 +5,14 @@ var pending_level: String = ""
 var pending_spawn: Vector2 = Vector2.ZERO
 var pending_facing: Vector2 = Vector2.ZERO
 
+# Gems accumulated across all minigames — used as shop currency
+var minigame_gems: int = 100
+
+# Where to return after leaving the market
+var market_return_path: String = ""
+var market_return_spawn: Vector2 = Vector2.ZERO
+var market_return_facing: Vector2 = Vector2.LEFT
+
 var chap1_node2_shown := false
 var chap1_node3_shown := false
 var chap1_node3_1_shown := false
@@ -25,6 +33,7 @@ func _ready() -> void:
 	add_to_group("savable")
 
 func new_game():
+	minigame_gems = 0
 	chap1_node2_shown = false
 	chap1_node3_shown = false
 	chap1_node3_1_shown = false
@@ -38,6 +47,7 @@ func new_game():
 
 func save():
 	return {
+		"minigame_gems": minigame_gems,
 		"chap1_node2_shown": chap1_node2_shown,
 		"chap1_node3_shown": chap1_node3_shown,
 		"chap1_node3_1_shown": chap1_node3_1_shown,
@@ -51,6 +61,7 @@ func save():
 	}
 
 func load_data(data):
+	minigame_gems = data.get("minigame_gems", 0)
 	chap1_node2_shown = data.get("chap1_node2_shown", false)
 	chap1_node3_shown = data.get("chap1_node3_shown", false)
 	chap1_node3_1_shown = data.get("chap1_node3_1_shown", false)
