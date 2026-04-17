@@ -29181,16 +29181,25 @@ position = Vector2(302.5, 1416.5)
 shape = SubResource("RectangleShape2D_w0hl0")
 
 [node name="QuestItem_Insignia" type="Area2D" parent="." unique_id=1282347528]
-position = Vector2(581, 1124)
+position = Vector2(583, 1128)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("14_ch7hf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestItem_Insignia" unique_id=838812578]
+position = Vector2(-220, -1841.25)
 shape = SubResource("RectangleShape2D_ch7hf")
 
 [node name="Sprite2D" type="Sprite2D" parent="QuestItem_Insignia" unique_id=258395290]
 position = Vector2(-219.99997, -1841.25)
 texture = ExtResource("14_pwvnp")
+
+[node name="PromptLabel" type="Label" parent="QuestItem_Insignia" unique_id=159418697]
+visible = false
+offset_left = -251.25002
+offset_top = -1883.75
+offset_right = -189.25002
+offset_bottom = -1860.75
+text = "Interact"
 
 [node name="WeightHole3_1" parent="." unique_id=2068755917 instance=ExtResource("10_3ll45")]
 position = Vector2(372, 104)
