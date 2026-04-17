@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c6ink07pklewb"]
+
+[ext_resource type="Script" uid="uid://boh8u11pcdmwa" path="res://game/chapter_3/node_3/boss_display.gd" id="1_ttfks"]
+[ext_resource type="Texture2D" uid="uid://b5t2jlijkondh" path="res://game/chapter_3/node_3/worm1.png" id="2_iqsfg"]
+[ext_resource type="Texture2D" uid="uid://b6udpwihq7hgk" path="res://game/chapter_3/node_3/worm2.png" id="3_qvqfl"]
+[ext_resource type="Texture2D" uid="uid://b33d4icnmmhhf" path="res://game/chapter_3/node_3/worm4.png" id="4_ttfks"]
+
+[node name="BossDisplay" type="Node2D" unique_id=1284634220]
+script = ExtResource("1_ttfks")
+
+[node name="Phase1Sprite" type="Sprite2D" parent="." unique_id=1165869348]
+texture = ExtResource("2_iqsfg")
+
+[node name="Phase2Sprite" type="Sprite2D" parent="." unique_id=1908328292]
+texture = ExtResource("3_qvqfl")
+
+[node name="Phase3Sprite" type="Sprite2D" parent="." unique_id=1222267652]
+texture = ExtResource("4_ttfks")

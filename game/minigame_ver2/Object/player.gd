@@ -24,6 +24,10 @@ var invincible_timer = 0.0
 var coyote_timer = 0.0
 var coyote_used = false  # ← prevents coyote from granting double jump
 
+signal shard_changed(amount)
+var max_health = 3
+var health_shards = 0
+
 func _ready():
 	add_to_group("player")
 
@@ -150,6 +154,20 @@ func update_animation():
 			anim.play("slide")
 		State.HURT:
 			anim.play("hurt")
+
+func add_shard(amount: int):
+	health_shards += amount
+	emit_signal("shard_changed", health_shards)
+	try_heal()
+
+func try_heal():
+	if health < max_health and health_shards >= 50:
+		health_shards -= 50
+		health += 1
+		emit_signal("health_changed", health)
+		emit_signal("shard_changed", health_shards)
+		# check again in case we have enough for another heal
+		try_heal()
 
 func stop():
 	print("stop called")  # ← does this print?

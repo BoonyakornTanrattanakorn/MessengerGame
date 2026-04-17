@@ -8,6 +8,7 @@ var player: Node2D
 var fixed_y: float 
 
 func _ready():
+	add_to_group("camera")
 	player = get_node(target)
 	# Keep player at ~20% from left edge
 	#offset.x = -get_viewport_rect().size.x * 0.35

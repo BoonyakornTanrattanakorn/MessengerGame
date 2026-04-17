@@ -1186,7 +1186,7 @@ scale = Vector2(0.23426874, 0.23426872)
 texture = ExtResource("18_x21l0")
 
 [node name="endpoint" parent="." unique_id=317329225 instance=ExtResource("14_0rlya")]
-position = Vector2(1150, -342)
+position = Vector2(3662, -19)
 
 [node name="BlastSkill" parent="." unique_id=1453903704 instance=ExtResource("19_qup56")]
 position = Vector2(-93, 18)

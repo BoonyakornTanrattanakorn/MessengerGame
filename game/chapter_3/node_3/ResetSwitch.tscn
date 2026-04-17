@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://baalomed8rvow"]
+
+[ext_resource type="Script" uid="uid://dqwytm7hoa0ef" path="res://game/chapter_3/node_3/reset_switch.gd" id="1_64k5s"]
+[ext_resource type="Texture2D" uid="uid://1hroptgybsua" path="res://game/chapter_3/node_3/switch.png" id="1_es2a5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64k5s"]
+size = Vector2(4, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1ptj"]
+size = Vector2(10, 25)
+
+[node name="ResetSwitch" type="StaticBody2D" unique_id=1010734173]
+script = ExtResource("1_64k5s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1755129175]
+position = Vector2(-9.536743e-07, -9.536743e-07)
+scale = Vector2(0.171875, 0.171875)
+texture = ExtResource("1_es2a5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=749151245]
+position = Vector2(-1, 8.5)
+shape = SubResource("RectangleShape2D_64k5s")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1672882593]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=372238877]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_m1ptj")
+debug_color = Color(0.9033461, 0.185601, 0.61322606, 0.41960785)

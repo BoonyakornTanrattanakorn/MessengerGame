@@ -3,7 +3,7 @@ extends Node2D
 
 signal charge_changed(current_charge)
 
-const MAX_CHARGE = 10
+const MAX_CHARGE = 20
 const BLAST_RADIUS = 20.0
 
 @onready var indicator = $SkillIndicator
