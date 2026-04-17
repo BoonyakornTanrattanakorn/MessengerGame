@@ -100,7 +100,7 @@ func _ready():
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	#ObjectiveManager.set_objective("Use wind power to flip the switch")
-	add_to_group("savable")
+	add_to_group("sava	ble")
 	hud.skill_changed.connect(_on_skill_changed)
 	# Set starting attribute from HUD
 	playerAttribute = hud.get_current_skill()
