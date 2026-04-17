@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dgc4m2wuoyn4j"]
 
 [ext_resource type="Script" uid="uid://dteinbbiiebdt" path="res://game/level_controller.gd" id="1_2fs4p"]
-[ext_resource type="PackedScene" uid="uid://dbouhfdrvk2o7" path="res://game/chapter_4/node11/node11.tscn" id="2_m7xky"]
+[ext_resource type="PackedScene" uid="uid://caimee62ouxhw" path="res://game/chapter_2/node_4/chapter_2_village.tscn" id="2_m7xky"]
 [ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://features/player/player.tscn" id="4_2lugc"]
 [ext_resource type="Texture2D" uid="uid://dtan4iu1ggc8h" path="res://assets/sprites/maps/minimap_frame.png" id="5_w17wa"]
 [ext_resource type="Script" uid="uid://0iqe0tscjprc" path="res://features/minimap/panel_container.gd" id="6_j3oqh"]
@@ -23,11 +23,10 @@ script = ExtResource("1_2fs4p")
 [node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
 y_sort_enabled = true
 
-[node name="Node11" parent="LevelHolder" unique_id=1031944713 instance=ExtResource("2_m7xky")]
+[node name="Chapter2_Village" parent="LevelHolder" unique_id=902764898 instance=ExtResource("2_m7xky")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
-position = Vector2(25, 423)
-collision_mask = 3
+position = Vector2(164, 427)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1552768552]
 zoom = Vector2(2, 2)
