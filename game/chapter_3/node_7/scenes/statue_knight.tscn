@@ -5,6 +5,8 @@
 [node name="statue_knight" type="Node2D" unique_id=846110001]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=512804884]
+z_index = 2
+y_sort_enabled = true
 position = Vector2(0, -35)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_ntep2")

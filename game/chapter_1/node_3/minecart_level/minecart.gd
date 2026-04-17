@@ -2,7 +2,7 @@ extends Node2D
 var player_in_range = false
 var player_mounted = false
 var mounted_player = null
-var cart_speed = 250.0
+var cart_speed = 200.0
 var is_moving = false
 var move_direction = Vector2.ZERO
 var in_turn_zone = false

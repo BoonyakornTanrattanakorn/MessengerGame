@@ -4,7 +4,8 @@ Merchant: Sorry — you startled me. I have been on edge since the attack three 
 Merchant: That alley to the east, I use it as a shortcut to the market every day.
 Merchant: Something moved in after the demons hit. Bigger than sand demons. Much bigger.
 Merchant: I have been stuck on this side ever since.
-Merchant: Clear them out for me and I will reward you well. Deal?
+Merchant: I have a secret information that you might needed.
+Merchant: Clear them out for me and I will tell you about it. Deal?
 => END
 
 ~ quest_reminder
@@ -15,7 +16,8 @@ Merchant: They are still in there. Alley to the east. Do not underestimate them.
 ~ quest_complete
 
 Merchant: You actually did it. I heard the fighting and barely dared to look.
-Merchant: Here — desert gold. Spends anywhere in the region including the market through that alley.
+Merchant: Word on the street is the King is plotting something suspicious.
+Merchant: I don’t have all the details yet, so watch your back.
 Merchant: There are trading posts on the road east as well. You will find supplies all the way to the next city.
 Merchant: Safe travels, outsider.
 => END

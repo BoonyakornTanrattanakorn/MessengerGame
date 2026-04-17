@@ -4,6 +4,11 @@ extends LevelEventHandler
 @export var dialogue_resource: DialogueResource
 
 func handle_intro_for_level() -> void:
+	if Node7State.intro_objective_started:
+		BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
+		Node7State.update_objective()
+		return
+
 	Node7State.reset()
 	BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
 	Node7State.start_desert_objective()

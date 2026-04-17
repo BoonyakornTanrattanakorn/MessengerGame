@@ -18,7 +18,7 @@ size = Vector2(2738.5, 20)
 size = Vector2(224, 218)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p81sg"]
-size = Vector2(30, 49)
+size = Vector2(42, 69.5)
 
 [node name="Node7Sidequest" type="Node2D" unique_id=896734931]
 script = ExtResource("1_7w5uh")
@@ -408,10 +408,12 @@ position = Vector2(-277, 846)
 shape = SubResource("RectangleShape2D_omy2y")
 
 [node name="Portal" type="Area2D" parent="." unique_id=1729018087]
-position = Vector2(1082, 614)
+y_sort_enabled = true
+position = Vector2(2220, 692)
 script = ExtResource("6_omy2y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=99119321]
+position = Vector2(-5, -10.25)
 shape = SubResource("RectangleShape2D_p81sg")
 
 [node name="PortalSprite" type="Sprite2D" parent="Portal" unique_id=795096265]
@@ -419,3 +421,10 @@ position = Vector2(0, -12.51)
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("7_6atbb")
 hframes = 8
+
+[node name="PromptLabel" type="Label" parent="Portal" unique_id=1385293214]
+offset_left = -64.0
+offset_top = -72.0
+offset_right = 71.0
+offset_bottom = -49.0
+text = "Return to the city"

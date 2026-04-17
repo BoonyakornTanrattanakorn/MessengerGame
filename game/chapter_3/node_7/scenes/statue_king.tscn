@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ckpo542dxa4lg" path="res://assets/sprites/maps/tilesets/statue_king.png" id="1_qtkna"]
 
 [node name="statue_king" type="Node2D" unique_id=837239417]
+z_index = 2
+y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=204441983]
 position = Vector2(0, -30)

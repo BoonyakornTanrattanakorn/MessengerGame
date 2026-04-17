@@ -5,7 +5,7 @@ enum State { NORMAL, DRIED, DUST }
 var ATTACK_RANGE: float = 50.0
 var ATTACK_DAMAGE: int = 1
 var ATTACK_COOLDOWN: float = 1.5
-var DETECTION_RANGE: float = 200.0
+var DETECTION_RANGE: float = 300.0
 var AGGRO_RANGE: float = 400.0
 var is_aggro: bool = false
 
@@ -142,6 +142,8 @@ func _die():
 	queue_free()
 
 func _on_hurtbox_area_entered(area: Area2D):
+	if not area.is_in_group("player_projectile"):
+		return
 	var dmg = area.get("damage") if area.get("damage") != null else 0
 	var source = area.get("source") if area.get("source") != null else ""
 	take_damage(dmg, source)

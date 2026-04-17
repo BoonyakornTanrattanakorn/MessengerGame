@@ -11,6 +11,7 @@ size = Vector2(120, 206)
 size = Vector2(53, 127)
 
 [node name="FremenGuard" type="Node2D" unique_id=980384197]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_pnjll")
 dialogue_resource = ExtResource("2_0krso")
@@ -22,8 +23,10 @@ position = Vector2(-50, 3)
 shape = SubResource("RectangleShape2D_fclmt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1422616039]
+position = Vector2(0, 29)
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("1_l2caw")
+offset = Vector2(0, -450)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1220183113]
 

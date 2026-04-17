@@ -5,6 +5,8 @@
 [node name="statue_princess" type="Node2D" unique_id=1083481428]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=682664280]
+z_index = 2
+y_sort_enabled = true
 position = Vector2(0, -33)
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("1_bydx0")

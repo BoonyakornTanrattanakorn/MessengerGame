@@ -14,6 +14,7 @@ var talked_to_guard_after_riddle := false
 var sandmonster_quest_turned_in := false
 var visited_shop := false
 
+
 func update_objective() -> void:
 	if sandmonster_quest_turned_in:
 		ObjectiveManager.set_objective("Head to the next city")

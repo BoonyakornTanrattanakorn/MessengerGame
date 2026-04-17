@@ -5,6 +5,8 @@
 [node name="statue_scarab" type="Node2D" unique_id=4739602]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=90565962]
+z_index = 2
+y_sort_enabled = true
 position = Vector2(0, -27)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_c071x")
