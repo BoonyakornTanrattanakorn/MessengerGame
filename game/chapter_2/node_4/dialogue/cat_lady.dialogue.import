@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cww4efwgmtmrs"
+path="res://.godot/imported/cat_lady.dialogue-2a9a3213b65e96b029a45c5da8a263b9.tres"
+
+[deps]
+
+source_file="res://game/chapter_2/node_4/dialogue/cat_lady.dialogue"
+dest_files=["res://.godot/imported/cat_lady.dialogue-2a9a3213b65e96b029a45c5da8a263b9.tres"]
+
+[params]
+
+defaults=true

@@ -224,19 +224,26 @@ func activate_earth_shield() -> void:
 
 func spawn_rock_pillar() -> void:
 	var player = _get_player()
+	if rock_pillar_scene == null:
+		return
+		
 	player.active_pillars = player.active_pillars.filter(func(p): return is_instance_valid(p))
+	
 	if player.active_pillars.size() >= player.max_pillars:
 		var oldest = player.active_pillars.pop_front()
 		if is_instance_valid(oldest):
 			oldest.queue_free()
-	if rock_pillar_scene != null:
-		var pillar = rock_pillar_scene.instantiate()
-		var spawn_pos = player.global_position + player.last_direction * 32.0
-		pillar.global_position = spawn_pos
-		var is_on_water = false
-		if player.has_method("check_if_water_at"):
-			is_on_water = player.check_if_water_at(spawn_pos)
-		get_tree().current_scene.add_child(pillar)
-		player.active_pillars.append(pillar)
-		if pillar.has_method("setup_pillar"):
-			pillar.setup_pillar(is_on_water)
+			
+	var pillar = rock_pillar_scene.instantiate()
+	var spawn_pos = player.global_position + player.last_direction * 32.0
+	pillar.global_position = spawn_pos
+	
+	var is_on_water = false
+	if player.has_method("check_if_water_at"):
+		is_on_water = player.check_if_water_at(spawn_pos)
+	
+	get_tree().current_scene.add_child(pillar)
+	player.active_pillars.append(pillar)
+	
+	if pillar.has_method("setup_pillar"):
+		pillar.setup_pillar(is_on_water)

@@ -1,4 +1,4 @@
-﻿Darkness|暗闇
+Darkness|暗闇
 Wire Mesh|金網
 Stone Bridge (V, Left)|石の橋（縦・左）
 Stone Bridge (V Center)|石の橋（縦・中央）
@@ -126,4 +126,3 @@ Relief Floor Tile E (Silver, Ruins)|レリーフ床E（銀・廃墟）
 Relief Floor Tile F (Silver)|レリーフ床F（銀）
 Relief Floor Tile G (Gold, Ruins)|レリーフ床G（金・廃墟）
 Relief Floor Tile H (Gold)|レリーフ床H（金）
-

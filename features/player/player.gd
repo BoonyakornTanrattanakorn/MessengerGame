@@ -104,7 +104,7 @@ func _ready():
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	#ObjectiveManager.set_objective("Use wind power to flip the switch")
-	add_to_group("savable")
+	add_to_group("sava	ble")
 	hud.skill_changed.connect(_on_skill_changed)
 	# Set starting attribute from HUD
 	playerAttribute = hud.get_current_skill()
@@ -274,6 +274,9 @@ func _physics_process(delta):
 	if check_if_water_at(check_pos):
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
+	if check_if_void_at(global_position):
+		if not check_if_platform_at(global_position):
+			speed_multiplier = 0.0
 	# Movement + dash handled by movement component
 	movement_component.process_movement(self, direction, speed_multiplier, delta)
 
@@ -638,4 +641,27 @@ func is_standing_on_pillar(pos: Vector2) -> bool:
 		if is_instance_valid(pillar):
 			if pos.distance_to(pillar.global_position) < 25.0:
 				return true
+	return false
+	
+func check_if_void_at(pos: Vector2) -> bool:
+	var tilemap = get_tree().current_scene.find_child("Ground", true, false)
+	
+	if tilemap == null:
+		return false
+
+	var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
+	var tile_data = tilemap.get_cell_tile_data(map_pos)
+	
+	if tile_data:
+		return tile_data.get_custom_data("is_void") == true
+			
+	return false
+
+func check_if_platform_at(_pos: Vector2) -> bool:
+	var overlapping_areas = $Hurtbox.get_overlapping_areas()
+	
+	for area in overlapping_areas:
+		if area.is_in_group("platform"):
+			return true
+			
 	return false
