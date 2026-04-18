@@ -13627,6 +13627,8 @@ iceBlock = NodePath("../TriggerIceBlock")
 z_index = 1
 position = Vector2(2249, -1528)
 script = ExtResource("11_ve5wd")
+next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
+spawn_position_in_next_level = Vector2(1, 312)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" unique_id=2105304042]
 position = Vector2(-1, 0)
