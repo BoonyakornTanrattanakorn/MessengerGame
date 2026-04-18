@@ -44,7 +44,6 @@ func _input(event):
 
 	if event.is_action_pressed("reset_level"):
 		reset_room()
-		get_player().health_component.emit_signal("health_changed", 3)
 
 
 func reset_room():
