@@ -36,21 +36,21 @@ func _ready() -> void:
 	assert(intro_walk != null)
 	_set_mage_group_visible(false)
 	_set_mage_ai_active(false)
-	
+
 	var minimap = get_node_or_null("/root/GameScene/Minimap")
 	if not minimap:
 		minimap = get_tree().current_scene.get_node_or_null("Minimap")
 	if minimap:
 		minimap.hide()
-		
+
 	
 func handle_intro_for_level() -> void:
-	#start_fight_sequence()
-	#return
 	var original_input_locked = player.is_in_dialogue
 	var original_camera_pan = player.is_camera_panning
 
-	# BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
+	# Play intro BGM (orchestral_mission)
+	BGMManager.play_bgm("orchestral_mission")
+
 	player.is_in_dialogue = true
 	player.is_camera_panning = true
 	_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
@@ -72,6 +72,9 @@ func handle_intro_for_level() -> void:
 		await start_post_fight_cutscene()
 	else:
 		await normal_ending()
+
+	# Restore intro/outro BGM after fight or ending
+	BGMManager.play_bgm("orchestral_mission")
 
 	_fast_forward_enabled = false
 	_fast_forward_balloons.clear()
@@ -151,8 +154,9 @@ func start_fight_sequence() -> void:
 		fight_sequence_finished.emit()
 		return
 
-	if SFXManager != null:
-		SFXManager.play_event("node12.cutscene.reveal")
+	# Play fight BGM
+	BGMManager.play_bgm("fire_blade")
+	SFXManager.play_event("node12.cutscene.reveal")
 
 	_set_mage_group_visible(true)
 	_set_mage_ai_active(false)
@@ -160,12 +164,12 @@ func start_fight_sequence() -> void:
 	_set_mage_ai_active(true)
 	player.is_in_dialogue = false
 	player.is_camera_panning = false
-	
+
 	if debug_skip_mage_fight:
 		await get_tree().create_timer(10.0).timeout
 		_force_clear_mages()
 		await get_tree().process_frame
-		
+
 	await _wait_until_all_mages_defeated()
 	player.is_in_dialogue = true
 	player.is_camera_panning = true
@@ -217,6 +221,10 @@ func _check_required_clues_placeholder() -> bool:
 	return _accusation_branch_unlocked
 
 func start_post_fight_cutscene() -> void:
+	# Restore outro BGM (orchestral_mission)
+	if BGMManager != null:
+		BGMManager.play_bgm("orchestral_mission")
+
 	if FINALE_DIALOGUE != null:
 		var balloon := DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE)
 		_register_fast_forward_balloon(balloon)
