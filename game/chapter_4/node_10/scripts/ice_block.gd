@@ -131,6 +131,7 @@ func push_from_player(player):
 
 func _on_area_entered(area):
 	if area is Fire_heavy or area is Fire_small:
+		SFXManager.play_sfx("res://assets/audio/fire_burn.mp3", 6)
 		melt()
 		area.queue_free()
 		

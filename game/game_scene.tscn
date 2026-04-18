@@ -23,7 +23,7 @@ script = ExtResource("1_2fs4p")
 [node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
 y_sort_enabled = true
 
-[node name="Node2D" parent="LevelHolder" unique_id=862201448 instance=ExtResource("2_m7xky")]
+[node name="Node10" parent="LevelHolder" unique_id=862201448 instance=ExtResource("2_m7xky")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
 position = Vector2(412, 675)

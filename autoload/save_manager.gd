@@ -227,10 +227,6 @@ func new_game():
 	get_tree().change_scene_to_file(init_scene_path)
 	restore_objects()
 	await get_tree().scene_changed
-	#var root = get_tree().current_scene
-	#var setting = root.get_node_or_null("Player/PlayerHUD/Setting/SettingMenu")
-	#if setting:
-	#	setting.hide()
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
