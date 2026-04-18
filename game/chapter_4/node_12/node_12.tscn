@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://c5l285add1oxq" path="res://game/chapter_4/node_12/node_12_event_handler.gd" id="1_5xwdw"]
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="2_flfan"]
-[ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/npc/king.tscn" id="3_otdus"]
-[ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/npc/soldier.tscn" id="4_eymx0"]
-[ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/npc/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
-[ext_resource type="PackedScene" uid="uid://dk5clku1rco51" path="res://game/chapter_4/node_12/npc/mage/mage_water/mage_water.tscn" id="5_rhnue"]
-[ext_resource type="PackedScene" uid="uid://rlxghj7ppkr0" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.tscn" id="6_flvrn"]
-[ext_resource type="PackedScene" uid="uid://cmlw3sah421gh" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.tscn" id="7_unbsp"]
+[ext_resource type="PackedScene" uid="uid://6rmk6jm54kwm" path="res://game/chapter_4/node_12/NPC/king.tscn" id="3_otdus"]
+[ext_resource type="PackedScene" uid="uid://c5w774bqym5nh" path="res://game/chapter_4/node_12/NPC/soldier.tscn" id="4_eymx0"]
+[ext_resource type="PackedScene" uid="uid://3l3qq4g6omou" path="res://game/chapter_4/node_12/NPC/mage/mage_earth/mage_earth.tscn" id="5_1x7oo"]
+[ext_resource type="PackedScene" uid="uid://dk5clku1rco51" path="res://game/chapter_4/node_12/NPC/mage/mage_water/mage_water.tscn" id="5_rhnue"]
+[ext_resource type="PackedScene" uid="uid://rlxghj7ppkr0" path="res://game/chapter_4/node_12/NPC/mage/mage_wind/mage_wind.tscn" id="6_flvrn"]
+[ext_resource type="PackedScene" uid="uid://cmlw3sah421gh" path="res://game/chapter_4/node_12/NPC/mage/mage_fire/mage_fire.tscn" id="7_unbsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fjm0"]
 size = Vector2(357.5, 20)

@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://dddr68vbk8xnb"]
+
+[ext_resource type="Script" uid="uid://bycjck0tilcvp" path="res://game/chapter_4/node_11/ice_ghost.gd" id="1_8wmm1"]
+[ext_resource type="Texture2D" uid="uid://d2k51w3dwesk3" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Enemy/Enemy 15-2.png" id="1_n21eh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wmm1"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkphn"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddgq8"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdsbe"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhvhm"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adbmd"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dec6"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jop5d"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71a5c"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0w18x"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bjio"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2da6a"]
+atlas = ExtResource("1_n21eh")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fdup2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wmm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkphn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddgq8")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdsbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhvhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adbmd")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dec6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jop5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71a5c")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0w18x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bjio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2da6a")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fk682"]
+radius = 14.0
+
+[node name="IceGhost" type="CharacterBody2D" unique_id=770296085]
+script = ExtResource("1_8wmm1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1164816980]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_fdup2")
+animation = &"down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1173105288]
+position = Vector2(0, 1)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_fk682")
