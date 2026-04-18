@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c00whxx6y58q5"]
 
 [ext_resource type="Texture2D" uid="uid://cawo34p0lfjd2" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Male/Male 15-3.png" id="1_8kvfq"]
+[ext_resource type="Script" path="res://game/chapter_4/node_11/NPC/villager.gd" id="2_villager_script"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dvxp3"]
 atlas = ExtResource("1_8kvfq")
@@ -94,6 +95,7 @@ animations = [{
 size = Vector2(32, 32)
 
 [node name="Villager" type="CharacterBody2D" unique_id=151893683]
+script = ExtResource("2_villager_script")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1344047570]
 sprite_frames = SubResource("SpriteFrames_qp5b3")
@@ -102,4 +104,9 @@ autoplay = "idle"
 frame_progress = 0.8391734
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404574336]
+shape = SubResource("RectangleShape2D_cwdef")
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=1987345610]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=1987345611]
 shape = SubResource("RectangleShape2D_cwdef")

@@ -12990,12 +12990,12 @@ shape = SubResource("RectangleShape2D_su4ry")
 [node name="NPC" type="Node2D" parent="." unique_id=1798320614]
 
 [node name="Villager" parent="NPC" unique_id=151893683 instance=ExtResource("5_ixp4i")]
-position = Vector2(-139, 206)
+position = Vector2(-138, 225)
 
-[node name="Villager2" parent="NPC" unique_id=1099790699 instance=ExtResource("6_vlen1")]
+[node name="Snowman" parent="NPC" unique_id=1099790699 instance=ExtResource("6_vlen1")]
 position = Vector2(630, 154)
 
-[node name="Villager3" parent="NPC" unique_id=684424197 instance=ExtResource("13_a8n8n")]
+[node name="Cat" parent="NPC" unique_id=684424197 instance=ExtResource("13_a8n8n")]
 position = Vector2(-172, 642)
 
 [node name="Soldier" parent="NPC" unique_id=2075762284 instance=ExtResource("9_j2i5m")]
