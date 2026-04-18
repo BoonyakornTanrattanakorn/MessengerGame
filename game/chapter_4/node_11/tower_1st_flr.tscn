@@ -8715,9 +8715,9 @@ size = Vector2(494, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l117g"]
 size = Vector2(43, 432)
 
-[node name="Tower" type="Node2D" unique_id=1166412024 node_paths=PackedStringArray("ice")]
+[node name="Tower" type="Node2D" unique_id=1166412024 node_paths=PackedStringArray("tower")]
 script = ExtResource("1_nyq44")
-ice = NodePath("icetmp")
+tower = NodePath("icetmp")
 
 [node name="Map" type="Node2D" parent="." unique_id=705382107]
 
