@@ -23,6 +23,12 @@ height = 250.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0y2em"]
 size = Vector2(28, 82)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6dxjs"]
+size = Vector2(1296, 131)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkoec"]
+size = Vector2(832, 708)
+
 [node name="Subnode2Chap3" type="Node2D" unique_id=1999057755]
 script = ExtResource("98_evthdlr")
 
@@ -136,3 +142,15 @@ shape = SubResource("RectangleShape2D_0y2em")
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="ColForNPC" unique_id=51264876]
 position = Vector2(1594, -142)
 shape = SubResource("RectangleShape2D_0y2em")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="ColForNPC" unique_id=912268409]
+position = Vector2(1367, 147)
+shape = SubResource("RectangleShape2D_6dxjs")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="ColForNPC" unique_id=963506279]
+position = Vector2(1480, -693)
+shape = SubResource("RectangleShape2D_6dxjs")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="ColForNPC" unique_id=1501956404]
+position = Vector2(2046, -273)
+shape = SubResource("RectangleShape2D_pkoec")
