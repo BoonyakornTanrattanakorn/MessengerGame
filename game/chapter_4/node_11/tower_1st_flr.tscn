@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://d2cycdbamd2gj" path="res://assets/sprites/maps/tilesets/Inside_B.png" id="5_e6s2k"]
 [ext_resource type="Texture2D" uid="uid://d8jxn6d34bfy" path="res://assets/sprites/maps/tilesets/Outside_B.png" id="6_8n6ou"]
 [ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="7_fq0jf"]
-[ext_resource type="PackedScene" uid="uid://dddr68vbk8xnb" path="res://game/chapter_4/node_11/ice_ghost.tscn" id="8_50ybw"]
+[ext_resource type="PackedScene" path="res://game/chapter_4/node_11/ice_ghost.tscn" id="8_50ybw"]
+[ext_resource type="Script" path="res://game/chapter_4/node_11/warp_to_floor_2.gd" id="9_floor2"]
+[ext_resource type="Script" path="res://game/chapter_4/node_11/warp_to_node_11.gd" id="10_node11"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_8ebhh"]
 tile_data = PackedInt32Array(0, 1179650, 24, 65536, 1179650, 25, 131072, 1179650, 26, 1, 1245186, 24, 65537, 1245186, 25, 131073, 1245186, 26, 2, 1310722, 24, 65538, 1310722, 25, 131074, 1310722, 26)
@@ -8741,7 +8743,7 @@ tile_set = SubResource("TileSet_l117g")
 
 [node name="warp_to_outside" type="Area2D" parent="Warp" unique_id=1910313630]
 collision_layer = 2
-script = ExtResource("7_fq0jf")
+script = ExtResource("10_node11")
 next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
 spawn_position_in_next_level = Vector2(-52, 639)
 facing_direction_on_warp = Vector2(0, 1)
@@ -8754,7 +8756,7 @@ shape = SubResource("RectangleShape2D_qhgts")
 [node name="warp_to_flr_2" type="Area2D" parent="Warp" unique_id=1616807380]
 position = Vector2(1, 0)
 collision_layer = 2
-script = ExtResource("7_fq0jf")
+script = ExtResource("9_floor2")
 next_level_path = "res://game/chapter_4/node_11/tower_2nd_flr.tscn"
 spawn_position_in_next_level = Vector2(307, 133)
 facing_direction_on_warp = Vector2(0, 1)
@@ -8768,7 +8770,7 @@ shape = SubResource("RectangleShape2D_qhgts")
 position = Vector2(307, 133)
 
 [node name="SpawnPoint2" type="Marker2D" parent="." unique_id=1307711771]
-position = Vector2(340, 387)
+position = Vector2(328, 369)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=670263198]
 

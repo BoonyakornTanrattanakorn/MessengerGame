@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bm16ktuss7a23" path="res://assets/sprites/maps/tilesets/Inside_A4.png" id="1_8ebhh"]
 [ext_resource type="Texture2D" uid="uid://v38avbxmjmcy" path="res://assets/sprites/maps/tilesets/Outside_A3.png" id="2_0gmsd"]
 [ext_resource type="Texture2D" uid="uid://d8jxn6d34bfy" path="res://assets/sprites/maps/tilesets/Outside_B.png" id="3_0gmsd"]
-[ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="4_qhgts"]
+[ext_resource type="Script" path="res://game/chapter_4/node_11/warp_to_floor_1.gd" id="4_qhgts"]
 [ext_resource type="Texture2D" uid="uid://dcotttkrk0mwd" path="res://assets/sprites/maps/tilesets/Inside_A5.png" id="4_v8oqa"]
 [ext_resource type="Texture2D" uid="uid://d2cycdbamd2gj" path="res://assets/sprites/maps/tilesets/Inside_B.png" id="5_61g8a"]
 [ext_resource type="Script" uid="uid://cc1mnmus27fob" path="res://game/chapter_4/node_11/tower_event_handler.gd" id="5_tower_event_handler"]
@@ -8704,8 +8704,8 @@ texture = ExtResource("3_0gmsd")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_8rwfx")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhgts"]
-size = Vector2(46.6875, 28.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxk6m"]
+size = Vector2(48, 28.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rwfx"]
 size = Vector2(494, 20)
@@ -8745,18 +8745,18 @@ tile_set = SubResource("TileSet_l117g")
 
 [node name="Warp" type="Node2D" parent="." unique_id=528099458]
 
-[node name="warp_to_tower" type="Area2D" parent="Warp" unique_id=1910313630]
-position = Vector2(2, 0)
+[node name="warp_to_1st_flr" type="Area2D" parent="Warp" unique_id=263273718]
+position = Vector2(0, 1)
 collision_layer = 2
 script = ExtResource("4_qhgts")
 next_level_path = "res://game/chapter_4/node_11/tower_1st_flr.tscn"
-spawn_position_in_next_level = Vector2(340, 387)
+spawn_position_in_next_level = Vector2(328, 369)
 facing_direction_on_warp = Vector2(0, 1)
 metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_tower" unique_id=722536473]
-position = Vector2(263.65625, 102)
-shape = SubResource("RectangleShape2D_qhgts")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_1st_flr" unique_id=958168025]
+position = Vector2(264, 103)
+shape = SubResource("RectangleShape2D_xxk6m")
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1330734681]
 position = Vector2(307, 133)
