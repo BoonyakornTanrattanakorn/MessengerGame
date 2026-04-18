@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://nt7tlf00wkc1"]
 
 [ext_resource type="Script" uid="uid://kp0fewpnw38j" path="res://game/chapter_1/node_3/lion_level/node_3_level_1_event_handler.gd" id="1_ucg3a"]
-[ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_ayuvw"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_ayuvw"]
 [ext_resource type="Script" uid="uid://bamwo7l48o40x" path="res://game/chapter_1/node_3/lion_level/warp_to_level_0_from_1.gd" id="3_yrulf"]
 [ext_resource type="Script" uid="uid://6jv154ufl3u3" path="res://game/chapter_1/node_3/lion_level/red_gem_pickup.gd" id="4_absj7"]
 [ext_resource type="Texture2D" uid="uid://bi5saalcfd6o3" path="res://assets/sprites/icons/red_gem.png" id="5_b0un0"]

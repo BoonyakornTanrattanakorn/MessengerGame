@@ -7,4 +7,4 @@ func _on_body_entered(body: Node) -> void:
 	if body.name != "Player":
 		return
 	SaveManager.save_game()
-	get_tree().change_scene_to_file("res://game/minigame_ver2/Level/main2.tscn")
+	get_tree().change_scene_to_file("res://game/minigame_ver2/Level/main.tscn")

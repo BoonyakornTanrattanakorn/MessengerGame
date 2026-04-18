@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://7slnoiux8hwh" path="res://game/minigame_ver2/Sprite/subb1.png" id="3_041ck"]
 [ext_resource type="PackedScene" uid="uid://cs6flapgwotx7" path="res://game/minigame_ver2/Object/HUD.tscn" id="4_6lkpn"]
 [ext_resource type="PackedScene" uid="uid://cac3nsmu0piae" path="res://game/minigame_ver2/Object/game_over.tscn" id="5_df1k0"]
-[ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="6_kai6d"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="6_kai6d"]
 [ext_resource type="PackedScene" uid="uid://i6t6o8e2y6dd" path="res://game/minigame_ver2/Object/blast_skill.tscn" id="7_1li2d"]
 [ext_resource type="PackedScene" uid="uid://dxl22bdgj38l4" path="res://game/minigame_ver2/Obstacles/breakable/breakable_obstacle.tscn" id="8_kai6d"]
 [ext_resource type="PackedScene" uid="uid://dxr5vb1n6n3vy" path="res://game/minigame_ver2/Collectible/recharge_item.tscn" id="9_w762d"]
@@ -2487,7 +2487,7 @@ scale = Vector2(0.54481095, 0.4372759)
 texture = ExtResource("23_041ck")
 
 [node name="endpoint" parent="." unique_id=317329225 instance=ExtResource("23_qtcdr")]
-position = Vector2(134, -19)
+position = Vector2(6090, -19)
 
 [node name="Pyramid" type="Sprite2D" parent="." unique_id=534257220]
 position = Vector2(6192.1255, -89.124855)

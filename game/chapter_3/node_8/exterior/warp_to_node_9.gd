@@ -14,7 +14,10 @@ func _on_body_entered(body: Node) -> void:
 	if body.name != "Player":
 		return
 	SaveManager.save_game()
-	get_tree().change_scene_to_file("res://game/minigame_ver2/Level/main2.tscn")
+	GameState.pending_level = "res://game/chapter_3/subnode/subnode_2_chap3.tscn"
+	GameState.pending_spawn = Vector2(0, 400)
+	GameState.pending_facing = Vector2.RIGHT
+	get_tree().change_scene_to_file("res://game/game_scene.tscn")
 
 func show_portal() -> void:
 	show()

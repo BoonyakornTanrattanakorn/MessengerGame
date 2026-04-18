@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://b4u2ea5kgyw2e"]
 
 [ext_resource type="Script" uid="uid://5bx4dpf7xj8n" path="res://game/chapter_1/node_3/center_level/node_3_level_0_event_handler.gd" id="1_o2bvy"]
-[ext_resource type="TileSet" uid="uid://bbmf3gv82xbiu" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_45wdf"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_45wdf"]
 [ext_resource type="Texture2D" uid="uid://w23njenxpw23" path="res://assets/sprites/chapter1_node2/decorative_cracks_walls.png" id="3_tgbhp"]
 [ext_resource type="Texture2D" uid="uid://cq0lc2yyx230l" path="res://assets/sprites/chapter1_node2/doors_lever_chest_animation.png" id="4_ddwnc"]
 [ext_resource type="Texture2D" uid="uid://b46tqab1k7m0t" path="res://assets/sprites/chapter1_node2/DoorWall.png" id="5_laplg"]

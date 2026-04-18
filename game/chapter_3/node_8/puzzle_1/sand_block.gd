@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal landed_on_plate(block: Node2D, plate: Node2D)
 signal left_plate(block: Node2D, plate: Node2D)
 
-const PUSH_SPEED := 80.0
+const PUSH_SPEED := 160
 const TILE_SIZE := 16
 
 var _is_moving := false

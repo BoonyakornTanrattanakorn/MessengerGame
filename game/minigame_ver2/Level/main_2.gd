@@ -53,7 +53,7 @@ func _on_level_completed():
 
 func _handle_completion():
 	GameState.minigame_gems += hud.gems
-	GameState.pending_level = "res://game/chapter_3/node_9/node_9.tscn"
-	GameState.pending_spawn = Vector2(50, 350)
-	GameState.pending_facing = Vector2.DOWN
+	GameState.pending_level = "res://game/chapter_3/node_8/level_0.tscn"
+	GameState.pending_spawn = Vector2(50, 720)
+	GameState.pending_facing = Vector2.RIGHT
 	get_tree().change_scene_to_file("res://game/game_scene.tscn")
