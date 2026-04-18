@@ -58,7 +58,7 @@ func _physics_process(delta):
 		
 		velocity = slide_direction * speed
 
-		var collisions = move_and_collide(velocity * delta)
+		var _collisions = move_and_collide(velocity * delta)
 
 		if velocity.length() * delta >= (target_position - global_position).length():
 
@@ -131,7 +131,7 @@ func push_from_player(player):
 
 func _on_area_entered(area):
 	if area is Fire_heavy or area is Fire_small:
-		SFXManager.play_sfx("res://assets/audio/fire_burn.mp3", 6)
+		SFXManager.play_sfx("res://assets/audio/sfx/fire_burn.ogg", 6)
 		melt()
 		area.queue_free()
 		
@@ -173,9 +173,9 @@ func load_data(data) -> void:
 	if pos:
 		global_position = Vector2(pos["x"], pos["y"])
 		
-	var visible = data.get("visible", null)
-	if visible != null:
-		if visible == true:
+	var ice_visible = data.get("visible", null)
+	if ice_visible != null:
+		if ice_visible == true:
 			recover()
 		else:
 			melt()

@@ -22,7 +22,7 @@ func _set_player_boat_mode(enabled: bool) -> void:
 
 func handle_intro_for_level() -> void:
 	if not GameState.chap2_node6_shown:
-		BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
+		BGMManager.play_bgm("field_theme_1", 0.0, true)
 		
 		GameState.chap2_node6_shown = true
 

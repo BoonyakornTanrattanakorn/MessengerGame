@@ -13610,18 +13610,18 @@ shape = SubResource("RectangleShape2D_bcujh")
 [node name="LevelManager" type="Node" parent="." unique_id=411427784]
 script = ExtResource("7_bcujh")
 
-[node name="IceBlock4" parent="." unique_id=2046404792 instance=ExtResource("5_pnn34")]
+[node name="TriggerIceBlock" parent="." unique_id=2046404792 instance=ExtResource("5_pnn34")]
 position = Vector2(1056, 192)
 script = ExtResource("13_x8fxk")
 save_id = "Example_block"
 level_scene_path = NodePath("..")
 
-[node name="Trigger" parent="." unique_id=1049504828 node_paths=PackedStringArray("IceBlock") instance=ExtResource("10_i1hpl")]
+[node name="Trigger" parent="." unique_id=1049504828 node_paths=PackedStringArray("iceBlock") instance=ExtResource("10_i1hpl")]
 position = Vector2(896, 192)
 script = ExtResource("11_2dx0m")
 save_id = "node_10_trigger"
 save_scope = "scene"
-IceBlock = NodePath("../IceBlock4")
+iceBlock = NodePath("../TriggerIceBlock")
 
 [node name="Exit" type="Area2D" parent="." unique_id=1749724821]
 z_index = 1

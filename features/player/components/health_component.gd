@@ -2,7 +2,6 @@ extends Node
 class_name HealthComponent
 
 signal health_changed(value: int)
-signal player_dead
 
 @export var max_hp: int = 3
 var hp: int = max_hp

@@ -17,7 +17,7 @@ func handle_intro_for_level() -> void:
 		GameState.chap4_node10_shown = true
 		
 		ObjectiveManager.set_objective("Explore the frozen cave")
-		BGMManager.play_bgm("res://assets/audio/node_10_bgm.mp3", -6, true)
+		BGMManager.play_bgm("node_10_bgm", -6, true)
 
 		DialogueManager.show_dialogue_balloon(
 			load("res://game/chapter_4/node_10/dialogue/node_10.dialogue"),

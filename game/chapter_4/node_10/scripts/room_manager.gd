@@ -21,7 +21,6 @@ func _ready():
 	player = get_player()
 	print(player)
 	await get_tree().process_frame
-	player.health_component.player_dead.connect(_on_player_dead)
 
 func store_initial_states():
 
@@ -67,7 +66,7 @@ func reset_room():
 			node.visible = state["visible"]
 
 
-	var player = get_player()
+	player = get_player()
 
 	if player:
 		player.global_position = player_checkpoint_position
@@ -112,6 +111,6 @@ func load_data(data):
 		player_checkpoint_position = Vector2(pos.x, pos.y)
 		
 	if player_checkpoint_position:
-		var player = get_player()
+		player = get_player()
 		if player:
 			player.global_position = player_checkpoint_position

@@ -2,13 +2,13 @@ extends Trigger
 
 @export var save_id = "node_10_trigger"
 @export var save_scope = "scene"
-@export var IceBlock: IceBlock
+@export var iceBlock: IceBlock
 
 func handle_trigger():
 	var player = get_tree().get_first_node_in_group("player")
 	
-	IceBlock.recover()
-	player.focus_camera_to(IceBlock)
+	iceBlock.recover()
+	player.focus_camera_to(iceBlock)
 
 	await get_tree().create_timer(1.0).timeout
 
