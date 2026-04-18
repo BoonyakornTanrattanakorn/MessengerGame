@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dddr68vbk8xnb"]
+[gd_scene format=3 uid="uid://hosl4w161u2o"]
 
 [ext_resource type="Script" uid="uid://bycjck0tilcvp" path="res://game/chapter_4/node_11/ice_ghost.gd" id="1_8wmm1"]
 [ext_resource type="Texture2D" uid="uid://d2k51w3dwesk3" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Enemy/Enemy 15-2.png" id="1_n21eh"]
@@ -119,7 +119,7 @@ script = ExtResource("1_8wmm1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1164816980]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_fdup2")
-animation = &"down"
+animation = &"left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1173105288]
 position = Vector2(0, 1)

@@ -16,6 +16,9 @@ func _on_body_entered(body: Node) -> void:
 	if body.name != "Player":
 		return
 
+	if not GameState.chap4_node11_ice_ghost_dead:
+		return
+
 	if not _begin_warp_cooldown():
 		return
 
