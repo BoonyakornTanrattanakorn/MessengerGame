@@ -17,7 +17,8 @@ var input_to_name = {
 	"item_rotate_left": "Rotate Item Left",
 	"item_rotate_right": "Rotate Item Right",
 	"pause_menu": "Pause Menu",
-	"world_map": "World Map"
+	"world_map": "World Map",
+	"reset_level": "Reset Level"
 }
 
 func _ready():
@@ -81,8 +82,11 @@ func _on_button_pressed(action):
 	buttons[action].text = "Press key..."
 
 func _input(event):
-	if waiting_action != null and event is InputEventKey and event.pressed:
+	if waiting_action == null:
+		return
 
+	# Keyboard binding
+	if event is InputEventKey and event.pressed:
 		var new_event = InputEventKey.new()
 		new_event.keycode = event.keycode
 		new_event.shift_pressed = event.shift_pressed
@@ -94,6 +98,20 @@ func _input(event):
 
 		update_button_text(waiting_action)
 		waiting_action = null
+		return
+
+
+	# Mouse binding
+	if event is InputEventMouseButton and event.pressed:
+		var new_event = InputEventMouseButton.new()
+		new_event.button_index = event.button_index
+
+		InputMap.action_erase_events(waiting_action)
+		InputMap.action_add_event(waiting_action, new_event)
+
+		update_button_text(waiting_action)
+		waiting_action = null	
+		
 
 func update_button_text(action):
 	var events = InputMap.action_get_events(action)
