@@ -1,16 +1,26 @@
 ~ start
-King: Fools. You think this was chaos?
-King: Every raid, every fire, every order was part of my design.
-King: Fear is the fastest way to unite a kingdom.
-Soldier: Your majesty... then the town attack was your command?
-Soldier: We watched the messenger fight with magic for his people.
-Soldier: If he is only a common messenger, why does he wield powers you never could?
-King: Silence.
-Soldier: The old records were true...
-Soldier: He is blood of the rightful line, descendant of the king before the usurpation.
-Soldier: Men, lower your weapons.
-Soldier: Long live the true king!
-Player: Bind him. He will answer for every village burned in his ambition.
-Player: From this moment, mobilize the army immediately.
-Player: We march to defend every town under this crown.
+King: Damned those useless mages!
+Player: You can't stop me with those mages! So give it up and surrender!
+Soldier: How can a mere messenger defeats all of the four royal mages!?!
+King: Soldier! Arrest this man immediately!
+Soldier: No. We want to hear what this man has to say.
+King: Now even my soldier betrays me! I shouldn't have kept you all alive just so you can betray me once again!
+Soldier: What?
+Player: That's right. Not only he usurped my father's throne but he also ordered the attack on my town!
+King: Shut up! You have no proof for that!
+Player: (show proof)
+Soldier: This letter... There's no more doubt! We need to arrest the king immediately!
+King: I am the KING! You can't arrest the king!
+Player: If you are really the king, why are you using the royal mages instead of using magic yourself?
+King: !!!
+Player: The real king is me!
+King: No! Don't listen to this madman!
+Soldier: You are the madman! Now that your plan has been undone, you will pay the price for all the innocent victim of your ambitions!
+Soldier: All hail the true king! We all are waiting for your commands!
+Player: Get that fake king into the dungeon at once!
+Soldier: Yes Sir!
+# Player walk and sit on the throne
+# TODO: add town's name
+Player: I command you to ready the army at once! We shall march to the [town] and defeat the traitor's army once and for all!
+Soldier: We will obey your commands! Long live the true king!
 => END
