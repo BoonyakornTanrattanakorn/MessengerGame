@@ -92,9 +92,6 @@ var player_camera: Camera2D = null
 var _footstep_timer: float = 0.0
 var _last_health_for_sfx: int = -1
 var _death_sfx_played: bool = false
-var _footstep_timer: float = 0.0
-var _last_health_for_sfx: int = -1
-var _death_sfx_played: bool = false
 
 # Compatibility placeholders for legacy identifiers referenced by other files / analyzer
 var _movement = null
@@ -279,7 +276,6 @@ func _physics_process(delta):
 			spawn_rock_pillar()
 	#check water
 	var speed_multiplier = 1.0
-	var is_on_water = false
 	var is_on_water = false
 	var check_pos = global_position + (direction * 10.0) 
 	
