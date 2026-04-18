@@ -1,6 +1,6 @@
 extends LevelEventHandler
 
-var dialogue = load("res://game/chapter_2/node_6/dialogue/chap2_node3.dialogue")
+var dialogue = load("res://game/chapter_2/node_6/dialogue/chap2_node6.dialogue")
 @export var town: Node2D
 
 
@@ -21,10 +21,10 @@ func _set_player_boat_mode(enabled: bool) -> void:
 		target_player.set_boat_mode(enabled)
 
 func handle_intro_for_level() -> void:
-	if not GameState.chap2_node3_shown:
+	if not GameState.chap2_node6_shown:
 		BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
 		
-		GameState.chap2_node3_shown = true
+		GameState.chap2_node6_shown = true
 
 		DialogueManager.show_dialogue_balloon(
 			dialogue,
