@@ -30,9 +30,9 @@ signal cool_changed(value: int)
 # Water fairy
 var fairy_instance = null
 var is_controlling_fairy: bool = false
-var fairy_duration: float = 5.0
+var fairy_duration: float = 8.0
 var fairy_timer: float = 0.0
-var fairy_cooldown: float = 8.0
+var fairy_cooldown: float = 1.0
 var fairy_cooldown_timer: float = 0.0
 
 # Water wave charging

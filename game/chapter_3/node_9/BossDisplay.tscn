@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://c6ink07pklewb"]
 
-[ext_resource type="Script" uid="uid://boh8u11pcdmwa" path="res://game/chapter_3/node_3/boss_display.gd" id="1_ttfks"]
-[ext_resource type="Texture2D" uid="uid://b5t2jlijkondh" path="res://game/chapter_3/node_3/worm1.png" id="2_iqsfg"]
-[ext_resource type="Texture2D" uid="uid://b6udpwihq7hgk" path="res://game/chapter_3/node_3/worm2.png" id="3_qvqfl"]
-[ext_resource type="Texture2D" uid="uid://b33d4icnmmhhf" path="res://game/chapter_3/node_3/worm4.png" id="4_ttfks"]
+[ext_resource type="Script" uid="uid://boh8u11pcdmwa" path="res://game/chapter_3/node_9/boss_display.gd" id="1_ttfks"]
+[ext_resource type="Texture2D" uid="uid://b5t2jlijkondh" path="res://game/chapter_3/node_9/worm1.png" id="2_iqsfg"]
+[ext_resource type="Texture2D" uid="uid://b6udpwihq7hgk" path="res://game/chapter_3/node_9/worm2.png" id="3_qvqfl"]
+[ext_resource type="Texture2D" uid="uid://b33d4icnmmhhf" path="res://game/chapter_3/node_9/worm4.png" id="4_ttfks"]
 
 [node name="BossDisplay" type="Node2D" unique_id=1284634220]
 script = ExtResource("1_ttfks")

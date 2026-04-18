@@ -202,7 +202,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gphl0"]
-size = Vector2(40, 88)
+size = Vector2(5.000001, 4.000004)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b1vkk"]
 size = Vector2(100, 149.99998)
@@ -216,7 +216,7 @@ sprite_frames = SubResource("SpriteFrames_orjd8")
 animation = &"idle back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1640479366]
-position = Vector2(0, 4.2)
+position = Vector2(-5.9604645e-08, 0)
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_gphl0")
 
