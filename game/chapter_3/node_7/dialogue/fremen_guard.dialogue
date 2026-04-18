@@ -20,5 +20,6 @@ Guard: Take your time. The stone plaza doesn't lie.
 
 ~ guard_after_solved
 Guard: You've already proven yourself. The city is open to you.
+Guard: You’ll find the governor in the north of the city, if you want to speak with him.
 Guard: Travel safe, stranger.
 => END

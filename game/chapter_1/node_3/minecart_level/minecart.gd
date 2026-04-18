@@ -1,15 +1,20 @@
 extends Node2D
+
 var player_in_range = false
 var player_mounted = false
 var mounted_player = null
-var cart_speed = 200.0
+
+# Speed system
+var cart_speed = 150.0
+var target_speed = 250.0
+var speed_increase_per_second = 5.0
+
 var is_moving = false
 var move_direction = Vector2.ZERO
 var in_turn_zone = false
 var turn_direction = Vector2.ZERO
 var turn_input = ""
 var can_dismount = false
-
 
 @onready var sprite = $Sprite2D
 @onready var mount_point = $MountPoint
@@ -80,26 +85,23 @@ func dismount_player():
 func stop_cart():
 	is_moving = false
 	move_direction = Vector2.ZERO
+	cart_speed = 150.0  # reset speed
 
 func _physics_process(delta):
 	if player_mounted:
 		if Input.is_action_just_pressed("greater_magic") and in_turn_zone:
 			var dir = Vector2.ZERO
-			#if is_moving:
 			if Input.is_action_pressed(turn_input):
-					dir = turn_direction
-			#else:
-			#	if Input.is_action_pressed("up"):
-			#		dir = Vector2.DOWN
-			#	elif Input.is_action_pressed("down"):
-			#		dir = Vector2.UP
-			#	elif Input.is_action_pressed("left"):
-			#		dir = Vector2.RIGHT
-			#	elif Input.is_action_pressed("right"):
-			#		dir = Vector2.LEFT
+				dir = turn_direction
+
 			if dir != Vector2.ZERO:
 				is_moving = true
 				move_direction = dir
+
+	#  Speed ramp
+	if is_moving and cart_speed < target_speed:
+		cart_speed += speed_increase_per_second * delta
+		cart_speed = min(cart_speed, target_speed)
 
 	# move cart
 	if is_moving:
@@ -133,7 +135,8 @@ func save():
 		"player_mounted": player_mounted,
 		"cart_position": {"x": global_position.x, "y": global_position.y},
 		"is_moving": is_moving,
-		"move_direction": {"x": move_direction.x, "y": move_direction.y}
+		"move_direction": {"x": move_direction.x, "y": move_direction.y},
+		"cart_speed": cart_speed
 	}
 
 func load_data(data):
@@ -146,6 +149,8 @@ func load_data(data):
 	move_direction = Vector2(dir.get("x", 0), dir.get("y", 0))
 
 	is_moving = data.get("is_moving", false)
+
+	cart_speed = data.get("cart_speed", 150.0)
 
 	if player_mounted:
 		var player = get_tree().get_first_node_in_group("player")

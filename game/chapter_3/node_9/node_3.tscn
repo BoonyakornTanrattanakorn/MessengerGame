@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bgu4m8ejsh4dv" path="res://game/chapter_3/node_9/PressurePlate.tscn" id="6_3fxbd"]
 [ext_resource type="Script" uid="uid://bdn5o7jvsdfs4" path="res://game/chapter_3/node_9/warp_to_market.gd" id="7_3fxbd"]
 [ext_resource type="PackedScene" uid="uid://b5m6jgbxk62e5" path="res://game/chapter_3/node_9/RockFallManager.tscn" id="8_bgr4g"]
+[ext_resource type="PackedScene" uid="uid://o3f4qu2b65da" path="res://game/chapter_3/sandmonster/Sandmonster.tscn" id="9_4v4sc"]
+[ext_resource type="PackedScene" uid="uid://3xd5iijpu3f1" path="res://game/chapter_3/sandmonster/BigSandmonster.tscn" id="10_v10b6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6kppn"]
 size = Vector2(61, 92)
@@ -439,3 +441,18 @@ position = Vector2(-162, 223)
 shape = SubResource("RectangleShape2D_6kppn")
 
 [node name="RockFallManager" parent="." unique_id=1163945927 instance=ExtResource("8_bgr4g")]
+
+[node name="SandMonster" parent="." unique_id=1501554289 instance=ExtResource("9_4v4sc")]
+position = Vector2(220, 515)
+
+[node name="SandMonster2" parent="." unique_id=234437115 instance=ExtResource("9_4v4sc")]
+position = Vector2(705, -433)
+
+[node name="SandMonster3" parent="." unique_id=132653365 instance=ExtResource("9_4v4sc")]
+position = Vector2(2041, -493)
+
+[node name="BigSandMonster" parent="." unique_id=4001001 instance=ExtResource("10_v10b6")]
+position = Vector2(1162, -1174)
+
+[node name="BigSandMonster2" parent="." unique_id=919019554 instance=ExtResource("10_v10b6")]
+position = Vector2(1230, 905)
