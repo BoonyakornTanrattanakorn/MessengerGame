@@ -10,6 +10,9 @@ var dash_cooldown = 0.5
 
 var playerAttribute = "wind" # make enum
 var is_boat_mode: bool = false
+var boat_splash_sfx: String = "res://assets/audio/water_ball_sfx.ogg"
+var boat_splash_interval: float = 1.0
+var boat_splash_timer: float = 0.0
 
 #Heat gauge for fire element
 var heat_gauge: float = 0.0
@@ -157,6 +160,8 @@ func _physics_process(delta):
 		return
 		
 	var direction = Input.get_vector("left", "right", "up", "down")
+	if boat_splash_timer > 0.0:
+		boat_splash_timer -= delta
 	
 	# Mount/Dismount
 	if Input.is_action_just_pressed("interact"):
@@ -271,6 +276,11 @@ func _physics_process(delta):
 			speed_multiplier = 0.0 
 	# Movement + dash handled by movement component
 	movement_component.process_movement(self, direction, speed_multiplier, delta)
+
+	if is_boat_mode and speed_multiplier > 0.0 and direction.length() > 0.1 and boat_splash_timer <= 0.0:
+		SFXManager.play_sfx(boat_splash_sfx, -5.0)
+		boat_splash_timer = boat_splash_interval
+
 	_update_animation(direction)
 
 func _facing_suffix(dir: Vector2) -> String:

@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 func initialize(spawn_position: Vector2, direction: Vector2) -> void:
-	SFXManager.play_sfx(water_ball_sfx, 0.5)
+	SFXManager.play_sfx(water_ball_sfx, 8.0)
 	global_position = spawn_position
 	_direction = direction.normalized() if direction.length() > 0.001 else Vector2.LEFT
 	rotation = _direction.angle()

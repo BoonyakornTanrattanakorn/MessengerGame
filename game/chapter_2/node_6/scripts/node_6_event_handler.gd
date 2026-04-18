@@ -22,6 +22,8 @@ func _set_player_boat_mode(enabled: bool) -> void:
 
 func handle_intro_for_level() -> void:
 	if not GameState.chap2_node3_shown:
+		BGMManager.play_bgm("res://assets/audio/field_theme_1.ogg", 0.0, true)
+		
 		GameState.chap2_node3_shown = true
 
 		DialogueManager.show_dialogue_balloon(
