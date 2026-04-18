@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bcijhgj3e0iu4"]
+
+[ext_resource type="Script" uid="uid://cqxwjqmisd2gt" path="res://game/chapter_4/node_11/ice_spikes.gd" id="1_di24v"]
+[ext_resource type="Texture2D" uid="uid://b5b6jnot3dg8v" path="res://assets/sprites/icons/w3.png" id="2_ixtou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acbkm"]
+size = Vector2(128, 106)
+
+[node name="IceSpikes" type="Area2D" unique_id=621358786]
+script = ExtResource("1_di24v")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=246952015]
+texture = ExtResource("2_ixtou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1975252987]
+position = Vector2(0, 11)
+shape = SubResource("RectangleShape2D_acbkm")
