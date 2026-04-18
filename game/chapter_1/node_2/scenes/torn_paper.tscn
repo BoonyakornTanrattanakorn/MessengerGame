@@ -10,8 +10,7 @@ size = Vector2(32, 48)
 script = ExtResource("1_5k3o6")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=586782613]
-position = Vector2(-1.4305115e-06, -1.4305115e-06)
-scale = Vector2(1.4999999, 1.4999999)
+scale = Vector2(1.0625, 1.0625)
 texture = ExtResource("1_3lw2m")
 region_enabled = true
 region_rect = Rect2(488, 200, 32, 32)

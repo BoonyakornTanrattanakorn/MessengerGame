@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxjyqmqtayne1"]
 
 [ext_resource type="Script" uid="uid://cb748gxcsquck" path="res://game/chapter_1/node_2/scripts/chapter_gate_npc.gd" id="1_wpeu3"]
-[ext_resource type="Texture2D" uid="uid://dg2foeeegdnba" path="res://icon.svg" id="1_xm0qu"]
+[ext_resource type="Texture2D" uid="uid://cjma0sptowchc" path="res://assets/sprites/gatekeeper/gatekeeper.png" id="2_nnnp1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeu3"]
 size = Vector2(128, 128)
@@ -10,7 +10,9 @@ size = Vector2(128, 128)
 script = ExtResource("1_wpeu3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1544696339]
-texture = ExtResource("1_xm0qu")
+position = Vector2(-2.861023e-06, -2.861023e-06)
+scale = Vector2(1.4999999, 1.4999999)
+texture = ExtResource("2_nnnp1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1995036844]
 shape = SubResource("RectangleShape2D_wpeu3")

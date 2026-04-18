@@ -38,7 +38,7 @@ func _talk() -> void:
 	if not Node4State.talked_to_village_chief:
 		DialogueManager.show_dialogue_balloon(dlg, "start")
 	else:
-		var count := Node4State.insignias_obtained_count()
+		var count = Node4State.insignias_obtained_count()
 		
 		if count >= 2:
 			DialogueManager.show_dialogue_balloon(dlg, "after_both")

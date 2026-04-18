@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://wgyiit14wfsd"]
+
+[ext_resource type="Texture2D" uid="uid://d2ud3pl3ren4y" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Animal/Cat 01-1.png" id="1_0yf8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0yf8a"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8na8"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqmtk"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7yqm"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45o3c"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gje1t"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t8q1"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_satf8"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a81ex"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obgbk"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkrip"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx6h4"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_row7g"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tgr4"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_simms"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brnw0"]
+atlas = ExtResource("1_0yf8a")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qp5b3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0yf8a")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8na8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqmtk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7yqm")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45o3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gje1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t8q1")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_satf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a81ex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obgbk")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vx6h4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_row7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tgr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_simms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brnw0")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwdef"]
+size = Vector2(32, 32)
+
+[node name="Villager" type="CharacterBody2D" unique_id=151893683]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1344047570]
+sprite_frames = SubResource("SpriteFrames_qp5b3")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404574336]
+shape = SubResource("RectangleShape2D_cwdef")

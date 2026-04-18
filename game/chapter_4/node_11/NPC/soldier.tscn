@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://vaqtxhdkbdeo"]
+
+[ext_resource type="Texture2D" uid="uid://wy6datpxb8i2" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Soldier/Soldier 01-1.png" id="1_rwv7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am0ur"]
+atlas = ExtResource("1_rwv7s")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk3vv"]
+atlas = ExtResource("1_rwv7s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdoof"]
+atlas = ExtResource("1_rwv7s")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utk7d"]
+atlas = ExtResource("1_rwv7s")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lc2q3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am0ur")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk3vv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdoof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utk7d")
+}],
+"loop": true,
+"name": &"move_a_bit",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwv7s"]
+size = Vector2(32, 32)
+
+[node name="Soldier" type="CharacterBody2D" unique_id=1597814262]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=614958511]
+sprite_frames = SubResource("SpriteFrames_lc2q3")
+animation = &"move_a_bit"
+autoplay = "move_a_bit"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041560675]
+shape = SubResource("RectangleShape2D_rwv7s")
