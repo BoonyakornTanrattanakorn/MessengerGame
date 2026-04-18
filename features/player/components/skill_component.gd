@@ -2,6 +2,7 @@ extends Node
 class_name SkillComponent
 
 @export var wind_scene: PackedScene
+@export var earth_shield_scene: PackedScene
 @export var fire_small_scene: PackedScene
 @export var fire_heavy_scene: PackedScene
 @export var water_fairy_scene: PackedScene
@@ -14,6 +15,7 @@ func _ready():
 	# Scenes should be assigned in the editor; provide lightweight helpers
 	scenes = {
 		"wind": wind_scene,
+		"earth_shield": earth_shield_scene,
 		"fire_small": fire_small_scene,
 		"fire_heavy": fire_heavy_scene,
 		"water_fairy": water_fairy_scene,
@@ -169,15 +171,55 @@ func shoot_water_wave(level: int) -> void:
 		get_tree().current_scene.add_child(wave)
 
 
-func activate_earth_shield() -> void:
+func _get_earth_shield() -> EarthShield:
 	var player = _get_player()
-	if player.is_shield_active:
+	if player == null:
+		return null
+
+	var shield := player.find_child("EarthShield", true, false)
+	if shield is EarthShield:
+		return shield as EarthShield
+
+	if earth_shield_scene == null:
+		return null
+
+	var shield_instance := earth_shield_scene.instantiate() as EarthShield
+	shield_instance.name = "EarthShield"
+	if player.has_node("AnimatedSprite2D"):
+		player.get_node("AnimatedSprite2D").add_child(shield_instance)
+	else:
+		player.add_child(shield_instance)
+	return shield_instance
+
+
+func _find_earth_shield() -> EarthShield:
+	var player = _get_player()
+	if player == null:
+		return null
+
+	var shield := player.find_child("EarthShield", true, false)
+	if shield is EarthShield:
+		return shield as EarthShield
+	return null
+
+
+func try_consume_projectile_with_shield(projectile: Area2D) -> bool:
+	var shield := _find_earth_shield()
+	if shield == null:
+		return false
+	return shield.try_absorb_projectile(projectile)
+
+
+func activate_earth_shield() -> void:
+	var shield := _get_earth_shield()
+	if shield == null:
 		return
-	player.current_shield_hp = player.shield_max_hp
-	player.is_shield_active = true
-	print("Earth Shield Activated! HP: ", player.current_shield_hp)
-	if player.animated_sprite.has_node("ShieldVisual"):
-		player.animated_sprite.get_node("ShieldVisual").show()
+
+	if shield.is_active:
+		return
+
+	shield.activate()
+	print("Earth Shield Activated! HP: ", shield.current_hp)
 
 
 func spawn_rock_pillar() -> void:

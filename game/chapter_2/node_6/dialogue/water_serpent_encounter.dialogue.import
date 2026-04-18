@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bhm1vnwqyqnd6"
+path="res://.godot/imported/water_serpent_encounter.dialogue-93807f2993951b38b5c78b4a975a2f5e.tres"
+
+[deps]
+
+source_file="res://game/chapter_2/node_6/dialogue/water_serpent_encounter.dialogue"
+dest_files=["res://.godot/imported/water_serpent_encounter.dialogue-93807f2993951b38b5c78b4a975a2f5e.tres"]
+
+[params]
+
+defaults=true
