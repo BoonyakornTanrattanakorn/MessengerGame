@@ -89,6 +89,12 @@ var is_camera_panning: bool = false
 @export var save_scope = "global" 
 
 var player_camera: Camera2D = null
+var _footstep_timer: float = 0.0
+var _last_health_for_sfx: int = -1
+var _death_sfx_played: bool = false
+var _footstep_timer: float = 0.0
+var _last_health_for_sfx: int = -1
+var _death_sfx_played: bool = false
 
 # Compatibility placeholders for legacy identifiers referenced by other files / analyzer
 var _movement = null
@@ -116,6 +122,8 @@ func _ready():
 	if health_component:
 		player_max_hp = health_component.max_hp
 		player_hp = health_component.hp
+		_last_health_for_sfx = health_component.hp
+		_last_health_for_sfx = health_component.hp
 		health_component.connect("health_changed", Callable(self, "_on_health_changed"))
 	
 	
@@ -165,6 +173,7 @@ func _physics_process(delta):
 	
 	# Mount/Dismount
 	if Input.is_action_just_pressed("interact"):
+		_play_sfx("player.interact")
 		if is_mounted:
 			if current_mount.can_dismount:
 				current_mount.dismount_player()
@@ -239,6 +248,7 @@ func _physics_process(delta):
 			shoot_fire_heavy()
 	elif playerAttribute == "wind":
 		if wind_dash_just_pressed:
+			_play_sfx("player.dash")
 			movement_component.request_dash(self, last_direction)
 		if Input.is_action_just_pressed("greater_magic"):
 			shoot_wind_wave()
@@ -253,6 +263,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("greater_magic"):
 			is_charging_wave = true
 			wave_charge_timer = 0.0
+			_play_sfx("skill.water.charge")
 		if Input.is_action_pressed("greater_magic") and is_charging_wave:
 			wave_charge_timer += delta
 			var preview_level = get_wave_level()
@@ -268,10 +279,13 @@ func _physics_process(delta):
 			spawn_rock_pillar()
 	#check water
 	var speed_multiplier = 1.0
-	
+	var is_on_water = false
+	var is_on_water = false
 	var check_pos = global_position + (direction * 10.0) 
 	
 	if check_if_water_at(check_pos):
+		is_on_water = true
+		is_on_water = true
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
 	if check_if_void_at(global_position):
@@ -480,6 +494,7 @@ func die_in_minecart_and_respawn(minecart_respawn_position):
 
 func shoot_wind_wave():
 	if skill_component:
+		_play_sfx("skill.wind.cast")
 		skill_component.shoot_wind_wave()
 
 func save():
@@ -520,6 +535,17 @@ func load_data(data):
 
 
 func _on_health_changed(new_hp: int) -> void:
+	if _last_health_for_sfx == -1:
+		_last_health_for_sfx = new_hp
+	if new_hp < _last_health_for_sfx:
+		_play_sfx("player.hit")
+	if new_hp <= 0 and not _death_sfx_played:
+		_death_sfx_played = true
+		_play_sfx("player.death")
+	elif new_hp > 0:
+		_death_sfx_played = false
+	_last_health_for_sfx = new_hp
+
 	# keep aliases in sync
 	player_hp = int(new_hp)
 	player_max_hp = health_component.max_hp if health_component else player_max_hp
@@ -542,11 +568,13 @@ func return_camera():
 
 func shoot_fire_small():
 	if skill_component:
+		_play_sfx("skill.fire.small")
 		skill_component.shoot_fire_small()
 
 
 func shoot_fire_heavy():
 	if skill_component:
+		_play_sfx("skill.fire.heavy")
 		skill_component.shoot_fire_heavy()
 
 
@@ -578,10 +606,12 @@ func get_wave_cost(level: int) -> int:
 
 func summon_fairy():
 	if skill_component:
+		_play_sfx("skill.water.cast")
 		skill_component.summon_fairy()
 
 func end_fairy():
 	if skill_component:
+		_play_sfx("skill.water.cast")
 		skill_component.end_fairy()
 
 func handle_fairy_movement(delta: float):
@@ -590,6 +620,7 @@ func handle_fairy_movement(delta: float):
 
 func shoot_water_wave(level: int):
 	if skill_component:
+		_play_sfx("skill.water.cast")
 		skill_component.shoot_water_wave(level)
 
 
@@ -605,11 +636,35 @@ var max_pillars = 3
 
 func activate_earth_shield():
 	if skill_component:
+		_play_sfx("skill.shield.up")
 		skill_component.activate_earth_shield()
 
 func spawn_rock_pillar():
 	if skill_component:
+		_play_sfx("skill.earth.cast")
 		skill_component.spawn_rock_pillar()
+
+func _play_sfx(event_key: String) -> void:
+	if SFXManager == null:
+		return
+	SFXManager.play_event(event_key)
+
+func _update_footstep_sfx(direction: Vector2, speed_multiplier: float, delta: float, is_on_water: bool) -> void:
+	var is_moving := direction.length() > 0.1 and speed_multiplier > 0.0 and not is_dashing and not is_controlling_fairy
+	if not is_moving:
+		_footstep_timer = 0.0
+		return
+
+	_footstep_timer -= delta
+	if _footstep_timer > 0.0:
+		return
+
+	if is_on_water:
+		_play_sfx("player.step_water")
+	else:
+		_play_sfx("player.step_grass")
+
+	_footstep_timer = 0.30
 
 func check_if_water_at(pos: Vector2) -> bool:
 	var tilemap = get_tree().current_scene.find_child("Ground", true, false)
@@ -627,6 +682,12 @@ func check_if_water_at(pos: Vector2) -> bool:
 		#print("No tile at", map_pos)
 		return false
 	else:
+		var tileset: TileSet = tilemap.tile_set
+		if tileset == null:
+			return false
+		if tileset.get_custom_data_layer_by_name("is_water") == -1:
+			return false
+
 		var is_water = tile_data.get_custom_data("is_water")
 
 		if is_water == true:

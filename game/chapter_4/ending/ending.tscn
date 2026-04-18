@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ljsa8ex5luev"]
+
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="1_e5r7r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5em0b"]
+font_size = 80
+
+[node name="Node13" type="Node2D" unique_id=615394464]
+
+[node name="Label" type="Label" parent="." unique_id=812902441]
+offset_right = 1281.0
+offset_bottom = 721.0
+theme = ExtResource("1_e5r7r")
+text = "END CREDITS ROLL"
+label_settings = SubResource("LabelSettings_5em0b")
+horizontal_alignment = 1
+vertical_alignment = 1

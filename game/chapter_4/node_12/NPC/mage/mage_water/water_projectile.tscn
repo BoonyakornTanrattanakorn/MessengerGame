@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c5sflq2n31t6d"]
+
+[ext_resource type="Script" uid="uid://nrrqbo5rtre2" path="res://game/chapter_4/node_12/npc/mage/mage_water/water_projectile.gd" id="1_sx5fp"]
+[ext_resource type="Texture2D" uid="uid://below851gxp8f" path="res://assets/sprites/icons/w2.png" id="2_yuf0d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8twpv"]
+radius = 4.0
+
+[node name="WaterProjectile" type="Area2D" unique_id=1223153570]
+scale = Vector2(5, 5)
+script = ExtResource("1_sx5fp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=199153392]
+shape = SubResource("CircleShape2D_8twpv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=237652286]
+position = Vector2(4.7683716e-07, -0.9999995)
+scale = Vector2(0.055687897, 0.055687897)
+texture = ExtResource("2_yuf0d")

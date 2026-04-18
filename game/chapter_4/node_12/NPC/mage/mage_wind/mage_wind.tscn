@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://rlxghj7ppkr0"]
+
+[ext_resource type="Texture2D" uid="uid://0y7revq8i8p8" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Soldier/Soldier 07-1.png" id="1_n83dj"]
+[ext_resource type="Script" uid="uid://cri18wxbdmxo8" path="res://game/chapter_4/node_12/npc/mage/mage_wind/mage_wind.gd" id="2_tq6n5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayddp"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_st7ad"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plafx"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip1f4"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4pce"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4lum"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqatu"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1etr2"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ni2p2"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrd2g"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aln0i"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2b6o"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfj2i"]
+atlas = ExtResource("1_n83dj")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m235k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayddp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_st7ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plafx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip1f4")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4pce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4lum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqatu")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1etr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ni2p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrd2g")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aln0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2b6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfj2i")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5n88"]
+size = Vector2(32, 32)
+
+[node name="MageWind" type="CharacterBody2D" unique_id=269745531]
+scale = Vector2(1.333, 1.333)
+script = ExtResource("2_tq6n5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1978601684]
+sprite_frames = SubResource("SpriteFrames_m235k")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1244478987]
+shape = SubResource("RectangleShape2D_u5n88")
