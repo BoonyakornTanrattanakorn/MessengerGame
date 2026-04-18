@@ -221,10 +221,6 @@ func try_consume_projectile_with_shield(projectile: Area2D) -> bool:
 
 
 func activate_earth_shield() -> void:
-	var player = _get_player()
-	if player.skill_locked:
-		return
-		
 	var shield := _get_earth_shield()
 	if shield == null:
 		return
