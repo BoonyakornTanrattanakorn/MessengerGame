@@ -38,8 +38,3 @@ func _process(delta: float):
 		if invincible_timer <= 0:
 			is_invincible = false
 			
-	if(hp == 0):
-		
-		player_dead.emit()
-		hp = max_hp
-		emit_signal("health_changed", hp)
