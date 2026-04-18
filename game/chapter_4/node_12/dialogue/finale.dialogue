@@ -1,4 +1,5 @@
 ~ start
+do _warp_player_to_intro_walk_end_for_finale()
 King: Damned those useless mages!
 Player: You can't stop me with those mages! So give it up and surrender!
 Soldier: How can a mere messenger defeats all of the four royal mages!?!
@@ -19,8 +20,10 @@ Soldier: You are the madman! Now that your plan has been undone, you will pay th
 Soldier: All hail the true king! We all are waiting for your commands!
 Player: Get that fake king into the dungeon at once!
 Soldier: Yes Sir!
-# Player walk and sit on the throne
-# TODO: add town's name
-Player: I command you to ready the army at once! We shall march to the [town] and defeat the traitor's army once and for all!
+do! _soldier_escort_king_out()
+King: You will come to regret your decision sooner or later.
+do _walk_player_to_throne()
+Soldier: Sir! We are ready to follow your orders!
+Player: Then my first order is to alert the army at once! We shall march to the [town] and defeat the traitor's army once and for all!
 Soldier: We will obey your commands! Long live the true king!
 => END
