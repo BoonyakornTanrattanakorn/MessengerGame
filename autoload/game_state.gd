@@ -13,6 +13,7 @@ var chap3_node8_shown := false
 var chap3_node9_shown := false
 var chap4_node10_shown := false
 var chap4_node11_shown := false
+var chap4_node11_ice_ghost_dead := false
 var chap4_node12_shown := false
 
 var clue_1_unlocked := false
@@ -40,6 +41,7 @@ func new_game():
 	chap3_node9_shown = false
 	chap4_node10_shown = false
 	chap4_node11_shown = false
+	chap4_node11_ice_ghost_dead = false
 	chap4_node12_shown = false
 
 	clue_1_unlocked = false
@@ -62,6 +64,7 @@ func save():
 		"chap3_node9_shown": chap3_node9_shown,
 		"chap4_node10_shown": chap4_node10_shown,
 		"chap4_node11_shown": chap4_node11_shown,
+		"chap4_node11_ice_ghost_dead": chap4_node11_ice_ghost_dead,
 		"chap4_node12_shown": chap4_node12_shown,
 		
 		"clue_1_unlocked": clue_1_unlocked,
@@ -84,6 +87,7 @@ func load_data(data):
 	chap3_node9_shown = data.get("chap3_node9_shown", false)
 	chap4_node10_shown = data.get("chap4_node10_shown", false)
 	chap4_node11_shown = data.get("chap4_node11_shown", false)
+	chap4_node11_ice_ghost_dead = data.get("chap4_node11_ice_ghost_dead", false)
 	chap4_node12_shown = data.get("chap4_node12_shown", false)
 	
 	clue_1_unlocked = data.get("clue_1_unlocked", false)
