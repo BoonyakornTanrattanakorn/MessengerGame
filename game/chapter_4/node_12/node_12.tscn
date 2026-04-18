@@ -27,6 +27,12 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Curve2D" id="Curve2D_flvrn"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 67, 0, 0, 0, 0, -1, 21, 0, 0, 0, 0, -1, 96, 0, 0, 0, 0, -60, 146, 0, 0, 0, 0, -65, 861)
+}
+point_count = 5
+
 [node name="Node12" type="Node2D" unique_id=981344518]
 script = ExtResource("1_5xwdw")
 
@@ -91,7 +97,7 @@ position = Vector2(195, 70)
 [node name="Soldier3" parent="NPC" unique_id=597062362 instance=ExtResource("4_eymx0")]
 position = Vector2(44, 66)
 
-[node name="Soldier4" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
+[node name="SoldierEscort" parent="NPC" unique_id=1994285744 instance=ExtResource("4_eymx0")]
 position = Vector2(-1, 67)
 
 [node name="Mage" type="Node2D" parent="." unique_id=2142568931]
@@ -142,3 +148,9 @@ curve = SubResource("Curve2D_7fjm0")
 
 [node name="PlayerBadEndWalk" type="Path2D" parent="PathAndMarker" unique_id=1249498335]
 curve = SubResource("Curve2D_1jugk")
+
+[node name="Throne" type="Marker2D" parent="PathAndMarker" unique_id=1400489890]
+position = Vector2(0, -14)
+
+[node name="SolderEscortKing" type="Path2D" parent="PathAndMarker" unique_id=230827901]
+curve = SubResource("Curve2D_flvrn")
