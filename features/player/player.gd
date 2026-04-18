@@ -9,6 +9,10 @@ var dash_duration = 0.15
 var dash_cooldown = 0.5
 
 var playerAttribute = "wind" # make enum
+var is_boat_mode: bool = false
+var boat_splash_sfx: String = "res://assets/audio/water_ball_sfx.ogg"
+var boat_splash_interval: float = 1.0
+var boat_splash_timer: float = 0.0
 
 #Heat gauge for fire element
 var heat_gauge: float = 0.0
@@ -100,7 +104,7 @@ func _ready():
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	#ObjectiveManager.set_objective("Use wind power to flip the switch")
-	add_to_group("savable")
+	add_to_group("sava	ble")
 	hud.skill_changed.connect(_on_skill_changed)
 	# Set starting attribute from HUD
 	playerAttribute = hud.get_current_skill()
@@ -114,7 +118,7 @@ func _ready():
 		player_hp = health_component.hp
 		health_component.connect("health_changed", Callable(self, "_on_health_changed"))
 	
-
+	
 func _on_dialogue_started(_arg = null):
 	is_in_dialogue = true
 	is_dashing = false
@@ -156,6 +160,8 @@ func _physics_process(delta):
 		return
 		
 	var direction = Input.get_vector("left", "right", "up", "down")
+	if boat_splash_timer > 0.0:
+		boat_splash_timer -= delta
 	
 	# Mount/Dismount
 	if Input.is_action_just_pressed("interact"):
@@ -273,6 +279,11 @@ func _physics_process(delta):
 			speed_multiplier = 0.0
 	# Movement + dash handled by movement component
 	movement_component.process_movement(self, direction, speed_multiplier, delta)
+
+	if is_boat_mode and speed_multiplier > 0.0 and direction.length() > 0.1 and boat_splash_timer <= 0.0:
+		SFXManager.play_sfx(boat_splash_sfx, -5.0)
+		boat_splash_timer = boat_splash_interval
+
 	_update_animation(direction)
 
 func _facing_suffix(dir: Vector2) -> String:
@@ -287,6 +298,12 @@ func _update_animation(direction: Vector2) -> void:
 	var facing = _facing_suffix(last_direction)
 	var anim = ""
 
+	if is_boat_mode:
+		anim = _resolve_boat_animation(facing)
+		if animated_sprite.animation != anim:
+			animated_sprite.play(anim)
+		return
+
 	if is_dashing:
 		anim = "dash"
 		if not animated_sprite.sprite_frames.has_animation(anim):
@@ -295,8 +312,41 @@ func _update_animation(direction: Vector2) -> void:
 		var moving = direction.length() > 0.1
 		anim = ("walk " if moving else "idle ") + facing
 
+	anim = _resolve_attribute_animation(anim)
+
 	if animated_sprite.animation != anim:
 		animated_sprite.play(anim)
+
+
+func _resolve_attribute_animation(base_anim: String) -> String:
+	if not animated_sprite or not animated_sprite.sprite_frames:
+		return base_anim
+
+	var attr_anim := "%s %s" % [base_anim, playerAttribute]
+	if animated_sprite.sprite_frames.has_animation(attr_anim):
+		return attr_anim
+
+	return base_anim
+
+
+func _resolve_boat_animation(facing: String) -> String:
+	if not animated_sprite or not animated_sprite.sprite_frames:
+		return "idle " + facing
+
+	var boat_attr_anim := "boat %s %s" % [facing, playerAttribute]
+	if animated_sprite.sprite_frames.has_animation(boat_attr_anim):
+		return boat_attr_anim
+
+	var boat_anim := "boat " + facing
+	if animated_sprite.sprite_frames.has_animation(boat_anim):
+		return boat_anim
+
+	return _resolve_attribute_animation("idle " + facing)
+
+
+func set_boat_mode(enabled: bool) -> void:
+	is_boat_mode = enabled
+	_update_animation(Vector2.ZERO)
 
 func set_facing_direction(direction: Vector2) -> void:
 	if direction.length() == 0:
@@ -385,6 +435,13 @@ func _on_interaction_area_area_exited(area: Area2D) -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("enemy_projectile"):
 		return
+
+	if area.has_meta("shield_consumed"):
+		return
+
+	if skill_component != null and skill_component.try_consume_projectile_with_shield(area):
+		return
+	
 	var dmg = area.get("damage")
 	health_component.take_damage(int(dmg) if dmg != null else 1)
 
@@ -539,11 +596,6 @@ func shoot_water_wave(level: int):
 # Earth system
 var earth_gauge: float = 0.0
 var max_earth: float = 100.0
-
-# Minor: Shield
-@export var shield_max_hp = 2
-var current_shield_hp = 0
-var is_shield_active = false
 
 
 # Skill system (component)

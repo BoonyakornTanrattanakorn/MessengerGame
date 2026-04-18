@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://4x55pkpibnki" path="res://game/chapter_2/node_4/warp_to_lower.gd" id="7_lxchf"]
 [ext_resource type="Script" uid="uid://13p6etk7si1r" path="res://game/chapter_2/node_4/village_chief.gd" id="8_b0f5y"]
 [ext_resource type="Texture2D" uid="uid://000akc61thtr" path="res://assets/sprites/village_chief/village_chief.png" id="8_bihni"]
+[ext_resource type="Texture2D" uid="uid://boqbe58pwln44" path="res://assets/sprites/quest_marker/quest_marker.png" id="11_15aa5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7i5hu"]
 texture = ExtResource("2_eqhn6")
@@ -16333,3 +16334,8 @@ shape = SubResource("RectangleShape2D_b0f5y")
 
 [node name="Sprite2D" type="Sprite2D" parent="VillageChief" unique_id=940756899]
 texture = ExtResource("8_bihni")
+
+[node name="QuestMarker" type="Sprite2D" parent="VillageChief" unique_id=1398367754]
+position = Vector2(3.0000153, -46)
+scale = Vector2(0.6718755, 0.6718755)
+texture = ExtResource("11_15aa5")
