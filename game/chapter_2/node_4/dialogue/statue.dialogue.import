@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c2nh0ld3nfkcr"
+path="res://.godot/imported/statue.dialogue-c609a38556514bc4f809372f8f3ac549.tres"
+
+[deps]
+
+source_file="res://game/chapter_2/node_4/dialogue/statue.dialogue"
+dest_files=["res://.godot/imported/statue.dialogue-c609a38556514bc4f809372f8f3ac549.tres"]
+
+[params]
+
+defaults=true

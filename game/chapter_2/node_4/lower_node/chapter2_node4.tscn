@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://5ut46t037pns" path="res://game/chapter_2/node_4/lower_node/cat_lady.gd" id="13_a2mns"]
 [ext_resource type="Script" uid="uid://bvfx365pvb8g4" path="res://game/chapter_2/node_4/lower_node/warp_to_main.gd" id="13_fgb4o"]
 [ext_resource type="Texture2D" uid="uid://ccvr6cwmuggl7" path="res://assets/sprites/cat_lady/cat_lady.png" id="13_l81xj"]
+[ext_resource type="Texture2D" uid="uid://boqbe58pwln44" path="res://assets/sprites/quest_marker/quest_marker.png" id="15_gjf1g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ax3c5"]
 texture = ExtResource("1_efuu3")
@@ -26225,6 +26226,11 @@ shape = SubResource("RectangleShape2D_a2mns")
 
 [node name="Sprite2D" type="Sprite2D" parent="CatLady" unique_id=2052443821]
 texture = ExtResource("13_l81xj")
+
+[node name="QuestMarker" type="Sprite2D" parent="CatLady" unique_id=1170131320]
+position = Vector2(1.0000153, -44.999985)
+scale = Vector2(0.6718755, 0.6718755)
+texture = ExtResource("15_gjf1g")
 
 [node name="WarpToMain" type="Area2D" parent="." unique_id=1041776016]
 script = ExtResource("13_fgb4o")
