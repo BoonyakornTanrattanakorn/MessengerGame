@@ -7,7 +7,8 @@ extends Node2D
 
 func _ready():
 	await get_tree().process_frame
-	
+	BGMManager.play_bgm("res://assets/audio/hustle-and-bustle-of-ormos-2-rvikm.ogg", 0.0, true)
+
 	hud.set_max_health(player.health)
 	hud.update_health(player.health)
 	hud.show_charge_ui(true)
@@ -52,7 +53,7 @@ func _on_level_completed():
 
 func _handle_completion():
 	GameState.minigame_gems += hud.gems
-	GameState.pending_level = "res://game/chapter_3/node_3/node_3.tscn"
-	GameState.pending_spawn = Vector2(0, 100)
+	GameState.pending_level = "res://game/chapter_3/node_9/node_9.tscn"
+	GameState.pending_spawn = Vector2(50, 350)
 	GameState.pending_facing = Vector2.DOWN
 	get_tree().change_scene_to_file("res://game/game_scene.tscn")

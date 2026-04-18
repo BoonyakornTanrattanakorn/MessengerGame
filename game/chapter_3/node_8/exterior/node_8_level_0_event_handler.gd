@@ -14,6 +14,7 @@ func on_level_loaded() -> void:
 			warp_to_node_9.hide_portal()
 
 func handle_intro_for_level() -> void:
+	BGMManager.play_bgm("res://assets/audio/caravan.ogg", 0.0, true)
 	if not GameState.chap3_node8_shown:
 		GameState.chap3_node8_shown = true
 

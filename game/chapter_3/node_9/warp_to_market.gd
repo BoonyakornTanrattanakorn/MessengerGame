@@ -6,7 +6,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.name != "Player":
 		return
-	GameState.market_return_path = "res://game/chapter_3/node_3/node_3.tscn"
+	GameState.market_return_path = "res://game/chapter_3/node_9/node_9.tscn"
 	GameState.market_return_spawn = Vector2(0, 100)
 	GameState.market_return_facing = Vector2.DOWN
 	SaveManager.save_game()

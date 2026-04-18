@@ -38,7 +38,7 @@ func update_objective() -> void:
 				"Find the missing statues (%d/%d)" % [get_statue_count(), TOTAL_STATUES]
 			)
 	else:
-		ObjectiveManager.set_objective("Talk to the Fremen Guard")
+		ObjectiveManager.set_objective("Talk to the Guard")
 
 func accept_quest() -> void:
 	if sandmonster_quest_accepted:

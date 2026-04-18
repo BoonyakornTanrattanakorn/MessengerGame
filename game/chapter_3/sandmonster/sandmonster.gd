@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 enum State { NORMAL, DRIED, DUST }
 
-var ATTACK_RANGE: float = 50.0
+var ATTACK_RANGE: float = 70.0
 var ATTACK_DAMAGE: int = 1
 var ATTACK_COOLDOWN: float = 1.5
 var DETECTION_RANGE: float = 300.0
@@ -15,11 +15,15 @@ var move_speed: float = 60.0
 var player: Node = null
 var attacking: bool = false
 var attack_timer: float = 0.0
+var attack_sfx: AudioStreamPlayer
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hurtbox = $Hurtbox
 
 func _ready():
+	attack_sfx = AudioStreamPlayer.new()
+	attack_sfx.stream = load("res://assets/audio/punch-sound-effect-hd-1-y-5-koz (1).ogg")
+	add_child(attack_sfx)
 	add_to_group("enemy")
 	hurtbox.add_to_group("enemy_hurtbox")
 	hurtbox.collision_mask |= 4  # include wind's collision layer (layer 3)
@@ -86,6 +90,7 @@ func _start_attack():
 	attacking = false
 
 func _do_attack_hit():
+	attack_sfx.play()
 	if player != null and is_instance_valid(player):
 		var dist = global_position.distance_to(player.global_position)
 		if dist <= ATTACK_RANGE:

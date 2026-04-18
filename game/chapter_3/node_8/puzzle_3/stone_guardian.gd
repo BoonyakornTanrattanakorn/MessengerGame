@@ -23,7 +23,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	set_physics_process(false)
 
-func take_damage(amount: int) -> void:
+func take_damage(amount: int, source: String = "") -> void:
 	if is_dead:
 		return
 	hp -= amount

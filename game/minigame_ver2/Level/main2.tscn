@@ -2487,7 +2487,7 @@ scale = Vector2(0.54481095, 0.4372759)
 texture = ExtResource("23_041ck")
 
 [node name="endpoint" parent="." unique_id=317329225 instance=ExtResource("23_qtcdr")]
-position = Vector2(6121, -19)
+position = Vector2(134, -19)
 
 [node name="Pyramid" type="Sprite2D" parent="." unique_id=534257220]
 position = Vector2(6192.1255, -89.124855)

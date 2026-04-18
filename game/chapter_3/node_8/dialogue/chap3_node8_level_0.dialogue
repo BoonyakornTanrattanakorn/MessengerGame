@@ -1,6 +1,6 @@
 ~ start
-Player: A pyramid... in the middle of the desert.
-Player: There must be something inside.
+Player [#sprite=water/neutral]: A pyramid... in the middle of the desert.
+Player [#sprite=water/neutral]: There must be something inside.
 => END
 
 ~ npc_entry

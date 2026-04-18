@@ -9,10 +9,11 @@ extends Node2D
 
 func _ready():
 	await get_tree().process_frame
-	
+	BGMManager.play_bgm("res://assets/audio/hustle-and-bustle-of-ormos-2-rvikm.ogg", 0.0, true)
+
 	hud.set_max_health(player.health)
 	hud.update_health(player.health)
-	
+
 	# main3 specific — hide gem, show shard and charge
 	hud.show_gem_ui(false)
 	hud.show_shard_ui(true)

@@ -3,7 +3,7 @@ extends "res://game/chapter_3/sandmonster/sandmonster.gd"
 func _ready():
 	hp = 15
 	move_speed = 40.0
-	ATTACK_RANGE = 80.0
+	ATTACK_RANGE = 90.0
 	ATTACK_DAMAGE = 2
 	ATTACK_COOLDOWN = 2.0
 	super._ready()
@@ -71,6 +71,7 @@ func _start_attack():
 	attacking = false
 
 func _do_attack_hit():
+	attack_sfx.play()
 	if player != null and is_instance_valid(player):
 		var dist = global_position.distance_to(player.global_position)
 		if dist <= ATTACK_RANGE:

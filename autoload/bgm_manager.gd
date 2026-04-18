@@ -23,7 +23,7 @@ func play_bgm(track_path: String, volume_db: float = 0.0, loop: bool = true) -> 
 	
 	# Stop previous track if playing
 	if current_bgm.playing:
-		await current_bgm.finished
+		current_bgm.stop()
 	
 	# Set up and play new track
 	current_bgm.stream = audio_stream
