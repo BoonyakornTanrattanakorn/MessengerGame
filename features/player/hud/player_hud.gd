@@ -73,23 +73,30 @@ var heat_gauge_value: float = 0.0
 var cool_gauge_value: int = 0
 var element_icons := {}
 
+
 func _ready():
 	add_to_group("savable")
 
 	ObjectiveManager.register_hud(self)
 	hide_objective()
-	
-	var players = get_tree().get_nodes_in_group("player")
 
+	var players = get_tree().get_nodes_in_group("player")
 	if players.size() == 0:
 		print("No player found")
 		return
 
 	var player = players[0]
-	
 	if not player.is_node_ready():
 		await player.ready
-		
+
+	# Listen for dialogue state to auto-hide power wheel
+	if player.has_signal("is_in_dialogue_changed"):
+		player.connect("is_in_dialogue_changed", Callable(self, "_on_player_dialogue_state_changed"))
+	else:
+		# Fallback: poll in _process if signal not available
+		set_process(true)
+		self._last_dialogue_state = player.is_in_dialogue
+
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	pause_menu = PAUSE_MENU_SCENE.instantiate() as PauseMenu
 	add_child(pause_menu)
@@ -114,7 +121,7 @@ func _ready():
 	call_deferred("_setup_health", player)
 
 	skill_changed.connect(_on_skill_changed)
-	
+
 	# Heat gauge
 	if heat_gauge != null:
 		heat_gauge.set_max_hp(player.health_component.max_hp)
@@ -136,13 +143,24 @@ func _ready():
 		print("ERROR: cool_gauge_ui node not found! Check path: ", cool_gauge_ui)
 
 
-func _setup_health(player):
-	top_left_gui.set_max_health(player.player_max_hp)
-	top_left_gui.update_health(player.player_hp)
-	player.health_changed.connect(top_left_gui.update_health)
-	
+# Auto-hide power wheel if player enters dialogue
+func _on_player_dialogue_state_changed(is_in_dialogue: bool) -> void:
+	if is_in_dialogue and power_wheel and power_wheel.visible:
+		power_wheel.visible = false
+		_set_power_wheel_slowmo(false)
 
+# Fallback polling if no signal
+
+var _last_dialogue_state := false
 func _process(_delta):
+	# Fallback polling for dialogue state if no signal
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		var player = players[0]
+		if player.is_in_dialogue != _last_dialogue_state:
+			_on_player_dialogue_state_changed(player.is_in_dialogue)
+			_last_dialogue_state = player.is_in_dialogue
+
 	if _power_wheel_slowmo_active and not Input.is_action_pressed("power_wheel"):
 		_set_power_wheel_slowmo(false)
 
@@ -172,6 +190,14 @@ func _process(_delta):
 		item_index = (item_index + 1) % items.size()
 		update_item_display()
 		_play_ui_sfx("ui.hover")
+
+
+func _setup_health(player):
+	top_left_gui.set_max_health(player.player_max_hp)
+	top_left_gui.update_health(player.player_hp)
+	player.health_changed.connect(top_left_gui.update_health)
+	
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("world_map"):
