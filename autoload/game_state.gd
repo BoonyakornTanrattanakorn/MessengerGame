@@ -13,6 +13,7 @@ var chap3_node8_shown := false
 var chap3_node9_shown := false
 var chap4_node10_shown := false
 var chap4_node11_shown := false
+var chap4_tower_1st_floor_shown := false
 var chap4_node11_ice_ghost_dead := false
 var chap4_node12_shown := false
 

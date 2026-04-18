@@ -6,10 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dcotttkrk0mwd" path="res://assets/sprites/maps/tilesets/Inside_A5.png" id="4_1dj6c"]
 [ext_resource type="Texture2D" uid="uid://d2cycdbamd2gj" path="res://assets/sprites/maps/tilesets/Inside_B.png" id="5_e6s2k"]
 [ext_resource type="Texture2D" uid="uid://d8jxn6d34bfy" path="res://assets/sprites/maps/tilesets/Outside_B.png" id="6_8n6ou"]
-[ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="7_fq0jf"]
-[ext_resource type="PackedScene" path="res://game/chapter_4/node_11/ice_ghost.tscn" id="8_50ybw"]
-[ext_resource type="Script" path="res://game/chapter_4/node_11/warp_to_floor_2.gd" id="9_floor2"]
-[ext_resource type="Script" path="res://game/chapter_4/node_11/warp_to_node_11.gd" id="10_node11"]
+[ext_resource type="PackedScene" uid="uid://hosl4w161u2o" path="res://game/chapter_4/node_11/ice_ghost.tscn" id="8_50ybw"]
+[ext_resource type="Script" uid="uid://b1gqk3rqsb1fp" path="res://game/chapter_4/node_11/warp_to_floor_2.gd" id="9_floor2"]
+[ext_resource type="Script" uid="uid://dg7yi8e4qqx8x" path="res://game/chapter_4/node_11/warp_to_node_11.gd" id="10_node11"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_8ebhh"]
 tile_data = PackedInt32Array(0, 1179650, 24, 65536, 1179650, 25, 131072, 1179650, 26, 1, 1245186, 24, 65537, 1245186, 25, 131073, 1245186, 26, 2, 1310722, 24, 65538, 1310722, 25, 131074, 1310722, 26)
@@ -8716,8 +8715,9 @@ size = Vector2(494, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l117g"]
 size = Vector2(43, 432)
 
-[node name="Tower" type="Node2D" unique_id=1166412024]
+[node name="Tower" type="Node2D" unique_id=1166412024 node_paths=PackedStringArray("ice")]
 script = ExtResource("1_nyq44")
+ice = NodePath("icetmp")
 
 [node name="Map" type="Node2D" parent="." unique_id=705382107]
 
@@ -8744,9 +8744,6 @@ tile_set = SubResource("TileSet_l117g")
 [node name="warp_to_outside" type="Area2D" parent="Warp" unique_id=1910313630]
 collision_layer = 2
 script = ExtResource("10_node11")
-next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
-spawn_position_in_next_level = Vector2(-52, 639)
-facing_direction_on_warp = Vector2(0, 1)
 metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_outside" unique_id=722536473]
@@ -8757,9 +8754,6 @@ shape = SubResource("RectangleShape2D_qhgts")
 position = Vector2(1, 0)
 collision_layer = 2
 script = ExtResource("9_floor2")
-next_level_path = "res://game/chapter_4/node_11/tower_2nd_flr.tscn"
-spawn_position_in_next_level = Vector2(307, 133)
-facing_direction_on_warp = Vector2(0, 1)
 metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_flr_2" unique_id=1153985019]
@@ -8791,4 +8785,7 @@ position = Vector2(-5, 216)
 shape = SubResource("RectangleShape2D_l117g")
 
 [node name="IceGhost" parent="." unique_id=770296085 instance=ExtResource("8_50ybw")]
-position = Vector2(265, 245)
+position = Vector2(264, 352)
+
+[node name="icetmp" type="Node2D" parent="." unique_id=1464562675]
+position = Vector2(266, 351)

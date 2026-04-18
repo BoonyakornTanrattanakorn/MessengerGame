@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var move_speed: float = 45
-@export var chase_range: float = 260
+@export var chase_range: float = 200
 @export var max_hp: int = 10
 
 var _hp: int = 1
@@ -77,7 +77,7 @@ func take_damage(amount: int, source_element: String = "") -> void:
 
 
 func _is_fire_source(source_element: String) -> bool:
-	return source_element == "fire" or source_element == "fire_small" or source_element == "fire_heavy"
+	return source_element == "fire" or source_element == "fire_small" or source_element == "fire_heavys"
 
 
 func _apply_dead_state() -> void:
