@@ -55,6 +55,11 @@ var _wind_dash_shift_was_down: bool = false
 var interact_with = null
 var current_dialog = 0
 
+# Ice slide
+var is_sliding := false
+var slide_direction := Vector2.ZERO
+var skill_locked := false
+
 # Mount system
 var is_mounted = false
 var current_mount = null
@@ -72,6 +77,7 @@ var invincible_timer: float = 0.0
 var invincible_duration: float = 1.0
 
 var respawn_position = Vector2(110, 115)
+var skill_offset := Vector2(0, -12)
 
 var inventory = {
 	"red_gem": 0,
@@ -89,9 +95,6 @@ var is_camera_panning: bool = false
 @export var save_scope = "global" 
 
 var player_camera: Camera2D = null
-var _footstep_timer: float = 0.0
-var _last_health_for_sfx: int = -1
-var _death_sfx_played: bool = false
 var _footstep_timer: float = 0.0
 var _last_health_for_sfx: int = -1
 var _death_sfx_played: bool = false
@@ -197,6 +200,11 @@ func _physics_process(delta):
 		global_position = current_mount.mount_point.global_position
 		return
 	
+	# Lock dir, skill when slide
+	if(is_sliding): 
+		direction = slide_direction 
+	skill_locked = is_sliding
+	
 	# Update last direction if there's input
 	if direction.length() > 0:
 		last_direction = direction.normalized()
@@ -280,11 +288,9 @@ func _physics_process(delta):
 	#check water
 	var speed_multiplier = 1.0
 	var is_on_water = false
-	var is_on_water = false
 	var check_pos = global_position + (direction * 10.0) 
 	
 	if check_if_water_at(check_pos):
-		is_on_water = true
 		is_on_water = true
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
@@ -369,7 +375,7 @@ func set_facing_direction(direction: Vector2) -> void:
 	_update_animation(last_direction)
 
 func get_aim_direction() -> Vector2:
-	var aim := get_global_mouse_position() - global_position
+	var aim := get_global_mouse_position() - (global_position + skill_offset)
 	if aim.length() < 4.0:
 		return last_direction
 	return aim.normalized()
@@ -726,3 +732,34 @@ func check_if_platform_at(_pos: Vector2) -> bool:
 			return true
 			
 	return false
+
+func can_move_in_direction(direction: Vector2) -> bool:
+
+	if direction == Vector2.ZERO:
+		return true
+
+	if test_move(global_transform, direction * 4):
+
+		var collision = move_and_collide(direction * 4, true)
+		var collider = collision.get_collider()
+
+		if collider.is_in_group("ice_block"):
+			if collider.start_slide(direction):
+				is_sliding = false
+				velocity = Vector2.ZERO
+		
+		return false
+
+	return true
+
+func is_on_ice_tile() -> bool:
+
+	var level = SaveManager.get_level_scene()
+	if level == null:
+		return false
+
+	if not "ice_layer" in level:
+		return false
+	if level.ice_layer == null:
+		return false
+	return level.ice_layer.is_on_ice(global_position)
