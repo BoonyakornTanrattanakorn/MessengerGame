@@ -191,6 +191,14 @@ func _process(_delta):
 		update_item_display()
 		_play_ui_sfx("ui.hover")
 
+
+func _setup_health(player):
+	top_left_gui.set_max_health(player.player_max_hp)
+	top_left_gui.update_health(player.player_hp)
+	player.health_changed.connect(top_left_gui.update_health)
+	
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("world_map"):
 		if is_world_map_open:
