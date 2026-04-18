@@ -8739,7 +8739,7 @@ tile_set = SubResource("TileSet_l117g")
 
 [node name="Warp" type="Node2D" parent="." unique_id=528099458]
 
-[node name="warp_to_tower" type="Area2D" parent="Warp" unique_id=1910313630]
+[node name="warp_to_outside" type="Area2D" parent="Warp" unique_id=1910313630]
 collision_layer = 2
 script = ExtResource("7_fq0jf")
 next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
@@ -8747,15 +8747,16 @@ spawn_position_in_next_level = Vector2(-52, 639)
 facing_direction_on_warp = Vector2(0, 1)
 metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_tower" unique_id=722536473]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_outside" unique_id=722536473]
 position = Vector2(264, 103)
 shape = SubResource("RectangleShape2D_qhgts")
 
 [node name="warp_to_flr_2" type="Area2D" parent="Warp" unique_id=1616807380]
+position = Vector2(1, 0)
 collision_layer = 2
 script = ExtResource("7_fq0jf")
 next_level_path = "res://game/chapter_4/node_11/tower_2nd_flr.tscn"
-spawn_position_in_next_level = Vector2(-52, 639)
+spawn_position_in_next_level = Vector2(307, 133)
 facing_direction_on_warp = Vector2(0, 1)
 metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
 
@@ -8766,8 +8767,10 @@ shape = SubResource("RectangleShape2D_qhgts")
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1330734681]
 position = Vector2(307, 133)
 
+[node name="SpawnPoint2" type="Marker2D" parent="." unique_id=1307711771]
+position = Vector2(340, 387)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=670263198]
-visible = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1450238249]
 position = Vector2(264, 441)

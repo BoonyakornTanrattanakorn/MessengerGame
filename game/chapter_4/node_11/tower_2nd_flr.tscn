@@ -8713,6 +8713,12 @@ size = Vector2(494, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l117g"]
 size = Vector2(43, 432)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvr6o"]
+size = Vector2(494, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgk0e"]
+size = Vector2(43, 432)
+
 [node name="Tower" type="Node2D" unique_id=1166412024]
 script = ExtResource("5_tower_event_handler")
 
@@ -8740,10 +8746,11 @@ tile_set = SubResource("TileSet_l117g")
 [node name="Warp" type="Node2D" parent="." unique_id=528099458]
 
 [node name="warp_to_tower" type="Area2D" parent="Warp" unique_id=1910313630]
+position = Vector2(2, 0)
 collision_layer = 2
 script = ExtResource("4_qhgts")
-next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
-spawn_position_in_next_level = Vector2(-52, 639)
+next_level_path = "res://game/chapter_4/node_11/tower_1st_flr.tscn"
+spawn_position_in_next_level = Vector2(340, 387)
 facing_direction_on_warp = Vector2(0, 1)
 metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
 
@@ -8772,3 +8779,21 @@ shape = SubResource("RectangleShape2D_l117g")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=758447475]
 position = Vector2(-5, 216)
 shape = SubResource("RectangleShape2D_l117g")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1784233369]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2" unique_id=40493963]
+position = Vector2(264, 441)
+shape = SubResource("RectangleShape2D_jvr6o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1920516613]
+position = Vector2(265, -10)
+shape = SubResource("RectangleShape2D_jvr6o")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D2" unique_id=147311673]
+position = Vector2(532, 215)
+shape = SubResource("RectangleShape2D_mgk0e")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D2" unique_id=2065720929]
+position = Vector2(-5, 216)
+shape = SubResource("RectangleShape2D_mgk0e")
