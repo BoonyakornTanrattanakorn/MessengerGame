@@ -8,6 +8,7 @@ var player_checkpoint_position
 @export var room_nodes : Array[Node]
 @export var save_id = "level_manager"
 @export var save_scope = "scene"
+var player
 
 func _ready():
 	add_to_group("savable")
@@ -17,6 +18,10 @@ func _ready():
 				room_nodes.append(child)
 
 	store_initial_states()
+	player = get_player()
+	print(player)
+	await get_tree().process_frame
+	player.health_component.player_dead.connect(_on_player_dead)
 
 func store_initial_states():
 
@@ -39,6 +44,7 @@ func _input(event):
 
 	if event.is_action_pressed("reset_level"):
 		reset_room()
+		get_player().health_component.emit_signal("health_changed", 3)
 
 
 func reset_room():
@@ -70,6 +76,9 @@ func reset_room():
 func get_player():
 
 	return get_tree().get_first_node_in_group("player")
+	
+func _on_player_dead():
+	reset_room()
 
 func save():
 
