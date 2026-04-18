@@ -11,8 +11,11 @@ const NODE_12_EVENT_UTILS := preload("res://game/chapter_4/node_12/node_12_event
 @onready var player_bad_end_walk: Path2D = $PathAndMarker/PlayerBadEndWalk
 @onready var intro_walk: Path2D = $"PathAndMarker/IntroWalk"
 @onready var fight_begin: Marker2D = $"PathAndMarker/FightBegin"
+@onready var throne_marker: Marker2D = $"PathAndMarker/Throne"
+@onready var solder_escort_king: Path2D = $PathAndMarker/SolderEscortKing
+
 @onready var king: CharacterBody2D = $"NPC/King"
-@onready var soldier_center: CharacterBody2D = $"NPC/Soldier4"
+@onready var soldier_escort: CharacterBody2D = $"NPC/SoldierEscort"
 @onready var mage_root: Node2D = $"Mage"
 
 @export_group("Debug")
@@ -166,7 +169,7 @@ func start_fight_sequence() -> void:
 	player.is_camera_panning = false
 
 	if debug_skip_mage_fight:
-		await get_tree().create_timer(10.0).timeout
+		await get_tree().create_timer(3.0).timeout
 		_force_clear_mages()
 		await get_tree().process_frame
 
@@ -190,6 +193,50 @@ func slow_walk_intro() -> void:
 		hold_ctrl_walk_speed_multiplier,
 		0.75
 	)
+
+func _warp_player_to_intro_walk_end_for_finale() -> void:
+	if player == null or intro_walk == null or intro_walk.curve == null:
+		return
+
+	var path_length := intro_walk.curve.get_baked_length()
+	if path_length <= 0.0:
+		return
+
+	var scene_root := get_tree().current_scene
+	if scene_root == null:
+		return
+
+	var fade_layer := CanvasLayer.new()
+	fade_layer.layer = 50
+	var fade_rect := ColorRect.new()
+	fade_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_rect.color = Color(0.0, 0.0, 0.0, 0.0)
+	fade_layer.add_child(fade_rect)
+	scene_root.add_child(fade_layer)
+
+	if SFXManager != null:
+		SFXManager.play_event("node12.cutscene.fade")
+
+	var fade_in_tween := create_tween()
+	fade_in_tween.tween_property(fade_rect, "color:a", 1.0, 0.25)
+	await fade_in_tween.finished
+
+	var end_local := intro_walk.curve.sample_baked(path_length, true)
+	var end_world := intro_walk.to_global(end_local)
+	player.global_position = end_world
+	player.velocity = Vector2.ZERO
+
+	var end_dir := NODE_12_EVENT_UTILS.get_path_end_direction(intro_walk, Vector2.DOWN)
+	_set_player_facing_idle(end_dir)
+
+	await get_tree().process_frame
+
+	var fade_out_tween := create_tween()
+	fade_out_tween.tween_property(fade_rect, "color:a", 0.0, 0.25)
+	await fade_out_tween.finished
+
+	fade_layer.queue_free()
 
 func start_player_king_dialogue() -> void:
 	if INTRO_DIALOGUE == null:
@@ -226,7 +273,7 @@ func start_post_fight_cutscene() -> void:
 		BGMManager.play_bgm("orchestral_mission")
 
 	if FINALE_DIALOGUE != null:
-		var balloon := DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE)
+		var balloon := DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE, "start", [self])
 		_register_fast_forward_balloon(balloon)
 		await DialogueManager.dialogue_ended
 	_show_ending_banner()
@@ -319,6 +366,222 @@ func _fade_to_black_then_warp_player() -> void:
 
 	fade_layer.queue_free()
 
+func _fade_out_king_for_finale() -> void:
+	if king == null or not is_instance_valid(king):
+		return
+
+	var scene_root := get_tree().current_scene
+	if scene_root == null:
+		king.visible = false
+		return
+
+	var fade_layer := CanvasLayer.new()
+	fade_layer.layer = 50
+	var fade_rect := ColorRect.new()
+	fade_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_rect.color = Color(0.0, 0.0, 0.0, 0.0)
+	fade_layer.add_child(fade_rect)
+	scene_root.add_child(fade_layer)
+
+	if SFXManager != null:
+		SFXManager.play_event("node12.cutscene.fade")
+
+	var fade_in_tween := create_tween()
+	fade_in_tween.tween_property(fade_rect, "color:a", 1.0, 0.25)
+	await fade_in_tween.finished
+
+	king.visible = false
+	king.set_physics_process(false)
+	king.set_process(false)
+	var king_collision := king.get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if king_collision != null:
+		king_collision.disabled = true
+
+	await get_tree().process_frame
+
+	var fade_out_tween := create_tween()
+	fade_out_tween.tween_property(fade_rect, "color:a", 0.0, 0.25)
+	await fade_out_tween.finished
+
+	fade_layer.queue_free()
+
+func _walk_player_to_throne() -> void:
+	if player == null or throne_marker == null:
+		return
+
+	var player_to_throne := Path2D.new()
+	var curve := Curve2D.new()
+	player_to_throne.curve = curve
+	player_to_throne.global_position = player.global_position
+	curve.add_point(Vector2.ZERO)
+	curve.add_point(throne_marker.global_position - player.global_position)
+	add_child(player_to_throne)
+
+	await NODE_12_EVENT_UTILS.walk_entity_along_path(
+		self,
+		player,
+		player_to_throne,
+		70.0,
+		hold_ctrl_walk_speed_multiplier,
+		0.75
+	)
+
+	if is_instance_valid(player_to_throne):
+		player_to_throne.queue_free()
+
+	_set_player_facing_idle(Vector2.DOWN)
+
+func _soldier_escort_king_out() -> void:
+	if king == null or soldier_escort == null or solder_escort_king == null or solder_escort_king.curve == null:
+		return
+
+	var curve := solder_escort_king.curve
+	var path_length := curve.get_baked_length()
+	if path_length <= 0.0:
+		return
+
+	# Phase 1: soldier walks to king first.
+	var king_guard_offset := Vector2(20.0, 0.0)
+	await _walk_npc_to_world_position(soldier_escort, king.global_position + king_guard_offset, 70.0)
+
+	var move_speed := 70.0
+	var king_local := solder_escort_king.to_local(king.global_position)
+	var start_offset := clampf(curve.get_closest_offset(king_local), 0.0, path_length)
+	var remaining_length := path_length - start_offset
+	if remaining_length <= 0.0:
+		_set_npc_idle_animation(king)
+		_set_npc_idle_animation(soldier_escort)
+		return
+
+	var duration := remaining_length / maxf(1.0, move_speed)
+	var king_offset := Vector2(-20.0, 0.0)
+	var soldier_offset := king_guard_offset
+	var last_direction := Vector2.UP
+
+	var tween := create_tween()
+	tween.tween_method(func(progress: float) -> void:
+		if not is_instance_valid(king) or not is_instance_valid(soldier_escort):
+			return
+		var distance_along := start_offset + (progress * remaining_length)
+		var local_pos := curve.sample_baked(distance_along, true)
+		var world_pos := solder_escort_king.to_global(local_pos)
+
+		var lookback := minf(distance_along, 4.0)
+		var prev_local := curve.sample_baked(distance_along - lookback, true)
+		var prev_world := solder_escort_king.to_global(prev_local)
+		var direction := (world_pos - prev_world).normalized()
+		if direction.length_squared() > 0.0001:
+			last_direction = direction
+
+		king.global_position = world_pos + king_offset
+		soldier_escort.global_position = world_pos + soldier_offset
+
+		_set_npc_walk_animation(king, last_direction)
+		_set_npc_walk_animation(soldier_escort, last_direction)
+	, 0.0, 1.0, duration)
+
+	while tween.is_running():
+		if not is_inside_tree():
+			tween.kill()
+			return
+		if not is_instance_valid(king) or not is_instance_valid(soldier_escort):
+			tween.kill()
+			return
+		var tree := get_tree()
+		if tree == null:
+			tween.kill()
+			return
+		var speed_multiplier := hold_ctrl_walk_speed_multiplier if NODE_12_EVENT_UTILS.is_fast_forward_pressed() else 1.0
+		tween.set_speed_scale(speed_multiplier)
+		await tree.process_frame
+
+	_set_npc_idle_animation(king)
+	_set_npc_idle_animation(soldier_escort)
+
+func _walk_npc_to_world_position(entity: CharacterBody2D, target_world_pos: Vector2, move_speed: float) -> void:
+	if entity == null:
+		return
+
+	var start_pos := entity.global_position
+	var distance := start_pos.distance_to(target_world_pos)
+	if distance <= 1.0:
+		_set_npc_idle_animation(entity)
+		return
+
+	var duration := distance / maxf(1.0, move_speed)
+	var tween := create_tween()
+	tween.tween_method(func(progress: float) -> void:
+		if not is_instance_valid(entity):
+			return
+		var world_pos := start_pos.lerp(target_world_pos, progress)
+		var direction := (target_world_pos - entity.global_position).normalized()
+		if direction.length_squared() > 0.0001:
+			_set_npc_walk_animation(entity, direction)
+		entity.global_position = world_pos
+	, 0.0, 1.0, duration)
+
+	while tween.is_running():
+		if not is_inside_tree():
+			tween.kill()
+			return
+		if not is_instance_valid(entity):
+			tween.kill()
+			return
+		var tree := get_tree()
+		if tree == null:
+			tween.kill()
+			return
+		var speed_multiplier := hold_ctrl_walk_speed_multiplier if NODE_12_EVENT_UTILS.is_fast_forward_pressed() else 1.0
+		tween.set_speed_scale(speed_multiplier)
+		await tree.process_frame
+
+	_set_npc_idle_animation(entity)
+
+func _set_player_facing_idle(direction: Vector2) -> void:
+	if player == null:
+		return
+
+	if player.has_method("set_facing_direction"):
+		player.call("set_facing_direction", direction)
+
+	var sprite := player.get("animated_sprite") as AnimatedSprite2D
+	if sprite == null or not player.has_method("_facing_suffix"):
+		return
+
+	var suffix := String(player.call("_facing_suffix", direction))
+	if suffix.is_empty():
+		return
+
+	var idle_anim := "idle " + suffix
+	if sprite.sprite_frames != null and sprite.sprite_frames.has_animation(idle_anim):
+		sprite.play(idle_anim)
+
+func _set_npc_walk_animation(entity: CharacterBody2D, direction: Vector2) -> void:
+	if entity == null:
+		return
+	var sprite := entity.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite == null or sprite.sprite_frames == null:
+		return
+
+	var anim := "walk_down"
+	if absf(direction.x) >= absf(direction.y):
+		anim = "walk_right" if direction.x >= 0.0 else "walk_left"
+	else:
+		anim = "walk_down" if direction.y >= 0.0 else "walk_up"
+
+	if sprite.sprite_frames.has_animation(anim) and sprite.animation != anim:
+		sprite.play(anim)
+
+func _set_npc_idle_animation(entity: CharacterBody2D) -> void:
+	if entity == null:
+		return
+	var sprite := entity.get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if sprite == null or sprite.sprite_frames == null:
+		return
+	if sprite.sprite_frames.has_animation("idle") and sprite.animation != "idle":
+		sprite.play("idle")
+
 func _reveal_mages_with_camera_pan() -> void:
 	_set_mage_group_visible(true)
 	await get_tree().process_frame
@@ -363,14 +626,6 @@ func _reveal_mages_with_camera_pan() -> void:
 		camera.reparent(player)
 		camera.position = Vector2.ZERO
 
-func _soldier_back_away() -> void:
-	if soldier_center == null:
-		return
-	var retreat_target := soldier_center.global_position + Vector2(0, 120)
-	var tween := create_tween()
-	tween.tween_property(soldier_center, "global_position", retreat_target, 0.8)
-	await tween.finished
-
 func _bad_end_walk_out() -> void:
 	await NODE_12_EVENT_UTILS.walk_entity_along_path(
 		self,
@@ -382,4 +637,25 @@ func _bad_end_walk_out() -> void:
 	)
 
 func _show_ending_banner() -> void:
+	var scene_root := get_tree().current_scene
+	if scene_root == null:
+		get_tree().change_scene_to_file("res://game/chapter_4/ending/ending.tscn")
+		return
+
+	var fade_layer := CanvasLayer.new()
+	fade_layer.layer = 60
+	var fade_rect := ColorRect.new()
+	fade_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_rect.color = Color(0.0, 0.0, 0.0, 0.0)
+	fade_layer.add_child(fade_rect)
+	scene_root.add_child(fade_layer)
+
+	if SFXManager != null:
+		SFXManager.play_event("node12.cutscene.fade")
+
+	var fade_tween := create_tween()
+	fade_tween.tween_property(fade_rect, "color:a", 1.0, 1.2)
+	await fade_tween.finished
+
 	get_tree().change_scene_to_file("res://game/chapter_4/ending/ending.tscn")
