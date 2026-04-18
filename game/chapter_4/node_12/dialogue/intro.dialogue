@@ -12,13 +12,11 @@ Player: Your majesty, I bring a message from the town.
 King: Speak.
 Player: The town is under attack. We need reinforcements now.
 King: I understand the situation. I will alert the army at once.
-King: You have done your duty, messenger.
-King: Guards, take him to rest.
-
+King: You have done your duty, messenger. You may leave and take a rest after your long journey.
 
 if can_accuse_king()
 	What will you do?
-	- Go with the soldier.
+	- Leave the throne room.
 		do choose_thanks_king()
 		=> END
 	- Accuse the king.
@@ -41,8 +39,6 @@ Player: (...but they will return again and again.)
 
 ~ accuse_king
 Player: No. You are the one behind the attacks.
-do equip_fire_power()
-Soldier: How could a mere messenger use magic!?
 King: The messenger has gone mad! Call in the royal mages! 
 do _fade_to_black_then_warp_player()
 King: My royal mages! Capture him dead or alive!
