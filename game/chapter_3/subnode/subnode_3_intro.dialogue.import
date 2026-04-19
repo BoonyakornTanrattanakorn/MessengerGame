@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://hql4y7hv62b7"
+path="res://.godot/imported/subnode_3_intro.dialogue-d939ce9f6e84bcf5e53a70a6e056e5a7.tres"
+
+[deps]
+
+source_file="res://game/chapter_3/subnode/subnode_3_intro.dialogue"
+dest_files=["res://.godot/imported/subnode_3_intro.dialogue-d939ce9f6e84bcf5e53a70a6e056e5a7.tres"]
+
+[params]
+
+defaults=true

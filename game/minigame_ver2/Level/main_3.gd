@@ -61,8 +61,12 @@ func _on_level_completed():
 	_handle_completion()
 
 func _handle_completion():
-	pass
-
+	await get_tree().create_timer(1.5).timeout
+	GameState.pending_level = "res://game/chapter_3/subnode/subnode_4_chap3.tscn"
+	GameState.pending_spawn = Vector2(459, 466)
+	GameState.pending_facing = Vector2.RIGHT
+	get_tree().change_scene_to_file("res://game/game_scene.tscn")
+	
 func _on_organ_destroyed():
 	print("organ destroyed — level complete!")
 	player.stop()
