@@ -1,6 +1,6 @@
 extends LevelEventHandler
 
-var dialogue = load("res://game/chapter_2/node_6/dialogue/chap2_node6.dialogue")
+var dialogue = load("res://game/chapter_2/node_6/dialogue/chap2_node3.dialogue")
 @export var town: Node2D
 
 
