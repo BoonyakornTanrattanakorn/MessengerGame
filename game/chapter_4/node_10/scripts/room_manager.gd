@@ -76,7 +76,7 @@ func get_player() -> Player:
 	return get_tree().get_first_node_in_group("player")
 	
 func _on_player_dead():
-	DeadManager.kill_player("Reason :  Overheat", Vector2(412,675))
+	DeadManager.kill_player("Overheat", Vector2(412,675))
 
 func save():
 

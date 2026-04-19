@@ -12,7 +12,7 @@ func _ready():
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	
 func setup(reason: String, position: Vector2):
-	reason_label.text = reason
+	reason_label.text = "Reason :  " + reason
 	respawn_position = position
 
 
