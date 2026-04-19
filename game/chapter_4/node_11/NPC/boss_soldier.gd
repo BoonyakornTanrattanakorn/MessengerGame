@@ -25,12 +25,10 @@ func _talk() -> void:
 	if _is_talking:
 		return
 
-	var selected_dialogue_path: String
+	var selected_dialogue_path: String = dialogue_path
 
 	if GameState.clue_4_unlocked:
 		selected_dialogue_path = dialogue_path_after_clue
-	else:
-		selected_dialogue_path = dialogue_path
 
 	var dlg = load(selected_dialogue_path)
 	if dlg == null:
@@ -42,6 +40,12 @@ func _talk() -> void:
 	await DialogueManager.dialogue_ended
 	_is_talking = false
 
+	if GameState.clue_4_unlocked:
+		GameState.chap4_node11_soldier = true
+		print("chap4_node11_soldier set to: ", GameState.chap4_node11_soldier)
+		_remove_boss_soldier()
+		SaveManager.save_game()
+
 
 func _on_interaction_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
@@ -51,3 +55,8 @@ func _on_interaction_area_body_entered(body: Node2D) -> void:
 func _on_interaction_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player") and body.interact_with == self:
 		body.interact_with = null
+
+
+func _remove_boss_soldier() -> void:
+	print("[BossSoldier] Removing BossSoldier only")
+	queue_free()
