@@ -42,10 +42,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bigbody"]
-size = Vector2(154, 182)
+size = Vector2(172, 224)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bighurt"]
-size = Vector2(94, 256)
+size = Vector2(184, 232)
 
 [node name="BigSandMonster" type="CharacterBody2D" unique_id=4001001]
 scale = Vector2(0.5, 0.5)
@@ -57,12 +57,12 @@ sprite_frames = SubResource("SpriteFrames_big")
 animation = &"normal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=4001003]
-position = Vector2(1, 17)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_bigbody")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=4001004]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=4001005]
-position = Vector2(0.5, 0)
+position = Vector2(-2, 6)
 shape = SubResource("RectangleShape2D_bighurt")
 debug_color = Color(0.866137, 0.2816584, 0.55973816, 0.41960785)
