@@ -18,11 +18,11 @@ func setup(reason: String, position: Vector2):
 
 func _on_respawn_button_pressed():
 	DeadManager.respawn_player(respawn_position)
+	SaveManager.load_game()
 	queue_free()
 	
 func _on_menu_button_pressed():
 	DeadManager.respawn_player(respawn_position)
 	queue_free()
-	SaveManager.save_game()
 	get_tree().change_scene_to_file("res://ui/menu/Main_menu.tscn")
 	
