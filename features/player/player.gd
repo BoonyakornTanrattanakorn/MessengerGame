@@ -715,12 +715,19 @@ func check_if_void_at(pos: Vector2) -> bool:
 	
 	if tilemap == null:
 		return false
-
-	var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
-	var tile_data = tilemap.get_cell_tile_data(map_pos)
-	
-	if tile_data:
-		return tile_data.get_custom_data("is_void") == true
+	else:
+		var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
+		var tile_data = tilemap.get_cell_tile_data(map_pos)
+		
+		var tileset: TileSet = tilemap.tile_set
+		if tileset == null:
+			return false
+		if tileset.get_custom_data_layer_by_name("is_void") == -1:
+			return false
+			
+		var is_void = tile_data.get_custom_data("is_void") == true
+		if is_void:
+			return true
 			
 	return false
 

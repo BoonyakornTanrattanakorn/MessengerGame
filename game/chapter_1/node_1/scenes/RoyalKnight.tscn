@@ -1,27 +1,7 @@
-[gd_scene format=3 uid="uid://1ep5r8rc4nge"]
+[gd_scene format=3 uid="uid://dh4s61buptah"]
 
 [ext_resource type="Texture2D" uid="uid://bn3apkcx1ab5b" path="res://assets/sprites/royal_knight_chapter1/with_outline/DEATH.png" id="1_wxxk7"]
 [ext_resource type="Texture2D" uid="uid://bjbutojm1vpx8" path="res://assets/sprites/royal_knight_chapter1/with_outline/IDLE.png" id="2_7sv8o"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8f85l"]
-atlas = ExtResource("1_wxxk7")
-region = Rect2(0, 0, 96, 84)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_urrci"]
-atlas = ExtResource("1_wxxk7")
-region = Rect2(96, 0, 96, 84)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mgg6c"]
-atlas = ExtResource("1_wxxk7")
-region = Rect2(192, 0, 96, 84)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mlcao"]
-atlas = ExtResource("1_wxxk7")
-region = Rect2(288, 0, 96, 84)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nn6i4"]
-atlas = ExtResource("1_wxxk7")
-region = Rect2(384, 0, 96, 84)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ekdg"]
 atlas = ExtResource("1_wxxk7")
@@ -79,24 +59,17 @@ region = Rect2(480, 0, 96, 84)
 atlas = ExtResource("2_7sv8o")
 region = Rect2(576, 0, 96, 84)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxxk7"]
+atlas = ExtResource("1_wxxk7")
+region = Rect2(288, 0, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sv8o"]
+atlas = ExtResource("1_wxxk7")
+region = Rect2(384, 0, 96, 84)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mtx2"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8f85l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_urrci")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mgg6c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mlcao")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nn6i4")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6ekdg")
 }, {
@@ -147,6 +120,17 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxxk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sv8o")
+}],
+"loop": true,
+"name": &"injured",
+"speed": 2.0
 }]
 
 [node name="RoyalKnight" type="Node2D" unique_id=2134897095]
@@ -154,5 +138,6 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=229001217]
 scale = Vector2(1.7083334, 1.7083334)
 sprite_frames = SubResource("SpriteFrames_4mtx2")
-animation = &"idle"
-frame_progress = 0.18161185
+animation = &"death"
+autoplay = "injured"
+frame_progress = 0.9829204
