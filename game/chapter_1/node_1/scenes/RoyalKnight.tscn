@@ -133,6 +133,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxxk7"]
+size = Vector2(164, 119)
+
 [node name="RoyalKnight" type="Node2D" unique_id=2134897095]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=229001217]
@@ -141,3 +144,16 @@ sprite_frames = SubResource("SpriteFrames_4mtx2")
 animation = &"death"
 autoplay = "injured"
 frame_progress = 0.9829204
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1276901287]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=414053153]
+position = Vector2(7, 49.5)
+shape = SubResource("RectangleShape2D_wxxk7")
+
+[node name="PromptLabel" type="Label" parent="." unique_id=750295143]
+offset_left = -47.0
+offset_top = -43.0
+offset_right = 61.0
+offset_bottom = -20.0
+text = "Press F to talk"
