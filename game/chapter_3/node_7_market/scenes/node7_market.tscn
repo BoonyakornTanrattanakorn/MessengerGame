@@ -1,13 +1,12 @@
 [gd_scene format=4 uid="uid://diws31cic66lh"]
 
 [ext_resource type="Script" uid="uid://bw3j8q63iflsi" path="res://game/chapter_3/node_7_market/scripts/market_event_handler.gd" id="1_8k15y"]
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_c5pho"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="1_c5pho"]
 [ext_resource type="Texture2D" uid="uid://bc7mutn1t47gy" path="res://assets/sprites/maps/tilesets/Desert cactus.png" id="2_q68fo"]
 [ext_resource type="Texture2D" uid="uid://s5jp4ujrd0lm" path="res://assets/sprites/maps/tilesets/coconut palm tree.png" id="3_p5fv4"]
 [ext_resource type="PackedScene" uid="uid://cxhrf1g0wlye1" path="res://game/chapter_3/node_7_market/scenes/shop.tscn" id="4_q68fo"]
 [ext_resource type="Resource" uid="uid://cdpcfqe3oli8l" path="res://game/chapter_3/node_7_market/dialogue/shopkeeper.dialogue" id="5_enhc4"]
 [ext_resource type="Script" uid="uid://duih8h0vr7ryv" path="res://game/chapter_3/node_7_market/scripts/warp_back_from_market.gd" id="7_8k15y"]
-
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q68fo"]
 size = Vector2(38, 705)

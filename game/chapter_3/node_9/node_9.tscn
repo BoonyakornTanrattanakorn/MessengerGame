@@ -1,14 +1,13 @@
 [gd_scene format=4 uid="uid://dxan4r6i5bl1i"]
 
 [ext_resource type="Script" path="res://game/chapter_3/node_9/node_9.gd" id="1_8qlak"]
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_xuldb"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="1_xuldb"]
 [ext_resource type="Script" uid="uid://ddmrvgk6syq6p" path="res://game/chapter_3/node_9/tile_manager.gd" id="3_kcmjt"]
 [ext_resource type="PackedScene" uid="uid://c6ink07pklewb" path="res://game/chapter_3/node_9/BossDisplay.tscn" id="5_6kppn"]
 [ext_resource type="PackedScene" uid="uid://bgu4m8ejsh4dv" path="res://game/chapter_3/node_9/PressurePlate.tscn" id="6_3fxbd"]
 [ext_resource type="PackedScene" uid="uid://b5m6jgbxk62e5" path="res://game/chapter_3/node_9/RockFallManager.tscn" id="8_bgr4g"]
 [ext_resource type="PackedScene" uid="uid://o3f4qu2b65da" path="res://game/chapter_3/sandmonster/Sandmonster.tscn" id="9_4v4sc"]
 [ext_resource type="PackedScene" uid="uid://3xd5iijpu3f1" path="res://game/chapter_3/sandmonster/BigSandmonster.tscn" id="10_v10b6"]
-
 
 [node name="Node3" type="Node2D" unique_id=1166092223]
 script = ExtResource("1_8qlak")

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://cmu5psnvpb1xu" path="res://game/chapter_3/node_7/dialogue/start_of_the_node.dialogue" id="2_4vl5c"]
 [ext_resource type="Texture2D" uid="uid://boou4wqx28utq" path="res://assets/sprites/maps/tilesets/World_A2.png" id="2_llbfv"]
 [ext_resource type="TileSet" uid="uid://bhy1vc7rq3icj" path="res://assets/sprites/tres/tile_set.tres" id="3_2yfee"]
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="3_u2f67"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="3_u2f67"]
 [ext_resource type="Script" uid="uid://bg33rtkqd4i4m" path="res://game/chapter_3/node_7/script/statues/statue_slot.gd" id="4_kdpop"]
 [ext_resource type="Texture2D" uid="uid://xoqdjaqi0ihe" path="res://assets/sprites/maps/tilesets/Readable_stone.tres" id="4_o2gls"]
 [ext_resource type="Texture2D" uid="uid://bc7mutn1t47gy" path="res://assets/sprites/maps/tilesets/Desert cactus.png" id="4_ypko5"]
@@ -35,7 +35,6 @@
 [ext_resource type="Script" uid="uid://c8lrywhtvvtfo" path="res://game/chapter_3/node_7/script/warp_to_sidequest_and_market.gd" id="32_a55ex"]
 [ext_resource type="PackedScene" uid="uid://o3f4qu2b65da" path="res://game/chapter_3/sandmonster/Sandmonster.tscn" id="33_54ajd"]
 [ext_resource type="Script" uid="uid://dmppsl53pgdwl" path="res://game/chapter_3/node_7/script/quest_blocker.gd" id="34_pjwts"]
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cnd0f"]
 texture = ExtResource("1_a40ew")
