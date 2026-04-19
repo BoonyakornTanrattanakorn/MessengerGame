@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cq7kpb66v5eot"]
+
+[ext_resource type="Script" uid="uid://bwk8ycj24grgc" path="res://game/minigame_ver2/Collectible/gem.gd" id="1_x6daa"]
+[ext_resource type="Texture2D" uid="uid://c8ku7qtln8f4q" path="res://game/minigame_ver2/Sprite/Coin.png" id="2_7pjjx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dmp7v"]
+
+[node name="Gem" type="Area2D" unique_id=2084162179]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_x6daa")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=138459867]
+position = Vector2(-2.3841858e-07, -2.3841858e-07)
+scale = Vector2(0.18900001, 0.18900001)
+texture = ExtResource("2_7pjjx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1295635682]
+shape = SubResource("CircleShape2D_dmp7v")

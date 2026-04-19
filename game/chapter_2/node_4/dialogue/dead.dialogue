@@ -1,0 +1,12 @@
+~ fall_in_void
+
+Villager: Hey! You there! Are you alright?
+Villager: I saw you drifting down the stream, coming straight out of that cave... I thought you were a goner for sure.
+Villager: Lucky for you, I was out here casting my net. Managed to pull you ashore just in time.
+Villager: You'd better watch your step from now on. This area is dangerous... especially when the currents are this strong.
+- Thank you so much.
+	Villager: Don't mention it. Just go find somewhere to rest up.
+- How did I get here?
+	Villager: I just told you—you were floating down the river! You must have hit your head pretty hard. Go sit down before you faint again.
+
+=> END

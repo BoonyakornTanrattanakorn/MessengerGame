@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://3xd5iijpu3f1"]
+
+[ext_resource type="Script" uid="uid://prycujdltw0v" path="res://game/chapter_3/sandmonster/big_sandmonster.gd" id="1_big"]
+[ext_resource type="Texture2D" uid="uid://dgif0e4d38mn3" path="res://game/chapter_3/sandmonster/bigsandmonsterattack.png" id="2_p5gbt"]
+[ext_resource type="Texture2D" uid="uid://bfv0asvyc5mpr" path="res://game/chapter_3/sandmonster/bigsandmonsterdark.png" id="3_ytn4q"]
+[ext_resource type="Texture2D" uid="uid://c40ds873xh5d3" path="res://game/chapter_3/sandmonster/bigsandmonsterdead.png" id="4_7pf28"]
+[ext_resource type="Texture2D" uid="uid://bvpqldqvlorwy" path="res://game/chapter_3/sandmonster/bigsandmonsteridle.png" id="5_28ctp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_big"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p5gbt")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ytn4q")
+}],
+"loop": true,
+"name": &"dried",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_7pf28")
+}],
+"loop": false,
+"name": &"dust",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_28ctp")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bigbody"]
+size = Vector2(172, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bighurt"]
+size = Vector2(184, 232)
+
+[node name="BigSandMonster" type="CharacterBody2D" unique_id=4001001]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_big")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=4001002]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_big")
+animation = &"normal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=4001003]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_bigbody")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=4001004]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=4001005]
+position = Vector2(-2, 6)
+shape = SubResource("RectangleShape2D_bighurt")
+debug_color = Color(0.866137, 0.2816584, 0.55973816, 0.41960785)

@@ -88,6 +88,7 @@ func _on_interaction_area_area_exited(area: Area2D):
 		print("[Fairy] Cleared interact_with (area exited): ", area.name)
 
 func _ready():
+	add_to_group("water_fairy")
 	print("[Fairy] Ready")
 	var area = $InteractionArea
 	if area == null:

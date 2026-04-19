@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://cs6flapgwotx7"]
+
+[ext_resource type="Script" uid="uid://d2rmhlnvt43xm" path="res://game/minigame_ver2/Object/hud.gd" id="1_lfcsx"]
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_0nv14"]
+[ext_resource type="Texture2D" uid="uid://c8ku7qtln8f4q" path="res://game/minigame_ver2/Sprite/Coin.png" id="2_x8gqg"]
+[ext_resource type="Script" uid="uid://bilg3jgxb2knl" path="res://features/player/hud/health_gui.gd" id="3_x8gqg"]
+[ext_resource type="PackedScene" uid="uid://dcujg6vgrtmxl" path="res://features/player/hud/health_end.tscn" id="4_n178f"]
+[ext_resource type="PackedScene" uid="uid://bc7lcjk07jgut" path="res://features/player/hud/health_middle.tscn" id="5_jhd11"]
+[ext_resource type="PackedScene" uid="uid://cvg005qrgt6qu" path="res://features/player/hud/element_display.tscn" id="6_g1gjp"]
+[ext_resource type="PackedScene" uid="uid://ctxx46yi1gm4o" path="res://features/player/powers/water/cool_gauge.tscn" id="7_k7fp2"]
+[ext_resource type="PackedScene" uid="uid://b7q4tjsvib3gr" path="res://features/player/powers/fire/heat_gauge.tscn" id="8_mpuoo"]
+[ext_resource type="Texture2D" uid="uid://bs06khl30a0xj" path="res://game/minigame_ver2/Sprite/recharger.png" id="9_n178f"]
+[ext_resource type="Texture2D" uid="uid://x1a6711s4a8y" path="res://game/minigame_ver2/Sprite/healthshard2.png" id="11_jhd11"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1243381214]
+script = ExtResource("1_lfcsx")
+
+[node name="TopLeftGUI" type="HBoxContainer" parent="." unique_id=534409551]
+unique_name_in_owner = true
+offset_left = 35.0
+offset_top = 31.0
+offset_right = 140.0
+offset_bottom = 87.0
+theme = ExtResource("2_0nv14")
+theme_override_constants/separation = 0
+script = ExtResource("3_x8gqg")
+
+[node name="HealthDisplayTemplate" type="Panel" parent="TopLeftGUI" unique_id=625835470]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_0nv14")
+
+[node name="HealthEnd" parent="TopLeftGUI/HealthDisplayTemplate" unique_id=300156056 instance=ExtResource("4_n178f")]
+layout_mode = 0
+offset_left = -70.0
+offset_right = -32.0
+theme = ExtResource("2_0nv14")
+
+[node name="HealthMiddle" parent="TopLeftGUI/HealthDisplayTemplate" unique_id=1822314281 instance=ExtResource("5_jhd11")]
+layout_mode = 0
+offset_left = -32.0
+offset_right = 0.0
+theme = ExtResource("2_0nv14")
+
+[node name="ElementDisplay" parent="TopLeftGUI" unique_id=843190275 instance=ExtResource("6_g1gjp")]
+layout_mode = 2
+theme = ExtResource("2_0nv14")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TopLeftGUI" unique_id=827075296]
+layout_mode = 2
+theme = ExtResource("2_0nv14")
+theme_override_constants/separation = 2
+
+[node name="HPBar" type="HBoxContainer" parent="TopLeftGUI/VBoxContainer" unique_id=1125112130]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_0nv14")
+theme_override_constants/separation = 0
+
+[node name="CoolGauge" parent="TopLeftGUI/VBoxContainer" unique_id=802023072 instance=ExtResource("7_k7fp2")]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_0nv14")
+
+[node name="HeatGauge" parent="TopLeftGUI/VBoxContainer" unique_id=1396212735 instance=ExtResource("8_mpuoo")]
+visible = false
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = ExtResource("2_0nv14")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2107880817]
+offset_left = 35.0
+offset_top = 101.0
+offset_right = 140.0
+offset_bottom = 165.0
+
+[node name="ChargeRow" type="HBoxContainer" parent="VBoxContainer" unique_id=74694234]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="ChargeImage" type="TextureRect" parent="VBoxContainer/ChargeRow" unique_id=1901559649]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("9_n178f")
+expand_mode = 2
+
+[node name="ChargeLabel" type="Label" parent="VBoxContainer/ChargeRow" unique_id=852531898]
+layout_mode = 2
+text = "Charge
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=976843104]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="GemImage" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1604171476]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_x8gqg")
+expand_mode = 2
+
+[node name="GemLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=48685226]
+layout_mode = 2
+text = "Gem"
+
+[node name="ShardRow" type="HBoxContainer" parent="VBoxContainer" unique_id=35559463]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="ShardImage" type="TextureRect" parent="VBoxContainer/ShardRow" unique_id=797540873]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("11_jhd11")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="ShardLabel" type="Label" parent="VBoxContainer/ShardRow" unique_id=253795848]
+layout_mode = 2
+text = "Shard"

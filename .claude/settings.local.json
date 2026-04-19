@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv exterior/node_2_level_0_event_handler.gd exterior/node_8_level_0_event_handler.gd)",
+      "Bash(mv puzzle_1/node_2_level_1_event_handler.gd puzzle_1/node_8_level_1_event_handler.gd)",
+      "Bash(mv puzzle_2/node_2_level_2_event_handler.gd puzzle_2/node_8_level_2_event_handler.gd)",
+      "Bash(mv puzzle_3/node_2_level_3_event_handler.gd puzzle_3/node_8_level_3_event_handler.gd)",
+      "Bash(mv node2_state.gd node8_state.gd)"
+    ]
+  }
+}

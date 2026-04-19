@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://c88hxk11qr18n" path="res://assets/sprites/insignia/insignia_left.png" id="14_pwvnp"]
 [ext_resource type="PackedScene" uid="uid://daalpk2tyx4q4" path="res://game/chapter_2/node_4/upper_node/statue.tscn" id="16_exbpy"]
 [ext_resource type="Texture2D" uid="uid://boqbe58pwln44" path="res://assets/sprites/quest_marker/quest_marker.png" id="19_bxsvo"]
+[ext_resource type="PackedScene" uid="uid://bo0j3fvpmq71b" path="res://game/chapter_2/node_4/upper_node/clue_0.tscn" id="20_3ll45"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ax3c5"]
 texture = ExtResource("1_adnnq")
@@ -29258,3 +29259,6 @@ script = ExtResource("12_yprkj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToMain2" unique_id=1753990218]
 position = Vector2(296, -348)
 shape = SubResource("RectangleShape2D_w0hl0")
+
+[node name="clue_0" parent="." unique_id=694505532 instance=ExtResource("20_3ll45")]
+position = Vector2(782, -458)

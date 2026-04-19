@@ -34,6 +34,12 @@ const NORMAL_TIME_SCALE := 1.0
 @export var torn_paper_2: Texture2D
 @export var torn_paper_3: Texture2D
 @export var torn_paper_4: Texture2D
+@export var statue_king: Texture2D
+@export var statue_princess: Texture2D
+@export var statue_knight: Texture2D
+@export var statue_villager: Texture2D
+@export var statue_scarab: Texture2D
+@export var desert_crystal: Texture2D
 
 #cool gauge
 @onready var cool_gauge_ui = $TopLeftGUI/VBoxContainer/CoolGauge
@@ -63,6 +69,7 @@ var pause_menu: PauseMenu
 var world_map_overlay: WorldMapOverlay
 var is_world_map_open: bool = false
 var _power_wheel_slowmo_active: bool = false
+var puzzle_finished_triggered = false
 
 signal skill_changed(attribute: String)
 
@@ -200,6 +207,10 @@ func _setup_health(player):
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	
+	if DeadManager.is_dead:
+		return
+		
 	if event.is_action_pressed("world_map"):
 		if is_world_map_open:
 			_close_world_map()
@@ -346,17 +357,16 @@ func _use_selected_item() -> bool:
 	if selected_item_name.is_empty():
 		return false
 
+	var player := get_tree().root.find_child("Player", true, false)
+	if player == null:
+		return false
+
 	if selected_item_name == "brave_stone":
-		var player := get_tree().root.find_child("Player", true, false)
-		if player == null or not player.health_component.has_method("increase_max_hp"):
-			return false
 		if player.inventory.get("brave_stone", 0) <= 0:
 			return false
-
 		player.inventory["brave_stone"] -= 1
 		if player.inventory["brave_stone"] <= 0:
 			player.inventory.erase("brave_stone")
-
 		player.health_component.increase_max_hp(1)
 		top_left_gui.set_max_health(player.health_component.max_hp)
 		top_left_gui.update_health(player.health_component.hp)
@@ -368,9 +378,15 @@ func _use_selected_item() -> bool:
 		if dialogue_resource == null:
 			push_warning("Torn paper dialogue resource is missing.")
 			return false
-
 		DialogueManager.show_dialogue_balloon(dialogue_resource, selected_item_name)
 		return true
+
+	if selected_item_name.begins_with("statue_"):
+		var placed = StatuePlacer.place_statue_on_platform(selected_item_name, player)
+		if placed:
+			refresh_items()
+			_check_statue_puzzle(player)
+		return placed
 
 	return false
 
@@ -407,6 +423,12 @@ func get_icon(item_name: String) -> Texture2D:
 		"paper_2": return torn_paper_2
 		"paper_3": return torn_paper_3
 		"paper_4": return torn_paper_4
+		"statue_king": return statue_king
+		"statue_princess": return statue_princess
+		"statue_knight": return statue_knight
+		"statue_villager": return statue_villager
+		"statue_scarab": return statue_scarab
+		"desert_crystal": return desert_crystal
 	return null
 
 # =========================
@@ -571,6 +593,33 @@ func _set_power_wheel_slowmo(active: bool) -> void:
 		return
 	_power_wheel_slowmo_active = active
 	Engine.time_scale = POWER_WHEEL_TIME_SCALE if active else NORMAL_TIME_SCALE
+
+func _check_statue_puzzle(player: Node) -> void:
+	var slots = get_tree().get_nodes_in_group("statue_interact")
+	for slot in slots:
+		if not slot.has_meta("placed_statue_name"):
+			continue
+		var placed = slot.get_meta("placed_statue_name")
+		var expected = slot.get("expected_statue")
+		if placed == expected:
+			Node7State.collect_statue(placed)
+
+	if StatuePuzzleChecker.is_puzzle_complete(get_tree()) and not puzzle_finished_triggered:
+		puzzle_finished_triggered = true
+		Node7State.solve_riddle()
+
+		DialogueManager.show_dialogue_balloon(
+			load("res://game/chapter_3/node_7/dialogue/statue_confirm.dialogue"),
+	        "confirm"
+		)
+		await DialogueManager.dialogue_ended
+		_notify_guards()
+
+func _notify_guards() -> void:
+	var guards = get_tree().get_nodes_in_group("fremen_guard")
+	for guard in guards:
+		if guard.has_method("_step_aside"):
+			guard._step_aside()
 
 func _play_ui_sfx(event_key: String) -> void:
 	if SFXManager == null:

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var movement_component: MovementComponent = $MovementComponent
@@ -34,9 +35,9 @@ signal cool_changed(value: int)
 # Water fairy
 var fairy_instance = null
 var is_controlling_fairy: bool = false
-var fairy_duration: float = 5.0
+var fairy_duration: float = 8.0
 var fairy_timer: float = 0.0
-var fairy_cooldown: float = 8.0
+var fairy_cooldown: float = 1.0
 var fairy_cooldown_timer: float = 0.0
 
 # Water wave charging
@@ -86,6 +87,7 @@ var inventory = {
 	"brave_stone": 0,
 	"potion": 3,
 	"antidote": 2,
+	"desert_crystal": 0
 }
 
 var is_in_dialogue = false
@@ -129,6 +131,8 @@ func _ready():
 		_last_health_for_sfx = health_component.hp
 		health_component.connect("health_changed", Callable(self, "_on_health_changed"))
 	
+	# Register player to DeadManager
+	DeadManager.register_player(self)
 	
 func _on_dialogue_started(_arg = null):
 	is_in_dialogue = true
@@ -144,7 +148,7 @@ func _on_skill_changed(attribute: String):
 	print("Switched to: ", attribute)
 
 func _is_input_locked() -> bool:
-	return is_in_dialogue or is_camera_panning
+	return is_in_dialogue or is_camera_panning or DeadManager.is_dead
 
 func _input(event: InputEvent) -> void:
 	if not _is_input_locked():
@@ -174,27 +178,29 @@ func _physics_process(delta):
 	if boat_splash_timer > 0.0:
 		boat_splash_timer -= delta
 	
-	# Mount/Dismount
 	if Input.is_action_just_pressed("interact"):
 		_play_sfx("player.interact")
 		if is_mounted:
 			if current_mount.can_dismount:
 				current_mount.dismount_player()
-		elif interact_with != null:
-			print("Pressing F on: ", interact_with.name)
-			if interact_with.has_method("activate"):
-				interact_with.activate()
-				interact_with = null
-			elif interact_with.has_method("can_interact"):
-				var dialogue_path = "res://dialogue/conversations/" + interact_with.name + ".dialogue"
-				if ResourceLoader.exists(dialogue_path):
-					DialogueManager.show_dialogue_balloon(
-						load(dialogue_path),
-						"_" + str(current_dialog)
-					)
-				else:
-					print("No dialogue for: ", interact_with.name)
-	
+		else:
+			# 1. TRY TO USE/PLACE ITEM FROM HUD FIRST
+			var item_used = hud._use_selected_item()
+			
+			if item_used:
+				# Placement was successful!
+				print("Statue placed via HUD logic.")
+			else:
+				# 2. IF NO ITEM WAS USED, TRY TO PICK UP A PLACED STATUE
+				var picked_up = StatuePlacer.try_pickup_statue(self, StatuePuzzleChecker.is_puzzle_complete(get_tree()))
+				if picked_up:
+					hud.refresh_items()
+				elif interact_with != null:
+					# 3. IF NO PICKUP, TRY DIALOGUE/ACTIVATION
+					if interact_with.has_method("activate"):
+						interact_with.activate()
+						interact_with = null
+
 	# If mounted, skip all movement and just follow the cart
 	if is_mounted:
 		global_position = current_mount.mount_point.global_position
@@ -295,8 +301,9 @@ func _physics_process(delta):
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
 	if check_if_void_at(global_position):
-		if not check_if_platform_at(global_position):
+		if not check_if_platform_at(global_position) and not is_dashing:
 			speed_multiplier = 0.0
+			_handle_void_fall()
 	# Movement + dash handled by movement component
 	movement_component.process_movement(self, direction, speed_multiplier, delta)
 
@@ -530,7 +537,8 @@ func load_data(data):
 	if pos:
 		position = Vector2(pos["x"], pos["y"])
 
-	playerAttribute = hud.get_current_skill()
+	playerAttribute = data.get("playerAttribute", playerAttribute)
+	hud.set_current_skill(playerAttribute)
 	health_component.max_hp = int(data.get("player_max_hp", health_component.max_hp))
 	health_component.hp = int(data.get("player_hp", health_component.hp))
 	# Notify HUD and other listeners via the HealthComponent's signal
@@ -730,6 +738,33 @@ func check_if_void_at(pos: Vector2) -> bool:
 			return true
 			
 	return false
+	
+func _handle_void_fall():
+	is_in_dialogue = true
+	velocity = Vector2.ZERO
+	
+	_play_sfx("player.death")
+	
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) # จางหายใน 0.5 วินาที
+	tween.tween_callback(func(): _void_fall_event())
+
+func _void_fall_event():	
+	is_in_dialogue = true
+	velocity = Vector2.ZERO
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+	
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	get_tree().change_scene_to_file(current_scene_path)
+	
+	var dialogue_resource = load("res://game/chapter_2/node_4/dialogue/dead.dialogue")
+	if dialogue_resource:
+		DialogueManager.show_dialogue_balloon(dialogue_resource, "fall_in_void")
+		
+		await DialogueManager.dialogue_ended
+	
+	is_in_dialogue = false
 
 func check_if_platform_at(_pos: Vector2) -> bool:
 	var overlapping_areas = $Hurtbox.get_overlapping_areas()
@@ -760,7 +795,6 @@ func can_move_in_direction(direction: Vector2) -> bool:
 	return true
 
 func is_on_ice_tile() -> bool:
-
 	var level = SaveManager.get_level_scene()
 	if level == null:
 		return false
@@ -770,3 +804,59 @@ func is_on_ice_tile() -> bool:
 	if level.ice_layer == null:
 		return false
 	return level.ice_layer.is_on_ice(global_position)
+	
+func respawn(at_position: Vector2) -> void:
+	
+	global_position = at_position
+
+	# Restore HP
+	if health_component:
+		health_component.hp = health_component.max_hp
+		health_component.health_changed.emit(health_component.hp)
+
+	# Reset death SFX flag
+	_death_sfx_played = false
+	_last_health_for_sfx = health_component.hp
+
+	# Reset movement state
+	velocity = Vector2.ZERO
+	is_dashing = false
+	is_sliding = false
+	skill_locked = false
+
+	# Reset mount state
+	if current_mount != null:
+		current_mount.reset_position()
+	current_mount = null
+	is_mounted = false
+
+	# Reset fairy system
+	if is_controlling_fairy:
+		end_fairy()
+	fairy_timer = 0.0
+	fairy_cooldown_timer = 0.0
+
+	# Reset elemental gauges
+	heat_gauge = 0.0
+	heat_cooldown_timer = 0.0
+	heat_changed.emit(heat_gauge)
+
+	cool_gauge = 0
+	cool_drain_timer = 0.0
+	cool_drain_accum = 0.0
+	cool_changed.emit(cool_gauge)
+
+	# Reset earth pillars
+	for pillar in active_pillars:
+		if is_instance_valid(pillar):
+			pillar.queue_free()
+	active_pillars.clear()
+
+	# Reset dash cooldown
+	dash_timer = 0.0
+	dash_cooldown_timer = 0.0
+
+	# Reset animation safely
+	_update_animation(Vector2.ZERO)
+	
+	print("Player respawned at:", at_position)

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dhco0dmm7m1cf"]
+
+[ext_resource type="Script" uid="uid://bnnuox24mjhac" path="res://game/minigame_ver2/Obstacles/rock.gd" id="1_4v8tj"]
+[ext_resource type="Texture2D" uid="uid://sgx8wio8iakm" path="res://game/minigame_ver2/Sprite/Stalactite.png" id="2_oohl3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3y3l8"]
+radius = 7.0
+height = 32.0
+
+[node name="Rock" type="Area2D" unique_id=1720770568]
+script = ExtResource("1_4v8tj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1317111101]
+position = Vector2(-7.450581e-09, -1.9999999)
+scale = Vector2(0.13700001, 0.16000001)
+texture = ExtResource("2_oohl3")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1864022434]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_3y3l8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

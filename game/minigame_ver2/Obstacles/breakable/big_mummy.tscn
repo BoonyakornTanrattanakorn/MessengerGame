@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b2nrv5seu4l6w"]
+
+[ext_resource type="Script" uid="uid://bdhtupc478p7c" path="res://game/minigame_ver2/Obstacles/breakable/big_mummy.gd" id="1_l24x4"]
+[ext_resource type="Texture2D" uid="uid://cyra1i5sfqqb3" path="res://game/minigame_ver2/Sprite/mummy2.png" id="2_8fggf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3p3ap"]
+size = Vector2(130, 137)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_se6wd"]
+size = Vector2(147, 152)
+
+[node name="BigMummy" type="StaticBody2D" unique_id=816499297]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_l24x4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=891998949]
+position = Vector2(-1, 1)
+scale = Vector2(0.4609375, 0.4609375)
+texture = ExtResource("2_8fggf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=669856096]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_3p3ap")
+
+[node name="HurtZone" type="Area2D" parent="." unique_id=976701277]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=887641056]
+z_index = 1
+position = Vector2(-8.5, -8)
+shape = SubResource("RectangleShape2D_se6wd")
+debug_color = Color(0.96168846, 1.540184e-06, 0.51167804, 0.41960785)
