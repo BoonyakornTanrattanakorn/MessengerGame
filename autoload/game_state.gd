@@ -6,7 +6,7 @@ var pending_spawn: Vector2 = Vector2.ZERO
 var pending_facing: Vector2 = Vector2.ZERO
 
 # Gems accumulated across all minigames — used as shop currency
-var minigame_gems: int = 100
+var minigame_gems: int = 0
 
 # Where to return after leaving the market
 var market_return_path: String = ""
@@ -35,6 +35,8 @@ var clue_4_unlocked := false
 # Chapter 3 Subnodes
 var chap3_subnode1_shown := false
 var chap3_subnode2_shown := false
+var chap3_subnode3_shown := false
+var chap3_subnode4_shown := false
 
 # Chapter 3 Node 8
 var chap3_node8_shown := false
@@ -52,6 +54,8 @@ func new_game():
 	minigame_gems = 0
 	chap3_subnode1_shown = false
 	chap3_subnode2_shown = false
+	chap3_subnode3_shown = false
+	chap3_subnode4_shown = false
 	chap1_node1_shown = false
 	chap1_node2_shown = false
 	chap1_node3_shown = false
@@ -69,6 +73,7 @@ func new_game():
 	chap4_node10_shown = false
 	chap4_node11_shown = false
 	chap4_node12_shown = false
+	
 
 	clue_1_unlocked = false
 	clue_2_unlocked = false
@@ -108,6 +113,8 @@ func load_data(data):
 	minigame_gems = data.get("minigame_gems", 0)
 	chap3_subnode1_shown = data.get("chap3_subnode1_shown", false)
 	chap3_subnode2_shown = data.get("chap3_subnode2_shown", false)
+	chap3_subnode3_shown = data.get("chap3_subnode3_shown", false)
+	chap3_subnode4_shown = data.get("chap3_subnode4_shown", false)
 	chap1_node1_shown = data.get("chap1_node1_shown", false)
 	chap1_node2_shown = data.get("chap1_node2_shown", false)
 	chap1_node3_shown = data.get("chap1_node3_shown", false)

@@ -18,27 +18,36 @@ var visited_shop := false
 func update_objective() -> void:
 	if sandmonster_quest_turned_in:
 		ObjectiveManager.set_objective("Head to the next city")
+		SaveManager.save_game()
 	elif sandmonster_quest_complete:
 		ObjectiveManager.set_objective("Return to the quest giver")
+		SaveManager.save_game()
 	elif sandmonster_quest_accepted:
 		ObjectiveManager.set_objective(
 			"Defeat big sand monsters (%d/%d)" % [big_sandmonsters_killed, TOTAL_BIG_SANDMONSTERS]
 		)
+		SaveManager.save_game()
 	elif talked_to_governor:
 		ObjectiveManager.set_objective("Explore the city")
+		SaveManager.save_game()
 	elif riddle_solved and talked_to_guard_after_riddle:
 		ObjectiveManager.set_objective("Talk to the city governor")
+		SaveManager.save_game()
 	elif riddle_solved:
 		ObjectiveManager.set_objective("Talk to the guard again")
+		SaveManager.save_game()
 	elif talked_to_guard:
 		if has_all_statues():
 			ObjectiveManager.set_objective("Solve the riddle of the five statues")
+			SaveManager.save_game()
 		else:
 			ObjectiveManager.set_objective(
 				"Find the missing statues (%d/%d)" % [get_statue_count(), TOTAL_STATUES]
 			)
+			SaveManager.save_game()
 	else:
 		ObjectiveManager.set_objective("Talk to the Guard")
+		SaveManager.save_game()
 
 func accept_quest() -> void:
 	if sandmonster_quest_accepted:

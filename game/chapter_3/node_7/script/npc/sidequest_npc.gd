@@ -64,6 +64,7 @@ func _on_dialogue_ended(resource: Resource) -> void:
 	elif Node7State.sandmonster_quest_complete and not Node7State.sandmonster_quest_turned_in:
 		Node7State.sandmonster_quest_turned_in = true
 		print("sandmonster_quest_turned_in: ", Node7State.sandmonster_quest_turned_in)
+		GameState.clue_3_unlocked = true
 		Node7State.update_objective()
 
 func _enter_tree() -> void:
