@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://destpbdq8hlqu" path="res://game/minigame_ver2/Level/main_3.gd" id="1_8fmg1"]
 [ext_resource type="PackedScene" uid="uid://dw3wogc68gtmu" path="res://game/minigame_ver2/Object/Player.tscn" id="2_di410"]
-[ext_resource type="Texture2D" uid="uid://bnnnqhs4go1fx" path="res://game/minigame_ver2/Sprite/Gemini_Generated_Image_rdvprrrdvprrrdvp.png" id="2_httf7"]
+[ext_resource type="Texture2D" uid="uid://ckurc78c65n12" path="res://game/minigame_ver2/Sprite/Gemini_Generated_Image_kz7drskz7drskz7d.png" id="2_qvvx4"]
 [ext_resource type="PackedScene" uid="uid://bcowadkdjwyr2" path="res://game/minigame_ver2/Object/game_camera.tscn" id="3_c5ivr"]
 [ext_resource type="Texture2D" uid="uid://7slnoiux8hwh" path="res://game/minigame_ver2/Sprite/subb1.png" id="3_qvvx4"]
 [ext_resource type="PackedScene" uid="uid://cs6flapgwotx7" path="res://game/minigame_ver2/Object/HUD.tscn" id="4_lddsv"]
@@ -36,9 +36,9 @@ script = ExtResource("1_8fmg1")
 motion_scale = Vector2(0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=685089975]
-position = Vector2(114.999985, 61.000008)
+position = Vector2(135, 88)
 scale = Vector2(0.21395949, 0.2639449)
-texture = ExtResource("2_httf7")
+texture = ExtResource("2_qvvx4")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1815759630]
 motion_scale = Vector2(0, 0)
@@ -2210,7 +2210,7 @@ position = Vector2(7433, -90)
 rotation = 3.1415927
 
 [node name="endpoint" parent="." unique_id=317329225 instance=ExtResource("22_6p51u")]
-position = Vector2(7128, -19)
+position = Vector2(7769, 50)
 
 [node name="RechargeItem241" parent="." unique_id=151959657 instance=ExtResource("8_lddsv")]
 position = Vector2(6451, -14)
@@ -2367,3 +2367,6 @@ position = Vector2(6135.5103, 50)
 rotation = 3.1415927
 scale = Vector2(0.37527025, 0.24432938)
 texture = ExtResource("26_qvvx4")
+
+[node name="DeathZone7" parent="." unique_id=75273644 instance=ExtResource("25_qje2x")]
+position = Vector2(7653, 74)

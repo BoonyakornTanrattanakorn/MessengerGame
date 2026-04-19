@@ -253,10 +253,14 @@ func _physics_process(delta):
 		fairy_cooldown_timer -= delta
 	# Handle skill
 	if playerAttribute == "fire":
-		if Input.is_action_just_pressed("lesser_magic"):
-			shoot_fire_small()
-		if Input.is_action_just_pressed("greater_magic"):
-			shoot_fire_heavy()
+	# Block skills when overheated
+		if heat_gauge >= max_heat:
+			pass  # skills locked — do nothing
+		else:
+			if Input.is_action_just_pressed("lesser_magic"):
+				shoot_fire_small()
+			if Input.is_action_just_pressed("greater_magic"):
+				shoot_fire_heavy()
 	elif playerAttribute == "wind":
 		if wind_dash_just_pressed:
 			_play_sfx("player.dash")
@@ -590,12 +594,10 @@ func shoot_fire_heavy():
 
 func add_heat(amount: float):
 	heat_gauge = clamp(heat_gauge + amount, 0.0, max_heat)
-	heat_cooldown_timer = heat_cooldown_delay   # reset cooldown window
+	heat_cooldown_timer = heat_cooldown_delay
 	heat_changed.emit(heat_gauge)
 	if heat_gauge >= max_heat:
-		health_component.hp = 0
-		health_component.emit_signal("health_changed", health_component.hp)
-		print("Overheated! Player dead!")
+		print("Overheated! Skills locked until cooled!")
 
 
 func add_cool(amount: int):
