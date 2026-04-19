@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dc8ddf0j4nnby"]
 
 [ext_resource type="Script" uid="uid://c7wlrrgfrvwbx" path="res://game/chapter_3/node_8/exterior/node_8_level_0_event_handler.gd" id="1_7iydh"]
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_2yygb"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_2yygb"]
 [ext_resource type="Script" uid="uid://cg62rqgd80634" path="res://game/chapter_3/node_8/exterior/warp_to_level_1.gd" id="3_840er"]
 [ext_resource type="Script" uid="uid://b0i76yist3qxk" path="res://game/chapter_3/node_8/exterior/warp_to_node_9.gd" id="4_7ndse"]
 [ext_resource type="Texture2D" uid="uid://dbg7ut2mytwaa" path="res://assets/sprites/maps/tilesets/pyramid.png" id="5_840er"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://d0ukyoxuoia6t" path="res://game/chapter_3/node_8/dialogue/chap3_node8_level_0.dialogue" id="7_dlg0"]
 [ext_resource type="Texture2D" uid="uid://2o2lcbmxnnwi" path="res://game/chapter_3/node_8/additional_assets/pyramidvillager.png" id="8_ilyw1"]
 [ext_resource type="Texture2D" uid="uid://dqsx07ddd0mo8" path="res://game/chapter_3/node_8/additional_assets/pyramidoldunc.png" id="9_6kv0g"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5lu3"]
 size = Vector2(44.3125, 94.25)

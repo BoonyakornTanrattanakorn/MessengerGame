@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cvrn2p3e27ab0"]
 
 [ext_resource type="Script" uid="uid://qv6dqhhqfo20" path="res://game/chapter_3/node_8/puzzle_1/node_8_level_1_event_handler.gd" id="1_r2bmu"]
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="2_i2qfj"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_i2qfj"]
 [ext_resource type="Script" uid="uid://kspcd4tytbeg" path="res://game/chapter_3/node_8/puzzle_1/puzzle_1_manager.gd" id="3_jd6bv"]
 [ext_resource type="Script" uid="uid://b3ibj7g7sn5rg" path="res://game/chapter_3/node_8/puzzle_1/sand_block.gd" id="4_sandblock"]
 [ext_resource type="Texture2D" uid="uid://cpud8w4jma6u" path="res://game/chapter_3/node_8/additional_assets/Block-A.png" id="5_2kifc"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cb6wxnyjhtoje" path="res://assets/sprites/Portal/PORTALBLUEone.png" id="9_dwin6"]
 [ext_resource type="Texture2D" uid="uid://dt4lgwmfi26jl" path="res://game/chapter_3/node_8/additional_assets/pressureplate_bird.png" id="9_swwnx"]
 [ext_resource type="Texture2D" uid="uid://bak0dg7ncjma5" path="res://game/chapter_3/node_8/additional_assets/pressureplate_cat.png" id="10_2kifc"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_block"]
 size = Vector2(148.5, 169)
