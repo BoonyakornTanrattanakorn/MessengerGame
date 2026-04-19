@@ -9,6 +9,7 @@ var source_element: String = "fire"
 func _ready():
 	$CollisionShape2D  # make sure you have one
 	add_to_group("fire_reflector")
+	add_to_group("spell")
 
 func _physics_process(delta):
 	position += direction * speed * delta

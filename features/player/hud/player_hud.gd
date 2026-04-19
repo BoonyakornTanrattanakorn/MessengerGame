@@ -200,6 +200,10 @@ func _setup_health(player):
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	
+	if DeadManager.is_dead:
+		return
+		
 	if event.is_action_pressed("world_map"):
 		if is_world_map_open:
 			_close_world_map()

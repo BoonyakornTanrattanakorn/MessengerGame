@@ -2,12 +2,14 @@ extends Node
 class_name HealthComponent
 
 signal health_changed(value: int)
+signal player_dead
 
 @export var max_hp: int = 3
 var hp: int = max_hp
 var is_invincible: bool = false
 var invincible_timer: float = 0.0
 var invincible_duration: float = 1.0
+var _was_alive := true
 
 func _ready():
 	hp = max_hp
@@ -36,4 +38,10 @@ func _process(delta: float):
 		invincible_timer -= delta
 		if invincible_timer <= 0:
 			is_invincible = false
+			
+	if hp <= 0 and _was_alive:
+		_was_alive = false
+		player_dead.emit()
+	elif hp > 0:
+		_was_alive = true
 			

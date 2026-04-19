@@ -27,6 +27,7 @@ DialogueManager="*uid://g4hn1po5lutd"
 GameState="*uid://cqe7q3hwi4d7r"
 SceneCache="*uid://fq1fbbmd3mkm"
 Node4State="*uid://d1cwiysmd8bbb"
+DeadManager="*uid://8061dqmp57lc"
 
 [display]
 

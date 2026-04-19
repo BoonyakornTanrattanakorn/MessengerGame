@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var movement_component: MovementComponent = $MovementComponent
@@ -129,6 +130,8 @@ func _ready():
 		_last_health_for_sfx = health_component.hp
 		health_component.connect("health_changed", Callable(self, "_on_health_changed"))
 	
+	# Register player to DeadManager
+	DeadManager.register_player(self)
 	
 func _on_dialogue_started(_arg = null):
 	is_in_dialogue = true
@@ -144,7 +147,7 @@ func _on_skill_changed(attribute: String):
 	print("Switched to: ", attribute)
 
 func _is_input_locked() -> bool:
-	return is_in_dialogue or is_camera_panning
+	return is_in_dialogue or is_camera_panning or DeadManager.is_dead
 
 func _input(event: InputEvent) -> void:
 	if not _is_input_locked():
@@ -530,7 +533,8 @@ func load_data(data):
 	if pos:
 		position = Vector2(pos["x"], pos["y"])
 
-	playerAttribute = hud.get_current_skill()
+	playerAttribute = data.get("playerAttribute", playerAttribute)
+	hud.set_current_skill(playerAttribute)
 	health_component.max_hp = int(data.get("player_max_hp", health_component.max_hp))
 	health_component.hp = int(data.get("player_hp", health_component.hp))
 	# Notify HUD and other listeners via the HealthComponent's signal
@@ -753,7 +757,6 @@ func can_move_in_direction(direction: Vector2) -> bool:
 	return true
 
 func is_on_ice_tile() -> bool:
-
 	var level = SaveManager.get_level_scene()
 	if level == null:
 		return false
@@ -763,3 +766,59 @@ func is_on_ice_tile() -> bool:
 	if level.ice_layer == null:
 		return false
 	return level.ice_layer.is_on_ice(global_position)
+	
+func respawn(at_position: Vector2) -> void:
+	
+	global_position = at_position
+
+	# Restore HP
+	if health_component:
+		health_component.hp = health_component.max_hp
+		health_component.health_changed.emit(health_component.hp)
+
+	# Reset death SFX flag
+	_death_sfx_played = false
+	_last_health_for_sfx = health_component.hp
+
+	# Reset movement state
+	velocity = Vector2.ZERO
+	is_dashing = false
+	is_sliding = false
+	skill_locked = false
+
+	# Reset mount state
+	if current_mount != null:
+		current_mount.reset_position()
+	current_mount = null
+	is_mounted = false
+
+	# Reset fairy system
+	if is_controlling_fairy:
+		end_fairy()
+	fairy_timer = 0.0
+	fairy_cooldown_timer = 0.0
+
+	# Reset elemental gauges
+	heat_gauge = 0.0
+	heat_cooldown_timer = 0.0
+	heat_changed.emit(heat_gauge)
+
+	cool_gauge = 0
+	cool_drain_timer = 0.0
+	cool_drain_accum = 0.0
+	cool_changed.emit(cool_gauge)
+
+	# Reset earth pillars
+	for pillar in active_pillars:
+		if is_instance_valid(pillar):
+			pillar.queue_free()
+	active_pillars.clear()
+
+	# Reset dash cooldown
+	dash_timer = 0.0
+	dash_cooldown_timer = 0.0
+
+	# Reset animation safely
+	_update_animation(Vector2.ZERO)
+	
+	print("Player respawned at:", at_position)

@@ -20,6 +20,7 @@ var traveled: float = 0.0
 @onready var collision = $CollisionShape2D
 
 func _ready():
+	add_to_group("spell")
 	add_to_group("water_reflector")
 	var settings = LEVEL_SETTINGS[level - 1]
 	speed        = settings["speed"]

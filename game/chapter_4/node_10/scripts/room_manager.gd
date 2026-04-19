@@ -8,7 +8,7 @@ var player_checkpoint_position
 @export var room_nodes : Array[Node]
 @export var save_id = "level_manager"
 @export var save_scope = "scene"
-var player
+var player : Player
 
 func _ready():
 	add_to_group("savable")
@@ -21,6 +21,7 @@ func _ready():
 	player = get_player()
 	print(player)
 	await get_tree().process_frame
+	player.health_component.player_dead.connect(_on_player_dead)
 
 func store_initial_states():
 
@@ -71,12 +72,11 @@ func reset_room():
 	if player:
 		player.global_position = player_checkpoint_position
 		
-func get_player():
-
+func get_player() -> Player: 
 	return get_tree().get_first_node_in_group("player")
 	
 func _on_player_dead():
-	reset_room()
+	DeadManager.kill_player("Reason :  Overheat", Vector2(412,675))
 
 func save():
 
@@ -95,6 +95,7 @@ func save():
 		}
 
 	return data
+	
 func load_data(data):
 
 	var room_name = data.get("current_room", "")
