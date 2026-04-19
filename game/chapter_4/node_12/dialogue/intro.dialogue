@@ -1,50 +1,47 @@
-~ start
-# Hallway walk cutscene
-Player: (I walk slowly through the grand hallway, the weight of my journey heavy on my mind.)
-Player: (So much has happened...)
-Player: (If only I had found more clues... maybe I could do something more here.)
-# If player has all clues, inner thought changes
-? [if game_state.clues_all_true] Player: (I have all the clues. If I act now, I might be able to stop the king...)
+~ hallway_thoughts
+Player: (The hallway feels longer than ever.)
+Player: (Every step here carries the weight of my journey.)
+if can_accuse_king()
+	Player: (I have enough proof. If I speak now, I can end this.)
+else
+	Player: (I still don't have enough proof... maybe I can't stop what comes next.)
+=> END
 
-# In front of the king
-Player: I have a message from the town.
-King: Read it.
-Player: The town is under attack and we need back up.
-Player: ...
-King: I understand the situation now. I will alert the army at once!
-King: You did well to relay this message to me. You deserve to rest now.
-King: Guards! Show this man to his chamber!
+~ throne_intro
+Player: Your majesty, I bring a message from the town.
+King: Speak.
+Player: The town is under attack. We need reinforcements now.
+King: I understand the situation. I will alert the army at once.
+King: You have done your duty, messenger. You may leave and take a rest after your long journey.
 
-# Player's choice (conditional)
-? What will you do?
-- Thank the king and go with the soldier => thanks_king
-- [if game_state.clues_all_true] Accuse the king of attacking the town => accuse_king
+if can_accuse_king()
+	What will you do?
+	- Leave the throne room.
+		do choose_thanks_king()
+		=> END
+	- Accuse the king.
+		do choose_accuse_king()
+		=> accuse_king
+else
+	What will you do?
+	- Go with the soldier.
+		do choose_thanks_king()
+		=> END
+
 
 ~ thanks_king
-Player: Thank you, your majesty.
-Soldier: This way, please.
-Player: (I follow the soldier and die.)
-# Normal ending
+Player: Understood, your majesty.
+if can_accuse_king()
+	Player: What am I doing!? That was my only chance and now it's gone forever.
+Player: (I leave the hall, and the monsters retreat for now...)
+Player: (...but they will return again and again.)
 => END
 
 ~ accuse_king
-Player: I know the truth. You are the one who attacked my town!
-King: ...
-King: The messenger has gone mad! Soldier! Capture him dead or alive!
-# Auto-equip fire power (handled in script)
-Soldier: ...
-Soldier: (hesitates)
-King: What are you waiting for? Do it!
-? Do you attack the soldier?
-- Attack the soldier => fight_begins
-- Do not attack => player_killed
-
-~ fight_begins
-Player: (I unleash my fire power at the soldier!)
-# (Battle sequence begins)
-=> END
-
-~ player_killed
-Soldier: Forgive me...
-# (Soldiers kill the player)
+Player: No. You are the one behind the attacks.
+King: The messenger has gone mad! Call in the royal mages! 
+do _fade_to_black_then_warp_player()
+King: My royal mages! Capture him dead or alive!
+do _reveal_mages_with_camera_pan()
+do! start_fight_sequence()
 => END

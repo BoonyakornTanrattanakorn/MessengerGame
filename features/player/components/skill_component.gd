@@ -2,6 +2,7 @@ extends Node
 class_name SkillComponent
 
 @export var wind_scene: PackedScene
+@export var earth_shield_scene: PackedScene
 @export var fire_small_scene: PackedScene
 @export var fire_heavy_scene: PackedScene
 @export var water_fairy_scene: PackedScene
@@ -14,6 +15,7 @@ func _ready():
 	# Scenes should be assigned in the editor; provide lightweight helpers
 	scenes = {
 		"wind": wind_scene,
+		"earth_shield": earth_shield_scene,
 		"fire_small": fire_small_scene,
 		"fire_heavy": fire_heavy_scene,
 		"water_fairy": water_fairy_scene,
@@ -50,6 +52,8 @@ func shoot_wind_wave() -> void:
 	var player = _get_player()
 	if wind_scene == null:
 		return
+	if player.skill_locked:
+		return
 	var aim_dir: Vector2 = player.last_direction
 	if player.has_method("get_aim_direction"):
 		aim_dir = player.get_aim_direction()
@@ -57,7 +61,7 @@ func shoot_wind_wave() -> void:
 		player.last_direction = aim_dir
 	var wave = wind_scene.instantiate()
 	wave.direction = aim_dir
-	wave.global_position = player.global_position
+	wave.global_position = player.global_position + player.skill_offset
 	wave.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(wave)
 
@@ -66,6 +70,8 @@ func shoot_fire_small() -> void:
 	var player = _get_player()
 	if fire_small_scene == null:
 		return
+	if player.skill_locked:
+		return
 	var aim_dir: Vector2 = player.last_direction
 	if player.has_method("get_aim_direction"):
 		aim_dir = player.get_aim_direction()
@@ -73,7 +79,7 @@ func shoot_fire_small() -> void:
 		player.last_direction = aim_dir
 	var ball = fire_small_scene.instantiate()
 	ball.direction = aim_dir
-	ball.global_position = player.global_position
+	ball.global_position = player.global_position + player.skill_offset
 	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
@@ -84,6 +90,8 @@ func shoot_fire_heavy() -> void:
 	var player = _get_player()
 	if fire_heavy_scene == null:
 		return
+	if player.skill_locked:
+		return
 	var aim_dir: Vector2 = player.last_direction
 	if player.has_method("get_aim_direction"):
 		aim_dir = player.get_aim_direction()
@@ -91,7 +99,7 @@ func shoot_fire_heavy() -> void:
 		player.last_direction = aim_dir
 	var ball = fire_heavy_scene.instantiate()
 	ball.direction = aim_dir
-	ball.global_position = player.global_position
+	ball.global_position = player.global_position + player.skill_offset
 	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
@@ -101,6 +109,8 @@ func shoot_fire_heavy() -> void:
 func summon_fairy() -> void:
 	var player = _get_player()
 	if player.cool_gauge + 1 > player.max_cool_gauge:
+		return
+	if player.skill_locked:
 		return
 	if player.has_method("add_cool"):
 		player.add_cool(1)
@@ -147,6 +157,8 @@ func handle_fairy_movement(delta: float) -> void:
 
 func shoot_water_wave(level: int) -> void:
 	var player = _get_player()
+	if player.skill_locked:
+		return
 	var cost = level
 	if player.cool_gauge + cost > player.max_cool_gauge:
 		level = player.max_cool_gauge - player.cool_gauge
@@ -169,32 +181,82 @@ func shoot_water_wave(level: int) -> void:
 		get_tree().current_scene.add_child(wave)
 
 
-func activate_earth_shield() -> void:
+func _get_earth_shield() -> EarthShield:
 	var player = _get_player()
-	if player.is_shield_active:
+	if player == null:
+		return null
+
+	var shield := player.find_child("EarthShield", true, false)
+	if shield is EarthShield:
+		return shield as EarthShield
+
+	if earth_shield_scene == null:
+		return null
+
+	var shield_instance := earth_shield_scene.instantiate() as EarthShield
+	shield_instance.name = "EarthShield"
+	if player.has_node("AnimatedSprite2D"):
+		player.get_node("AnimatedSprite2D").add_child(shield_instance)
+	else:
+		player.add_child(shield_instance)
+	return shield_instance
+
+
+func _find_earth_shield() -> EarthShield:
+	var player = _get_player()
+	if player == null:
+		return null
+
+	var shield := player.find_child("EarthShield", true, false)
+	if shield is EarthShield:
+		return shield as EarthShield
+	return null
+
+
+func try_consume_projectile_with_shield(projectile: Area2D) -> bool:
+	var shield := _find_earth_shield()
+	if shield == null:
+		return false
+	return shield.try_absorb_projectile(projectile)
+
+
+func activate_earth_shield() -> void:
+	var shield := _get_earth_shield()
+	if shield == null:
 		return
-	player.current_shield_hp = player.shield_max_hp
-	player.is_shield_active = true
-	print("Earth Shield Activated! HP: ", player.current_shield_hp)
-	if player.animated_sprite.has_node("ShieldVisual"):
-		player.animated_sprite.get_node("ShieldVisual").show()
+
+	if shield.is_active:
+		return
+	
+
+	shield.activate()
+	print("Earth Shield Activated! HP: ", shield.current_hp)
 
 
 func spawn_rock_pillar() -> void:
 	var player = _get_player()
+	if rock_pillar_scene == null:
+		return
+	if player.skill_locked:
+		return
+		
 	player.active_pillars = player.active_pillars.filter(func(p): return is_instance_valid(p))
+	
 	if player.active_pillars.size() >= player.max_pillars:
 		var oldest = player.active_pillars.pop_front()
 		if is_instance_valid(oldest):
 			oldest.queue_free()
-	if rock_pillar_scene != null:
-		var pillar = rock_pillar_scene.instantiate()
-		var spawn_pos = player.global_position + player.last_direction * 32.0
-		pillar.global_position = spawn_pos
-		var is_on_water = false
-		if player.has_method("check_if_water_at"):
-			is_on_water = player.check_if_water_at(spawn_pos)
-		get_tree().current_scene.add_child(pillar)
-		player.active_pillars.append(pillar)
-		if pillar.has_method("setup_pillar"):
-			pillar.setup_pillar(is_on_water)
+			
+	var pillar = rock_pillar_scene.instantiate()
+	var spawn_pos = player.global_position + player.last_direction * 32.0
+	pillar.global_position = spawn_pos
+	
+	var is_on_water = false
+	if player.has_method("check_if_water_at"):
+		is_on_water = player.check_if_water_at(spawn_pos)
+	
+	get_tree().current_scene.add_child(pillar)
+	player.active_pillars.append(pillar)
+	
+	if pillar.has_method("setup_pillar"):
+		pillar.setup_pillar(is_on_water)

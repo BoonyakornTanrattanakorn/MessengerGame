@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cls66supdwuig" path="res://game/chapter_2/node_6/scripts/node_6_event_handler.gd" id="1_2kw6h"]
 [ext_resource type="Script" uid="uid://8kpto0gna34x" path="res://game/chapter_2/node_6/scripts/go_back_zone.gd" id="3_gbkap"]
 [ext_resource type="Script" uid="uid://couoawwk1dc3h" path="res://game/chapter_2/node_6/scripts/boss_fight_zone.gd" id="4_ov4mv"]
+[ext_resource type="PackedScene" uid="uid://iq255vk6v3yr" path="res://game/chapter_2/node_6/scenes/water_serpent.tscn" id="5_lynql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbkap"]
 size = Vector2(20, 220)
@@ -69,6 +70,8 @@ shape = SubResource("RectangleShape2D_ov4mv")
 
 [node name="BossFightZone" type="Area2D" parent="." unique_id=1577412828 node_paths=PackedStringArray("_zone_shape", "_trigger_area", "_borders")]
 position = Vector2(1400, 0)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("4_ov4mv")
 _zone_shape = NodePath("BossFightZone")
 _trigger_area = NodePath("BossFightTrigger")
@@ -114,5 +117,8 @@ shape = SubResource("RectangleShape2D_jvahv")
 [node name="Top" type="CollisionShape2D" parent="MapCollisions" unique_id=1220197927]
 position = Vector2(0, -280)
 shape = SubResource("RectangleShape2D_lhdtu")
+
+[node name="WaterSerpent" parent="." unique_id=1998665961 instance=ExtResource("5_lynql")]
+position = Vector2(1900, 0)
 
 [connection signal="area_entered" from="GoBackZone" to="GoBackZone" method="_on_area_entered"]

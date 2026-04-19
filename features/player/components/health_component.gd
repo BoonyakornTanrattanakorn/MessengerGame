@@ -36,3 +36,4 @@ func _process(delta: float):
 		invincible_timer -= delta
 		if invincible_timer <= 0:
 			is_invincible = false
+			

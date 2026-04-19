@@ -9,6 +9,8 @@ var _dash_timer: float = 0.0
 var _dash_cooldown_timer: float = 0.0
 var _dash_dir: Vector2 = Vector2.ZERO
 
+var _slide_block_timer := 0.0
+
 func process_movement(character: CharacterBody2D, direction: Vector2, speed_multiplier: float, delta: float) -> void:
 	# update cooldown
 	if _dash_cooldown_timer > 0.0:
@@ -17,7 +19,7 @@ func process_movement(character: CharacterBody2D, direction: Vector2, speed_mult
 	# sync cooldown back to character for compatibility
 	if "dash_cooldown_timer" in character:
 		character.dash_cooldown_timer = _dash_cooldown_timer
-
+	
 	# handle active dash
 	if _is_dashing:
 		_dash_timer -= delta
@@ -33,6 +35,47 @@ func process_movement(character: CharacterBody2D, direction: Vector2, speed_mult
 			if "is_dashing" in character:
 				character.is_dashing = true
 			return
+	
+	if _slide_block_timer > 0.0:
+		_slide_block_timer -= delta
+		return
+
+	if not character.is_sliding:
+
+		if direction != Vector2.ZERO:
+			
+			if "is_on_ice_tile" in character:
+				if character.is_on_ice_tile():
+					if abs(direction.x) > abs(direction.y):
+						direction = Vector2(sign(direction.x), 0)
+					else:
+						direction = Vector2(0, sign(direction.y))
+					character.is_sliding = true
+					character.slide_direction = direction
+	
+	if character.is_sliding:
+
+		if "can_move_in_direction" in character:
+			
+			if not character.can_move_in_direction(character.slide_direction):
+				character.is_sliding = false
+				character.velocity = Vector2.ZERO
+				_slide_block_timer = 0.1
+				return
+
+
+		velocity = character.slide_direction * character.speed
+		character.velocity = velocity
+		character.move_and_slide()
+
+
+		if "is_on_ice_tile" in character:
+			if not character.is_on_ice_tile():
+				character.is_sliding = false
+		return
+			
+	if "can_move_in_direction" in character:
+		character.can_move_in_direction(direction)
 
 	# normal movement
 	velocity = direction * character.speed * speed_multiplier
@@ -55,3 +98,4 @@ func request_dash(character: CharacterBody2D, direction: Vector2) -> void:
 		_dash_timer = float(character.dash_duration)
 	else:
 		_dash_timer = 0.15
+		

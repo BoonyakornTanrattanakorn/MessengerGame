@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dgjdfsr7qke2c"]
+
+[ext_resource type="Texture2D" uid="uid://np5lug5264mv" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Male/Male 01-1.png" id="1_wsraa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa2qm"]
+atlas = ExtResource("1_wsraa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df47n"]
+atlas = ExtResource("1_wsraa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlwie"]
+atlas = ExtResource("1_wsraa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8vjio"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wa2qm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df47n")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlwie")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsraa"]
+size = Vector2(32, 32)
+
+[node name="BossSoldier" type="CharacterBody2D" unique_id=1384484859]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=467022871]
+sprite_frames = SubResource("SpriteFrames_8vjio")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=395892870]
+shape = SubResource("RectangleShape2D_wsraa")

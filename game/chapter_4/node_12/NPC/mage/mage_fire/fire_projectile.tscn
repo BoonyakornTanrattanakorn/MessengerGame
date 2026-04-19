@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b0n62cjbjn8ux"]
+
+[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_fire/fire_projectile.gd" id="1_x8aka"]
+[ext_resource type="Texture2D" uid="uid://brb33klyryiw8" path="res://assets/sprites/chapter1_node2/heavy_fire.png" id="2_1ev8o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8twpv"]
+radius = 4.0
+
+[node name="FireProjectile" type="Area2D" unique_id=1223153570]
+scale = Vector2(2, 2)
+script = ExtResource("1_x8aka")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=199153392]
+shape = SubResource("CircleShape2D_8twpv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=237652286]
+position = Vector2(-6.000001, -9.536743e-07)
+scale = Vector2(0.0377501, 0.0377501)
+texture = ExtResource("2_1ev8o")

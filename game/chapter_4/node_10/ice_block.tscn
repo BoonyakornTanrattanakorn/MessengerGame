@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ocelh48dimnp"]
+
+[ext_resource type="Script" uid="uid://cdjij0x58a61d" path="res://game/chapter_4/node_10/scripts/ice_block.gd" id="1_daf44"]
+[ext_resource type="Texture2D" uid="uid://b7mykpgb5y185" path="res://assets/sprites/icons/ice.png" id="2_ersdy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arnb7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twobc"]
+
+[node name="IceBlock" type="CharacterBody2D" unique_id=2046404792 groups=["ice_block"]]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(1.6, 1.6)
+collision_layer = 16
+collision_mask = 5
+script = ExtResource("1_daf44")
+level_scene_path = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1125030759]
+shape = SubResource("RectangleShape2D_arnb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1595328031]
+y_sort_enabled = true
+position = Vector2(0, -2.25)
+scale = Vector2(0.541, 0.51)
+texture = ExtResource("2_ersdy")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=258028329]
+y_sort_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=104483170]
+shape = SubResource("RectangleShape2D_twobc")

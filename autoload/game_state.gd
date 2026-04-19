@@ -13,12 +13,24 @@ var market_return_path: String = ""
 var market_return_spawn: Vector2 = Vector2.ZERO
 var market_return_facing: Vector2 = Vector2.LEFT
 
+var chap1_node1_shown := false
 var chap1_node2_shown := false
 var chap1_node3_shown := false
 var chap1_node3_1_shown := false
 var chap1_node3_2_shown := false
 var chap1_node3_3_shown := false
-var chap2_node3_shown := false
+var chap2_node4_shown := false
+var chap2_node6_shown := false
+var chap3_node7_shown := false
+var chap3_node9_shown := false
+var chap4_node10_shown := false
+var chap4_node11_shown := false
+var chap4_node12_shown := false
+
+var clue_1_unlocked := false
+var clue_2_unlocked := false
+var clue_3_unlocked := false
+var clue_4_unlocked := false
 
 # Chapter 3 Subnodes
 var chap3_subnode1_shown := false
@@ -40,6 +52,7 @@ func new_game():
 	minigame_gems = 0
 	chap3_subnode1_shown = false
 	chap3_subnode2_shown = false
+	chap1_node1_shown = false
 	chap1_node2_shown = false
 	chap1_node3_shown = false
 	chap1_node3_1_shown = false
@@ -50,12 +63,25 @@ func new_game():
 	chap3_node8_2_shown = false
 	chap3_node8_3_shown = false
 	chap2_node3_shown = false
+	chap2_node4_shown = false
+	chap2_node6_shown = false
+	chap3_node7_shown = false
+	chap3_node9_shown = false
+	chap4_node10_shown = false
+	chap4_node11_shown = false
+	chap4_node12_shown = false
+
+	clue_1_unlocked = false
+	clue_2_unlocked = false
+	clue_3_unlocked = false
+	clue_4_unlocked = false
 
 func save():
 	return {
 		"minigame_gems": minigame_gems,
 		"chap3_subnode1_shown": chap3_subnode1_shown,
 		"chap3_subnode2_shown": chap3_subnode2_shown,
+		"chap1_node1_shown": chap1_node1_shown,
 		"chap1_node2_shown": chap1_node2_shown,
 		"chap1_node3_shown": chap1_node3_shown,
 		"chap1_node3_1_shown": chap1_node3_1_shown,
@@ -66,12 +92,25 @@ func save():
 		"chap3_node8_2_shown": chap3_node8_2_shown,
 		"chap3_node8_3_shown": chap3_node8_3_shown,
 		"chap2_node3_shown": chap2_node3_shown
+		"chap2_node4_shown": chap2_node4_shown,
+		"chap2_node6_shown": chap2_node6_shown,
+		"chap3_node7_shown": chap3_node7_shown,
+		"chap3_node9_shown": chap3_node9_shown,
+		"chap4_node10_shown": chap4_node10_shown,
+		"chap4_node11_shown": chap4_node11_shown,
+		"chap4_node12_shown": chap4_node12_shown,
+		
+		"clue_1_unlocked": clue_1_unlocked,
+		"clue_2_unlocked": clue_2_unlocked,
+		"clue_3_unlocked": clue_3_unlocked,
+		"clue_4_unlocked": clue_4_unlocked
 	}
 
 func load_data(data):
 	minigame_gems = data.get("minigame_gems", 0)
 	chap3_subnode1_shown = data.get("chap3_subnode1_shown", false)
 	chap3_subnode2_shown = data.get("chap3_subnode2_shown", false)
+	chap1_node1_shown = data.get("chap1_node1_shown", false)
 	chap1_node2_shown = data.get("chap1_node2_shown", false)
 	chap1_node3_shown = data.get("chap1_node3_shown", false)
 	chap1_node3_1_shown = data.get("chap1_node3_1_shown", false)
@@ -82,3 +121,15 @@ func load_data(data):
 	chap3_node8_2_shown = data.get("chap3_node8_2_shown", false)
 	chap3_node8_3_shown = data.get("chap3_node8_3_shown", false)
 	chap2_node3_shown = data.get("chap2_node3_shown", false)
+	chap2_node4_shown = data.get("chap2_node4_shown", false)
+	chap2_node6_shown = data.get("chap2_node6_shown", false)
+	chap3_node7_shown = data.get("chap3_node7_shown", false)
+	chap3_node9_shown = data.get("chap3_node9_shown", false)
+	chap4_node10_shown = data.get("chap4_node10_shown", false)
+	chap4_node11_shown = data.get("chap4_node11_shown", false)
+	chap4_node12_shown = data.get("chap4_node12_shown", false)
+	
+	clue_1_unlocked = data.get("clue_1_unlocked", false)
+	clue_2_unlocked = data.get("clue_2_unlocked", false)
+	clue_3_unlocked = data.get("clue_3_unlocked", false)
+	clue_4_unlocked = data.get("clue_4_unlocked", false)

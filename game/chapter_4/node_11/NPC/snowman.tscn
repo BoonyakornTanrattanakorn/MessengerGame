@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://4adc4u5tcoe7"]
+
+[ext_resource type="Texture2D" uid="uid://qxoytagsclua" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Xmas/pipo-xmaschara05.png" id="1_pjgwa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvxp3"]
+atlas = ExtResource("1_pjgwa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7t3i"]
+atlas = ExtResource("1_pjgwa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wejp"]
+atlas = ExtResource("1_pjgwa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8inrr"]
+atlas = ExtResource("1_pjgwa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qp5b3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvxp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7t3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wejp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8inrr")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwdef"]
+size = Vector2(32, 32)
+
+[node name="Villager" type="CharacterBody2D" unique_id=151893683]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1344047570]
+sprite_frames = SubResource("SpriteFrames_qp5b3")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.89576215
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404574336]
+shape = SubResource("RectangleShape2D_cwdef")

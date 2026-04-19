@@ -80,23 +80,30 @@ var heat_gauge_value: float = 0.0
 var cool_gauge_value: int = 0
 var element_icons := {}
 
+
 func _ready():
 	add_to_group("savable")
 
 	ObjectiveManager.register_hud(self)
 	hide_objective()
-	
-	var players = get_tree().get_nodes_in_group("player")
 
+	var players = get_tree().get_nodes_in_group("player")
 	if players.size() == 0:
 		print("No player found")
 		return
 
 	var player = players[0]
-	
 	if not player.is_node_ready():
 		await player.ready
-		
+
+	# Listen for dialogue state to auto-hide power wheel
+	if player.has_signal("is_in_dialogue_changed"):
+		player.connect("is_in_dialogue_changed", Callable(self, "_on_player_dialogue_state_changed"))
+	else:
+		# Fallback: poll in _process if signal not available
+		set_process(true)
+		self._last_dialogue_state = player.is_in_dialogue
+
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	pause_menu = PAUSE_MENU_SCENE.instantiate() as PauseMenu
 	add_child(pause_menu)
@@ -121,7 +128,7 @@ func _ready():
 	call_deferred("_setup_health", player)
 
 	skill_changed.connect(_on_skill_changed)
-	
+
 	# Heat gauge
 	if heat_gauge != null:
 		heat_gauge.set_max_hp(player.health_component.max_hp)
@@ -143,13 +150,24 @@ func _ready():
 		print("ERROR: cool_gauge_ui node not found! Check path: ", cool_gauge_ui)
 
 
-func _setup_health(player):
-	top_left_gui.set_max_health(player.player_max_hp)
-	top_left_gui.update_health(player.player_hp)
-	player.health_changed.connect(top_left_gui.update_health)
-	
+# Auto-hide power wheel if player enters dialogue
+func _on_player_dialogue_state_changed(is_in_dialogue: bool) -> void:
+	if is_in_dialogue and power_wheel and power_wheel.visible:
+		power_wheel.visible = false
+		_set_power_wheel_slowmo(false)
 
+# Fallback polling if no signal
+
+var _last_dialogue_state := false
 func _process(_delta):
+	# Fallback polling for dialogue state if no signal
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		var player = players[0]
+		if player.is_in_dialogue != _last_dialogue_state:
+			_on_player_dialogue_state_changed(player.is_in_dialogue)
+			_last_dialogue_state = player.is_in_dialogue
+
 	if _power_wheel_slowmo_active and not Input.is_action_pressed("power_wheel"):
 		_set_power_wheel_slowmo(false)
 
@@ -160,50 +178,71 @@ func _process(_delta):
 	if Input.is_action_just_pressed("element_rotate_left"):
 		skill_index = (skill_index - 1 + skills.size()) % skills.size()
 		update_skill_display()
+		_play_ui_sfx("ui.hover")
 		emit_signal("skill_changed", skills[skill_index]["attribute"])
 
 	if Input.is_action_just_pressed("element_rotate_right"):
 		skill_index = (skill_index + 1) % skills.size()
 		update_skill_display()
+		_play_ui_sfx("ui.hover")
 		emit_signal("skill_changed", skills[skill_index]["attribute"])
 
 	# Item bar — left/right
 	if items.size() > 0 and Input.is_action_just_pressed("item_rotate_left"):
 		item_index = (item_index - 1 + items.size()) % items.size()
 		update_item_display()
+		_play_ui_sfx("ui.hover")
 
 	if items.size() > 0 and Input.is_action_just_pressed("item_rotate_right"):
 		item_index = (item_index + 1) % items.size()
 		update_item_display()
+		_play_ui_sfx("ui.hover")
+
+
+func _setup_health(player):
+	top_left_gui.set_max_health(player.player_max_hp)
+	top_left_gui.update_health(player.player_hp)
+	player.health_changed.connect(top_left_gui.update_health)
+	
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("world_map"):
 		if is_world_map_open:
 			_close_world_map()
+			_play_ui_sfx("ui.unpause")
 		elif not get_tree().paused:
 			_open_world_map()
+			_play_ui_sfx("ui.pause")
 		get_viewport().set_input_as_handled()
 		return
 
 	if event.is_action_pressed("pause_menu"):
 		if is_world_map_open:
 			_close_world_map()
+			_play_ui_sfx("ui.unpause")
 		elif get_tree().paused:
 			_resume_game()
+			_play_ui_sfx("ui.unpause")
 		else:
 			_pause_game()
+			_play_ui_sfx("ui.pause")
 		get_viewport().set_input_as_handled()
 		return
 
 	if event.is_action_pressed("use_item"):
 		if _use_selected_item():
+			_play_ui_sfx("ui.use_item")
 			get_viewport().set_input_as_handled()
+		else:
+			_play_ui_sfx("ui.denied")
 
 	# Show power wheel while holding the assigned action
 	# Show power wheel while holding the assigned action.
 	if event.is_action_pressed("power_wheel"):
 		if power_wheel:
 			power_wheel.visible = true
+		_play_ui_sfx("ui.hover")
 		_set_power_wheel_slowmo(true)
 		get_viewport().set_input_as_handled()
 		return
@@ -214,7 +253,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			if sel_idx >= 0 and sel_idx < skills.size():
 				skill_index = sel_idx
 				update_skill_display()
+				_play_ui_sfx("ui.equip")
 				emit_signal("skill_changed", skills[skill_index]["attribute"])
+			else:
+				_play_ui_sfx("ui.decline")
 			power_wheel.visible = false
 		_set_power_wheel_slowmo(false)
 		get_viewport().set_input_as_handled()
@@ -276,6 +318,20 @@ func _hide_all_element_icons() -> void:
 
 func get_current_skill() -> String:
 	return skills[skill_index]["attribute"]
+
+func set_current_skill(attribute: String) -> void:
+	if skills.is_empty():
+		return
+
+	var normalized_attribute := attribute.to_lower()
+	for i in range(skills.size()):
+		if String(skills[i]["attribute"]).to_lower() == normalized_attribute:
+			skill_index = i
+			update_skill_display()
+			emit_signal("skill_changed", skills[skill_index]["attribute"])
+			return
+
+	push_warning("Unknown skill attribute requested: %s" % attribute)
 
 func update_item_display():
 	if items.size() == 0:
@@ -560,3 +616,8 @@ func _notify_guards() -> void:
 	for guard in guards:
 		if guard.has_method("_step_aside"):
 			guard._step_aside()
+
+func _play_ui_sfx(event_key: String) -> void:
+	if SFXManager == null:
+		return
+	SFXManager.play_event(event_key)
