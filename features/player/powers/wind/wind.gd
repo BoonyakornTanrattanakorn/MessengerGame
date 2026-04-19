@@ -8,6 +8,7 @@ var source: String = "wind"
 
 func _ready():
 	# สั่งให้ลบตัวเองทิ้งเมื่อครบเวลา
+	add_to_group("spell")
 	add_to_group("wind_wave")
 	add_to_group("player_projectile")
 	await get_tree().create_timer(lifetime).timeout
