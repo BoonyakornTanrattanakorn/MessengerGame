@@ -10726,14 +10726,14 @@ tile_set = SubResource("TileSet_jypgh")
 [node name="StaticBody2D" type="StaticBody2D" parent="Map" unique_id=2038560893]
 
 [node name="Castle" type="Sprite2D" parent="Map/StaticBody2D" unique_id=1682452461]
-position = Vector2(1027, 233.00002)
+position = Vector2(1018, 228.00002)
 scale = Vector2(4.1901073, 4.063803)
 texture = ExtResource("2_iep0d")
 region_enabled = true
 region_rect = Rect2(383.891, 192.147, 96, 95.549164)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/StaticBody2D" unique_id=763326120]
-position = Vector2(-53, -18)
+position = Vector2(-58, -26)
 polygon = PackedVector2Array(882, 131, 1278, 128, 1280, 229, 1253, 249, 1252, 376, 1278, 426, 1277, 445, 1184, 446, 1181, 424, 979, 423, 980, 446, 878, 448, 879, 373, 908, 332, 906, 249, 879, 231)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Map" unique_id=2140384355]
