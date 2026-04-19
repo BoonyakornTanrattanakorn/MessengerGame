@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://f1q6h4fh4tl7"]
 
-[ext_resource type="TileSet" uid="uid://da22223b768hm" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="1_mp6xq"]
+[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_mp6xq"]
 [ext_resource type="Texture2D" uid="uid://mq5u0vxfx83g" path="res://game/chapter_3/subnode/additional_assets_forallsubnodechap3/camelsung.png" id="2_1euj6"]
 [ext_resource type="Script" uid="uid://b4vboqt110cum" path="res://game/chapter_3/subnode/warp_to_minigame.gd" id="3_8cooy"]
 [ext_resource type="Texture2D" uid="uid://dnr3khqpsrkoq" path="res://game/chapter_3/subnode/additional_assets_forallsubnodechap3/CamelStation.png" id="4_p2b63"]

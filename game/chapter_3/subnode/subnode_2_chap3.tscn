@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://drxs8v1i2mfx8"]
 
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="1_u1lrk"]
+[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_u1lrk"]
 [ext_resource type="PackedScene" uid="uid://cxhrf1g0wlye1" path="res://game/chapter_3/node_7_market/scenes/shop.tscn" id="2_d2h18"]
 [ext_resource type="Texture2D" uid="uid://cin0bsadvym6h" path="res://game/chapter_3/subnode/additional_assets_forallsubnodechap3/sandstatue.png" id="3_0xjbb"]
 [ext_resource type="Texture2D" uid="uid://dl4ogwpskckwn" path="res://game/chapter_3/subnode/additional_assets_forallsubnodechap3/Statue.png" id="4_1f0tw"]

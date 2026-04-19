@@ -62,7 +62,6 @@ func new_game():
 	chap3_node8_1_shown = false
 	chap3_node8_2_shown = false
 	chap3_node8_3_shown = false
-	chap2_node3_shown = false
 	chap2_node4_shown = false
 	chap2_node6_shown = false
 	chap3_node7_shown = false
@@ -91,7 +90,6 @@ func save():
 		"chap3_node8_1_shown": chap3_node8_1_shown,
 		"chap3_node8_2_shown": chap3_node8_2_shown,
 		"chap3_node8_3_shown": chap3_node8_3_shown,
-		"chap2_node3_shown": chap2_node3_shown
 		"chap2_node4_shown": chap2_node4_shown,
 		"chap2_node6_shown": chap2_node6_shown,
 		"chap3_node7_shown": chap3_node7_shown,
@@ -120,7 +118,6 @@ func load_data(data):
 	chap3_node8_1_shown = data.get("chap3_node8_1_shown", false)
 	chap3_node8_2_shown = data.get("chap3_node8_2_shown", false)
 	chap3_node8_3_shown = data.get("chap3_node8_3_shown", false)
-	chap2_node3_shown = data.get("chap2_node3_shown", false)
 	chap2_node4_shown = data.get("chap2_node4_shown", false)
 	chap2_node6_shown = data.get("chap2_node6_shown", false)
 	chap3_node7_shown = data.get("chap3_node7_shown", false)

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://7slnoiux8hwh" path="res://game/minigame_ver2/Sprite/subb1.png" id="3_qvvx4"]
 [ext_resource type="PackedScene" uid="uid://cs6flapgwotx7" path="res://game/minigame_ver2/Object/HUD.tscn" id="4_lddsv"]
 [ext_resource type="PackedScene" uid="uid://cac3nsmu0piae" path="res://game/minigame_ver2/Object/game_over.tscn" id="5_3pjlm"]
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.res" id="6_x36au"]
+[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="6_x36au"]
 [ext_resource type="PackedScene" uid="uid://i6t6o8e2y6dd" path="res://game/minigame_ver2/Object/blast_skill.tscn" id="7_tdav1"]
 [ext_resource type="PackedScene" uid="uid://dxr5vb1n6n3vy" path="res://game/minigame_ver2/Collectible/recharge_item.tscn" id="8_lddsv"]
 [ext_resource type="PackedScene" uid="uid://be5fq86ot88rw" path="res://game/minigame_ver2/Collectible/health_shard.tscn" id="9_3pjlm"]
