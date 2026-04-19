@@ -1,8 +1,9 @@
 [gd_scene format=4 uid="uid://d1xnmphum431q"]
 
-[ext_resource type="TileSet" uid="uid://f0rvhxykfmty" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_gsr62"]
-[ext_resource type="PackedScene" uid="uid://62un3mh3kwg1" path="res://game/chapter_1/node_1/scenes/fire.tscn" id="2_eai0u"]
-[ext_resource type="PackedScene" uid="uid://w537r6gp3kmf" path="res://game/chapter_1/node_1/scenes/fire_floored.tscn" id="3_xpk2m"]
+[ext_resource type="TileSet" uid="uid://ceymlxtm7dm00" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_gsr62"]
+[ext_resource type="PackedScene" path="res://game/chapter_1/node_1/scenes/fire.tscn" id="2_eai0u"]
+[ext_resource type="PackedScene" uid="uid://1ep5r8rc4nge" path="res://game/chapter_1/node_1/scenes/RoyalKnight.tscn" id="2_xpk2m"]
+[ext_resource type="PackedScene" path="res://game/chapter_1/node_1/scenes/fire_floored.tscn" id="3_xpk2m"]
 
 [node name="Chapter1Node1" type="Node2D" unique_id=94247565]
 
@@ -27,6 +28,9 @@ tile_set = ExtResource("1_gsr62")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAATAPX/KQAkACUAAAATAPf/KQAkACcAAAAUAPT/KQAlACQAAAAUAPX/KQAlACUAAAAUAPb/KQAlACYAAAAUAPf/KQAlACcAAAAVAPX/KQAmACUAAAAVAPb/KQAmACYAAAAVAPf/KQAmACcAAAD9//X/KQAJAAgAAAD9//b/KQAJAAkAAAD9//f/KQAJAAoAAAD+//X/KQAKAAgAAAD+//b/KQAKAAkAAAD+//f/KQAKAAoAAAD///X/KQALAAgAAAD///b/KQALAAkAAAD///f/KQALAAoAAAD9//T/KQAJAAcAAAD+//T/KQAKAAcAAAD///T/KQALAAcAAAD6//X/KQAiAAwAAAD6//b/KQAiAA0AAAD6//f/KQAiAA4AAAD7//X/KQAjAAwAAAD7//b/KQAjAA0AAAD5//X/KQAhAAwAAAD5//b/KQAhAA0AAAD5//f/KQAhAA4AAAAIAPP/KQAnAAYAAAAIAPT/KQAnAAcAAAAIAPX/KQAnAAgAAAAIAPb/KQAnAAkAAAAIAPf/KQAnAAoAAAAIAPj/KQAnAAsAAAAJAPP/KQAoAAYAAAAJAPT/KQAoAAcAAAAJAPX/KQAoAAgAAAAJAPb/KQAoAAkAAAAJAPf/KQAoAAoAAAAJAPj/KQAoAAsAAAAKAPP/KQApAAYAAAAKAPT/KQApAAcAAAAKAPX/KQApAAgAAAAKAPb/KQApAAkAAAAKAPf/KQApAAoAAAAEAPj/KQAtACgAAAAEAPn/KQAtACkAAAAFAPj/KQAuACgAAAAFAPn/KQAuACkAAAAGAPj/KQAvACgAAAAGAPn/KQAvACkAAADn//T/KQAnACUAAADn//b/KQAnACcAAADn//f/KQAnACgAAADn//j/KQAnACkAAADo//P/KQAoACQAAADo//T/KQAoACUAAADo//X/KQAoACYAAADo//b/KQAoACcAAADo//f/KQAoACgAAADo//j/KQAoACkAAADp//T/KQApACUAAADp//X/KQApACYAAADp//b/KQApACcAAADp//f/KQApACgAAADp//j/KQApACkAAADu//T/KQAtAAAAAADu//X/KQAtAAEAAADu//b/KQAtAAIAAADu//f/KQAtAAMAAADu//j/KQAtAAQAAADv//T/KQAuAAAAAADv//X/KQAuAAEAAADv//b/KQAuAAIAAADv//f/KQAuAAMAAADv//j/KQAuAAQAAADw//T/KQAvAAAAAADw//X/KQAvAAEAAADw//b/KQAvAAIAAADw//f/KQAvAAMAAADw//j/KQAvAAQAAAA=")
 tile_set = ExtResource("1_gsr62")
+
+[node name="RoyalKnight" parent="." unique_id=2134897095 instance=ExtResource("2_xpk2m")]
+position = Vector2(292, -106)
 
 [node name="Fires" type="Node2D" parent="." unique_id=1909004268]
 
