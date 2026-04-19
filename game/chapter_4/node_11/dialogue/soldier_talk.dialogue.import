@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cgg38s1ayu5fd"
+path="res://.godot/imported/soldier_talk.dialogue-5096aa35505ba123410aa1be8dd18ed9.tres"
+
+[deps]
+
+source_file="res://game/chapter_4/node_11/dialogue/soldier_talk.dialogue"
+dest_files=["res://.godot/imported/soldier_talk.dialogue-5096aa35505ba123410aa1be8dd18ed9.tres"]
+
+[params]
+
+defaults=true

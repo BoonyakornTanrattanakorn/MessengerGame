@@ -10817,7 +10817,7 @@ position = Vector2(1157, 484)
 position = Vector2(993, 484)
 
 [node name="BossSoldier" parent="NPC" unique_id=1384484859 instance=ExtResource("10_uark8")]
-position = Vector2(1039, 484)
+position = Vector2(1036, 485)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=32194027]
 

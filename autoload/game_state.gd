@@ -26,6 +26,7 @@ var chap3_node9_shown := false
 var chap4_node10_shown := false
 var chap4_node11_shown := false
 var chap4_node11_villager_talked_once := false
+var chap4_node11_soilder := false
 var chap4_tower_1st_floor_shown := false
 var chap4_node11_ice_ghost_dead := false
 var chap4_node12_shown := false
@@ -76,6 +77,7 @@ func new_game():
 	chap4_node10_shown = false
 	chap4_node11_shown = false
 	chap4_node11_villager_talked_once = false
+	chap4_node11_soilder = false
 	chap4_node11_ice_ghost_dead = false
 	chap4_node12_shown = false
 	
@@ -107,6 +109,7 @@ func save():
 		"chap4_node10_shown": chap4_node10_shown,
 		"chap4_node11_shown": chap4_node11_shown,
 		"chap4_node11_villager_talked_once": chap4_node11_villager_talked_once,
+		"chap4_node11_soilder": chap4_node11_soilder,
 		"chap4_node11_ice_ghost_dead": chap4_node11_ice_ghost_dead,
 		"chap4_node12_shown": chap4_node12_shown,
 		
@@ -139,6 +142,7 @@ func load_data(data):
 	chap4_node10_shown = data.get("chap4_node10_shown", false)
 	chap4_node11_shown = data.get("chap4_node11_shown", false)
 	chap4_node11_villager_talked_once = data.get("chap4_node11_villager_talked_once", false)
+	chap4_node11_soilder = data.get("chap4_node11_soilder", false)
 	chap4_node11_ice_ghost_dead = data.get("chap4_node11_ice_ghost_dead", false)
 	chap4_node12_shown = data.get("chap4_node12_shown", false)
 	

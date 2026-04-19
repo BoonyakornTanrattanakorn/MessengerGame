@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c00whxx6y58q5"]
 
 [ext_resource type="Texture2D" uid="uid://cawo34p0lfjd2" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Male/Male 15-3.png" id="1_8kvfq"]
-[ext_resource type="Script" path="res://game/chapter_4/node_11/NPC/villager.gd" id="2_villager_script"]
+[ext_resource type="Script" uid="uid://d4lk0puexmrpq" path="res://game/chapter_4/node_11/NPC/villager.gd" id="2_villager_script"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dvxp3"]
 atlas = ExtResource("1_8kvfq")
