@@ -35,9 +35,9 @@ signal cool_changed(value: int)
 # Water fairy
 var fairy_instance = null
 var is_controlling_fairy: bool = false
-var fairy_duration: float = 5.0
+var fairy_duration: float = 8.0
 var fairy_timer: float = 0.0
-var fairy_cooldown: float = 8.0
+var fairy_cooldown: float = 1.0
 var fairy_cooldown_timer: float = 0.0
 
 # Water wave charging
@@ -87,6 +87,7 @@ var inventory = {
 	"brave_stone": 0,
 	"potion": 3,
 	"antidote": 2,
+	"desert_crystal": 0
 }
 
 var is_in_dialogue = false
@@ -177,27 +178,29 @@ func _physics_process(delta):
 	if boat_splash_timer > 0.0:
 		boat_splash_timer -= delta
 	
-	# Mount/Dismount
 	if Input.is_action_just_pressed("interact"):
 		_play_sfx("player.interact")
 		if is_mounted:
 			if current_mount.can_dismount:
 				current_mount.dismount_player()
-		elif interact_with != null:
-			print("Pressing F on: ", interact_with.name)
-			if interact_with.has_method("activate"):
-				interact_with.activate()
-				interact_with = null
-			elif interact_with.has_method("can_interact"):
-				var dialogue_path = "res://dialogue/conversations/" + interact_with.name + ".dialogue"
-				if ResourceLoader.exists(dialogue_path):
-					DialogueManager.show_dialogue_balloon(
-						load(dialogue_path),
-						"_" + str(current_dialog)
-					)
-				else:
-					print("No dialogue for: ", interact_with.name)
-	
+		else:
+			# 1. TRY TO USE/PLACE ITEM FROM HUD FIRST
+			var item_used = hud._use_selected_item()
+			
+			if item_used:
+				# Placement was successful!
+				print("Statue placed via HUD logic.")
+			else:
+				# 2. IF NO ITEM WAS USED, TRY TO PICK UP A PLACED STATUE
+				var picked_up = StatuePlacer.try_pickup_statue(self, StatuePuzzleChecker.is_puzzle_complete(get_tree()))
+				if picked_up:
+					hud.refresh_items()
+				elif interact_with != null:
+					# 3. IF NO PICKUP, TRY DIALOGUE/ACTIVATION
+					if interact_with.has_method("activate"):
+						interact_with.activate()
+						interact_with = null
+
 	# If mounted, skip all movement and just follow the cart
 	if is_mounted:
 		global_position = current_mount.mount_point.global_position
@@ -298,8 +301,9 @@ func _physics_process(delta):
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
 	if check_if_void_at(global_position):
-		if not check_if_platform_at(global_position):
+		if not check_if_platform_at(global_position) and not is_dashing:
 			speed_multiplier = 0.0
+			_handle_void_fall()
 	# Movement + dash handled by movement component
 	movement_component.process_movement(self, direction, speed_multiplier, delta)
 
@@ -727,6 +731,33 @@ func check_if_void_at(pos: Vector2) -> bool:
 		return tile_data.get_custom_data("is_void") == true
 			
 	return false
+	
+func _handle_void_fall():
+	is_in_dialogue = true
+	velocity = Vector2.ZERO
+	
+	_play_sfx("player.death")
+	
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) # จางหายใน 0.5 วินาที
+	tween.tween_callback(func(): _void_fall_event())
+
+func _void_fall_event():	
+	is_in_dialogue = true
+	velocity = Vector2.ZERO
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+	
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	get_tree().change_scene_to_file(current_scene_path)
+	
+	var dialogue_resource = load("res://game/chapter_2/node_4/dialogue/dead.dialogue")
+	if dialogue_resource:
+		DialogueManager.show_dialogue_balloon(dialogue_resource, "fall_in_void")
+		
+		await DialogueManager.dialogue_ended
+	
+	is_in_dialogue = false
 
 func check_if_platform_at(_pos: Vector2) -> bool:
 	var overlapping_areas = $Hurtbox.get_overlapping_areas()

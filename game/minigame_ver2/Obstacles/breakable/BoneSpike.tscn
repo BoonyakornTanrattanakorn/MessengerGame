@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cfsewd3ymiu7g"]
+
+[ext_resource type="Texture2D" uid="uid://b8cmuo8yi8ds6" path="res://game/minigame_ver2/Sprite/bone_spike.png" id="1_akhul"]
+[ext_resource type="Script" uid="uid://dhsbrirrbj6y6" path="res://game/minigame_ver2/Obstacles/breakable/bone_spike.gd" id="1_cxdlo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_akhul"]
+radius = 19.0
+height = 54.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cxdlo"]
+radius = 21.0
+height = 56.0
+
+[node name="BoneSpike" type="StaticBody2D" unique_id=769906411]
+script = ExtResource("1_cxdlo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=533126365]
+position = Vector2(0, -4.375002)
+scale = Vector2(0.2285156, 0.26269528)
+texture = ExtResource("1_akhul")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=61972186]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_akhul")
+
+[node name="HurtZone" type="Area2D" parent="." unique_id=1936612425]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=281089814]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_cxdlo")
+debug_color = Color(0.7778609, 0.3695489, 0.621446, 0.41960785)

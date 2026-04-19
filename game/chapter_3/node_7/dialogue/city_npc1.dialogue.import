@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dchi2whlgtctr"
+path="res://.godot/imported/city_npc1.dialogue-d28df246dabf4cb467f11974717c2810.tres"
+
+[deps]
+
+source_file="res://game/chapter_3/node_7/dialogue/city_npc1.dialogue"
+dest_files=["res://.godot/imported/city_npc1.dialogue-d28df246dabf4cb467f11974717c2810.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cxed41yeamfbj"
+path="res://.godot/imported/dead.dialogue-96b58e40de180a604ac4175eaeea64c3.tres"
+
+[deps]
+
+source_file="res://game/chapter_2/node_4/dialogue/dead.dialogue"
+dest_files=["res://.godot/imported/dead.dialogue-96b58e40de180a604ac4175eaeea64c3.tres"]
+
+[params]
+
+defaults=true

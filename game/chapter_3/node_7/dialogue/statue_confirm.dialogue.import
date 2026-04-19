@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://yi1ts74ka1us"
+path="res://.godot/imported/statue_confirm.dialogue-eae4c150bc3c442d498747504c8034fb.tres"
+
+[deps]
+
+source_file="res://game/chapter_3/node_7/dialogue/statue_confirm.dialogue"
+dest_files=["res://.godot/imported/statue_confirm.dialogue-eae4c150bc3c442d498747504c8034fb.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dxl22bdgj38l4"]
+
+[ext_resource type="Script" uid="uid://dfoltg4qgm0rl" path="res://game/minigame_ver2/Obstacles/breakable/breakable_obstacle.gd" id="1_gmcdk"]
+[ext_resource type="Texture2D" uid="uid://cicdpcp1n1xh7" path="res://game/minigame_ver2/Sprite/break_pillar.png" id="2_yp2d5"]
+[ext_resource type="Texture2D" uid="uid://b2vkw1wo5vls4" path="res://game/minigame_ver2/Sprite/broken.png" id="3_yp2d5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_361fd"]
+size = Vector2(59, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yp2d5"]
+size = Vector2(59, 146)
+
+[node name="BreakableObstacle" type="StaticBody2D" unique_id=1529554925]
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_gmcdk")
+rock_texture = ExtResource("3_yp2d5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1612680949]
+position = Vector2(-1.0000057, 5.722046e-06)
+scale = Vector2(0.24453123, 0.24453123)
+texture = ExtResource("2_yp2d5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=604309638]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-1.5, 3)
+shape = SubResource("RectangleShape2D_361fd")
+
+[node name="HurtZone" type="Area2D" parent="." unique_id=118821125]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=200178913]
+z_index = 1
+position = Vector2(-1.5, 3)
+shape = SubResource("RectangleShape2D_yp2d5")
+debug_color = Color(0.94055444, 0.17992964, 0.42668003, 0.41960785)

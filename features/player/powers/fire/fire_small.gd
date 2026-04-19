@@ -10,6 +10,8 @@ func _ready():
 	$CollisionShape2D  # make sure you have one
 	add_to_group("fire_reflector")
 	add_to_group("spell")
+	add_to_group("player_projectile")
+	connect("body_entered", _on_body_entered)
 
 func _physics_process(delta):
 	position += direction * speed * delta
