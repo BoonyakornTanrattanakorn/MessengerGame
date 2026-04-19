@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://b48vavelubmdp"]
 
-[ext_resource type="TileSet" uid="uid://ceymlxtm7dm00" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_1mfa1"]
+[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_1mfa1"]
 [ext_resource type="Script" uid="uid://cls66supdwuig" path="res://game/chapter_2/node_6/scripts/node_6_event_handler.gd" id="1_2kw6h"]
 [ext_resource type="Script" uid="uid://8kpto0gna34x" path="res://game/chapter_2/node_6/scripts/go_back_zone.gd" id="3_gbkap"]
 [ext_resource type="Script" uid="uid://couoawwk1dc3h" path="res://game/chapter_2/node_6/scripts/boss_fight_zone.gd" id="4_ov4mv"]

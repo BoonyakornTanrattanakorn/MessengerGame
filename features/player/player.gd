@@ -11,7 +11,7 @@ var dash_cooldown = 0.5
 
 var playerAttribute = "wind" # make enum
 var is_boat_mode: bool = false
-var boat_splash_sfx: String = "res://assets/audio/water_ball_sfx.ogg"
+var boat_splash_sfx: String = "res://assets/audio/sfx/water_ball_sfx.ogg"
 var boat_splash_interval: float = 1.0
 var boat_splash_timer: float = 0.0
 

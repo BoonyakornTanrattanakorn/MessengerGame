@@ -3,10 +3,10 @@ extends LevelEventHandler
 var dialogue = load("res://game/chapter_2/node_6/dialogue/chap2_node3.dialogue")
 @export var town: Node2D
 
-
 func _ready() -> void:
 	_set_player_boat_mode(true)
-
+	await get_tree().process_frame
+	player.health_component.player_dead.connect(_on_player_dead)
 
 func _exit_tree() -> void:
 	_set_player_boat_mode(false)
@@ -44,3 +44,6 @@ func handle_intro_for_level() -> void:
 		)
 		
 		await DialogueManager.dialogue_ended
+
+func _on_player_dead():
+	DeadManager.kill_player("Shot down by water ball\nTry using wind and earth element alternately.", Vector2(0,0))
