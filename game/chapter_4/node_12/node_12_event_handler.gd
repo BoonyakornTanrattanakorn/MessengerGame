@@ -50,8 +50,6 @@ func _ready() -> void:
 func handle_intro_for_level() -> void:
 	var original_input_locked = player.is_in_dialogue
 	var original_camera_pan = player.is_camera_panning
-	var original_input_locked = player.is_in_dialogue
-	var original_camera_pan = player.is_camera_panning
 
 	# Play intro BGM (orchestral_mission)
 	BGMManager.play_bgm("orchestral_mission")
@@ -118,17 +116,6 @@ func _on_hallway_thoughts_dialogue_ended(resource: DialogueResource) -> void:
 		DialogueManager.dialogue_ended.connect(_on_hallway_thoughts_dialogue_ended)
 	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "hallway_thoughts", [self])
 	_register_fast_forward_balloon(balloon)
-
-func _on_hallway_thoughts_dialogue_ended(resource: DialogueResource) -> void:
-	if not _waiting_for_hallway_thoughts:
-		return
-	if resource != INTRO_DIALOGUE:
-		return
-	_waiting_for_hallway_thoughts = false
-	_hallway_thoughts_done = true
-	if DialogueManager.dialogue_ended.is_connected(_on_hallway_thoughts_dialogue_ended):
-		DialogueManager.dialogue_ended.disconnect(_on_hallway_thoughts_dialogue_ended)
-	hallway_thoughts_finished.emit()
 
 func show_king_cutscene() -> void:
 	if SFXManager != null:
