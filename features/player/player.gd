@@ -295,8 +295,9 @@ func _physics_process(delta):
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
 	if check_if_void_at(global_position):
-		if not check_if_platform_at(global_position):
+		if not check_if_platform_at(global_position) and not is_dashing:
 			speed_multiplier = 0.0
+			_handle_void_fall()
 	# Movement + dash handled by movement component
 	movement_component.process_movement(self, direction, speed_multiplier, delta)
 
@@ -723,6 +724,33 @@ func check_if_void_at(pos: Vector2) -> bool:
 		return tile_data.get_custom_data("is_void") == true
 			
 	return false
+	
+func _handle_void_fall():
+	is_in_dialogue = true
+	velocity = Vector2.ZERO
+	
+	_play_sfx("player.death")
+	
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) # จางหายใน 0.5 วินาที
+	tween.tween_callback(func(): _void_fall_event())
+
+func _void_fall_event():	
+	is_in_dialogue = true
+	velocity = Vector2.ZERO
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+	
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	get_tree().change_scene_to_file(current_scene_path)
+	
+	var dialogue_resource = load("res://game/chapter_2/node_4/dialogue/dead.dialogue")
+	if dialogue_resource:
+		DialogueManager.show_dialogue_balloon(dialogue_resource, "fall_in_void")
+		
+		await DialogueManager.dialogue_ended
+	
+	is_in_dialogue = false
 
 func check_if_platform_at(_pos: Vector2) -> bool:
 	var overlapping_areas = $Hurtbox.get_overlapping_areas()
