@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dgc4m2wuoyn4j"]
 
 [ext_resource type="Script" uid="uid://dteinbbiiebdt" path="res://game/level_controller.gd" id="1_2fs4p"]
-[ext_resource type="PackedScene" uid="uid://bdhw0grmpvptv" path="res://game/chapter_3/subnode/subnode_3_chap3.tscn" id="2_j3oqh"]
+[ext_resource type="PackedScene" uid="uid://dn8tnkqxbocmf" path="res://game/chapter_4/node_10/node_10.tscn" id="2_j3oqh"]
 [ext_resource type="PackedScene" uid="uid://bq8fy4b0jdi2" path="res://features/player/player.tscn" id="4_2lugc"]
 [ext_resource type="PackedScene" uid="uid://oxmcfsdchgpc" path="res://features/player/powers/wind/wind.tscn" id="4_j3oqh"]
 [ext_resource type="PackedScene" uid="uid://dhx5nknyw30h4" path="res://features/player/powers/fire/fire_small.tscn" id="5_kq3sm"]
@@ -29,12 +29,10 @@ script = ExtResource("1_2fs4p")
 [node name="LevelHolder" type="Node2D" parent="." unique_id=196418677]
 y_sort_enabled = true
 
-[node name="Subnode3Chap3" parent="LevelHolder" unique_id=1955289097 instance=ExtResource("2_j3oqh")]
+[node name="Node10" parent="LevelHolder" unique_id=862201448 instance=ExtResource("2_j3oqh")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
-position = Vector2(297, 424)
-save_id = null
-save_scope = null
+position = Vector2(412, 675)
 wind_scene = ExtResource("4_j3oqh")
 fire_small_scene = ExtResource("5_kq3sm")
 fire_heavy_scene = ExtResource("6_e27mp")

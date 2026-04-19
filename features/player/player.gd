@@ -60,6 +60,7 @@ var current_dialog = 0
 var is_sliding := false
 var slide_direction := Vector2.ZERO
 var skill_locked := false
+var earth_greater_locked := false
 
 # Mount system
 var is_mounted = false

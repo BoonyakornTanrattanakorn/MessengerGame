@@ -11,11 +11,11 @@
 [ext_resource type="Script" uid="uid://bkihiu26d6r0j" path="res://game/chapter_4/node_10/scripts/room_manager.gd" id="7_bcujh"]
 [ext_resource type="PackedScene" uid="uid://05acn6y4wcy5" path="res://game/chapter_1/node_2/scenes/trigger.tscn" id="10_i1hpl"]
 [ext_resource type="Script" uid="uid://d2hf0y2vdftmo" path="res://game/chapter_4/node_10/scripts/node_10_trigger.gd" id="11_2dx0m"]
-[ext_resource type="Script" uid="uid://ch5w0pbtx0fkk" path="res://game/warp.gd" id="11_ve5wd"]
 [ext_resource type="Texture2D" uid="uid://bw75ooflysld5" path="res://assets/sprites/maps/tilesets/Dungeon_C.png" id="13_bt7nk"]
 [ext_resource type="Script" uid="uid://dfjc3bx0wkbi5" path="res://game/chapter_4/node_10/scripts/ice_block_ex.gd" id="13_x8fxk"]
 [ext_resource type="Texture2D" uid="uid://5g2o2yd2frhx" path="res://assets/sprites/maps/tilesets/Inside_C.png" id="14_x8fxk"]
 [ext_resource type="Texture2D" uid="uid://d2cycdbamd2gj" path="res://assets/sprites/maps/tilesets/Inside_B.png" id="15_muc34"]
+[ext_resource type="Script" uid="uid://e54xslor2ysu" path="res://game/chapter_4/node_10/scripts/warp_node_10.gd" id="16_bt7nk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ghb4q"]
 texture = ExtResource("4_pnn34")
@@ -13626,7 +13626,7 @@ iceBlock = NodePath("../TriggerIceBlock")
 [node name="Exit" type="Area2D" parent="." unique_id=1749724821]
 z_index = 1
 position = Vector2(2249, -1528)
-script = ExtResource("11_ve5wd")
+script = ExtResource("16_bt7nk")
 next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
 spawn_position_in_next_level = Vector2(1, 312)
 
