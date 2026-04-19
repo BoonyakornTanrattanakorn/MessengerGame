@@ -55,6 +55,11 @@ var _wind_dash_shift_was_down: bool = false
 var interact_with = null
 var current_dialog = 0
 
+# Ice slide
+var is_sliding := false
+var slide_direction := Vector2.ZERO
+var skill_locked := false
+
 # Mount system
 var is_mounted = false
 var current_mount = null
@@ -72,6 +77,7 @@ var invincible_timer: float = 0.0
 var invincible_duration: float = 1.0
 
 var respawn_position = Vector2(110, 115)
+var skill_offset := Vector2(0, -12)
 
 var inventory = {
 	"red_gem": 0,
@@ -194,6 +200,11 @@ func _physics_process(delta):
 		global_position = current_mount.mount_point.global_position
 		return
 	
+	# Lock dir, skill when slide
+	if(is_sliding): 
+		direction = slide_direction 
+	skill_locked = is_sliding
+	
 	# Update last direction if there's input
 	if direction.length() > 0:
 		last_direction = direction.normalized()
@@ -281,12 +292,12 @@ func _physics_process(delta):
 	
 	if check_if_water_at(check_pos):
 		is_on_water = true
-		is_on_water = true
 		if not is_standing_on_pillar(check_pos):
 			speed_multiplier = 0.0 
 	if check_if_void_at(global_position):
-		if not check_if_platform_at(global_position):
+		if not check_if_platform_at(global_position) and not is_dashing:
 			speed_multiplier = 0.0
+			_handle_void_fall()
 	# Movement + dash handled by movement component
 	movement_component.process_movement(self, direction, speed_multiplier, delta)
 
@@ -365,7 +376,7 @@ func set_facing_direction(direction: Vector2) -> void:
 	_update_animation(last_direction)
 
 func get_aim_direction() -> Vector2:
-	var aim := get_global_mouse_position() - global_position
+	var aim := get_global_mouse_position() - (global_position + skill_offset)
 	if aim.length() < 4.0:
 		return last_direction
 	return aim.normalized()
@@ -713,6 +724,33 @@ func check_if_void_at(pos: Vector2) -> bool:
 		return tile_data.get_custom_data("is_void") == true
 			
 	return false
+	
+func _handle_void_fall():
+	is_in_dialogue = true
+	velocity = Vector2.ZERO
+	
+	_play_sfx("player.death")
+	
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.5) # จางหายใน 0.5 วินาที
+	tween.tween_callback(func(): _void_fall_event())
+
+func _void_fall_event():	
+	is_in_dialogue = true
+	velocity = Vector2.ZERO
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 0.5)
+	
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	get_tree().change_scene_to_file(current_scene_path)
+	
+	var dialogue_resource = load("res://game/chapter_2/node_4/dialogue/dead.dialogue")
+	if dialogue_resource:
+		DialogueManager.show_dialogue_balloon(dialogue_resource, "fall_in_void")
+		
+		await DialogueManager.dialogue_ended
+	
+	is_in_dialogue = false
 
 func check_if_platform_at(_pos: Vector2) -> bool:
 	var overlapping_areas = $Hurtbox.get_overlapping_areas()
@@ -722,3 +760,34 @@ func check_if_platform_at(_pos: Vector2) -> bool:
 			return true
 			
 	return false
+
+func can_move_in_direction(direction: Vector2) -> bool:
+
+	if direction == Vector2.ZERO:
+		return true
+
+	if test_move(global_transform, direction * 4):
+
+		var collision = move_and_collide(direction * 4, true)
+		var collider = collision.get_collider()
+
+		if collider.is_in_group("ice_block"):
+			if collider.start_slide(direction):
+				is_sliding = false
+				velocity = Vector2.ZERO
+		
+		return false
+
+	return true
+
+func is_on_ice_tile() -> bool:
+
+	var level = SaveManager.get_level_scene()
+	if level == null:
+		return false
+
+	if not "ice_layer" in level:
+		return false
+	if level.ice_layer == null:
+		return false
+	return level.ice_layer.is_on_ice(global_position)

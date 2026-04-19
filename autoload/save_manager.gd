@@ -17,9 +17,11 @@ var init_data = {
 
 var init_scene_path = "res://game/game_scene.tscn"
 
+var level_scene = null
+
 
 func save_game():
-	var level_scene = get_level_scene()
+	level_scene = get_level_scene()
 	if level_scene == null:
 		return
 
@@ -111,7 +113,7 @@ func restore_objects():
 	
 	GameState.new_game()
 	
-	var level_scene = get_level_scene()
+	level_scene = get_level_scene()
 
 	if level_scene == null:
 		return
@@ -169,7 +171,7 @@ func restore_level_objects():
 		return
 	await get_tree().process_frame
 	
-	var level_scene = get_level_scene()
+	level_scene = get_level_scene()
 	if level_scene == null:
 		return
 
@@ -193,6 +195,7 @@ func restore_level_objects():
 			continue
 
 		node.load_data(data)
+		print(node.name)
 		print(data)
 		
 func restore_global_objects():
@@ -224,10 +227,6 @@ func new_game():
 	get_tree().change_scene_to_file(init_scene_path)
 	restore_objects()
 	await get_tree().scene_changed
-	#var root = get_tree().current_scene
-	#var setting = root.get_node_or_null("Player/PlayerHUD/Setting/SettingMenu")
-	#if setting:
-	#	setting.hide()
 	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

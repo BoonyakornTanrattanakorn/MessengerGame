@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dxfuuh2rc0c10"
+path="res://.godot/imported/clue0.dialogue-d8b234ac1ddf5779ce800d67f9b8a005.tres"
+
+[deps]
+
+source_file="res://game/chapter_2/node_4/dialogue/clue0.dialogue"
+dest_files=["res://.godot/imported/clue0.dialogue-d8b234ac1ddf5779ce800d67f9b8a005.tres"]
+
+[params]
+
+defaults=true

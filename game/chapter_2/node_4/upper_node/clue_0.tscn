@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bo0j3fvpmq71b"]
+
+[ext_resource type="Script" uid="uid://cy2kw6qv1ni3h" path="res://game/chapter_2/node_4/upper_node/clue_0.gd" id="1_7f0sl"]
+[ext_resource type="Texture2D" uid="uid://bw75ooflysld5" path="res://assets/sprites/maps/tilesets/Dungeon_C.png" id="1_7prek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7f0sl"]
+size = Vector2(118, 107)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwtc3"]
+atlas = ExtResource("1_7prek")
+region = Rect2(433, 1, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4sdie"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwtc3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="clue_0" type="Area2D" unique_id=694505532]
+script = ExtResource("1_7f0sl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=190924544]
+position = Vector2(-2, 0.5)
+shape = SubResource("RectangleShape2D_7f0sl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=371256307]
+sprite_frames = SubResource("SpriteFrames_4sdie")

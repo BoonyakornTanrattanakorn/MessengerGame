@@ -71,7 +71,7 @@ func play_event(event_key: String) -> AudioStreamPlayer:
 		return null
 	return play_sfx(String(SFX_EVENTS[event_key]))
 
-func play_sfx(sfx_path: String) -> AudioStreamPlayer:
+func play_sfx(sfx_path: String, volume = 0) -> AudioStreamPlayer:
 	var audio_player = AudioStreamPlayer.new()
 	var audio_stream: AudioStream = _stream_cache.get(sfx_path, null)
 	if audio_stream == null:
@@ -84,7 +84,7 @@ func play_sfx(sfx_path: String) -> AudioStreamPlayer:
 		return null
 	
 	audio_player.stream = audio_stream
-	audio_player.volume_db = 0.0
+	audio_player.volume_db = volume
 	audio_player.bus = "SFX"
 	add_child(audio_player)
 	audio_player.finished.connect(audio_player.queue_free)
