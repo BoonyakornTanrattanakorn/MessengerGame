@@ -251,7 +251,6 @@ animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1244478987]
 shape = SubResource("RectangleShape2D_u5n88")
-<<<<<<< HEAD
 
 [node name="Barrier" type="Node2D" parent="." unique_id=1174806569]
 
@@ -264,5 +263,3 @@ shape = SubResource("RectangleShape2D_u5n88")
 [node name="BG" type="Polygon2D" parent="Health" unique_id=1587559129]
 
 [node name="Fill" type="Polygon2D" parent="Health" unique_id=597571381]
-=======
->>>>>>> 28ec560 (feat: implement mage earth projectile attack pattern)
