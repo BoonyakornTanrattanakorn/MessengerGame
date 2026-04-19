@@ -12933,10 +12933,11 @@ size = Vector2(474, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lboax"]
 size = Vector2(32, 111.5)
 
-[node name="Node11" type="Node2D" unique_id=1031944713 node_paths=PackedStringArray("tower", "castle")]
+[node name="Node11" type="Node2D" unique_id=1031944713 node_paths=PackedStringArray("tower", "castle", "towerleader")]
 script = ExtResource("11_node11")
 tower = NodePath("tower_tmp")
 castle = NodePath("castle_tmp")
+towerleader = NodePath("towerleader_tmp")
 
 [node name="Map" type="Node2D" parent="." unique_id=435959519]
 
@@ -13088,3 +13089,6 @@ position = Vector2(-103, 601)
 
 [node name="castle_tmp" type="Node2D" parent="." unique_id=167882047]
 position = Vector2(1022, 389)
+
+[node name="towerleader_tmp" type="Node2D" parent="." unique_id=389826600]
+position = Vector2(-138, 225)

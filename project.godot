@@ -173,51 +173,8 @@ reset_level={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray(
-"res://game/chapter_1/node_2/dialogue/character_gate.dialogue",
-"res://game/chapter_1/node_2/dialogue/node_2.dialogue",
-"res://game/chapter_1/node_3/dialogue/chap1_node3.dialogue",
-"res://game/chapter_1/node_3/dialogue/chap1_node3_1.dialogue",
-"res://game/chapter_1/node_3/dialogue/chap1_node3_2.dialogue",
-"res://game/chapter_1/node_3/dialogue/chap1_node3_3.dialogue",
+locale/translations_pot_files=PackedStringArray("res://game/chapter_1/node_2/dialogue/character_gate.dialogue", "res://game/chapter_1/node_2/dialogue/node_2.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_1.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_2.dialogue", "res://game/chapter_1/node_3/dialogue/chap1_node3_3.dialogue", "res://game/chapter_2/node_4/dialogue/cat_lady.dialogue", "res://game/chapter_2/node_4/dialogue/clue0.dialogue", "res://game/chapter_2/node_4/dialogue/dead.dialogue", "res://game/chapter_2/node_4/dialogue/intro_node4.dialogue", "res://game/chapter_2/node_4/dialogue/statue.dialogue", "res://game/chapter_2/node_4/dialogue/village_chief.dialogue", "res://game/chapter_2/node_6/dialogue/chap2_node3.dialogue", "res://game/chapter_2/node_6/dialogue/go_back.dialogue", "res://game/chapter_2/node_6/dialogue/water_serpent_encounter.dialogue", "res://game/chapter_3/node_7/dialogue/city_governor.dialogue", "res://game/chapter_3/node_7/dialogue/city_npc1.dialogue", "res://game/chapter_3/node_7/dialogue/fremen_guard.dialogue", "res://game/chapter_3/node_7/dialogue/sidequest_npc.dialogue", "res://game/chapter_3/node_7/dialogue/start_of_the_node.dialogue", "res://game/chapter_3/node_7/dialogue/statue_confirm.dialogue", "res://game/chapter_3/node_7/dialogue/stone_tablet.dialogue", "res://game/chapter_3/node_7_market/dialogue/shopkeeper.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_0.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_1.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_2.dialogue", "res://game/chapter_3/node_8/dialogue/chap3_node8_level_3.dialogue", "res://game/chapter_3/subnode/cookie_run_guide.dialogue", "res://game/chapter_3/subnode/subnode_1_intro.dialogue", "res://game/chapter_3/subnode/subnode_2_intro.dialogue", "res://game/chapter_3/subnode/subnode_3_intro.dialogue", "res://game/chapter_3/subnode/subnode_4_intro.dialogue", "res://game/chapter_4/node_10/dialogue/node_10.dialogue", "res://game/chapter_4/node_11/dialogue/ice_ghost.dialogue", "res://game/chapter_4/node_11/dialogue/villager.dialogue", "res://game/chapter_4/node_12/dialogue/finale.dialogue", "res://game/chapter_4/node_12/dialogue/intro.dialogue", "res://game/chapter_4/node_11/dialogue/villager_talk.dialogue", "res://game/chapter_4/node_11/dialogue/villager_talk2.dialogue")
 
-"res://game/chapter_2/node_4/dialogue/cat_lady.dialogue",
-"res://game/chapter_2/node_4/dialogue/clue0.dialogue",
-"res://game/chapter_2/node_4/dialogue/dead.dialogue",
-"res://game/chapter_2/node_4/dialogue/intro_node4.dialogue",
-"res://game/chapter_2/node_4/dialogue/statue.dialogue",
-"res://game/chapter_2/node_4/dialogue/village_chief.dialogue",
-
-"res://game/chapter_2/node_6/dialogue/chap2_node3.dialogue",
-"res://game/chapter_2/node_6/dialogue/go_back.dialogue",
-"res://game/chapter_2/node_6/dialogue/water_serpent_encounter.dialogue",
-
-"res://game/chapter_3/node_7/dialogue/city_governor.dialogue",
-"res://game/chapter_3/node_7/dialogue/city_npc1.dialogue",
-"res://game/chapter_3/node_7/dialogue/fremen_guard.dialogue",
-"res://game/chapter_3/node_7/dialogue/sidequest_npc.dialogue",
-"res://game/chapter_3/node_7/dialogue/start_of_the_node.dialogue",
-"res://game/chapter_3/node_7/dialogue/statue_confirm.dialogue",
-"res://game/chapter_3/node_7/dialogue/stone_tablet.dialogue",
-"res://game/chapter_3/node_7_market/dialogue/shopkeeper.dialogue",
-
-"res://game/chapter_3/node_8/dialogue/chap3_node8_level_0.dialogue",
-"res://game/chapter_3/node_8/dialogue/chap3_node8_level_1.dialogue",
-"res://game/chapter_3/node_8/dialogue/chap3_node8_level_2.dialogue",
-"res://game/chapter_3/node_8/dialogue/chap3_node8_level_3.dialogue",
-
-"res://game/chapter_3/subnode/cookie_run_guide.dialogue",
-"res://game/chapter_3/subnode/subnode_1_intro.dialogue",
-"res://game/chapter_3/subnode/subnode_2_intro.dialogue",
-"res://game/chapter_3/subnode/subnode_3_intro.dialogue",
-"res://game/chapter_3/subnode/subnode_4_intro.dialogue",
-
-"res://game/chapter_4/node_10/dialogue/node_10.dialogue",
-"res://game/chapter_4/node_11/dialogue/ice_ghost.dialogue",
-"res://game/chapter_4/node_11/dialogue/villager.dialogue",
-"res://game/chapter_4/node_12/dialogue/finale.dialogue",
-"res://game/chapter_4/node_12/dialogue/intro.dialogue"
-)
 [layer_names]
 
 2d_physics/layer_1="Player"
