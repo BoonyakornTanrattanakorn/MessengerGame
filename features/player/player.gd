@@ -690,25 +690,25 @@ func check_if_water_at(pos: Vector2) -> bool:
 		return false
 
 	var local_pos = tilemap.to_local(pos)
-	var map_pos = tilemap.local_to_map(local_pos)
-
-	var tile_data = tilemap.get_cell_tile_data(map_pos)
 	
-	if tile_data == null:
+	if tilemap == null:
 		#print("No tile at", map_pos)
 		return false
 	else:
+		var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
+		var tile_data
+		if tilemap.get_cell_tile_data(map_pos) != null:
+			tile_data = tilemap.get_cell_tile_data(map_pos)
+			
 		var tileset: TileSet = tilemap.tile_set
 		if tileset == null:
 			return false
 		if tileset.get_custom_data_layer_by_name("is_water") == -1:
 			return false
-
-		var is_water = tile_data.get_custom_data("is_water")
-
-		if is_water == true:
+		
+		if tile_data != null and tile_data.get_custom_data("is_water") != null:
 			#print("FOUND WATER")
-			return true
+			return tile_data.get_custom_data("is_water")
 
 	#print("NOT WATER")
 	return false
@@ -727,7 +727,9 @@ func check_if_void_at(pos: Vector2) -> bool:
 		return false
 	else:
 		var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
-		var tile_data = tilemap.get_cell_tile_data(map_pos)
+		var tile_data
+		if tilemap.get_cell_tile_data(map_pos) != null:
+			tile_data = tilemap.get_cell_tile_data(map_pos)
 		
 		var tileset: TileSet = tilemap.tile_set
 		if tileset == null:
@@ -735,9 +737,8 @@ func check_if_void_at(pos: Vector2) -> bool:
 		if tileset.get_custom_data_layer_by_name("is_void") == -1:
 			return false
 			
-		var is_void = tile_data.get_custom_data("is_void") == true
-		if is_void:
-			return true
+		if tile_data != null and tile_data.get_custom_data("is_void") != null:
+			return tile_data.get_custom_data("is_void")
 			
 	return false
 	
