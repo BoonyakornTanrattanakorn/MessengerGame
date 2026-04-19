@@ -40,4 +40,8 @@ func _on_boss_defeated():
 	await get_tree().create_timer(0.9).timeout
 	boss_display.play_defeat()
 	update_objective()
-	get_tree().change_scene_to_file("res://game/minigame_ver2/Level/main3.tscn")
+	
+	GameState.pending_level = "res://game/chapter_3/subnode/subnode_3_chap3.tscn"
+	GameState.pending_spawn = Vector2(606, 671)
+	GameState.pending_facing = Vector2.RIGHT
+	get_tree().change_scene_to_file("res://game/game_scene.tscn")

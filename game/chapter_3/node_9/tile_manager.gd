@@ -19,7 +19,7 @@ func _ready():
 	_set_phase(1)
 
 func _link_plates():
-	for i in range(1, 49):
+	for i in range(1, 129):
 		# Find each plate by name
 		var plate = get_tree().root.find_child(
 			"PressurePlate" + str(i), true, false
@@ -52,6 +52,7 @@ func _on_plate_activated(id: int):
 	if id in CORRECT_PLATES[current_phase]:
 		if id not in stepped_correct:
 			stepped_correct.append(id)
+			stepped_correct.sort()
 			print("[TileManager] Correct plates so far: ", stepped_correct)
 	# Check win condition every time a plate activates
 	_check_win_condition()
