@@ -1,0 +1,22 @@
+~ start
+Player [#sprite=water/neutral]: A pyramid... in the middle of the desert.
+Player [#sprite=water/neutral]: There must be something inside.
+=> END
+
+~ npc_entry
+OldMan: Traveler! Stop right there.
+OldMan: That pyramid holds three ancient puzzle chambers, sealed long ago by the desert queen herself.
+OldMan: But beware... a stone guardian lurks within. Powerful and relentless.
+OldMan: Many have entered seeking treasure. Few have returned.
+OldMan: Tread carefully, and trust your wits over your strength.
+=> END
+
+~ npc_exit
+Scholar: Ah... you made it out alive. You've seen him, haven't you? The stone guardian.
+Scholar: Long ago, he was a man. A royal guard, sworn to protect the queen with his life.
+Scholar: But the day she was taken, he was not at her side. He failed her.
+Scholar: They say his grief was so great that the desert gods themselves heard his vow —
+Scholar: "I will protect her until the end of time."
+Scholar: And so he was reborn in stone, eternal, forever standing watch over her tomb deep within that pyramid.
+Scholar: He is not evil. He is... faithful. Cursed by his own devotion.
+=> END

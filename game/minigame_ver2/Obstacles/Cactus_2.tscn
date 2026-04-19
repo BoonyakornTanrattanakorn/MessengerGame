@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c0pdnrr58aq1a"]
+
+[ext_resource type="Script" uid="uid://vaiwllr0nyro" path="res://game/minigame_ver2/Obstacles/cactus_2.gd" id="1_to5qm"]
+[ext_resource type="Texture2D" uid="uid://c3hbjdg3rv1q0" path="res://game/minigame_ver2/Sprite/Cactus.png" id="2_puggt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_to5qm"]
+height = 37.333332
+
+[node name="Cactus" type="Area2D" unique_id=1286275692]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_to5qm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1470126722]
+position = Vector2(0, -8.666666)
+shape = SubResource("CapsuleShape2D_to5qm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=97854489]
+position = Vector2(0, -9.333334)
+scale = Vector2(0.22656247, 0.29882813)
+texture = ExtResource("2_puggt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

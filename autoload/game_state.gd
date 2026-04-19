@@ -1,5 +1,18 @@
 extends Node
 
+# Session-only: set before change_scene_to_file("game_scene.tscn") to override the default starting level
+var pending_level: String = ""
+var pending_spawn: Vector2 = Vector2.ZERO
+var pending_facing: Vector2 = Vector2.ZERO
+
+# Gems accumulated across all minigames — used as shop currency
+var minigame_gems: int = 0
+
+# Where to return after leaving the market
+var market_return_path: String = ""
+var market_return_spawn: Vector2 = Vector2.ZERO
+var market_return_facing: Vector2 = Vector2.LEFT
+
 var chap1_node1_shown := false
 var chap1_node2_shown := false
 var chap1_node3_shown := false
@@ -9,7 +22,6 @@ var chap1_node3_3_shown := false
 var chap2_node4_shown := false
 var chap2_node6_shown := false
 var chap3_node7_shown := false
-var chap3_node8_shown := false
 var chap3_node9_shown := false
 var chap4_node10_shown := false
 var chap4_node11_shown := false
@@ -22,6 +34,18 @@ var clue_2_unlocked := false
 var clue_3_unlocked := false
 var clue_4_unlocked := false
 
+# Chapter 3 Subnodes
+var chap3_subnode1_shown := false
+var chap3_subnode2_shown := false
+var chap3_subnode3_shown := false
+var chap3_subnode4_shown := false
+
+# Chapter 3 Node 8
+var chap3_node8_shown := false
+var chap3_node8_1_shown := false
+var chap3_node8_2_shown := false
+var chap3_node8_3_shown := false
+
 @export var save_id = "game_state"
 @export var save_scope = "global"
 
@@ -29,21 +53,30 @@ func _ready() -> void:
 	add_to_group("savable")
 
 func new_game():
+	minigame_gems = 0
+	chap3_subnode1_shown = false
+	chap3_subnode2_shown = false
+	chap3_subnode3_shown = false
+	chap3_subnode4_shown = false
 	chap1_node1_shown = false
 	chap1_node2_shown = false
 	chap1_node3_shown = false
 	chap1_node3_1_shown = false
 	chap1_node3_2_shown = false
 	chap1_node3_3_shown = false
+	chap3_node8_shown = false
+	chap3_node8_1_shown = false
+	chap3_node8_2_shown = false
+	chap3_node8_3_shown = false
 	chap2_node4_shown = false
 	chap2_node6_shown = false
 	chap3_node7_shown = false
-	chap3_node8_shown = false
 	chap3_node9_shown = false
 	chap4_node10_shown = false
 	chap4_node11_shown = false
 	chap4_node11_ice_ghost_dead = false
 	chap4_node12_shown = false
+	
 
 	clue_1_unlocked = false
 	clue_2_unlocked = false
@@ -52,16 +85,22 @@ func new_game():
 
 func save():
 	return {
+		"minigame_gems": minigame_gems,
+		"chap3_subnode1_shown": chap3_subnode1_shown,
+		"chap3_subnode2_shown": chap3_subnode2_shown,
 		"chap1_node1_shown": chap1_node1_shown,
 		"chap1_node2_shown": chap1_node2_shown,
 		"chap1_node3_shown": chap1_node3_shown,
 		"chap1_node3_1_shown": chap1_node3_1_shown,
 		"chap1_node3_2_shown": chap1_node3_2_shown,
 		"chap1_node3_3_shown": chap1_node3_3_shown,
+		"chap3_node8_shown": chap3_node8_shown,
+		"chap3_node8_1_shown": chap3_node8_1_shown,
+		"chap3_node8_2_shown": chap3_node8_2_shown,
+		"chap3_node8_3_shown": chap3_node8_3_shown,
 		"chap2_node4_shown": chap2_node4_shown,
 		"chap2_node6_shown": chap2_node6_shown,
 		"chap3_node7_shown": chap3_node7_shown,
-		"chap3_node8_shown": chap3_node8_shown,
 		"chap3_node9_shown": chap3_node9_shown,
 		"chap4_node10_shown": chap4_node10_shown,
 		"chap4_node11_shown": chap4_node11_shown,
@@ -75,16 +114,24 @@ func save():
 	}
 
 func load_data(data):
+	minigame_gems = data.get("minigame_gems", 0)
+	chap3_subnode1_shown = data.get("chap3_subnode1_shown", false)
+	chap3_subnode2_shown = data.get("chap3_subnode2_shown", false)
+	chap3_subnode3_shown = data.get("chap3_subnode3_shown", false)
+	chap3_subnode4_shown = data.get("chap3_subnode4_shown", false)
 	chap1_node1_shown = data.get("chap1_node1_shown", false)
 	chap1_node2_shown = data.get("chap1_node2_shown", false)
 	chap1_node3_shown = data.get("chap1_node3_shown", false)
 	chap1_node3_1_shown = data.get("chap1_node3_1_shown", false)
 	chap1_node3_2_shown = data.get("chap1_node3_2_shown", false)
 	chap1_node3_3_shown = data.get("chap1_node3_3_shown", false)
+	chap3_node8_shown = data.get("chap3_node8_shown", false)
+	chap3_node8_1_shown = data.get("chap3_node8_1_shown", false)
+	chap3_node8_2_shown = data.get("chap3_node8_2_shown", false)
+	chap3_node8_3_shown = data.get("chap3_node8_3_shown", false)
 	chap2_node4_shown = data.get("chap2_node4_shown", false)
 	chap2_node6_shown = data.get("chap2_node6_shown", false)
 	chap3_node7_shown = data.get("chap3_node7_shown", false)
-	chap3_node8_shown = data.get("chap3_node8_shown", false)
 	chap3_node9_shown = data.get("chap3_node9_shown", false)
 	chap4_node10_shown = data.get("chap4_node10_shown", false)
 	chap4_node11_shown = data.get("chap4_node11_shown", false)

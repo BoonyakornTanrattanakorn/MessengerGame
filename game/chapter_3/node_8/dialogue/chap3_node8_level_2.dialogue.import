@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dm5tqj2l2w1h4"
+path="res://.godot/imported/chap3_node8_level_2.dialogue-9986af86711a85d9800a1c1288801425.tres"
+
+[deps]
+
+source_file="res://game/chapter_3/node_8/dialogue/chap3_node8_level_2.dialogue"
+dest_files=["res://.godot/imported/chap3_node8_level_2.dialogue-9986af86711a85d9800a1c1288801425.tres"]
+
+[params]
+
+defaults=true

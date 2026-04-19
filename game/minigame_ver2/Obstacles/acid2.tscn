@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bxfmdsgllqgnr"]
+
+[ext_resource type="Script" uid="uid://df37kt4hs5xp0" path="res://game/minigame_ver2/Obstacles/acid_2.gd" id="1_yvf5i"]
+[ext_resource type="Texture2D" uid="uid://cut63rk7ub663" path="res://game/minigame_ver2/Sprite/acid2.png" id="2_0y6ym"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgnse"]
+size = Vector2(128, 35)
+
+[node name="Acid2" type="Area2D" unique_id=1471803647]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_yvf5i")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=940356278]
+position = Vector2(1.0000019, 2)
+scale = Vector2(1.484375, 1.3828125)
+texture = ExtResource("2_0y6ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2070824439]
+position = Vector2(0, 44.5)
+shape = SubResource("RectangleShape2D_wgnse")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

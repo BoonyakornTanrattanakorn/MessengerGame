@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c1gre4nqvkpbv"]
+
+[ext_resource type="Script" uid="uid://f23pedsx0a51" path="res://game/minigame_ver2/Obstacles/breakable/flying_organ.gd" id="1_btl62"]
+[ext_resource type="Texture2D" uid="uid://djqklgf4dtder" path="res://game/minigame_ver2/Sprite/heart1.png" id="2_pjj2i"]
+[ext_resource type="Texture2D" uid="uid://klix66gvhwet" path="res://game/minigame_ver2/Sprite/heart2.png" id="3_lwk23"]
+[ext_resource type="Texture2D" uid="uid://do3hm1enlvau6" path="res://game/minigame_ver2/Sprite/heart3.png" id="4_yfilj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lwk23"]
+radius = 86.145226
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfilj"]
+radius = 87.0
+
+[node name="FlyingOrgan" type="Area2D" unique_id=59078226]
+script = ExtResource("1_btl62")
+normal_texture = ExtResource("2_pjj2i")
+severe_texture = ExtResource("3_lwk23")
+broken_texture = ExtResource("4_yfilj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=185161511]
+position = Vector2(42, 3)
+shape = SubResource("CircleShape2D_lwk23")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1044323127]
+texture = ExtResource("2_pjj2i")
+
+[node name="HurtZone" type="Area2D" parent="." unique_id=1179025015]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" unique_id=250403827]
+position = Vector2(27, 8)
+shape = SubResource("CircleShape2D_yfilj")
+debug_color = Color(0.84279627, 0.09930911, 0.22438979, 0.41960785)

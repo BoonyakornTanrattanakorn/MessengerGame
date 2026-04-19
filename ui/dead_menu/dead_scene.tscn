@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c7nnxrjglf0ft"]
+
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="1_8mp4g"]
+[ext_resource type="Script" uid="uid://c1pwxeo00r216" path="res://ui/dead_menu/dead_scene.gd" id="1_wob38"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wob38"]
+bg_color = Color(0.5921569, 0, 0, 0.3529412)
+
+[node name="DeadScene" type="CanvasLayer" unique_id=131548661]
+layer = 2
+script = ExtResource("1_wob38")
+
+[node name="Panel" type="Panel" parent="." unique_id=1006764597]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wob38")
+
+[node name="Title" type="Label" parent="Panel" unique_id=595636908]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.067
+anchor_right = 1.0
+anchor_bottom = 0.31100002
+offset_top = -0.24000168
+offset_bottom = 16.079987
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8mp4g")
+theme_override_font_sizes/font_size = 140
+text = "You  Dead!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeadReason" type="Label" parent="Panel" unique_id=1030624628]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.31100002
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 0.07998657
+offset_bottom = -56.0
+theme = ExtResource("1_8mp4g")
+theme_override_font_sizes/font_size = 50
+text = "Reason :  Dead by explsion"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RespawnButton" type="Button" parent="Panel" unique_id=920696720]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.48900002
+anchor_right = 0.68700004
+anchor_bottom = 0.62200004
+offset_top = -0.08001709
+offset_right = 0.6399536
+offset_bottom = 0.15997314
+theme = ExtResource("1_8mp4g")
+theme_override_font_sizes/font_size = 50
+text = "Respawn"
+
+[node name="MenuButton" type="Button" parent="Panel" unique_id=1789614864]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.66700006
+anchor_right = 0.68700004
+anchor_bottom = 0.8
+offset_top = -0.24005127
+offset_right = 0.6399536
+theme = ExtResource("1_8mp4g")
+theme_override_font_sizes/font_size = 50
+text = "Menu"

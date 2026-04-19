@@ -3,7 +3,7 @@ extends Area2D
 var direction: Vector2 = Vector2.RIGHT
 var level: int = 1
 var damage: int = 1
-var source_element: String = "water"
+var source: String = "water_lv1"
 
 # Per level: [speed, max_distance, scale]
 const LEVEL_SETTINGS = [
@@ -20,12 +20,16 @@ var traveled: float = 0.0
 @onready var collision = $CollisionShape2D
 
 func _ready():
+	add_to_group("spell")
 	add_to_group("water_reflector")
+	add_to_group("water_wave")
+	add_to_group("player_projectile")
 	var settings = LEVEL_SETTINGS[level - 1]
 	speed        = settings["speed"]
 	max_distance = settings["distance"]
 	scale        = settings["scale"]
 	damage       = level
+	source       = "water_lv%d" % level
 
 	# Rotate entire node to face direction
 	rotation = direction.angle()
@@ -54,8 +58,7 @@ func _on_body_entered(body):
 	if body.is_in_group("player_hurtbox"):
 		return  # ignore player
 	if body.is_in_group("enemy"):
-		if body.has_method("take_damage"):
-			body.take_damage(damage, source_element)
+		body.take_damage(damage, source)
 	queue_free()
 
 func _on_expire():

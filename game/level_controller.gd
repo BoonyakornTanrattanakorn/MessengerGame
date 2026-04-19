@@ -7,9 +7,17 @@ class_name NodeTemplate
 var current_level: Node = null
 
 func _ready() -> void:
+	if GameState.pending_level != "":
+		var path := GameState.pending_level
+		var spawn := GameState.pending_spawn
+		var facing := GameState.pending_facing
+		GameState.pending_level = ""
+		await load_level(path, spawn, facing)
+		return
+
 	if level_holder.get_child_count() > 0:
 		current_level = level_holder.get_child(0)
-	
+
 	await get_tree().process_frame
 	await _run_level_intro_if_needed()
 

@@ -1,0 +1,13 @@
+~ npc_first
+
+NPC: You're the one who restored the Statue Plaza, aren't you?
+NPC: Word travels fast here. The whole city is talking about it.
+NPC: And that outfit — you don't dress like anyone from the desert tribes.
+NPC: Where exactly are you from, stranger?
+=> END
+
+~ npc_repeat
+
+NPC: Still exploring? There is much to see here.
+NPC: Not many outsiders make it this far into the desert.
+=> END

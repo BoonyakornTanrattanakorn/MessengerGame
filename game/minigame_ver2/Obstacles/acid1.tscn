@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c5rscaiji62ad"]
+
+[ext_resource type="Script" uid="uid://bra23ss8ydu0a" path="res://game/minigame_ver2/Obstacles/acid_1.gd" id="1_xr3jp"]
+[ext_resource type="Texture2D" uid="uid://d0fxxeow8nkll" path="res://game/minigame_ver2/Sprite/acid1.png" id="2_c7ug1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3tdct"]
+radius = 33.83785
+
+[node name="Acid1" type="Area2D" unique_id=1152104782]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_xr3jp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1583285522]
+texture = ExtResource("2_c7ug1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=360804041]
+shape = SubResource("CircleShape2D_3tdct")
+debug_color = Color(0.87437266, 0.22302231, 0.6623464, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

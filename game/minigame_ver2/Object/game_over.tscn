@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cac3nsmu0piae"]
+
+[ext_resource type="Script" uid="uid://clqr1n5qw5tna" path="res://game/minigame_ver2/Object/game_over.gd" id="1_m4kx1"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=260371992]
+script = ExtResource("1_m4kx1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1699360388]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=274559609]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -29.0
+offset_right = 21.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer" unique_id=1140915955]
+layout_mode = 2
+text = "Retry"
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1234688329]
+layout_mode = 2
+text = "▶"
+flat = true

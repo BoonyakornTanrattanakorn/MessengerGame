@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://be5fq86ot88rw"]
+
+[ext_resource type="Texture2D" uid="uid://miig2kvgdfp7" path="res://game/minigame_ver2/Sprite/healthshard.png" id="1_71evk"]
+[ext_resource type="Script" uid="uid://bbcfj7k2twcp2" path="res://game/minigame_ver2/Collectible/health_shard.gd" id="1_q2fw6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q2fw6"]
+radius = 28.160255
+
+[node name="HealthShard" type="Area2D" unique_id=1700220737]
+scale = Vector2(0.15, 0.15)
+script = ExtResource("1_q2fw6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1642567867]
+texture = ExtResource("1_71evk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1988508505]
+shape = SubResource("CircleShape2D_q2fw6")

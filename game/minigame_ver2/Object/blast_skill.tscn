@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://i6t6o8e2y6dd"]
+
+[ext_resource type="Script" uid="uid://b8uggublyi1dh" path="res://game/minigame_ver2/Object/blast_skill.gd" id="1_257dl"]
+[ext_resource type="PackedScene" uid="uid://cyi1r3xmie10t" path="res://game/minigame_ver2/Object/skill_indicator.tscn" id="2_oau6y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wid2b"]
+radius = 40.024994
+
+[node name="BlastSkill" type="Node2D" unique_id=1453903704]
+script = ExtResource("1_257dl")
+
+[node name="SkillIndicator" parent="." unique_id=38352505 instance=ExtResource("2_oau6y")]
+
+[node name="BlastArea" type="Area2D" parent="." unique_id=891016674]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlastArea" unique_id=674174579]
+shape = SubResource("CircleShape2D_wid2b")
+debug_color = Color(0.39412895, 0.47317564, 0.9937661, 0.41960785)

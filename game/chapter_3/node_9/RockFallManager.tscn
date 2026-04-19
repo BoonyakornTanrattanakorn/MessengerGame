@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b5m6jgbxk62e5"]
+
+[ext_resource type="Script" uid="uid://j0lk3e70p466" path="res://game/chapter_3/node_9/rock_fall_manager.gd" id="1_ahjud"]
+
+[node name="RockFallManager" type="Node2D" unique_id=1163945927]
+script = ExtResource("1_ahjud")

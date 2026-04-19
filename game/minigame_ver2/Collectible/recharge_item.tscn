@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dxr5vb1n6n3vy"]
+
+[ext_resource type="Script" uid="uid://uyqvprutfqm1" path="res://game/minigame_ver2/Collectible/recharge_item.gd" id="1_7mjlf"]
+[ext_resource type="Texture2D" uid="uid://bs06khl30a0xj" path="res://game/minigame_ver2/Sprite/recharger.png" id="2_kih5x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d17ie"]
+
+[node name="RechargeItem" type="Area2D" unique_id=949953680]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_7mjlf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1042831587]
+position = Vector2(-1.1920929e-07, -1.1920929e-07)
+scale = Vector2(0.06484377, 0.06484377)
+texture = ExtResource("2_kih5x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=963451381]
+shape = SubResource("CircleShape2D_d17ie")
