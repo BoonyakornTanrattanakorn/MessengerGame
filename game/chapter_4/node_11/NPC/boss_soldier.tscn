@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dgjdfsr7qke2c"]
 
 [ext_resource type="Texture2D" uid="uid://np5lug5264mv" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Male/Male 01-1.png" id="1_wsraa"]
+[ext_resource type="Script" uid="uid://ctxg4t1vw1jmw" path="res://game/chapter_4/node_11/NPC/boss_soldier.gd" id="2_bossg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wa2qm"]
 atlas = ExtResource("1_wsraa")
@@ -39,7 +40,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wsraa"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wa2qm"]
+size = Vector2(32, 32)
+
 [node name="BossSoldier" type="CharacterBody2D" unique_id=1384484859]
+script = ExtResource("2_bossg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=467022871]
 sprite_frames = SubResource("SpriteFrames_8vjio")
@@ -48,3 +53,8 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=395892870]
 shape = SubResource("RectangleShape2D_wsraa")
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=1632834266]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=2036093943]
+shape = SubResource("RectangleShape2D_wa2qm")
