@@ -14,6 +14,11 @@ func _ready() -> void:
 		if guardian:
 			guardian.queue_free()
 
+	player.health_component.player_dead.connect(_on_player_dead)
+
+func _on_player_dead() -> void:
+	DeadManager.kill_player("Defeated by the Stone Guardian", Vector2(100, 500))
+
 func on_level_loaded() -> void:
 	Chap3Node8State.update_objective()
 

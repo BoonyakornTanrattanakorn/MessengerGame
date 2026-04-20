@@ -228,7 +228,3 @@ func new_game():
 	restore_objects()
 	await get_tree().scene_changed
 	
-func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		print("Auto saving before exit...")
-		save_game()

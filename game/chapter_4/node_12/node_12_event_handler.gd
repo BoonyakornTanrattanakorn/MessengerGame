@@ -117,6 +117,7 @@ func _on_hallway_thoughts_dialogue_ended(resource: DialogueResource) -> void:
 	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "hallway_thoughts", [self])
 	_register_fast_forward_balloon(balloon)
 
+
 func show_king_cutscene() -> void:
 	if SFXManager != null:
 		SFXManager.play_event("ui.confirm")

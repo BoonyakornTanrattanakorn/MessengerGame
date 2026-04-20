@@ -102,5 +102,4 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 func _on_menu_button_pressed() -> void:
 	get_tree().paused = false
-	SaveManager.save_game()
 	get_tree().change_scene_to_file("res://ui/menu/Main_menu.tscn")

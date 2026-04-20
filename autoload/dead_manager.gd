@@ -19,7 +19,7 @@ func kill_player(reason: String, respawn_position: Vector2):
 	show_death_screen(reason, respawn_position)
 
 
-func show_death_screen(reason: String, respawn_position: Vector2):
+func show_death_screen(reason: String, respawn_position: Vector2 = Vector2.ZERO):
 	var death_ui = death_scene.instantiate()
 	death_ui.process_mode = PROCESS_MODE_ALWAYS
 	get_tree().current_scene.add_child(death_ui)

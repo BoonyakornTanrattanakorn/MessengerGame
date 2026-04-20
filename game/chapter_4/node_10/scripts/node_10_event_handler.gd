@@ -25,5 +25,5 @@ func handle_intro_for_level() -> void:
 		)
 
 		await DialogueManager.dialogue_ended
-		
+	SaveManager.save_game()
 		
