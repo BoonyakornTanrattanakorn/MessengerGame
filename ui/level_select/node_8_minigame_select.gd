@@ -9,7 +9,8 @@ func _ready():
 	$BackToLevelSelectButton.pressed.connect(_level_select)
 		
 func _minigame_start():
-	SaveManager.new_game_from_level(minigame_scene, Vector2(0,0), Vector2.UP)
+	SaveManager.save_game()
+	get_tree().change_scene_to_file(minigame_scene)
 
 func _node_start():
 	get_tree().change_scene_to_file("res://ui/level_select/node_8_select.tscn")

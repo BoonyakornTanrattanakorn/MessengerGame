@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://d1xnmphum431q"]
 
-[ext_resource type="TileSet" uid="uid://ceymlxtm7dm00" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_gsr62"]
+[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_gsr62"]
 [ext_resource type="Script" uid="uid://usmnq7mcknob" path="res://game/chapter_1/node_1/scripts/node_1_event_handler.gd" id="1_ye1fb"]
 [ext_resource type="PackedScene" uid="uid://62un3mh3kwg1" path="res://game/chapter_1/node_1/scenes/fire.tscn" id="2_eai0u"]
 [ext_resource type="Resource" uid="uid://10qqfag420tx" path="res://game/chapter_1/node_1/dialogue/node_1_dialogue.dialogue" id="2_x6qgn"]

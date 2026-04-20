@@ -16,4 +16,3 @@ func _node_start():
 	
 func _level_select():
 	get_tree().change_scene_to_file("res://ui/level_select/level_select.tscn")
-"res://game/chapter_3/node_7/scenes/node_7.tscn"

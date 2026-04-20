@@ -1,11 +1,11 @@
 extends Control
 
-var node_1_scene
+var node_1_scene = "res://game/chapter_1/node_1/scenes/chapter1_node1.tscn"
 var node_2_scene = "res://game/chapter_1/node_2/scenes/Node_2.tscn"
 var node_6_scene = "res://game/chapter_2/node_6/scenes/chapter2_node3.tscn"
 var node_9_scene = "res://game/chapter_3/node_9/node_9.tscn"
 var node_10_scene = "res://game/chapter_4/node_10/node_10.tscn"
-var node_11_scene = "res://game/chapter_4/node_10/node_11.tscn"
+var node_11_scene = "res://game/chapter_4/node_11/node_11.tscn"
 var node_12_scene = "res://game/chapter_4/node_12/node_12.tscn"
 
 func _ready():
@@ -54,7 +54,7 @@ func _node_10_start():
 	SaveManager.new_game_from_level(node_10_scene, Vector2(400, 670), Vector2.UP)
 
 func _node_11_start():
-	SaveManager.new_game_from_level(node_11_scene, Vector2(-330, 350), Vector2.LEFT)
+	SaveManager.new_game_from_level(node_11_scene, Vector2(-330, 350), Vector2.RIGHT)
 
 func _node_12_start():
 	SaveManager.new_game_from_level(node_12_scene, Vector2(0,0), Vector2.UP)

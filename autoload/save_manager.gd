@@ -16,6 +16,7 @@ var init_data = {
 }
 
 var init_scene_path = "res://game/game_scene.tscn"
+var init_node_path = "res://game/chapter_1/node_1/scenes/chapter1_node1.tscn"
 
 var level_scene = null
 
@@ -227,6 +228,12 @@ func new_game():
 	get_tree().change_scene_to_file(init_scene_path)
 	restore_objects()
 	await get_tree().scene_changed
+	get_tree().current_scene.call_deferred(
+		"load_level",
+		init_node_path,
+		Vector2(0, 0),
+		Vector2.DOWN
+	)
 	
 	
 func new_game_from_level(scene_path, spawn_position, facing_direction_on_warp):

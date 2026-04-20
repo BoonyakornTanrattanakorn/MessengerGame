@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://dcg6xb00j02p2"]
+[gd_scene format=4 uid="uid://wwn7arwrumur"]
 
 [ext_resource type="Script" uid="uid://dgtu765ouk3is" path="res://game/chapter_3/subnode/subnode_4_event_handler.gd" id="1_05dxj"]
 [ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_nag8u"]
