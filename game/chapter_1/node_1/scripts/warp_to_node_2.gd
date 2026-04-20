@@ -4,7 +4,7 @@ var dialogue = load("res://game/chapter_1/node_1/dialogue/royal_knight.dialogue"
 
 func _ready() -> void:
 	super._ready()
-	next_level_path = "res://game/chapter_1/node_2/scenes/Node_2.tscn"
+	next_level_path = "res://game/chapter_1/node_2/scenes/node_2.tscn"
 	spawn_position_in_next_level = Vector2(2250, 3975)
 	facing_direction_on_warp = Vector2.DOWN
 

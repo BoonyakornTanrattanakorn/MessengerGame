@@ -1,7 +1,7 @@
 extends Control
 
 var node_1_scene = "res://game/chapter_1/node_1/scenes/chapter1_node1.tscn"
-var node_2_scene = "res://game/chapter_1/node_2/scenes/Node_2.tscn"
+var node_2_scene = "res://game/chapter_1/node_2/scenes/node_2.tscn"
 var node_6_scene = "res://game/chapter_2/node_6/scenes/chapter2_node3.tscn"
 var node_9_scene = "res://game/chapter_3/node_9/node_9.tscn"
 var node_10_scene = "res://game/chapter_4/node_10/node_10.tscn"

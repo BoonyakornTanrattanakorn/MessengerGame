@@ -5,7 +5,7 @@ extends Control
 var levels = [
 	"res://game/chapter_1/node_1/scenes/chapter1_node1.tscn",
 	
-	"res://game/chapter_1/node_2/scenes/Node_2.tscn",
+	"res://game/chapter_1/node_2/scenes/node_2.tscn",
 	
 	"res://game/chapter_1/node_3/level_0.tscn",
 	"res://game/chapter_1/node_3/level_1.tscn",
