@@ -7,11 +7,14 @@
 size = Vector2(128, 106)
 
 [node name="IceSpikes" type="Area2D" unique_id=621358786]
+collision_layer = 5
 script = ExtResource("1_di24v")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=246952015]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_ixtou")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1975252987]
-position = Vector2(0, 11)
+position = Vector2(0, 6)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_acbkm")
