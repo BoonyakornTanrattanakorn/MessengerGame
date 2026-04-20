@@ -137,5 +137,5 @@ script = ExtResource("1_pe236")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=275422144]
 sprite_frames = SubResource("SpriteFrames_bcyfn")
-animation = &"rise"
-autoplay = "rise"
+animation = &"dive"
+autoplay = "dive"

@@ -7,7 +7,14 @@ func on_level_loaded() -> void:
 func handle_intro_for_level() -> void:
 	BGMManager.play_bgm("caravan", 0.0, true)
 
+	var unlock_changed := false
+	if not GameState.element_fire_unlocked:
+		GameState.element_fire_unlocked = true
+		unlock_changed = true
+
 	if GameState.chap3_subnode4_shown:
+		if unlock_changed:
+			SaveManager.save_game()
 		return
 	GameState.chap3_subnode4_shown = true
 

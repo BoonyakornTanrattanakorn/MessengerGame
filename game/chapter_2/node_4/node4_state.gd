@@ -24,6 +24,7 @@ func start_node4() -> void:
 
 func talk_to_village_chief() -> void:
 	talked_to_village_chief = true
+	GameState.element_earth_unlocked = true
 	_update_insignia_objective()
 
 func enter_upper_node() -> void:

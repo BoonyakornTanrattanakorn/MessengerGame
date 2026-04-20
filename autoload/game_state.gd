@@ -38,6 +38,11 @@ var clue_2_unlocked := false
 var clue_3_unlocked := false
 var clue_4_unlocked := false
 
+var element_wind_unlocked := true
+var element_earth_unlocked := false
+var element_water_unlocked := false
+var element_fire_unlocked := false
+
 # Chapter 3 Subnodes
 var chap3_subnode1_shown := false
 var chap3_subnode2_shown := false
@@ -91,6 +96,11 @@ func new_game():
 	clue_3_unlocked = false
 	clue_4_unlocked = false
 
+	element_wind_unlocked = true
+	element_earth_unlocked = false
+	element_water_unlocked = false
+	element_fire_unlocked = false
+
 func save():
 	return {
 		"minigame_gems": minigame_gems,
@@ -122,7 +132,11 @@ func save():
 		"clue_1_unlocked": clue_1_unlocked,
 		"clue_2_unlocked": clue_2_unlocked,
 		"clue_3_unlocked": clue_3_unlocked,
-		"clue_4_unlocked": clue_4_unlocked
+		"clue_4_unlocked": clue_4_unlocked,
+		"element_wind_unlocked": element_wind_unlocked,
+		"element_earth_unlocked": element_earth_unlocked,
+		"element_water_unlocked": element_water_unlocked,
+		"element_fire_unlocked": element_fire_unlocked
 	}
 
 func load_data(data):
@@ -158,3 +172,19 @@ func load_data(data):
 	clue_2_unlocked = data.get("clue_2_unlocked", false)
 	clue_3_unlocked = data.get("clue_3_unlocked", false)
 	clue_4_unlocked = data.get("clue_4_unlocked", false)
+
+	element_wind_unlocked = data.get("element_wind_unlocked", true)
+	if data.has("element_earth_unlocked"):
+		element_earth_unlocked = data.get("element_earth_unlocked", false)
+	else:
+		element_earth_unlocked = chap2_node6_shown or chap3_node7_shown or chap4_node10_shown
+
+	if data.has("element_water_unlocked"):
+		element_water_unlocked = data.get("element_water_unlocked", false)
+	else:
+		element_water_unlocked = chap3_node7_shown or chap4_node10_shown
+
+	if data.has("element_fire_unlocked"):
+		element_fire_unlocked = data.get("element_fire_unlocked", false)
+	else:
+		element_fire_unlocked = chap4_node10_shown

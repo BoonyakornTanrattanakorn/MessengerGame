@@ -284,6 +284,7 @@ func _finish_boss_fight_win() -> void:
 	_disable_trigger_area()
 
 	ObjectiveManager.set_objective("Continue to the desert")
+	GameState.element_water_unlocked = true
 	SaveManager.save_game()
 	boss_fight_won.emit(_tracked_player)
 	_set_player_cutscene_lock(false)

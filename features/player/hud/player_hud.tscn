@@ -28,6 +28,9 @@
 [ext_resource type="Texture2D" uid="uid://dvh3xjhdehycg" path="res://assets/sprites/icons/elements/fire_icon.png" id="21_61gxr"]
 [ext_resource type="Texture2D" uid="uid://cxr6xgmyk66c5" path="res://assets/sprites/icons/elements/water_icon.png" id="22_aq8ub"]
 [ext_resource type="Texture2D" uid="uid://fcp8l2ylrcd3" path="res://assets/sprites/icons/elements/earth_icon.png" id="23_yi150"]
+[ext_resource type="Texture2D" uid="uid://bhteh20qwnfdh" path="res://assets/sprites/icons/elements/locked_fire_icon.png" id="27_d2r6w"]
+[ext_resource type="Texture2D" uid="uid://bshkga328ix4h" path="res://assets/sprites/icons/elements/locked_water_icon.png" id="29_6qjy5"]
+[ext_resource type="Texture2D" uid="uid://77nmatuquo5q" path="res://assets/sprites/icons/elements/locked_earth_icon.png" id="31_xncl8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -311,7 +314,7 @@ start_angle_deg = -90.0
 hover_scale = 1.25
 angle_offset_deg = 45.0
 
-[node name="Power_0" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999998]
+[node name="wind" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999998]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -319,21 +322,40 @@ size_flags_vertical = 4
 texture = ExtResource("16_qtp52")
 expand_mode = 3
 
-[node name="Power_1" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999997]
+[node name="fire" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999997]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("21_61gxr")
 expand_mode = 3
 
-[node name="Power_2" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999996]
+[node name="locked_fire" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1687062241]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("27_d2r6w")
+expand_mode = 3
+
+[node name="water" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999996]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("22_aq8ub")
 expand_mode = 3
 
-[node name="Power_3" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999995]
+[node name="locked_water" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=936899603]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("29_6qjy5")
+expand_mode = 3
+
+[node name="earth" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1999999995]
 z_index = 100
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("23_yi150")
+expand_mode = 3
+
+[node name="locked_earth" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=506771401]
+z_index = 100
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("31_xncl8")
 expand_mode = 3

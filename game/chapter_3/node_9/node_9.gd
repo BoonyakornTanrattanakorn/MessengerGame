@@ -43,6 +43,7 @@ func _on_boss_defeated():
 	await get_tree().create_timer(0.9).timeout
 	boss_display.play_defeat()
 	update_objective()
+	SaveManager.save_game()
 	
 	GameState.pending_level = "res://game/chapter_3/subnode/subnode_3_chap3.tscn"
 	GameState.pending_spawn = Vector2(606, 671)

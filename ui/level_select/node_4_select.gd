@@ -9,10 +9,10 @@ func _ready():
 	$BackToLevelSelectButton.pressed.connect(_level_select)
 		
 func _village_start():
-	SaveManager.new_game_from_level(village_scene, Vector2(0, 100), Vector2.RIGHT)
+	SaveManager.new_game_from_level(village_scene, Vector2(0, 450), Vector2.RIGHT)
 
 func _node_start():
-	SaveManager.new_game_from_level(node_4_scene, Vector2(400, 1470), Vector2.UP)
+	SaveManager.new_game_from_level(node_4_scene, Vector2(400, 1370), Vector2.UP)
 	
 func _level_select():
 	get_tree().change_scene_to_file("res://ui/level_select/level_select.tscn")
