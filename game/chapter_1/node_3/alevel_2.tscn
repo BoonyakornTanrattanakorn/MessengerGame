@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://8u2hukuvatir"]
+[gd_scene format=4 uid="uid://bhoidptmps3yf"]
 
 [ext_resource type="Script" uid="uid://cqalnxnuke8vp" path="res://game/chapter_1/node_3/minecart_level/node_3_level_2_event_handler.gd" id="1_l1lnv"]
 [ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_vrgyj"]

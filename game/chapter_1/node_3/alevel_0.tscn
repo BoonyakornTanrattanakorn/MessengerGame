@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://b4u2ea5kgyw2e"]
+[gd_scene format=4 uid="uid://tre3bourgeyl"]
 
 [ext_resource type="Script" uid="uid://5bx4dpf7xj8n" path="res://game/chapter_1/node_3/center_level/node_3_level_0_event_handler.gd" id="1_o2bvy"]
 [ext_resource type="TileSet" uid="uid://f0rvhxykfmty" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_45wdf"]

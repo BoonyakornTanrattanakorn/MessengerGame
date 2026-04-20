@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bofm1h5dsvh8b"]
+[gd_scene format=4 uid="uid://d04em3g24cdy5"]
 
 [ext_resource type="Script" uid="uid://csdhr8hdh1orb" path="res://game/chapter_1/node_3/golem_level/node_3_level_3_event_handler.gd" id="1_dr1y6"]
 [ext_resource type="TileSet" uid="uid://c71ipw3cggrd0" path="res://game/chapter_1/node_3/tres/Hole.tres" id="2_s8l73"]
