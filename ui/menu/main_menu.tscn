@@ -73,3 +73,15 @@ size_flags_horizontal = 4
 theme = ExtResource("2_or6mk")
 theme_override_font_sizes/font_size = 36
 text = "Quit Game"
+
+[node name="LevelSelectButton" type="Button" parent="." unique_id=1813772953]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 0
+offset_left = 1050.0
+offset_top = 636.0
+offset_right = 1250.0
+offset_bottom = 696.0
+size_flags_horizontal = 4
+theme = ExtResource("2_or6mk")
+theme_override_font_sizes/font_size = 32
+text = "Level Selection"

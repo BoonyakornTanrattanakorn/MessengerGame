@@ -228,3 +228,15 @@ func new_game():
 	restore_objects()
 	await get_tree().scene_changed
 	
+	
+func new_game_from_level(scene_path, spawn_position, facing_direction_on_warp):
+	save_data = init_data.duplicate(true)
+	get_tree().change_scene_to_file(init_scene_path)
+	restore_objects()
+	await get_tree().scene_changed
+	get_tree().current_scene.call_deferred(
+		"load_level",
+		scene_path,
+		spawn_position,
+		facing_direction_on_warp
+	)

@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://d0hfpg46yy64i"]
+
+[ext_resource type="Script" uid="uid://ckg1h7ofvwpnp" path="res://ui/level_select/node_8_select.gd" id="1_q0rfg"]
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_iry2h"]
+[ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="3_xn8vj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fv6w7"]
+font = ExtResource("3_xn8vj")
+font_size = 96
+font_color = Color(0, 0, 0, 1)
+
+[node name="Node8Select" type="Control" unique_id=591818469]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q0rfg")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1647652699]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -327.0
+offset_top = -289.165
+offset_right = 327.0
+offset_bottom = 205.83508
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_iry2h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=575347576]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer" unique_id=83250568]
+layout_mode = 2
+theme = ExtResource("2_iry2h")
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=479560564]
+custom_minimum_size = Vector2(300, 225)
+layout_mode = 2
+theme = ExtResource("2_iry2h")
+theme_override_font_sizes/font_size = 32
+text = "Select Level"
+label_settings = SubResource("LabelSettings_fv6w7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level0Button" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1861184647]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_iry2h")
+theme_override_font_sizes/font_size = 36
+text = "Level 0"
+
+[node name="Level1Button" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1429175496]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_iry2h")
+theme_override_font_sizes/font_size = 36
+text = "Level 1"
+
+[node name="Level2Button" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1713554831]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_iry2h")
+theme_override_font_sizes/font_size = 36
+text = "Level 2"
+
+[node name="Level3Button" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer" unique_id=1036666184]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_iry2h")
+theme_override_font_sizes/font_size = 36
+text = "Level 3"
+
+[node name="BackToLevelSelectButton" type="Button" parent="." unique_id=2124490145]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 0
+offset_left = 974.0
+offset_top = 636.0
+offset_right = 1250.0007
+offset_bottom = 696.0
+size_flags_horizontal = 4
+theme = ExtResource("2_iry2h")
+theme_override_font_sizes/font_size = 32
+text = "Back to Level Selection"
