@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://8u2hukuvatir"]
 
 [ext_resource type="Script" uid="uid://cqalnxnuke8vp" path="res://game/chapter_1/node_3/minecart_level/node_3_level_2_event_handler.gd" id="1_l1lnv"]
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_vrgyj"]
+[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_vrgyj"]
 [ext_resource type="Script" uid="uid://byqnwcsc08ud4" path="res://game/chapter_1/node_3/minecart_level/warp_to_level_0_from_2.gd" id="3_wtqb0"]
 [ext_resource type="PackedScene" uid="uid://bjmvx33n8l4a6" path="res://game/chapter_1/node_3/minecart_level/minecart.tscn" id="4_ad0e2"]
 [ext_resource type="Script" uid="uid://ba5kpb58s0dn6" path="res://game/chapter_1/node_3/minecart_level/turn_area_right.gd" id="5_qqth2"]

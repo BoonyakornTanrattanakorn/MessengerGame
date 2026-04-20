@@ -16,6 +16,7 @@ var init_data = {
 }
 
 var init_scene_path = "res://game/game_scene.tscn"
+var init_node_path = "res://game/chapter_1/node_1/scenes/chapter1_node1.tscn"
 
 var level_scene = null
 
@@ -90,6 +91,10 @@ func load_game():
 	await restore_global_objects()
 
 	var level_path = save_data.get("scene", "")
+	GameState.pending_level = ""
+	GameState.pending_spawn = Vector2.ZERO
+	GameState.pending_facing = Vector2.ZERO
+	Warp._warp_locked_until_msec = Time.get_ticks_msec() + 1200
 
 	get_tree().change_scene_to_file(init_scene_path)
 	
@@ -227,4 +232,22 @@ func new_game():
 	get_tree().change_scene_to_file(init_scene_path)
 	restore_objects()
 	await get_tree().scene_changed
+	get_tree().current_scene.call_deferred(
+		"load_level",
+		init_node_path,
+		Vector2(0, 0),
+		Vector2.DOWN
+	)
 	
+	
+func new_game_from_level(scene_path, spawn_position, facing_direction_on_warp):
+	save_data = init_data.duplicate(true)
+	get_tree().change_scene_to_file(init_scene_path)
+	restore_objects()
+	await get_tree().scene_changed
+	get_tree().current_scene.call_deferred(
+		"load_level",
+		scene_path,
+		spawn_position,
+		facing_direction_on_warp
+	)

@@ -21,3 +21,4 @@ func handle_intro_for_level() -> void:
 		player.focus_camera_to(camel_station)
 		await get_tree().create_timer(1.5).timeout
 		player.return_camera()
+	SaveManager.save_game()

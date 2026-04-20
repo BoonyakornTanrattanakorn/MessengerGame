@@ -48,41 +48,45 @@ func _ready() -> void:
 
 	
 func handle_intro_for_level() -> void:
-	var original_input_locked = player.is_in_dialogue
-	var original_camera_pan = player.is_camera_panning
+	if not GameState.chap4_node12_shown:
+		GameState.chap4_node12_shown = true
+		
+		var original_input_locked = player.is_in_dialogue
+		var original_camera_pan = player.is_camera_panning
 
-	# Play intro BGM (orchestral_mission)
-	BGMManager.play_bgm("orchestral_mission")
+		# Play intro BGM (orchestral_mission)
+		BGMManager.play_bgm("orchestral_mission", -8.0)
 
-	player.is_in_dialogue = true
-	player.is_camera_panning = true
-	_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
-	_fight_sequence_started = false
-	_fight_sequence_done = false
-	_fast_forward_enabled = true
-	_track_fast_forward_loop()
 
-	show_player_thoughts()
-	await slow_walk_intro()
-	if _waiting_for_hallway_thoughts and not _hallway_thoughts_done:
-		await hallway_thoughts_finished
-	await show_king_cutscene()
-	await start_player_king_dialogue()
+		player.is_in_dialogue = true
+		player.is_camera_panning = true
+		_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
+		_fight_sequence_started = false
+		_fight_sequence_done = false
+		_fast_forward_enabled = true
+		_track_fast_forward_loop()
 
-	if _fight_sequence_started:
-		if not _fight_sequence_done:
-			await fight_sequence_finished
-		await start_post_fight_cutscene()
-	else:
-		await normal_ending()
+		show_player_thoughts()
+		await slow_walk_intro()
+		if _waiting_for_hallway_thoughts and not _hallway_thoughts_done:
+			await hallway_thoughts_finished
+		await show_king_cutscene()
+		await start_player_king_dialogue()
 
-	# Restore intro/outro BGM after fight or ending
-	BGMManager.play_bgm("orchestral_mission")
+		if _fight_sequence_started:
+			if not _fight_sequence_done:
+				await fight_sequence_finished
+			await start_post_fight_cutscene()
+		else:
+			await normal_ending()
 
-	_fast_forward_enabled = false
-	_fast_forward_balloons.clear()
-	player.is_in_dialogue = original_input_locked
-	player.is_camera_panning = original_camera_pan
+		# Restore intro/outro BGM after fight or ending
+		BGMManager.play_bgm("orchestral_mission", -8.0)
+
+		_fast_forward_enabled = false
+		_fast_forward_balloons.clear()
+		player.is_in_dialogue = original_input_locked
+		player.is_camera_panning = original_camera_pan
 
 func show_player_thoughts() -> void:
 	if INTRO_DIALOGUE == null:
@@ -106,16 +110,6 @@ func _on_hallway_thoughts_dialogue_ended(resource: DialogueResource) -> void:
 	if DialogueManager.dialogue_ended.is_connected(_on_hallway_thoughts_dialogue_ended):
 		DialogueManager.dialogue_ended.disconnect(_on_hallway_thoughts_dialogue_ended)
 	hallway_thoughts_finished.emit()
-	if INTRO_DIALOGUE == null:
-		_hallway_thoughts_done = true
-		_waiting_for_hallway_thoughts = false
-		return
-	_hallway_thoughts_done = false
-	_waiting_for_hallway_thoughts = true
-	if not DialogueManager.dialogue_ended.is_connected(_on_hallway_thoughts_dialogue_ended):
-		DialogueManager.dialogue_ended.connect(_on_hallway_thoughts_dialogue_ended)
-	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "hallway_thoughts", [self])
-	_register_fast_forward_balloon(balloon)
 
 
 func show_king_cutscene() -> void:
@@ -169,7 +163,7 @@ func start_fight_sequence() -> void:
 		return
 
 	# Play fight BGM
-	BGMManager.play_bgm("fire_blade")
+	BGMManager.play_bgm("fire_blade", -12.0)
 	SFXManager.play_event("node12.cutscene.reveal")
 
 	_set_mage_group_visible(true)
@@ -281,7 +275,8 @@ func _check_required_clues_placeholder() -> bool:
 func start_post_fight_cutscene() -> void:
 	# Restore outro BGM (orchestral_mission)
 	if BGMManager != null:
-		BGMManager.play_bgm("orchestral_mission")
+		BGMManager.play_bgm("orchestral_mission", -8.0)
+
 
 	if FINALE_DIALOGUE != null:
 		var balloon := DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE, "start", [self])

@@ -32,6 +32,7 @@ func handle_intro_for_level() -> void:
 		player.focus_camera_to(chief)
 		await get_tree().create_timer(1.0).timeout
 		player.return_camera()
+		SaveManager.save_game()
 
 func trigger_exit_open() -> void:
 	if _exit_opening_started or _exit_opened:

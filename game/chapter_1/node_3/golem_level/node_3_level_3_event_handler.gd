@@ -3,9 +3,10 @@ extends LevelEventHandler
 @onready var bridge_manager = $BridgeManager
 
 @export var golem_boss: Node2D
-@onready var warp_to_level_0 = $WarpToLevel0from3
+@onready var portal = $Portal
 
 func _ready():
+	player.health_component.player_dead.connect(_on_player_dead)
 	for node in get_all_children(self):
 		# Only connect nodes that have switch_activated signal
 		if node.has_method("activate") and node.has_signal("switch_activated"):
@@ -14,8 +15,8 @@ func _ready():
 	if golem_boss and golem_boss.has_signal("boss_defeated"):
 		golem_boss.boss_defeated.connect(_on_golem_boss_defeated)
 
-	if warp_to_level_0 and warp_to_level_0.has_method("hide_portal"):
-		warp_to_level_0.hide_portal()
+	if portal and portal.has_method("hide_portal"):
+		portal.hide_portal()
 
 	if golem_boss and golem_boss.has_method("is_defeated") and golem_boss.is_defeated():
 		_on_golem_boss_defeated()
@@ -28,10 +29,12 @@ func get_all_children(node: Node) -> Array:
 	return result
 
 func _on_player_dead() -> void:
-	DeadManager.kill_player("Defeated by the tormented flame of Golem Guardian", Vector2(100, 500))
+	DeadManager.kill_player("Defeated by the tormented flame of Golem Guardian", "Color of the golems seems to resemble the switches...", Vector2(100, 500))
 
 func handle_intro_for_level() -> void:
+	Node3State.update_objective()
 	if not GameState.chap1_node3_3_shown:
+		BGMManager.play_bgm("dungeon", -5.0, true)
 		GameState.chap1_node3_3_shown = true
 
 		DialogueManager.show_dialogue_balloon(
@@ -45,7 +48,9 @@ func handle_intro_for_level() -> void:
 
 		await get_tree().create_timer(1.0).timeout
 		player.return_camera()
+		SaveManager.save_game()
 
 func _on_golem_boss_defeated() -> void:
-	if warp_to_level_0 and warp_to_level_0.has_method("show_portal"):
-		warp_to_level_0.show_portal()
+	if portal and portal.has_method("show_portal"):
+		portal.show_portal()
+		SaveManager.save_game()

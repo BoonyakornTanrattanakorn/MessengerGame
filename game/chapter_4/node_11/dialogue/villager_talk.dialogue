@@ -1,15 +1,8 @@
 ~ start
-Mysterious Woman: Stop!
+Mysterious Woman: Hey there, young one. What brings you here?
 
-Player: Who's there...?
-
-(The figure emerges from the shadows)
-
-Mysterious Woman: Beyond this point is no place for an ordinary person.
-Mysterious Woman: What are you doing here?
-
-Player: I need to get into the palace.
-Player: There’s something I have to take care of.
+Jarn Thorian [#sprite=attribute/neutral]: I need to get into the palace.
+Jarn Thorian [#sprite=attribute/neutral]: There’s something I have to take care of.
 
 Mysterious Woman: The palace, huh...
 Mysterious Woman: Now’s the worst time to go there.
@@ -18,65 +11,90 @@ Mysterious Woman: Now’s the worst time to go there.
 
 Mysterious Woman: ...You look kind of familiar.
 
-Player: Must be a coincidence.
+Jarn Thorian [#sprite=attribute/neutral]: Must be a coincidence.
 
 Mysterious Woman: Maybe.
-Mysterious Woman: I used to be in the palace. I've seen a lot of faces.
+Mysterious Woman: I spent time in the palace once. I've seen a lot of faces.
 
-Player: If you were in the palace,
-Player: then you must know a way in.
+Jarn Thorian [#sprite=attribute/neutral]: If you were in the palace,
+Jarn Thorian [#sprite=attribute/neutral]: then you must know a way in, right?
 
-Mysterious Woman: I do. But things aren’t the same anymore.
+Mysterious Woman: I know of one. But things are different now.
 
-Player: What do you mean?
+Jarn Thorian [#sprite=attribute/neutral]: What do you mean?
 
 Mysterious Woman: The entrance is sealed.
 Mysterious Woman: Guards are stationed everywhere.
 
-Mysterious Woman: Without the "code," you’re not getting in.
+Mysterious Woman: Without the "code", you’re not getting in.
 
-Player: Then where is it?
+Jarn Thorian [#sprite=attribute/neutral]: Then where is it?
 
 Mysterious Woman: Inside that tower.
-Mysterious Woman: ...But no one can retrieve it now.
+Mysterious Woman: ...But retrieving it is no easy task.
 
-Player: Why not?
+Jarn Thorian [#sprite=attribute/neutral]: Why not?
 
-Mysterious Woman: Because it's overrun with monsters.
+Mysterious Woman: There’s a monster in there, a powerful one that shouldn’t be awake.
 
-(She pauses briefly)
+Jarn Thorian [#sprite=attribute/neutral]: What?
 
-Mysterious Woman: The king was the one who released them.
+Mysterious Woman: You see... I was once responsible for that tower.
 
-Player: What?
+Jarn Thorian [#sprite=attribute/neutral]: ?!.
 
-Mysterious Woman: I was the master of that tower. I had to abandon it.
+Tower Master: One day when I was working there, there was a huge explosion.
+Tower Master: The monster appeared out of nowhere, and it was really strong.
+Tower Master: I barely escaped with my life.
 
-Player: ??!.
+Tower Master: After that, the king kicked me out of the palace and "sealed" the tower.
+Tower Master: He has been acting strange since then.
+Tower Master: Something about this whole thing doesn’t sit right.
 
-Tower Master: The king must be furious with me.
-Tower Master: He doesn’t want anyone using it anymore.
+Jarn Thorian [#sprite=attribute/neutral]: I see...
 
-Player: What about you?
+Tower Master: ...So you’re still going to head in?
 
-Tower Master: I left before it was too late.
-
-Tower Master: But it seems...
-Tower Master: you’re choosing to walk straight into it.
-
-Player: If the code is inside, then I don’t have a choice.
+Jarn Thorian [#sprite=attribute/neutral]: If the code is inside, then I don’t have a choice.
 
 Tower Master: You do realize how dangerous that is?
 
-Player: I do.
+Jarn Thorian [#sprite=attribute/neutral]: I do.
+Jarn Thorian [#sprite=attribute/neutral]: But it’s the only way.
 
-Player: It’s the only way left.
-
-(She looks at you again, differently this time)
+(She looks at you again, with a different expression.)
 
 Tower Master: ...Interesting.
+Tower Master: Seems like you have more guts than most.
 
 Tower Master: Very well. Go.
+Tower Master: Bring back the code from that tower, and I’ll open the way for you.
+=> END
 
+~ talked
 Tower Master: If you can bring the code in tower back, I’ll open the way for you.
+=> END
+
+~ after_ice_ghost
+Jarn Thorian [#sprite=attribute/neutral]: I'm back.
+Tower Master: You actually defeated it?
+Tower Master: Seems like I really did underestimate you...
+Tower Master: But thanks to you, I'm finally able to go back to the tower once again.
+Tower Master: Thank you, young one.
+
+Jarn Thorian [#sprite=attribute/neutral]: You're welcome.
+Tower Master: Oh yes, before you're going to the palace, why not visit the tower first?
+Tower Master: There might be something you could make use of.
+Jarn Thorian [#sprite=attribute/neutral]: ...I'll consider it.
+	
+Tower Master: By the way, the code for the guards is "Closed Throne".
+Tower Master: Don't say it too loudly near the gate.
+Jarn Thorian [#sprite=attribute/neutral]: Got it. Thanks.
+=> END
+
+~ inside_tower
+Tower Master: Welcome to the tower, young one!
+Tower Master: This place has many archived documents that might be of great use.
+Tower Master: Go ahead and take a look around.
+Tower Master: I'll be here if you need anything.
 => END

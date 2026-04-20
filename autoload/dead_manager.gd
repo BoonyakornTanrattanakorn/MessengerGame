@@ -9,22 +9,22 @@ func register_player(p):
 	player = p
 
 
-func kill_player(reason: String, respawn_position: Vector2):
+func kill_player(reason: String, tips: String, respawn_position: Vector2):
 	if player:
 		player.hide()
 		player.set_physics_process(false)
 		is_dead = true
 	
 	get_tree().paused = true
-	show_death_screen(reason, respawn_position)
+	show_death_screen(reason, tips, respawn_position)
 
 
-func show_death_screen(reason: String, respawn_position: Vector2 = Vector2.ZERO):
+func show_death_screen(reason: String, tips: String, respawn_position: Vector2 = Vector2.ZERO):
 	var death_ui = death_scene.instantiate()
 	death_ui.process_mode = PROCESS_MODE_ALWAYS
 	get_tree().current_scene.add_child(death_ui)
 
-	death_ui.setup(reason, respawn_position)
+	death_ui.setup(reason, tips, respawn_position)
 
 
 func respawn_player(position: Vector2):

@@ -3,7 +3,7 @@ extends Area2D
 @export var locked_texture: Texture2D
 @export var unlocked_texture: Texture2D
 @export var next_level_path: String = "res://game/chapter_2/node_4/chapter_2_village.tscn"
-@export var spawn_position_in_next_level: Vector2 = Vector2(0, 100)
+@export var spawn_position_in_next_level: Vector2 = Vector2(0, 450)
 @export var facing_direction_on_warp: Vector2 = Vector2.RIGHT
 
 @onready var sprite: Sprite2D = $Sprite2D

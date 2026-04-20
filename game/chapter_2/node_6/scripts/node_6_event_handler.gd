@@ -22,7 +22,7 @@ func _set_player_boat_mode(enabled: bool) -> void:
 
 func handle_intro_for_level() -> void:
 	if not GameState.chap2_node6_shown:
-		BGMManager.play_bgm("field_theme_1", 0.0, true)
+		BGMManager.play_bgm("chapter2", 0.0, true)
 		
 		GameState.chap2_node6_shown = true
 
@@ -44,6 +44,7 @@ func handle_intro_for_level() -> void:
 		)
 		
 		await DialogueManager.dialogue_ended
+		SaveManager.save_game()
 
 func _on_player_dead():
-	DeadManager.kill_player("Shot down by water ball\nTry using wind and earth element alternately.", Vector2(0,0))
+	DeadManager.kill_player("Shot down by water ball", "Try using wind and earth element alternately.", Vector2(0,0))

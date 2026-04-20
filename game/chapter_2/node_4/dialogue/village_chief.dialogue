@@ -1,5 +1,11 @@
 ~ start
 Village Chief: Ah, traveler... our village is in need of aid.
+Village Chief: Come and rest for a bit, will you?
+Village Chief: There is also an old Earth Rune in our care.
+Village Chief: No one here can use it... but if you can, I'll entrust it to you.
+=> quest_offer
+
+~ quest_offer
 Village Chief: Two insignias must be recovered before we may proceed.
 Village Chief: One lies in the upper ruins, guarded by an ancient mechanism.
 Village Chief: The other is held by the cat lady, though she may ask for your help first.

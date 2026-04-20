@@ -1,30 +1,21 @@
 extends LevelEventHandler
 
-const ICE_GHOST_DIALOGUE := preload("res://game/chapter_4/node_11/dialogue/ice_ghost.dialogue")
+var dialogue := load("res://game/chapter_4/node_11/dialogue/ice_ghost.dialogue")
 
-@export var tower: Node2D
-@export var focus_delay: float = 0.2
-@export var focus_duration: float = 1.5
+@export var ice_ghost: Node2D
 
-func on_level_loaded() -> void:
-	if tower == null:
-		tower = get_tree().current_scene.find_child("Tower", true, false) as Node2D
+func _ready() -> void:
+	player.health_component.player_dead.connect(_on_player_dead)
 
 func handle_intro_for_level() -> void:
 	if not GameState.chap4_tower_1st_floor_shown:
 		GameState.chap4_tower_1st_floor_shown = true
-	
-		if player == null:
-			return
-		if tower == null or not is_instance_valid(tower):
-			tower = get_tree().current_scene.find_child("Tower", true, false) as Node2D
-		if tower == null:
-			return
 
-		await get_tree().create_timer(focus_delay).timeout
-		player.focus_camera_to(tower)
-		if ICE_GHOST_DIALOGUE != null:
-			DialogueManager.show_dialogue_balloon(ICE_GHOST_DIALOGUE, "start", [self])
+		player.focus_camera_to(ice_ghost)
+		if dialogue != null:
+			DialogueManager.show_dialogue_balloon(dialogue, "start")
 			await DialogueManager.dialogue_ended
-		await get_tree().create_timer(focus_duration).timeout
 		player.return_camera()
+		
+func _on_player_dead() -> void:
+	DeadManager.kill_player("Defeated by the ice ghost", "Use fire power. Period.", Vector2(260, 130))

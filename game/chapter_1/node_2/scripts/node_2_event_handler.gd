@@ -5,8 +5,7 @@ extends LevelEventHandler
 func handle_intro_for_level() -> void:
 	if not GameState.chap1_node2_shown:
 		# Play BGM
-		BGMManager.play_bgm("field_theme_1", 0.0, true)
-		
+		BGMManager.stop_bgm(2.0)
 		GameState.chap1_node2_shown = true
 
 		DialogueManager.show_dialogue_balloon(
@@ -20,3 +19,5 @@ func handle_intro_for_level() -> void:
 
 		await get_tree().create_timer(1.0).timeout
 		player.return_camera()
+		BGMManager.play_bgm("dungeon", -5.0, true)
+		SaveManager.save_game()

@@ -115,8 +115,9 @@ static func walk_entity_along_path(
 			if anim_sprite:
 				var facing_suffix := _get_facing_suffix(entity, direction)
 				if not facing_suffix.is_empty():
-					var walk_anim := "walk " + facing_suffix
+					var walk_anim := _resolve_entity_animation(entity, "walk " + facing_suffix)
 					if anim_sprite.animation != walk_anim:
+						print("[Node12EventUtils] play walk animation:", walk_anim)
 						anim_sprite.play(walk_anim)
 
 		entity.global_position = world_pos
@@ -143,7 +144,9 @@ static func walk_entity_along_path(
 		anim_sprite.speed_scale = original_anim_speed
 		var idle_suffix := _get_facing_suffix(entity, last_direction)
 		if not idle_suffix.is_empty():
-			anim_sprite.play("idle " + idle_suffix)
+			var idle_anim := _resolve_entity_animation(entity, "idle " + idle_suffix)
+			print("[Node12EventUtils] play idle animation:", idle_anim)
+			anim_sprite.play(idle_anim)
 
 	return last_direction
 
@@ -157,3 +160,9 @@ static func _get_facing_suffix(entity: Node, direction: Vector2) -> String:
 	if entity.has_method("_facing_suffix"):
 		return String(entity.call("_facing_suffix", direction))
 	return ""
+
+
+static func _resolve_entity_animation(entity: Node, base_anim: String) -> String:
+	if entity != null and entity.has_method("_resolve_attribute_animation"):
+		return String(entity.call("_resolve_attribute_animation", base_anim))
+	return base_anim

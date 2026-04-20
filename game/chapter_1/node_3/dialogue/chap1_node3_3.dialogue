@@ -1,6 +1,6 @@
 ~ start
-Player [#sprite=wind/neutral]: This cave goes pretty deep...
-Player [#sprite=wind/neutral]: That golem is guarding the blue gem.
-Player [#sprite=wind/neutral]: It doesn’t look like it’ll let me take it easily.
-Player [#sprite=wind/neutral]: I need to figure out how to get there first.
+Jarn Thorian [#sprite=attribute/neutral]: This cave goes pretty deep...
+Jarn Thorian [#sprite=attribute/neutral]: That golem is guarding the blue gem.
+Jarn Thorian [#sprite=attribute/neutral]: It doesn’t look like it’ll let me take it easily.
+Jarn Thorian [#sprite=attribute/neutral]: I need to figure out how to get there first.
 => END

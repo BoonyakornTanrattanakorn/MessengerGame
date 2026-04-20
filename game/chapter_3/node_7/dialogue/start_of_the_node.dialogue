@@ -1,5 +1,5 @@
 ~ start
-Player [#sprite=water/neutral]: Finally... I thought the horizon would never end. That must be the city.
-Player [#sprite=water/neutral]: There's a guard posted right out front.
-Player [#sprite=water/neutral]: No way around it. I'd better talk to him.
+Jarn Thorian [#sprite=attribute/neutral]: Finally... I thought the horizon would never end. That must be the city.
+Jarn Thorian [#sprite=attribute/neutral]: There's a guard posted right out front.
+Jarn Thorian [#sprite=attribute/neutral]: No way around it. I'd better talk to him.
 => END

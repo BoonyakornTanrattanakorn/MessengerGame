@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://bcmk1530ht5uv"]
+
+[ext_resource type="Script" uid="uid://dxym0shirn6lj" path="res://ui/level_select/node_4_select.gd" id="1_26arm"]
+[ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="2_by2te"]
+[ext_resource type="FontFile" uid="uid://bnhmi3yp5qqbu" path="res://assets/fonts/Bagura Font Pack v1.5/Bold.ttf" id="3_flo5w"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2qncu"]
+font = ExtResource("3_flo5w")
+font_size = 96
+font_color = Color(0, 0, 0, 1)
+
+[node name="Node4Select" type="Control" unique_id=777595655]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_26arm")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1286575350]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -327.0
+offset_top = -289.165
+offset_right = 327.0
+offset_bottom = 205.83508
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_by2te")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1021967527]
+layout_mode = 2
+theme = ExtResource("2_by2te")
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=992835506]
+custom_minimum_size = Vector2(300, 225)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_by2te")
+theme_override_font_sizes/font_size = 32
+text = "Start from village?"
+label_settings = SubResource("LabelSettings_2qncu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1444939201]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="YesButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1784884846]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_by2te")
+theme_override_font_sizes/font_size = 36
+text = "Yes"
+
+[node name="NoButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=419536905]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_by2te")
+theme_override_font_sizes/font_size = 36
+text = "No"
+
+[node name="BackToLevelSelectButton" type="Button" parent="." unique_id=404551834]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 0
+offset_left = 974.0
+offset_top = 636.0
+offset_right = 1250.0007
+offset_bottom = 696.0
+size_flags_horizontal = 4
+theme = ExtResource("2_by2te")
+theme_override_font_sizes/font_size = 32
+text = "Back to Level Selection"

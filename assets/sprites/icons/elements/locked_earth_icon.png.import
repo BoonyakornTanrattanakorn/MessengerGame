@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d01an4yd5qgto"
-path="res://.godot/imported/neutral.png-a6e8ab1d45109d0280c74a505206a303.ctex"
+uid="uid://77nmatuquo5q"
+path="res://.godot/imported/locked_earth_icon.png-d2abffb6d9a9caf6c26727d2ef3d199d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/portraits/Player/water/neutral.png"
-dest_files=["res://.godot/imported/neutral.png-a6e8ab1d45109d0280c74a505206a303.ctex"]
+source_file="res://assets/sprites/icons/elements/locked_earth_icon.png"
+dest_files=["res://.godot/imported/locked_earth_icon.png-d2abffb6d9a9caf6c26727d2ef3d199d.ctex"]
 
 [params]
 

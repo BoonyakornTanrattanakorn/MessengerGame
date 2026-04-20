@@ -1,17 +1,17 @@
 ~ start
 Water Serpent [#sprite=neutral]: ...
-Player [#sprite=earth/neutral]: ...
-Player [#sprite=earth/neutral]: Well this is bad...
+Jarn Thorian [#sprite=attribute/neutral]: ...
+Jarn Thorian [#sprite=attribute/neutral]: Well this is bad...
 Water Serpent [#sprite=enraged]: RAAAAAAAAAAAAH!!!
 => END
 
 ~ win
 Water Serpent [#sprite=neutral]: ...
-Player [#sprite=earth/neutral]: ...?
-Player [#sprite=earth/neutral]: Is it... over?
+Jarn Thorian [#sprite=attribute/neutral]: ...?
+Jarn Thorian [#sprite=attribute/neutral]: Is it... over?
 Water Serpent [#sprite=neutral]: rah
 => END
 
 ~ win_2
-Player [#sprite=earth/neutral]: ...okay.
+Jarn Thorian [#sprite=attribute/neutral]: ...okay.
 => END

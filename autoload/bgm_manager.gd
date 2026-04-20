@@ -6,8 +6,10 @@ var current_track: String = ""
 # Dictionary of BGM keys to resource paths
 var bgm_paths := {
 	"orchestral_mission": "res://assets/audio/bgm/orchestral_mission.ogg",
+	"dungeon": "res://assets/audio/bgm/dungeon.ogg",
 	"fire_blade": "res://assets/audio/bgm/火の大剣.ogg",
 	"node_10_bgm": "res://assets/audio/bgm/node_10_bgm.ogg",
+	"node_11_bgm": "res://assets/audio/bgm/node_11_bgm.ogg",
 	"water_serpent_bgm": "res://assets/audio/bgm/water_serpent_bgm.ogg",
 	"field_theme_1": "res://assets/audio/bgm/field_theme_1.ogg",
 	"chapter2": "res://assets/audio/bgm/chapter2.ogg",

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export_file("*.dialogue") var dialogue_path: String = "res://game/chapter_4/node_11/dialogue/soldier_talk.dialogue"
-@export_file("*.dialogue") var dialogue_path_after_clue: String = "res://game/chapter_4/node_11/dialogue/soldier_talk2.dialogue"
+var dialogue = load("res://game/chapter_4/node_11/dialogue/soldier_talk.dialogue")
+var dialogue_tag = "no_code"
 
 @onready var interaction_area: Area2D = $InteractArea
 
@@ -25,24 +25,17 @@ func _talk() -> void:
 	if _is_talking:
 		return
 
-	var selected_dialogue_path: String = dialogue_path
-
-	if GameState.clue_4_unlocked:
-		selected_dialogue_path = dialogue_path_after_clue
-
-	var dlg = load(selected_dialogue_path)
-	if dlg == null:
-		push_warning("Failed to load dialogue: " + selected_dialogue_path)
-		return
+	if GameState.chap4_node11_tower_master_returned:
+		dialogue_tag = "has_code"
 
 	_is_talking = true
-	DialogueManager.show_dialogue_balloon(dlg, "start")
+	DialogueManager.show_dialogue_balloon(dialogue, dialogue_tag)
 	await DialogueManager.dialogue_ended
 	_is_talking = false
 
-	if GameState.clue_4_unlocked:
+	if dialogue_tag == "has_code" and not GameState.chap4_node11_soldier:
 		GameState.chap4_node11_soldier = true
-		print("chap4_node11_soldier set to: ", GameState.chap4_node11_soldier)
+		ObjectiveManager.set_objective("Go into the palace")
 		_remove_boss_soldier()
 		SaveManager.save_game()
 

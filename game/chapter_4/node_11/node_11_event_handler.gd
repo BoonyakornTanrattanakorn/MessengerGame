@@ -2,7 +2,9 @@ extends LevelEventHandler
 @export var tower: Node2D
 @export var castle: Node2D
 @export var towerleader: Node2D
-const Villager_DIALOGUE := preload("res://game/chapter_4/node_11/dialogue/villager.dialogue")
+
+var dialogue := load("res://game/chapter_4/node_11/dialogue/node_11_dialogue.dialogue")
+
 func on_level_loaded() -> void:
 	if GameState.chap4_node11_soldier:
 		#print("[Node11] chap4_node11_soldier is true, removing BossSoldier")
@@ -11,25 +13,26 @@ func on_level_loaded() -> void:
 func handle_intro_for_level() -> void:
 	if not GameState.chap4_node11_shown:
 		GameState.chap4_node11_shown = true
-
+		BGMManager.play_bgm("node_11_bgm", -6, true)
+		
 		if tower != null:
 			player.focus_camera_to(tower)
 			await get_tree().create_timer(1.5).timeout
-			player.return_camera()
-			await get_tree().create_timer(1.0).timeout
 
 		if castle != null:
 			player.focus_camera_to(castle)
 			await get_tree().create_timer(1.5).timeout
-			player.return_camera()
-			await get_tree().create_timer(1.0).timeout
 		
 		if towerleader != null:
 			player.focus_camera_to(towerleader)
-			DialogueManager.show_dialogue_balloon(Villager_DIALOGUE, "start", [self])
-			await DialogueManager.dialogue_ended
 			await get_tree().create_timer(1.5).timeout
+			DialogueManager.show_dialogue_balloon(dialogue, "start")
+			await DialogueManager.dialogue_ended
+			
 			player.return_camera()
+		
+		ObjectiveManager.set_objective("Talk to the mysterious woman")
+		SaveManager.save_game()
 
 
 func _remove_boss_soldier() -> void:

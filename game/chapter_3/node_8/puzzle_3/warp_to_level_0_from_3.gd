@@ -1,7 +1,7 @@
 extends Warp
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+	super._ready()
 	next_level_path = "res://game/chapter_3/node_8/level_0.tscn"
 	spawn_position_in_next_level = Vector2(1225, 700)
 	facing_direction_on_warp = Vector2.UP

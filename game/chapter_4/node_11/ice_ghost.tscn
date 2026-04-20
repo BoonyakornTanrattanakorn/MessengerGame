@@ -119,7 +119,8 @@ script = ExtResource("1_8wmm1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1164816980]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_fdup2")
-animation = &"left"
+animation = &"down"
+autoplay = "down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1173105288]
 position = Vector2(0, 1)

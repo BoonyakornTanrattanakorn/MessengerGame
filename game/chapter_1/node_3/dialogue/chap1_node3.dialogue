@@ -1,5 +1,5 @@
 ~ start
-Player [#sprite=wind/neutral]: ...
-Player [#sprite=wind/neutral]: What is that big door?
-Player [#sprite=wind/neutral]: I probably need all the 3 gems to open it.
+Jarn Thorian [#sprite=attribute/neutral]: ...
+Jarn Thorian [#sprite=attribute/neutral]: What is that big door?
+Jarn Thorian [#sprite=attribute/neutral]: I probably need all the 3 gems to open it.
 => END
