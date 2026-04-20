@@ -43,6 +43,7 @@ size = Vector2(11, 5)
 
 [node name="lever" type="Area2D" unique_id=2093616132]
 y_sort_enabled = true
+collision_mask = 15
 script = ExtResource("1_wv1st")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1638210522]

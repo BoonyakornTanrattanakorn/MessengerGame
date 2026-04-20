@@ -9,7 +9,7 @@ extends Node2D
 
 func _ready():
 	await get_tree().process_frame
-	BGMManager.play_bgm("res://assets/audio/hustle-and-bustle-of-ormos-2-rvikm.ogg", 0.0, true)
+	BGMManager.play_bgm("camel", 0.0, true)
 
 	hud.set_max_health(player.health)
 	hud.update_health(player.health)

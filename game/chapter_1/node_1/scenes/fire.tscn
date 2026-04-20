@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://62un3mh3kwg1"]
+
+[ext_resource type="Texture2D" uid="uid://dadg0srwvludi" path="res://assets/sprites/fire_animation/normal/Group 4 - 5/Group 4 - 5.png" id="2_bxi8f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uk1xk"]
+atlas = ExtResource("2_bxi8f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmkt4"]
+atlas = ExtResource("2_bxi8f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prij4"]
+atlas = ExtResource("2_bxi8f")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrand"]
+atlas = ExtResource("2_bxi8f")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmu7b"]
+atlas = ExtResource("2_bxi8f")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxhyv"]
+atlas = ExtResource("2_bxi8f")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adgbq"]
+atlas = ExtResource("2_bxi8f")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t73ko"]
+atlas = ExtResource("2_bxi8f")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u1b2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uk1xk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmkt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prij4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrand")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmu7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxhyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adgbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t73ko")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 10.0
+}]
+
+[node name="Fire" type="Node2D" unique_id=774633734]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=637840241]
+sprite_frames = SubResource("SpriteFrames_u1b2r")
+animation = &"normal"
+autoplay = "normal"
+frame_progress = 0.949188
