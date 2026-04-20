@@ -27,6 +27,8 @@ func get_all_children(node: Node) -> Array:
 		result.append_array(get_all_children(child))
 	return result
 
+func _on_player_dead() -> void:
+	DeadManager.kill_player("Defeated by the tormented flame of Golem Guardian", Vector2(100, 500))
 
 func handle_intro_for_level() -> void:
 	if not GameState.chap1_node3_3_shown:

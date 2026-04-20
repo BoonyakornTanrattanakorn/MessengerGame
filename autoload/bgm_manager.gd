@@ -10,7 +10,10 @@ var bgm_paths := {
 	"node_10_bgm": "res://assets/audio/bgm/node_10_bgm.ogg",
 	"water_serpent_bgm": "res://assets/audio/bgm/water_serpent_bgm.ogg",
 	"field_theme_1": "res://assets/audio/bgm/field_theme_1.ogg",
-	"chapter2": "res://assets/audio/bgm/chapter2.ogg"
+	"chapter2": "res://assets/audio/bgm/chapter2.ogg",
+	"caravan": "res://assets/audio/bgm/caravan.ogg",
+	"camel": "res://assets/audio/bgm/hustle-and-bustle-of-ormos-2-rvikm.ogg"
+	
 }
 
 func _ready() -> void:

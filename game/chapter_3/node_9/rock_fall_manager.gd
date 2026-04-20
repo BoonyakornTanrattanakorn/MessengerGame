@@ -1,8 +1,8 @@
 # RockFallManager.gd
 extends Node2D
 
-const ROCK_COUNTS = {1: 1, 2: 2, 3: 3}    # rocks per phase
-const SPAWN_INTERVAL = 4.0                  # seconds between waves
+const ROCK_COUNTS = {1: 1, 2: 2, 3: 4}    # rocks per phase
+const SPAWN_INTERVAL = 7.0                # seconds between waves
 const SPAWN_RADIUS = 80.0                   # how close to player rocks spawn
 const MIN_DISTANCE = 40.0                   # minimum distance from player
 

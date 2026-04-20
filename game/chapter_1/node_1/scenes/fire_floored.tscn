@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://w537r6gp3kmf"]
+
+[ext_resource type="Texture2D" uid="uid://botqpwliow2mt" path="res://assets/sprites/fire_animation/floor/Group 4 - 5/Group 4 - 5.png" id="1_krrr7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke0v3"]
+atlas = ExtResource("1_krrr7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nq8dq"]
+atlas = ExtResource("1_krrr7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63uru"]
+atlas = ExtResource("1_krrr7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5wl2"]
+atlas = ExtResource("1_krrr7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wshg1"]
+atlas = ExtResource("1_krrr7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlgyt"]
+atlas = ExtResource("1_krrr7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp0nw"]
+atlas = ExtResource("1_krrr7")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijxfs"]
+atlas = ExtResource("1_krrr7")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u1b2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke0v3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nq8dq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63uru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5wl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wshg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlgyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fp0nw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijxfs")
+}],
+"loop": true,
+"name": &"floored",
+"speed": 10.0
+}]
+
+[node name="Fire" type="Node2D" unique_id=774633734]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=637840241]
+sprite_frames = SubResource("SpriteFrames_u1b2r")
+animation = &"floored"
+autoplay = "floored"

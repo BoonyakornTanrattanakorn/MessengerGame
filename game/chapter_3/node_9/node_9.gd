@@ -16,7 +16,7 @@ func on_level_loaded() -> void:
 	pass
 
 func handle_intro_for_level() -> void:
-	BGMManager.play_bgm("res://assets/audio/caravan.ogg", 0.0, true)
+	BGMManager.play_bgm("caravan", 0.0, true)
 
 func _ready():
 	is_boss_dead = false
@@ -32,6 +32,8 @@ func _on_phase_complete(phase: int):
 	boss_display.show_phase(next_phase)
 	rock_fall_manager.start(next_phase)
 
+func _on_player_dead() -> void:
+	DeadManager.kill_player("Defeated by the Worm Guardian", Vector2(100, 500))
 
 func _on_boss_defeated():
 	is_boss_dead = true

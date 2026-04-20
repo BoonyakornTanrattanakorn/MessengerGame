@@ -4,7 +4,7 @@ extends Area2D
 @export var lifetime: float = 5.0
 @export var damage: int = 1
 
-var water_ball_sfx = "res://assets/audio/water_ball_sfx.ogg"
+var water_ball_sfx = "res://assets/audio/sfx/water_ball_sfx.ogg"
 var _direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
