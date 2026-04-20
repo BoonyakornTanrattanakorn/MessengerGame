@@ -28,7 +28,7 @@ func activate_lever():
 		print("Lever activated in room ", room_id)
 
 func _on_area_entered(area):
-	if area.name.to_lower().contains("wind") or area.is_in_group("wind_magic"):
+	if area.name.to_lower().contains("wind") or area.is_in_group("wind_wave"):
 		activate_lever()
 		if area.has_method("queue_free"):
 			area.queue_free()
