@@ -1,4 +1,5 @@
 extends Area2D
+class_name CheckPoint_Node10
 
 @export var level_manager : LevelManager
 @export var save_id = ""

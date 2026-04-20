@@ -113,5 +113,5 @@ func load_data(data):
 		
 	if player_checkpoint_position:
 		player = get_player()
-		if player:
-			player.global_position = player_checkpoint_position
+		#if player:
+		#	player.global_position = player_checkpoint_position

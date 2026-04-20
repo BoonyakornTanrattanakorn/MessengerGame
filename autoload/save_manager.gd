@@ -18,7 +18,7 @@ var init_data = {
 var init_scene_path = "res://game/game_scene.tscn"
 
 var level_scene = null
-
+signal level_loaded
 
 func save_game():
 	level_scene = get_level_scene()
@@ -92,7 +92,6 @@ func load_game():
 	var level_path = save_data.get("scene", "")
 
 	get_tree().change_scene_to_file(init_scene_path)
-	
 	await get_tree().scene_changed
 	
 	#var player = get_tree().current_scene.get_node("Player")
@@ -100,18 +99,17 @@ func load_game():
 	#player_hud._pause_game()
 	
 	var root_scene = get_tree().current_scene
-
 	if level_path != "":
-		root_scene.load_level(level_path, Vector2.ZERO)
+		await root_scene.load_level(level_path, Vector2.ZERO)
 
-	restore_objects()
+	await restore_objects()
+	
+	
 
 
 
 func restore_objects():
 	await get_tree().process_frame
-	
-	GameState.new_game()
 	
 	level_scene = get_level_scene()
 
@@ -128,11 +126,11 @@ func restore_objects():
 
 	savables += root_scene.find_children("*", "", true, false)
 	savables += level_scene.find_children("*", "", true, false)
-	for node in get_tree().root.get_children():
-		if node == root_scene:
-			continue
-		savables += node.find_children("*", "", true, false)
-		savables.append(node)
+	# for node in get_tree().root.get_children():
+	# 	if node == root_scene:
+	# 		continue
+	# 	savables += node.find_children("*", "", true, false)
+	# 	savables.append(node)
 		
 	for node in savables:
 		if not node.has_method("load_data"):
@@ -150,6 +148,7 @@ func restore_objects():
 			continue
 
 		node.load_data(data)
+	level_loaded.emit()
 
 func get_level_scene():
 	var root = get_tree().current_scene
@@ -224,7 +223,9 @@ func restore_global_objects():
 
 func new_game():
 	save_data = init_data.duplicate(true)
+	GameState.new_game()
 	get_tree().change_scene_to_file(init_scene_path)
-	restore_objects()
 	await get_tree().scene_changed
-	
+	var root_scene = get_tree().current_scene
+	await restore_objects()
+	save_game()
