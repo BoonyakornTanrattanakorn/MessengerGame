@@ -15,11 +15,17 @@ var _player: Node2D
 var _attack_timer: float = 0.0
 var _attack_ready_timer: float = 0.0
 var _attack_direction: Vector2 = Vector2.LEFT
+var _dialogue_active: bool = false
 
 func _ready() -> void:
 	_hp = max(1, max_hp)
 	add_to_group("enemy")
 	_player = _find_player()
+	if DialogueManager != null:
+		if not DialogueManager.dialogue_started.is_connected(_on_dialogue_started):
+			DialogueManager.dialogue_started.connect(_on_dialogue_started)
+		if not DialogueManager.dialogue_ended.is_connected(_on_dialogue_ended):
+			DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	_apply_dead_state()
 	set_physics_process(not is_dead())
 
@@ -27,6 +33,14 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if is_dead():
 		velocity = Vector2.ZERO
+		return
+
+	if _dialogue_active:
+		# Cancel queued attacks and stay still while dialogue is on screen.
+		_attack_timer = 0.0
+		velocity = Vector2.ZERO
+		_update_animation(velocity)
+		move_and_slide()
 		return
 
 	if _attack_ready_timer > 0.0:
@@ -173,3 +187,11 @@ func _fire_spike(direction: Vector2) -> void:
 	spike.set("speed", spike_speed)
 	spike.set("damage", 1)
 	spike.set("source_element", "ice")
+
+
+func _on_dialogue_started(_resource = null) -> void:
+	_dialogue_active = true
+
+
+func _on_dialogue_ended(_resource = null) -> void:
+	_dialogue_active = false

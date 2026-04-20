@@ -2,7 +2,8 @@ extends LevelEventHandler
 @export var tower: Node2D
 @export var castle: Node2D
 @export var towerleader: Node2D
-const Villager_DIALOGUE := preload("res://game/chapter_4/node_11/dialogue/villager.dialogue")
+
+var dialogue := load("res://game/chapter_4/node_11/dialogue/villager.dialogue")
 
 func on_level_loaded() -> void:
 	if GameState.chap4_node11_soldier:
@@ -24,7 +25,7 @@ func handle_intro_for_level() -> void:
 		if towerleader != null:
 			player.focus_camera_to(towerleader)
 			await get_tree().create_timer(1.5).timeout
-			DialogueManager.show_dialogue_balloon(Villager_DIALOGUE, "start", [self])
+			DialogueManager.show_dialogue_balloon(dialogue, "start")
 			await DialogueManager.dialogue_ended
 			
 			player.return_camera()

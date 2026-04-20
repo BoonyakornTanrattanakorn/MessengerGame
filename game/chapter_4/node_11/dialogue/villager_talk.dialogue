@@ -1,12 +1,5 @@
 ~ start
-Mysterious Woman: Stop!
-
-Player [#sprite=fire/neutral]: Who's there...?
-
-(A woman stands in your way.)
-
-Mysterious Woman: Beyond this point is no place for an ordinary person.
-Mysterious Woman: What are you doing here?
+Mysterious Woman: Hey there, child. What brings you here?
 
 Player [#sprite=fire/neutral]: I need to get into the palace.
 Player [#sprite=fire/neutral]: There’s something I have to take care of.
