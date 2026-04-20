@@ -44,4 +44,4 @@ func _process(delta: float):
 		player_dead.emit()
 	elif hp > 0:
 		_was_alive = true
-			
+		
