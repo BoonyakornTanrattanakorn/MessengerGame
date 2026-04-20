@@ -31,7 +31,7 @@ func _on_phase_complete(phase: int):
 	var next_phase = phase + 1
 	boss_display.show_phase(next_phase)
 	rock_fall_manager.start(next_phase)
-
+	SaveManager.save_game()
 func _on_player_dead() -> void:
 	DeadManager.kill_player("Defeated by the Worm Guardian", Vector2(100, 500))
 
