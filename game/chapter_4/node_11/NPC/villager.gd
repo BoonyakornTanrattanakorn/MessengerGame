@@ -1,39 +1,47 @@
 extends CharacterBody2D
 
-@export_file("*.dialogue") var dialogue_path: String = "res://game/chapter_4/node_11/dialogue/villager_talk.dialogue"
-@export_file("*.dialogue") var dialogue_path_after_first: String = "res://game/chapter_4/node_11/dialogue/villager_talk2.dialogue"
+var dialogue_path = "res://game/chapter_4/node_11/dialogue/villager_talk.dialogue"
+var dialogue_tag = "start"
 
 var _is_talking: bool = false
 
+@export var hide_if_tower_master_not_returned: bool = false
+
+func _ready() -> void:
+	if hide_if_tower_master_not_returned and not GameState.chap4_node11_tower_master_returned:
+		queue_free()
 
 func can_interact() -> int:
 	return 0
 
-
 func activate() -> void:
 	_talk()
-
 
 func _talk() -> void:
 	if _is_talking:
 		return
-
-	var selected_dialogue_path: String
-
-	if GameState.chap4_node11_villager_talked_once:
-		selected_dialogue_path = dialogue_path_after_first
-	else:
-		selected_dialogue_path = dialogue_path
-
-	var dlg = load(selected_dialogue_path)
-	if dlg == null:
-		push_warning("Failed to load dialogue: " + selected_dialogue_path)
-		return
-
+		
+	if GameState.chap4_node11_tower_master_returned:
+		dialogue_tag = "inside_tower"
+	elif GameState.chap4_node11_ice_ghost_dead:
+		dialogue_tag = "after_ice_ghost"
+	elif GameState.chap4_node11_villager_talked_once:
+		dialogue_tag = "talked"
+	
 	_is_talking = true
-	DialogueManager.show_dialogue_balloon(dlg, "start")
+	DialogueManager.show_dialogue_balloon(load(dialogue_path), dialogue_tag)
 	await DialogueManager.dialogue_ended
 	_is_talking = false
+	
+	if dialogue_tag == "talked":
+		ObjectiveManager.set_objective("Defeat the monster in the tower")
+		SaveManager.save_game()
+		
+	if dialogue_tag == "after_ice_ghost":
+		queue_free()
+		GameState.chap4_node11_tower_master_returned = true
+		ObjectiveManager.set_objective("Talk to the boss soldier\n(Optional) Read the archives in the tower")
+		SaveManager.save_game()
 
 	if not GameState.chap4_node11_villager_talked_once:
 		GameState.chap4_node11_villager_talked_once = true

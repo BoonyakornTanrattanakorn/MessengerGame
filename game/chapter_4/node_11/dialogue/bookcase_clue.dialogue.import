@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ci3fxr16cfkp3"
+path="res://.godot/imported/bookcase_clue.dialogue-6d4c3c3e41801f151a8a992eaf6b87ba.tres"
+
+[deps]
+
+source_file="res://game/chapter_4/node_11/dialogue/bookcase_clue.dialogue"
+dest_files=["res://.godot/imported/bookcase_clue.dialogue-6d4c3c3e41801f151a8a992eaf6b87ba.tres"]
+
+[params]
+
+defaults=true

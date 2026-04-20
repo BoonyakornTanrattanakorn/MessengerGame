@@ -5,7 +5,3 @@ func _ready() -> void:
 	next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
 	spawn_position_in_next_level = Vector2(-105, 675)
 	facing_direction_on_warp = Vector2.DOWN
-
-func _on_body_entered(body: Node) -> void:
-	super._on_body_entered(body)
-	

@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c581p6bfe6qyu" path="res://assets/sprites/maps/tilesets/Dungeon_A1.png" id="5_rn0ad"]
 [ext_resource type="Script" uid="uid://5oob4cxcv0ae" path="res://game/chapter_4/node_11/warp_to_tower_node_11.tscn.gd" id="6_uark8"]
 [ext_resource type="PackedScene" uid="uid://4adc4u5tcoe7" path="res://game/chapter_4/node_11/NPC/snowman.tscn" id="6_vlen1"]
+[ext_resource type="Script" uid="uid://77b76cxjgsxh" path="res://game/chapter_4/node_11/warp_to_node_12.gd" id="7_jypgh"]
 [ext_resource type="PackedScene" uid="uid://vaqtxhdkbdeo" path="res://game/chapter_4/node_11/NPC/soldier.tscn" id="9_j2i5m"]
 [ext_resource type="PackedScene" uid="uid://dgjdfsr7qke2c" path="res://game/chapter_4/node_11/NPC/boss_soldier.tscn" id="10_uark8"]
 [ext_resource type="Script" uid="uid://k2xift2imvpg" path="res://game/chapter_4/node_11/node_11_event_handler.gd" id="11_node11"]
@@ -10678,7 +10679,7 @@ sources/0 = SubResource("TileSetAtlasSource_uark8")
 size = Vector2(160, 194)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7ial"]
-size = Vector2(49, 29)
+size = Vector2(50, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y847a"]
 size = Vector2(1536, 20)
@@ -10732,10 +10733,11 @@ tile_map_data = PackedByteArray("AABbAAAAAAAMACcAAABbAAEAAAAMACgAAABbAAIAAAAMACk
 tile_set = SubResource("TileSet_jypgh")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map" unique_id=2038560893]
-z_index = 1
 y_sort_enabled = true
 
 [node name="Castle" type="Sprite2D" parent="Map/StaticBody2D" unique_id=1682452461]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(1018, 228.00002)
 scale = Vector2(4.1901073, 4.063803)
 texture = ExtResource("2_iep0d")
@@ -10750,6 +10752,8 @@ polygon = PackedVector2Array(882, 131, 1278, 128, 1280, 229, 1253, 249, 1252, 37
 y_sort_enabled = true
 
 [node name="Moutain" type="Sprite2D" parent="Map/StaticBody2D2" unique_id=2028404843]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(-600.3594, 939.5)
 scale = Vector2(7.320023, 5.4333334)
 texture = ExtResource("2_iep0d")
@@ -10761,11 +10765,12 @@ position = Vector2(-661, 1010)
 shape = SubResource("RectangleShape2D_su4ry")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Map" unique_id=574038483]
-z_index = 1
 y_sort_enabled = true
 position = Vector2(262, 423)
 
 [node name="Tower" type="Sprite2D" parent="Map/StaticBody2D3" unique_id=481411180]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(-364.99997, 73.000015)
 scale = Vector2(4.0416665, 3.0312502)
 texture = ExtResource("2_iep0d")
@@ -10774,7 +10779,7 @@ region_rect = Rect2(192.61633, 672.93976, 47.47348, 95.267334)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/StaticBody2D3" unique_id=1761148623]
 position = Vector2(-462, 124)
-polygon = PackedVector2Array(1, 58, 0, -30, 20, -47, 29, -121, 53, -141, 51, -176, 77, -194, 115, -195, 140, -179, 141, -141, 165, -124, 171, -49, 194, -29, 194, 1, 193, 58)
+polygon = PackedVector2Array(1, 58, 0, -30, 20, -47, 29, -121, 53, -141, 51, -176, 77, -194, 115, -195, 140, -179, 141, -141, 165, -124, 171, -49, 194, -29, 194, 1, 193, 58, 133, 93, 72, 93)
 
 [node name="Warp" type="Node2D" parent="." unique_id=258521233]
 position = Vector2(0, 12)
@@ -10785,6 +10790,16 @@ script = ExtResource("6_uark8")
 metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_tower" unique_id=967697032]
+position = Vector2(-104, 621)
+shape = SubResource("RectangleShape2D_f7ial")
+
+[node name="warp_to_node12" type="Area2D" parent="Warp" unique_id=264316315]
+position = Vector2(1123, -220)
+collision_layer = 2
+script = ExtResource("7_jypgh")
+metadata/_custom_type_script = "uid://ch5w0pbtx0fkk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warp/warp_to_node12" unique_id=417874591]
 position = Vector2(-104, 621)
 shape = SubResource("RectangleShape2D_f7ial")
 
@@ -10864,18 +10879,3 @@ shape = SubResource("RectangleShape2D_jypgh")
 [node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D" unique_id=1716236333]
 position = Vector2(-461.89, 347.25)
 shape = SubResource("RectangleShape2D_lboax")
-
-[node name="SpawnPoint2" type="Marker2D" parent="." unique_id=1072107176]
-position = Vector2(-331, 353)
-
-[node name="SpawnPoint" type="Marker2D" parent="." unique_id=617712259]
-position = Vector2(-52, 639)
-
-[node name="tower_tmp" type="Node2D" parent="." unique_id=1578276592]
-position = Vector2(-102, 516)
-
-[node name="castle_tmp" type="Node2D" parent="." unique_id=167882047]
-position = Vector2(1022, 389)
-
-[node name="towerleader_tmp" type="Node2D" parent="." unique_id=389826600]
-position = Vector2(-138, 225)

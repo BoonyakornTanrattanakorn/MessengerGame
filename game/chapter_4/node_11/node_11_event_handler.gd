@@ -3,7 +3,7 @@ extends LevelEventHandler
 @export var castle: Node2D
 @export var towerleader: Node2D
 
-var dialogue := load("res://game/chapter_4/node_11/dialogue/villager.dialogue")
+var dialogue := load("res://game/chapter_4/node_11/dialogue/node_11_dialogue.dialogue")
 
 func on_level_loaded() -> void:
 	if GameState.chap4_node11_soldier:

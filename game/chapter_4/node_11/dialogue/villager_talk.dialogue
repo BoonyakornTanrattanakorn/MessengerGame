@@ -1,5 +1,5 @@
 ~ start
-Mysterious Woman: Hey there, child. What brings you here?
+Mysterious Woman: Hey there, young one. What brings you here?
 
 Jarn Thorian [#sprite=attribute/neutral]: I need to get into the palace.
 Jarn Thorian [#sprite=attribute/neutral]: There’s something I have to take care of.
@@ -69,4 +69,32 @@ Tower Master: Seems like you have more guts than most.
 
 Tower Master: Very well. Go.
 Tower Master: Bring back the code from that tower, and I’ll open the way for you.
+=> END
+
+~ talked
+Tower Master: If you can bring the code in tower back, I’ll open the way for you.
+=> END
+
+~ after_ice_ghost
+Jarn Thorian [#sprite=attribute/neutral]: I'm back.
+Tower Master: You actually defeated it?
+Tower Master: Seems like I really did underestimate you...
+Tower Master: But thanks to you, I'm finally able to go back to the tower once again.
+Tower Master: Thank you, young one.
+
+Jarn Thorian [#sprite=attribute/neutral]: You're welcome.
+Tower Master: Oh yes, before you're going to the palace, why not visit the tower first?
+Tower Master: There might be something you could make use of.
+Jarn Thorian [#sprite=attribute/neutral]: ...I'll consider it.
+	
+Tower Master: By the way, the code for the guards is "Closed Throne".
+Tower Master: Don't say it too loudly near the gate.
+Jarn Thorian [#sprite=attribute/neutral]: Got it. Thanks.
+=> END
+
+~ inside_tower
+Tower Master: Welcome to the tower, young one!
+Tower Master: This place has many archived documents that might be of great use.
+Tower Master: Go ahead and take a look around.
+Tower Master: I'll be here if you need anything.
 => END

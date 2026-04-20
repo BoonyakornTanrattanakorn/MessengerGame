@@ -85,6 +85,7 @@ func _physics_process(_delta: float) -> void:
 
 func mark_dead() -> void:
 	GameState.chap4_node11_ice_ghost_dead = true
+	GameState.save()
 	_hp = 0
 	_apply_dead_state()
 
