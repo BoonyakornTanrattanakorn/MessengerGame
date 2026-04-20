@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6026iolw1hgk"
-path="res://.godot/imported/neutral.png-94005944873d98ee78b52dbb269c806a.ctex"
+uid="uid://d01an4yd5qgto"
+path="res://.godot/imported/neutral.png-ecda2fae92450f363852b6da598aceac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/portraits/Player/earth/neutral.png"
-dest_files=["res://.godot/imported/neutral.png-94005944873d98ee78b52dbb269c806a.ctex"]
+source_file="res://assets/portraits/Jarn Thorian/water/neutral.png"
+dest_files=["res://.godot/imported/neutral.png-ecda2fae92450f363852b6da598aceac.ctex"]
 
 [params]
 

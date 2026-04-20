@@ -13,7 +13,8 @@ func on_level_loaded() -> void:
 func handle_intro_for_level() -> void:
 	if not GameState.chap4_node11_shown:
 		GameState.chap4_node11_shown = true
-
+		BGMManager.play_bgm("node_11_bgm", -6, true)
+		
 		if tower != null:
 			player.focus_camera_to(tower)
 			await get_tree().create_timer(1.5).timeout
@@ -29,6 +30,8 @@ func handle_intro_for_level() -> void:
 			await DialogueManager.dialogue_ended
 			
 			player.return_camera()
+		
+		ObjectiveManager.set_objective("Talk to the mysterious woman")
 
 
 func _remove_boss_soldier() -> void:

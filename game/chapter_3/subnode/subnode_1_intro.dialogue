@@ -1,4 +1,4 @@
 ~ start
-Player [#sprite=water/neutral]: A camel station... out here in the middle of the desert.
-Player [#sprite=water/neutral]: Looks like there are people here. Maybe they know more about what lies ahead.
+Jarn Thorian [#sprite=attribute/neutral]: A camel station... out here in the middle of the desert.
+Jarn Thorian [#sprite=attribute/neutral]: Looks like there are people here. Maybe they know more about what lies ahead.
 => END

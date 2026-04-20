@@ -1,9 +1,9 @@
 ~ start
-Player [#sprite=wind/neutral]: W-What's happening?! Why are the monsters suddenly attacking our tower?!
-Player [#sprite=wind/neutral]: I can't stay here... I have to get out of here.
+Jarn Thorian [#sprite=attribute/neutral]: W-What's happening?! Why are the monsters suddenly attacking our tower?!
+Jarn Thorian [#sprite=attribute/neutral]: I can't stay here... I have to get out of here.
 => END
 
 ~ knight_spotted
-Player [#sprite=wind/neutral]: Wait... is that a knight over there?
-Player [#sprite=wind/neutral]: He's still standing. I should go talk to him — maybe he knows what's going on.
+Jarn Thorian [#sprite=attribute/neutral]: Wait... is that a knight over there?
+Jarn Thorian [#sprite=attribute/neutral]: He's still standing. I should go talk to him — maybe he knows what's going on.
 => END

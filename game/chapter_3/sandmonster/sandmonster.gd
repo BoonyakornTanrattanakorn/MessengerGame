@@ -22,7 +22,7 @@ var attack_sfx: AudioStreamPlayer
 
 func _ready():
 	attack_sfx = AudioStreamPlayer.new()
-	attack_sfx.stream = load("res://assets/audio/punch-sound-effect-hd-1-y-5-koz (1).ogg")
+	attack_sfx.stream = load("res://assets/audio/sfx/punch-sound-effect-hd-1-y-5-koz.ogg")
 	add_child(attack_sfx)
 	add_to_group("enemy")
 	hurtbox.add_to_group("enemy_hurtbox")

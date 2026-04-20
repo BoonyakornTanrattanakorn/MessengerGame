@@ -1,5 +1,5 @@
 ~ start
-Player [#sprite=water/neutral]: A stone guardian... it's still active after all this time.
-Player [#sprite=water/neutral]: It looks tough. But water should wear it down.
-Player [#sprite=water/neutral]: Watch out — it's throwing sand back at me!
+Jarn Thorian [#sprite=attribute/neutral]: A stone guardian... it's still active after all this time.
+Jarn Thorian [#sprite=attribute/neutral]: It looks tough. But water should wear it down.
+Jarn Thorian [#sprite=attribute/neutral]: Watch out — it's throwing sand back at me!
 => END

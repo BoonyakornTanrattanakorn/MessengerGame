@@ -1,8 +1,8 @@
 ~ start
 Mysterious Woman: Hey there, child. What brings you here?
 
-Player [#sprite=fire/neutral]: I need to get into the palace.
-Player [#sprite=fire/neutral]: There’s something I have to take care of.
+Jarn Thorian [#sprite=attribute/neutral]: I need to get into the palace.
+Jarn Thorian [#sprite=attribute/neutral]: There’s something I have to take care of.
 
 Mysterious Woman: The palace, huh...
 Mysterious Woman: Now’s the worst time to go there.
@@ -11,37 +11,37 @@ Mysterious Woman: Now’s the worst time to go there.
 
 Mysterious Woman: ...You look kind of familiar.
 
-Player [#sprite=fire/neutral]: Must be a coincidence.
+Jarn Thorian [#sprite=attribute/neutral]: Must be a coincidence.
 
 Mysterious Woman: Maybe.
 Mysterious Woman: I spent time in the palace once. I've seen a lot of faces.
 
-Player [#sprite=fire/neutral]: If you were in the palace,
-Player [#sprite=fire/neutral]: then you must know a way in, right?
+Jarn Thorian [#sprite=attribute/neutral]: If you were in the palace,
+Jarn Thorian [#sprite=attribute/neutral]: then you must know a way in, right?
 
 Mysterious Woman: I know of one. But things are different now.
 
-Player [#sprite=fire/neutral]: What do you mean?
+Jarn Thorian [#sprite=attribute/neutral]: What do you mean?
 
 Mysterious Woman: The entrance is sealed.
 Mysterious Woman: Guards are stationed everywhere.
 
 Mysterious Woman: Without the "code", you’re not getting in.
 
-Player [#sprite=fire/neutral]: Then where is it?
+Jarn Thorian [#sprite=attribute/neutral]: Then where is it?
 
 Mysterious Woman: Inside that tower.
 Mysterious Woman: ...But retrieving it is no easy task.
 
-Player [#sprite=fire/neutral]: Why not?
+Jarn Thorian [#sprite=attribute/neutral]: Why not?
 
 Mysterious Woman: There’s a monster in there, a powerful one that shouldn’t be awake.
 
-Player [#sprite=fire/neutral]: What?
+Jarn Thorian [#sprite=attribute/neutral]: What?
 
 Mysterious Woman: You see... I was once responsible for that tower.
 
-Player [#sprite=fire/neutral]: ?!.
+Jarn Thorian [#sprite=attribute/neutral]: ?!.
 
 Tower Master: One day when I was working there, there was a huge explosion.
 Tower Master: The monster appeared out of nowhere, and it was really strong.
@@ -51,16 +51,16 @@ Tower Master: After that, the king kicked me out of the palace and "sealed" the 
 Tower Master: He has been acting strange since then.
 Tower Master: Something about this whole thing doesn’t sit right.
 
-Player [#sprite=fire/neutral]: I see...
+Jarn Thorian [#sprite=attribute/neutral]: I see...
 
 Tower Master: ...So you’re still going to head in?
 
-Player [#sprite=fire/neutral]: If the code is inside, then I don’t have a choice.
+Jarn Thorian [#sprite=attribute/neutral]: If the code is inside, then I don’t have a choice.
 
 Tower Master: You do realize how dangerous that is?
 
-Player [#sprite=fire/neutral]: I do.
-Player [#sprite=fire/neutral]: But it’s the only way.
+Jarn Thorian [#sprite=attribute/neutral]: I do.
+Jarn Thorian [#sprite=attribute/neutral]: But it’s the only way.
 
 (She looks at you again, with a different expression.)
 

@@ -1,14 +1,14 @@
 ~ start
-Player [#sprite=water/neutral]: A pyramid... in the middle of the desert.
-Player [#sprite=water/neutral]: There must be something inside.
+Jarn Thorian [#sprite=attribute/neutral]: A pyramid... in the middle of the desert.
+Jarn Thorian [#sprite=attribute/neutral]: There must be something inside.
 => END
 
 ~ npc_entry
-OldMan: Traveler! Stop right there.
-OldMan: That pyramid holds three ancient puzzle chambers, sealed long ago by the desert queen herself.
-OldMan: But beware... a stone guardian lurks within. Powerful and relentless.
-OldMan: Many have entered seeking treasure. Few have returned.
-OldMan: Tread carefully, and trust your wits over your strength.
+Old Man: Traveler! Stop right there.
+Old Man: That pyramid holds three ancient puzzle chambers, sealed long ago by the desert queen herself.
+Old Man: But beware... a stone guardian lurks within. Powerful and relentless.
+Old Man: Many have entered seeking treasure. Few have returned.
+Old Man: Tread carefully, and trust your wits over your strength.
 => END
 
 ~ npc_exit

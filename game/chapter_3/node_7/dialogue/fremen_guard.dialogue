@@ -9,8 +9,8 @@ Guard: Until then, I cannot let you through.
 => END
 
 ~ guard_hint
-Player [#sprite=water/neutral]: Sand monsters... with a combination of water and wind, I should be able to wash them away.
-Player [#sprite=water/neutral]: That stone I passed on the way here... there must be some clues on it.
+Jarn Thorian [#sprite=attribute/neutral]: Sand monsters... with a combination of water and wind, I should be able to wash them away.
+Jarn Thorian [#sprite=attribute/neutral]: That stone I passed on the way here... there must be some clues on it.
 => END
 
 ~ guard_not_solved

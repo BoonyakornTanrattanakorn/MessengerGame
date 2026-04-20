@@ -141,6 +141,7 @@ func apply_dialogue_line() -> void:
 		sprite_name = "portrait"
 	
 	var portrait_path: String = "res://assets/portraits/%s/%s.png" % [dialogue_line.character, sprite_name]
+	portrait_path = portrait_path.replace("attribute", _get_current_player_attribute())
 	if ResourceLoader.exists(portrait_path):
 		portrait.texture = load(portrait_path)
 		portrait.show()
@@ -227,6 +228,20 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
+
+
+func _get_current_player_attribute() -> String:
+	var scene_root := get_tree().current_scene
+	if scene_root == null:
+		return "wind"
+
+	var player := scene_root.find_child("Player", true, false)
+	if player != null and player.has_method("get"):
+		var attribute = player.get("playerAttribute")
+		if attribute != null:
+			return String(attribute).to_lower()
+
+	return "wind"
 
 
 #endregion

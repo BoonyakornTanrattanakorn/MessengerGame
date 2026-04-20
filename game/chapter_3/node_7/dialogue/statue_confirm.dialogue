@@ -1,6 +1,6 @@
 ~ confirm
 
-Player [#sprite=water/neutral]: ...That's it. Just like the stone tablet described.
-Player [#sprite=water/neutral]: Each statue back where it belongs. The King, the Princess, the Knight, the Villager, the Scarab.
-Player [#sprite=water/neutral]: The guard should let me through now.
+Jarn Thorian [#sprite=attribute/neutral]: ...That's it. Just like the stone tablet described.
+Jarn Thorian [#sprite=attribute/neutral]: Each statue back where it belongs. The King, the Princess, the Knight, the Villager, the Scarab.
+Jarn Thorian [#sprite=attribute/neutral]: The guard should let me through now.
 => END
