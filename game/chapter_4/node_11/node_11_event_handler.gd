@@ -32,6 +32,7 @@ func handle_intro_for_level() -> void:
 			player.return_camera()
 		
 		ObjectiveManager.set_objective("Talk to the mysterious woman")
+		SaveManager.save_game()
 
 
 func _remove_boss_soldier() -> void:

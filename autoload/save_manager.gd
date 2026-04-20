@@ -91,6 +91,10 @@ func load_game():
 	await restore_global_objects()
 
 	var level_path = save_data.get("scene", "")
+	GameState.pending_level = ""
+	GameState.pending_spawn = Vector2.ZERO
+	GameState.pending_facing = Vector2.ZERO
+	Warp._warp_locked_until_msec = Time.get_ticks_msec() + 1200
 
 	get_tree().change_scene_to_file(init_scene_path)
 	

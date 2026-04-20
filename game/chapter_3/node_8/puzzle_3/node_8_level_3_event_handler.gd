@@ -17,7 +17,7 @@ func _ready() -> void:
 	player.health_component.player_dead.connect(_on_player_dead)
 
 func _on_player_dead() -> void:
-	DeadManager.kill_player("Defeated by the Stone Guardian", Vector2(100, 500))
+	DeadManager.kill_player("Defeated by the Stone Guardian", "", Vector2(100, 500))
 
 func on_level_loaded() -> void:
 	Chap3Node8State.update_objective()
@@ -42,3 +42,4 @@ func handle_intro_for_level() -> void:
 
 		if puzzle_manager and puzzle_manager.has_method("activate_guardian"):
 			puzzle_manager.activate_guardian()
+		SaveManager.save_game()

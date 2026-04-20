@@ -14,6 +14,7 @@ var market_return_spawn: Vector2 = Vector2.ZERO
 var market_return_facing: Vector2 = Vector2.LEFT
 
 var chap1_node1_shown := false
+var chap1_node1_knight_dead := false
 var chap1_node2_shown := false
 var chap1_node3_shown := false
 var chap1_node3_1_shown := false
@@ -62,6 +63,7 @@ func new_game():
 	chap3_subnode3_shown = false
 	chap3_subnode4_shown = false
 	chap1_node1_shown = false
+	chap1_node1_knight_dead = false
 	chap1_node2_shown = false
 	chap1_node3_shown = false
 	chap1_node3_1_shown = false
@@ -95,6 +97,7 @@ func save():
 		"chap3_subnode1_shown": chap3_subnode1_shown,
 		"chap3_subnode2_shown": chap3_subnode2_shown,
 		"chap1_node1_shown": chap1_node1_shown,
+		"chap1_node1_knight_dead": chap1_node1_knight_dead,
 		"chap1_node2_shown": chap1_node2_shown,
 		"chap1_node3_shown": chap1_node3_shown,
 		"chap1_node3_1_shown": chap1_node3_1_shown,
@@ -129,6 +132,7 @@ func load_data(data):
 	chap3_subnode3_shown = data.get("chap3_subnode3_shown", false)
 	chap3_subnode4_shown = data.get("chap3_subnode4_shown", false)
 	chap1_node1_shown = data.get("chap1_node1_shown", false)
+	chap1_node1_knight_dead = data.get("chap1_node1_knight_dead", false)
 	chap1_node2_shown = data.get("chap1_node2_shown", false)
 	chap1_node3_shown = data.get("chap1_node3_shown", false)
 	chap1_node3_1_shown = data.get("chap1_node3_1_shown", false)

@@ -1,5 +1,5 @@
 # BossMap.gd
-extends Node2D
+extends LevelEventHandler
 
 @onready var tile_manager = $TileManager
 @onready var boss_display = $BossDisplay
@@ -24,6 +24,7 @@ func _ready():
 	tile_manager.phase_complete.connect(_on_phase_complete)
 	tile_manager.boss_defeated.connect(_on_boss_defeated)
 	rock_fall_manager.start(1)
+	player.health_component.player_dead.connect(_on_player_dead)
 
 func _on_phase_complete(phase: int):
 	boss_display.play_hit()
@@ -33,7 +34,7 @@ func _on_phase_complete(phase: int):
 	rock_fall_manager.start(next_phase)
 
 func _on_player_dead() -> void:
-	DeadManager.kill_player("Defeated by the Worm Guardian", Vector2(100, 500))
+	DeadManager.kill_player("Defeated by the Worm Guardian", "", Vector2(100, 500))
 
 func _on_boss_defeated():
 	is_boss_dead = true

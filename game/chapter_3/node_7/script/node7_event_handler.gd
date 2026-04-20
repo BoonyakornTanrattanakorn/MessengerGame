@@ -19,6 +19,7 @@ func handle_intro_for_level() -> void:
 		player.focus_camera_to(switch_node)
 		await get_tree().create_timer(2.0).timeout
 		player.return_camera()
+	SaveManager.save_game()
 
 func _play_intro_dialogue() -> void:
 	if dialogue_resource == null:

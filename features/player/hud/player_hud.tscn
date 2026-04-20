@@ -257,8 +257,10 @@ theme = ExtResource("8_mycat")
 anchors_preset = -1
 anchor_left = 0.03
 anchor_top = 0.2
-anchor_right = 0.23
+anchor_right = 0.284
 anchor_bottom = 0.3
+offset_right = -0.120025635
+offset_bottom = -1.5258789e-05
 size_flags_vertical = 0
 theme = ExtResource("8_mycat")
 

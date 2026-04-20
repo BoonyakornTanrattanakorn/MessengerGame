@@ -10,6 +10,9 @@ func can_interact() -> int:
 func activate() -> void:
 	if _is_talking:
 		return
+		
+	if not GameState.chap4_node11_tower_master_returned:
+		return
 
 	if dialogue == null:
 		push_warning("Failed to load dialogue resource for bookcases")

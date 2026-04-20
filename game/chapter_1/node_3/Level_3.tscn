@@ -9,6 +9,7 @@
 [ext_resource type="TileSet" uid="uid://cy24m54pcr32o" path="res://game/chapter_1/node_3/tres/rope.tres" id="11_ifk54"]
 [ext_resource type="TileSet" uid="uid://cwwldao25tjb0" path="res://game/chapter_1/node_3/tres/Switch.tres" id="12_moxjk"]
 [ext_resource type="PackedScene" uid="uid://2215xa1l24qs" path="res://game/chapter_1/node_3/golem_level/Switch.tscn" id="13_frly1"]
+[ext_resource type="Script" uid="uid://dj4bhsoxbwtpj" path="res://game/chapter_1/node_3/golem_level/save_before_golem.gd" id="14_5hoof"]
 [ext_resource type="Script" uid="uid://d06i3t6u22uq3" path="res://game/chapter_1/node_3/golem_level/bridge_manager.gd" id="15_gjgsd"]
 [ext_resource type="PackedScene" uid="uid://oeforo6vfrj0" path="res://game/chapter_1/node_3/golem_level/golem_boss.tscn" id="16_nxltn"]
 [ext_resource type="Script" uid="uid://cbn67i7ap68i" path="res://game/chapter_1/node_3/golem_level/warp_to_level_0_from_3.gd" id="17_skg5l"]
@@ -64,6 +65,9 @@ size = Vector2(240, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwlfy"]
 size = Vector2(30, 49)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r2wm0"]
+size = Vector2(20, 64)
 
 [node name="Level_3" type="Node2D" unique_id=890950609 node_paths=PackedStringArray("golem_boss")]
 y_sort_enabled = true
@@ -281,3 +285,11 @@ tile_set = ExtResource("8_r8158")
 [node name="Rope" type="TileMapLayer" parent="." unique_id=1819827037]
 tile_map_data = PackedByteArray("AAD5/wMAAAATAAMAAAD5/wQAAAATAAQAAAD5/wUAAAATAAUAAAD5/wYAAAATAAYAAAD5//7/AAATAAAAAAD5////AAATAAEAAAD5/wAAAAATAAIAAAD5/wEAAAATAAMAAAD5/wIAAAATAAQAAAD5//n/AAATAAAAAAD5//r/AAATAAEAAAD5//v/AAATAAIAAAD5//z/AAATAAMAAAD5//3/AAATAAQAAAD5//T/AAATAAAAAAD5//X/AAATAAEAAAD5//b/AAATAAIAAAD5//f/AAATAAMAAAD5//j/AAATAAQAAAD5/+//AAATAAAAAAD5//D/AAATAAEAAAD5//H/AAATAAIAAAD5//L/AAATAAMAAAD5//P/AAATAAQAAAD5/+r/AAATAAQAAAD5/+v/AAATAAEAAAD5/+z/AAATAAIAAAD5/+3/AAATAAMAAAD5/+7/AAATAAQAAAD5/+b/AAATAAAAAAD5/+f/AAATAAEAAAD5/+j/AAATAAIAAAD5/+n/AAATAAMAAAA=")
 tile_set = ExtResource("11_ifk54")
+
+[node name="Save" type="Area2D" parent="." unique_id=334040136]
+position = Vector2(934, 608)
+script = ExtResource("14_5hoof")
+metadata/_custom_type_script = "uid://ckg3x1vvtmmef"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Save" unique_id=1319818837]
+shape = SubResource("RectangleShape2D_r2wm0")

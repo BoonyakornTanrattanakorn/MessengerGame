@@ -38,3 +38,4 @@ func handle_intro_for_level() -> void:
 			player.focus_camera_to(plate_decoy)
 			await get_tree().create_timer(1.0).timeout
 		player.return_camera()
+		SaveManager.save_game()

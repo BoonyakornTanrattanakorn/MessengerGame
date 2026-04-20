@@ -44,6 +44,7 @@ func handle_intro_for_level() -> void:
 		)
 		
 		await DialogueManager.dialogue_ended
+		SaveManager.save_game()
 
 func _on_player_dead():
-	DeadManager.kill_player("Shot down by water ball\nTry using wind and earth element alternately.", Vector2(0,0))
+	DeadManager.kill_player("Shot down by water ball", "Try using wind and earth element alternately.", Vector2(0,0))

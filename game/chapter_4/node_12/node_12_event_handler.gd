@@ -55,8 +55,8 @@ func handle_intro_for_level() -> void:
 		var original_camera_pan = player.is_camera_panning
 
 		# Play intro BGM (orchestral_mission)
-		BGMManager.play_bgm("orchestral_mission")
-		BGMManager.set_volume(-8.0)
+		BGMManager.play_bgm("orchestral_mission", -8.0)
+
 
 		player.is_in_dialogue = true
 		player.is_camera_panning = true
@@ -81,8 +81,7 @@ func handle_intro_for_level() -> void:
 			await normal_ending()
 
 		# Restore intro/outro BGM after fight or ending
-		BGMManager.play_bgm("orchestral_mission")
-		BGMManager.set_volume(-8.0)
+		BGMManager.play_bgm("orchestral_mission", -8.0)
 
 		_fast_forward_enabled = false
 		_fast_forward_balloons.clear()
@@ -164,8 +163,7 @@ func start_fight_sequence() -> void:
 		return
 
 	# Play fight BGM
-	BGMManager.play_bgm("fire_blade")
-	BGMManager.set_volume(-12.0)
+	BGMManager.play_bgm("fire_blade", -12.0)
 	SFXManager.play_event("node12.cutscene.reveal")
 
 	_set_mage_group_visible(true)
@@ -277,8 +275,8 @@ func _check_required_clues_placeholder() -> bool:
 func start_post_fight_cutscene() -> void:
 	# Restore outro BGM (orchestral_mission)
 	if BGMManager != null:
-		BGMManager.play_bgm("orchestral_mission")
-		BGMManager.set_volume(-8.0)
+		BGMManager.play_bgm("orchestral_mission", -8.0)
+
 
 	if FINALE_DIALOGUE != null:
 		var balloon := DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE, "start", [self])

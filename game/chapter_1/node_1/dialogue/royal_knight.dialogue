@@ -8,6 +8,10 @@ Royal Knight: There's a secret passage to get out on the end of the hall way. Do
 Royal Knight: *coughs* I... I can't hold on much longer. Please... just go.
 => END
 
+~ not_talked
+Jarn Thorian [#sprite=attribute/neutral]: I really should talk to that knight first.
+=> END
+
 ~ knight_clue
 Jarn Thorian [#sprite=attribute/neutral]: Hm...? What's this?
 Jarn Thorian [#sprite=attribute/neutral]: A royal document... with the king's seal on it.
