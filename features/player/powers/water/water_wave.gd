@@ -58,7 +58,10 @@ func _on_body_entered(body):
 	if body.is_in_group("player_hurtbox"):
 		return  # ignore player
 	if body.is_in_group("enemy"):
-		body.take_damage(damage, source)
+		if body.has_method("take_damage"):
+			body.take_damage(damage, source)
+		elif body.has_method("receive_reflected_hit"):
+			body.receive_reflected_hit(float(damage), "water")
 	queue_free()
 
 func _on_expire():

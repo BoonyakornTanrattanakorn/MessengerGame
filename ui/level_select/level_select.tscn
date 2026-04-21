@@ -196,6 +196,14 @@ theme = ExtResource("2_2hwju")
 theme_override_font_sizes/font_size = 36
 text = "Node 12"
 
+[node name="Node12DebugAllCluesButton" type="Button" parent="CenterContainer/HBoxContainer/Chapter4Container" unique_id=1717043216]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_2hwju")
+theme_override_font_sizes/font_size = 24
+text = "Node 12 (Debug All Clues)"
+
 [node name="BackToMenuButton" type="Button" parent="." unique_id=1140125235]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 0

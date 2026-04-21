@@ -212,6 +212,7 @@ func _pass_turn() -> void:
 	_prune_turn_roster()
 	if _turn_roster.is_empty():
 		return
+	get_tree().call_group("node12_mage_turn_listener", "_on_node12_mage_turn_passed", self)
 	_turn_index = (_turn_index + 1) % _turn_roster.size()
 
 func _prune_turn_roster() -> void:

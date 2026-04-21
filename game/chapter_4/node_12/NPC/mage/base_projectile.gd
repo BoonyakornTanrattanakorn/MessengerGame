@@ -88,7 +88,10 @@ func _physics_process(delta: float) -> void:
 			_consume_reflected_owner_hit()
 			return
 
-	if owner_mage == null or global_position.distance_to(owner_mage.global_position) >= despawn_radius:
+	if _is_reflected:
+		if owner_mage == null or not is_instance_valid(owner_mage):
+			queue_free()
+	elif owner_mage == null or global_position.distance_to(owner_mage.global_position) >= despawn_radius:
 		queue_free()
 
 func _check_swept_hits(start_pos: Vector2, end_pos: Vector2) -> bool:
@@ -121,6 +124,7 @@ func _handle_shape_hits_at(sample_pos: Vector2, radius: float) -> bool:
 
 	var space_state := get_world_2d().direct_space_state
 	var results := space_state.intersect_shape(shape_query, 8)
+	var pending_player_hurtbox: Area2D = null
 	for result in results:
 		if not result.has("collider"):
 			continue
@@ -130,13 +134,21 @@ func _handle_shape_hits_at(sample_pos: Vector2, radius: float) -> bool:
 
 		if collider is Area2D:
 			var area := collider as Area2D
-			if area.is_in_group("player_hurtbox") and not _is_reflected:
-				_apply_damage_to_hurtbox(area)
-				queue_free()
+			if not _is_reflected and _is_earth_blocked_by_rock_pillar(area):
+				_reflect_to_owner(_get_reflect_element())
 				return true
+			if not _is_reflected and _can_reflect_from_body(area):
+				_reflect_to_owner(_get_reflect_element())
+				return true
+			if area.is_in_group("player_hurtbox") and not _is_reflected:
+				pending_player_hurtbox = area
+				continue
 
 		if collider is Node2D:
 			var body := collider as Node2D
+			if not _is_reflected and _is_earth_blocked_by_rock_pillar(body):
+				_reflect_to_owner(_get_reflect_element())
+				return true
 			if _is_reflected and owner_mage != null and is_instance_valid(owner_mage) and body == owner_mage:
 				_consume_reflected_owner_hit()
 				return true
@@ -144,6 +156,26 @@ func _handle_shape_hits_at(sample_pos: Vector2, radius: float) -> bool:
 				_reflect_to_owner(_get_reflect_element())
 				return true
 
+	if pending_player_hurtbox != null and is_instance_valid(pending_player_hurtbox):
+		_apply_damage_to_hurtbox(pending_player_hurtbox)
+		queue_free()
+		return true
+
+	return false
+
+func _is_earth_blocked_by_rock_pillar(node: Node) -> bool:
+	if source_element != "earth":
+		return false
+	if node == null:
+		return false
+	return _node_or_ancestor_in_group(node, "rock_pillar") or _node_or_ancestor_in_group(node, "rock_pillar_main")
+
+func _node_or_ancestor_in_group(node: Node, group_name: String) -> bool:
+	var current := node
+	while current != null:
+		if current.is_in_group(group_name):
+			return true
+		current = current.get_parent()
 	return false
 
 func _get_hit_radius() -> float:
@@ -165,6 +197,9 @@ func _apply_damage_to_hurtbox(area: Area2D) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area == null:
 		return
+	if not _is_reflected and _can_reflect_from_body(area):
+		_reflect_to_owner(_get_reflect_element())
+		return
 	if area.is_in_group("player_hurtbox") and not _is_reflected:
 		_apply_damage_to_hurtbox(area)
 		queue_free()
@@ -173,6 +208,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body == null:
 		return
 	if _is_reflected:
+		if owner_mage != null and is_instance_valid(owner_mage) and body == owner_mage:
+			_consume_reflected_owner_hit()
 		return
 	if not _can_reflect_from_body(body):
 		return
@@ -216,7 +253,7 @@ func _can_reflect_from_body(body: Node2D) -> bool:
 	if source_element == "":
 		return false
 	var reflector_group := "%s_reflector" % source_element
-	return body.is_in_group(reflector_group)
+	return _node_or_ancestor_in_group(body, reflector_group)
 
 func _get_reflect_element() -> String:
 	return source_element

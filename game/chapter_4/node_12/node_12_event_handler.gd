@@ -19,7 +19,7 @@ const NODE_12_EVENT_UTILS := preload("res://game/chapter_4/node_12/node_12_event
 @onready var mage_root: Node2D = $"Mage"
 
 @export_group("Debug")
-@export var debug_skip_mage_fight: bool = true
+@export var debug_skip_mage_fight: bool = false
 @export_group("Cutscene Fast Forward")
 @export var hold_ctrl_walk_speed_multiplier: float = 10.0
 @export var hold_ctrl_dialogue_speed_multiplier: float = 10.0
@@ -32,7 +32,12 @@ var _fight_sequence_started: bool = false
 var _fight_sequence_done: bool = false
 var _fast_forward_enabled: bool = false
 var _fast_forward_balloons: Array[Node] = []
-var _accusation_branch_unlocked: bool = true
+var _accusation_branch_unlocked: bool = false
+var _fight_respawn_position: Vector2 = Vector2.ZERO
+var _node12_death_handled: bool = false
+var _mage_reset_data: Array[Dictionary] = []
+var _respawn_reset_in_progress: bool = false
+var _round_completed_mages: Dictionary = {}
 var _accusation_presented_clues: Dictionary = {
 	1: false,
 	2: false,
@@ -41,8 +46,10 @@ var _accusation_presented_clues: Dictionary = {
 }
 
 func _ready() -> void:
+	add_to_group("node12_mage_turn_listener")
 
 	assert(intro_walk != null)
+	_cache_mage_reset_data()
 	_set_mage_group_visible(false)
 	_set_mage_ai_active(false)
 
@@ -51,6 +58,11 @@ func _ready() -> void:
 		minimap = get_tree().current_scene.get_node_or_null("Minimap")
 	if minimap:
 		minimap.hide()
+
+	if player != null and not player.health_changed.is_connected(_on_player_health_changed):
+		player.health_changed.connect(_on_player_health_changed)
+	if DeadManager != null and not DeadManager.player_respawned.is_connected(_on_dead_manager_player_respawned):
+		DeadManager.player_respawned.connect(_on_dead_manager_player_respawned)
 
 	
 func handle_intro_for_level() -> void:
@@ -69,6 +81,7 @@ func handle_intro_for_level() -> void:
 		_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
 		_fight_sequence_started = false
 		_fight_sequence_done = false
+		_node12_death_handled = false
 		_fast_forward_enabled = true
 		_track_fast_forward_loop()
 
@@ -164,6 +177,12 @@ func equip_fire_power() -> void:
 
 func start_fight_sequence() -> void:
 	_fight_sequence_started = true
+	_node12_death_handled = false
+	_reset_mage_round_progress()
+	if fight_begin != null:
+		_fight_respawn_position = fight_begin.global_position
+	else:
+		_fight_respawn_position = player.global_position
 	if _fight_sequence_done:
 		fight_sequence_finished.emit()
 		return
@@ -192,7 +211,136 @@ func start_fight_sequence() -> void:
 	fight_sequence_finished.emit()
 
 func player_killed_sequence() -> void:
+	if _fight_sequence_started and not _fight_sequence_done:
+		_trigger_node12_fight_death_respawn()
+		return
 	_show_ending_banner()
+
+func _on_player_health_changed(new_hp: int) -> void:
+	if new_hp > 0:
+		return
+	if not _fight_sequence_started or _fight_sequence_done:
+		return
+	_trigger_node12_fight_death_respawn()
+
+func _trigger_node12_fight_death_respawn() -> void:
+	if _node12_death_handled:
+		return
+	_node12_death_handled = true
+	_set_mage_ai_active(false)
+	var respawn_pos := _fight_respawn_position if _fight_respawn_position != Vector2.ZERO else player.global_position
+	DeadManager.kill_player(
+		"Defeated by the royal mages",
+		"Reflect each projectile with the matching element.",
+		respawn_pos,
+		false
+	)
+
+func _on_dead_manager_player_respawned(_position: Vector2) -> void:
+	if not _fight_sequence_started or _fight_sequence_done:
+		return
+	if _respawn_reset_in_progress:
+		return
+	_set_mage_ai_active(false)
+	player.is_in_dialogue = true
+	player.is_camera_panning = true
+	_respawn_reset_in_progress = true
+	call_deferred("_reset_fight_after_respawn")
+
+func _reset_fight_after_respawn() -> void:
+	await _rebuild_mage_group()
+	_reset_mage_round_progress()
+	_node12_death_handled = false
+	_respawn_reset_in_progress = false
+
+func _on_node12_mage_turn_passed(mage: Node12MageBase) -> void:
+	if mage == null or not is_instance_valid(mage):
+		return
+	if not _fight_sequence_started or _fight_sequence_done:
+		return
+	if DeadManager != null and DeadManager.is_dead:
+		return
+
+	_round_completed_mages[mage.name] = true
+	if _round_completed_mages.size() < 4:
+		return
+
+	if player != null and player.health_component != null:
+		player.health_component.heal(1)
+	_reset_mage_round_progress()
+
+func _reset_mage_round_progress() -> void:
+	_round_completed_mages.clear()
+
+func _cache_mage_reset_data() -> void:
+	_mage_reset_data.clear()
+	if mage_root == null:
+		return
+	for child in mage_root.get_children():
+		if child is Node12MageBase:
+			_mage_reset_data.append({
+				"scene_path": child.scene_file_path,
+				"name": child.name,
+				"position": child.position,
+				"rotation": child.rotation,
+				"scale": child.scale,
+				"z_index": child.z_index
+			})
+
+func _rebuild_mage_group() -> void:
+	if mage_root == null:
+		return
+
+	player.is_in_dialogue = true
+	player.is_camera_panning = true
+	_set_mage_ai_active(false)
+	_set_mage_group_visible(false)
+
+	for child in mage_root.get_children():
+		if child is Node12MageBase:
+			child.queue_free()
+
+	for projectile in get_tree().get_nodes_in_group("enemy_projectile"):
+		if is_instance_valid(projectile):
+			projectile.queue_free()
+
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	Node12MageBase._turn_roster.clear()
+	Node12MageBase._turn_index = 0
+
+	for mage_data in _mage_reset_data:
+		var scene_path := String(mage_data.get("scene_path", ""))
+		if scene_path.is_empty():
+			continue
+
+		var packed := load(scene_path) as PackedScene
+		if packed == null:
+			push_warning("Failed to reload mage scene: %s" % scene_path)
+			continue
+
+		var mage_instance := packed.instantiate()
+		if not (mage_instance is Node12MageBase):
+			if mage_instance != null:
+				mage_instance.queue_free()
+			continue
+
+		mage_root.add_child(mage_instance)
+		mage_instance.name = String(mage_data.get("name", mage_instance.name))
+		mage_instance.position = mage_data.get("position", mage_instance.position)
+		mage_instance.rotation = float(mage_data.get("rotation", mage_instance.rotation))
+		mage_instance.scale = mage_data.get("scale", mage_instance.scale)
+		mage_instance.z_index = int(mage_data.get("z_index", mage_instance.z_index))
+		mage_instance.visible = false
+		mage_instance.set_physics_process(false)
+		mage_instance.set_process(false)
+
+	_set_mage_group_visible(true)
+	await _reveal_mages_with_camera_pan()
+	_set_mage_ai_active(true)
+	player.is_in_dialogue = false
+	player.is_camera_panning = false
 
 func slow_walk_intro() -> void:
 	player.is_in_dialogue = true
@@ -311,7 +459,7 @@ func choose_give_up() -> void:
 	pass
 
 func _can_start_accusation_branch() -> bool:
-	return _accusation_branch_unlocked
+	return _get_unlocked_clue_count() > 0
 
 func _resolve_accusation_branch_unlock() -> bool:
 	return _get_unlocked_clue_count() > 0
