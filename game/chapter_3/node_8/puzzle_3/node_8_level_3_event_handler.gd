@@ -21,6 +21,9 @@ func _on_player_dead() -> void:
 
 func on_level_loaded() -> void:
 	Chap3Node8State.update_objective()
+	if not Chap3Node8State.puzzle_3_completed:
+		if puzzle_manager and puzzle_manager.has_method("activate_guardian"):
+			puzzle_manager.activate_guardian()
 
 func handle_intro_for_level() -> void:
 	BGMManager.play_bgm("caravan", 0.0, true)
@@ -40,6 +43,4 @@ func handle_intro_for_level() -> void:
 			await get_tree().create_timer(1.5).timeout
 		player.return_camera()
 
-		if puzzle_manager and puzzle_manager.has_method("activate_guardian"):
-			puzzle_manager.activate_guardian()
 		SaveManager.save_game()
