@@ -8855,5 +8855,5 @@ shape = SubResource("RectangleShape2D_mbb5s")
 [node name="Villager" parent="." unique_id=151893683 instance=ExtResource("8_mgk0e")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(224, 111)
+position = Vector2(233, 138)
 hide_if_tower_master_not_returned = true
