@@ -9,7 +9,7 @@ signal organ_destroyed
 @onready var sprite = $Sprite2D
 @onready var hurt_zone = $HurtZone
 
-const MAX_HP = 80
+const MAX_HP = 105
 const OFFSET = Vector2(300, -150)
 
 var current_hp = MAX_HP
@@ -33,9 +33,9 @@ func take_hit():
 		destroy()
 
 func update_sprite():
-	if current_hp >= 80:
+	if current_hp >= 41:
 		sprite.texture = normal_texture
-	elif current_hp <= 35:
+	elif current_hp <= 40:
 		sprite.texture = severe_texture
 
 func flash_damage():

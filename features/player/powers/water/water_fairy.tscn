@@ -208,6 +208,7 @@ size = Vector2(5.000001, 4.000004)
 size = Vector2(100, 149.99998)
 
 [node name="WaterFairy" type="CharacterBody2D" unique_id=387822076]
+z_index = 1
 script = ExtResource("1_vaps4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=730896454]

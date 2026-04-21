@@ -2341,7 +2341,7 @@ height = 42.0
 
 [node name="Player" type="CharacterBody2D" unique_id=417667803 groups=["player", "savable"]]
 visibility_layer = 2
-z_index = 1
+z_index = 2
 y_sort_enabled = true
 collision_mask = 63
 script = ExtResource("14_player")

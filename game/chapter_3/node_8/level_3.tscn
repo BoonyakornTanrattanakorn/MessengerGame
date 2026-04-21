@@ -16,6 +16,12 @@ size = Vector2(73, 161)
 radius = 65.0
 height = 178.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mh0m4"]
+size = Vector2(1087, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_has05"]
+size = Vector2(24, 1033)
+
 [node name="Level3" type="Node2D" unique_id=583010001 node_paths=PackedStringArray("puzzle_manager")]
 script = ExtResource("1_evhandler")
 puzzle_manager = NodePath("Puzzle3Manager")
@@ -57,3 +63,21 @@ shape = SubResource("CapsuleShape2D_k1i6g")
 
 [node name="Sprite2D" type="Sprite2D" parent="StoneGuardian" unique_id=208836641]
 texture = ExtResource("8_has05")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2001391622]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=109405786]
+position = Vector2(533.5, 0)
+shape = SubResource("RectangleShape2D_mh0m4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=194256042]
+position = Vector2(541, 1015)
+shape = SubResource("RectangleShape2D_mh0m4")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=664565525]
+position = Vector2(2, 506.5)
+shape = SubResource("RectangleShape2D_has05")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1316204708]
+position = Vector2(1067, 503)
+shape = SubResource("RectangleShape2D_has05")

@@ -73,10 +73,16 @@ func _on_phase_complete():
 		_set_phase(current_phase + 1)
 
 func _check_win_condition():
-	# Only check if all correct plates are currently glowing
+	# Check all correct plates are active
 	for id in CORRECT_PLATES[current_phase]:
 		if id not in stepped_correct:
-			return  # not all correct plates active yet
-	
-	# All correct plates are glowing — phase complete!
+			return
+
+	# Check NO wrong plates are glowing
+	for id in plates:
+		if plates[id].is_glowing and id not in CORRECT_PLATES[current_phase]:
+			print("[TileManager] Wrong plate ", id, " is still glowing — blocked!")
+			return
+
+	# All correct, no wrong — phase complete!
 	_on_phase_complete()
