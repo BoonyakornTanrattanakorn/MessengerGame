@@ -47,6 +47,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwdef"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(32, 32)
+
 [node name="Snowman" type="CharacterBody2D" unique_id=151893683]
 script = ExtResource("2_w6t4b")
 
@@ -58,3 +61,8 @@ frame_progress = 0.89576215
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404574336]
 shape = SubResource("RectangleShape2D_cwdef")
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=542113807]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=192235777]
+shape = SubResource("RectangleShape2D_interact")

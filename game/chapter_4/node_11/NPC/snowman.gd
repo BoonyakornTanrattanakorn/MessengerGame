@@ -1,12 +1,19 @@
 extends CharacterBody2D
 
 @export var dialogue_path: String = "res://game/chapter_4/node_11/dialogue/snowman.dialogue"
-@export var required_item_name: String = "desert_crystal"
+@export var required_item_name: String = "snowstone"
 @export var required_item_count: int = 1
 
 var _is_talking: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var interaction_area: Area2D = $InteractArea
+
+
+func _ready() -> void:
+	if interaction_area != null:
+		interaction_area.body_entered.connect(_on_interaction_area_body_entered)
+		interaction_area.body_exited.connect(_on_interaction_area_body_exited)
 
 
 func can_interact() -> int:
@@ -26,7 +33,7 @@ func _talk() -> void:
 		push_warning("Snowman dialogue missing: %s" % dialogue_path)
 		return
 
-	var dialogue_tag := "has_item" if _player_has_required_item() else "no_item"
+	var dialogue_tag := _resolve_dialogue_tag()
 	_set_talking_animation(true)
 	_is_talking = true
 	DialogueManager.show_dialogue_balloon(dialogue_resource, dialogue_tag)
@@ -34,9 +41,20 @@ func _talk() -> void:
 	_is_talking = false
 	_set_talking_animation(false)
 
+	if dialogue_tag == "has_item":
+		_grant_reward()
+
+
+func _resolve_dialogue_tag() -> String:
+	if GameState.chap4_node11_snowman_reward_claimed:
+		return "after_reward"
+	if _player_has_required_item():
+		return "has_item"
+	return "no_item"
+
 
 func _player_has_required_item() -> bool:
-	var player := get_tree().get_first_node_in_group("player")
+	var player: CharacterBody2D = _get_player()
 	if player == null:
 		return false
 
@@ -47,6 +65,40 @@ func _player_has_required_item() -> bool:
 	return int(inventory.get(required_item_name, 0)) >= required_item_count
 
 
+func _grant_reward() -> void:
+	var player: CharacterBody2D = _get_player()
+	if player == null or GameState.chap4_node11_snowman_reward_claimed:
+		return
+
+	var inventory = player.get("inventory")
+	if not (inventory is Dictionary):
+		return
+
+	var current_amount := int(inventory.get(required_item_name, 0))
+	if current_amount < required_item_count:
+		return
+
+	current_amount -= required_item_count
+	if current_amount > 0:
+		inventory[required_item_name] = current_amount
+	else:
+		inventory.erase(required_item_name)
+
+	if player.health_component != null:
+		player.health_component.increase_max_hp(1)
+		player.health_component.heal(player.health_component.max_hp)
+
+	if player.hud != null and player.hud.has_method("refresh_items"):
+		player.hud.refresh_items()
+
+	GameState.chap4_node11_snowman_reward_claimed = true
+	SaveManager.save_game()
+
+
+func _get_player() -> CharacterBody2D:
+	return get_tree().get_first_node_in_group("player") as CharacterBody2D
+
+
 func _set_talking_animation(is_talking: bool) -> void:
 	if animated_sprite == null:
 		return
@@ -54,3 +106,13 @@ func _set_talking_animation(is_talking: bool) -> void:
 	var animation_name := "talk" if is_talking and animated_sprite.sprite_frames.has_animation("talk") else "idle"
 	if animated_sprite.animation != animation_name:
 		animated_sprite.play(animation_name)
+
+
+func _on_interaction_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		body.interact_with = self
+
+
+func _on_interaction_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player") and body.interact_with == self:
+		body.interact_with = null

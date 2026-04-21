@@ -28,6 +28,7 @@ const NORMAL_TIME_SCALE := 1.0
 @export var blue_gem: Texture2D
 @export var green_gem: Texture2D
 @export var brave_stone: Texture2D
+@export var snowstone: Texture2D
 @export var potion: Texture2D
 @export var antidote: Texture2D
 @export var torn_paper_1: Texture2D
@@ -420,6 +421,7 @@ func get_icon(item_name: String) -> Texture2D:
 		"blue_gem": return blue_gem
 		"green_gem": return green_gem
 		"brave_stone": return brave_stone
+		"snowstone": return snowstone
 		"potion": return potion
 		"antidote": return antidote
 		"paper_1": return torn_paper_1

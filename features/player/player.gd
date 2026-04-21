@@ -85,6 +85,7 @@ var inventory = {
 	"green_gem": 0,
 	"blue_gem": 0,
 	"brave_stone": 0,
+	"snowstone": 0,
 	"potion": 3,
 	"antidote": 2,
 	"desert_crystal": 0

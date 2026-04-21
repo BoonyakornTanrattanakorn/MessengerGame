@@ -9,8 +9,14 @@ Snowman: Come back if you find anything useful, okay?
 ~ has_item
 Snowman: Oh! You actually brought something for me?
 Snowman: Hehe... that should make this snowy post a lot more bearable.
-Snowman: Thanks, friend.
+Snowman: Thanks, friend. Here, let me return the favor.
+
+=> END
 
 
+
+~ after_reward
+Snowman: Ahh... much better now.
+Snowman: Thanks again for the snowstone, friend.
 
 => END
