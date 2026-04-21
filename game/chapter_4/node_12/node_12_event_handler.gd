@@ -33,6 +33,12 @@ var _fight_sequence_done: bool = false
 var _fast_forward_enabled: bool = false
 var _fast_forward_balloons: Array[Node] = []
 var _accusation_branch_unlocked: bool = true
+var _accusation_presented_clues: Dictionary = {
+	1: false,
+	2: false,
+	3: false,
+	4: false
+}
 
 func _ready() -> void:
 
@@ -258,19 +264,95 @@ func choose_thanks_king() -> void:
 func choose_accuse_king() -> void:
 	if not _can_start_accusation_branch():
 		return
+	_reset_accusation_presented_clues()
 
 func can_accuse_king() -> bool:
 	return _can_start_accusation_branch()
+
+func can_accuse_effectively() -> bool:
+	return _get_unlocked_clue_count() >= 4
+
+func can_present_clue_1() -> bool:
+	return _can_present_clue(1)
+
+func can_present_clue_2() -> bool:
+	return _can_present_clue(2)
+
+func can_present_clue_3() -> bool:
+	return _can_present_clue(3)
+
+func can_present_clue_4() -> bool:
+	return _can_present_clue(4)
+
+func has_any_presentable_clue() -> bool:
+	return can_present_clue_1() or can_present_clue_2() or can_present_clue_3() or can_present_clue_4()
+
+func all_required_clues_presented() -> bool:
+	if not can_accuse_effectively():
+		return false
+	for clue_index in _accusation_presented_clues.keys():
+		if not _accusation_presented_clues[clue_index]:
+			return false
+	return true
+
+func choose_clue_1() -> void:
+	_mark_clue_presented(1)
+
+func choose_clue_2() -> void:
+	_mark_clue_presented(2)
+
+func choose_clue_3() -> void:
+	_mark_clue_presented(3)
+
+func choose_clue_4() -> void:
+	_mark_clue_presented(4)
+
+func choose_give_up() -> void:
+	pass
 
 func _can_start_accusation_branch() -> bool:
 	return _accusation_branch_unlocked
 
 func _resolve_accusation_branch_unlock() -> bool:
-	return _check_required_clues_placeholder()
+	return _get_unlocked_clue_count() > 0
 
-func _check_required_clues_placeholder() -> bool:
-	# TODO: Implement node_12-specific clue/flag validation.
-	return _accusation_branch_unlocked
+func _get_unlocked_clue_count() -> int:
+	var clue_count := 0
+	if GameState.clue_1_unlocked:
+		clue_count += 1
+	if GameState.clue_2_unlocked:
+		clue_count += 1
+	if GameState.clue_3_unlocked:
+		clue_count += 1
+	if GameState.clue_4_unlocked:
+		clue_count += 1
+	return clue_count
+
+func _can_present_clue(clue_index: int) -> bool:
+	if not _is_clue_unlocked(clue_index):
+		return false
+	return not bool(_accusation_presented_clues.get(clue_index, false))
+
+func _is_clue_unlocked(clue_index: int) -> bool:
+	match clue_index:
+		1:
+			return GameState.clue_1_unlocked
+		2:
+			return GameState.clue_2_unlocked
+		3:
+			return GameState.clue_3_unlocked
+		4:
+			return GameState.clue_4_unlocked
+		_:
+			return false
+
+func _mark_clue_presented(clue_index: int) -> void:
+	if _accusation_presented_clues.has(clue_index):
+		_accusation_presented_clues[clue_index] = true
+
+func _reset_accusation_presented_clues() -> void:
+	for clue_index in _accusation_presented_clues.keys():
+		_accusation_presented_clues[clue_index] = false
 
 func start_post_fight_cutscene() -> void:
 	# Restore outro BGM (orchestral_mission)
