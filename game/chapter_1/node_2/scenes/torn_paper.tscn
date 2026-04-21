@@ -20,8 +20,8 @@ shape = SubResource("RectangleShape2D_5k3o6")
 
 [node name="PromptLabel" type="Label" parent="." unique_id=90577250]
 visible = false
-offset_left = -24.0
-offset_top = -56.0
-offset_right = 24.0
-offset_bottom = -33.0
+offset_left = -19.0
+offset_top = -39.0
+offset_right = 29.0
+offset_bottom = -16.0
 text = "Read"

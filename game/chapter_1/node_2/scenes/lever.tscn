@@ -57,6 +57,14 @@ y_sort_enabled = true
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_2ihno")
 
+[node name="PromptLabel" type="Label" parent="." unique_id=380719966]
+visible = false
+offset_left = -27.0
+offset_top = -38.0
+offset_right = 28.0
+offset_bottom = -15.0
+text = "Press F"
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=46727239]
 position = Vector2(0, -5)
 
