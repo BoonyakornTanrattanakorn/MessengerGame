@@ -32,7 +32,7 @@ y_sort_enabled = true
 [node name="Ch3n1" parent="LevelHolder" unique_id=1752183892 instance=ExtResource("2_j3oqh")]
 
 [node name="Player" parent="." unique_id=417667803 instance=ExtResource("4_2lugc")]
-position = Vector2(449, 1670)
+position = Vector2(4997, 1582)
 wind_scene = ExtResource("4_j3oqh")
 fire_small_scene = ExtResource("5_kq3sm")
 fire_heavy_scene = ExtResource("6_e27mp")

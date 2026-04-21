@@ -23,6 +23,8 @@ position = Vector2(-50, 3)
 shape = SubResource("RectangleShape2D_fclmt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1422616039]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(0, 29)
 scale = Vector2(0.07, 0.07)
 texture = ExtResource("1_l2caw")

@@ -1,6 +1,6 @@
 extends Node
 
-const TOTAL_BIG_SANDMONSTERS := 3
+const TOTAL_BIG_SANDMONSTERS := 5
 var big_sandmonsters_killed := 0
 const TOTAL_STATUES := 5
 var collected_statues: Array[String] = []

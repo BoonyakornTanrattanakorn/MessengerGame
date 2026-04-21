@@ -8,7 +8,7 @@
 size = Vector2(140, 206)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5rao"]
-size = Vector2(28, 60)
+size = Vector2(28, 74)
 
 [node name="city_npc2" type="Node2D" unique_id=1809901119]
 z_index = 1
@@ -25,10 +25,11 @@ shape = SubResource("RectangleShape2D_t05km")
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=519407667]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=108723580]
-position = Vector2(0, -13)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_t5rao")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1421405616]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -15.999999)
 scale = Vector2(0.3, 0.3)

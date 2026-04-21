@@ -4,7 +4,7 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node) -> void:
-	if Node7State.sandmonster_quest_turned_in:
+	if Node7State.sandmonster_quest_complete:
 		GameState.market_return_path = "res://game/chapter_3/node_7/scenes/node_7.tscn"
 		GameState.market_return_spawn = Vector2(5000, 1741)
 		GameState.market_return_facing = Vector2.LEFT

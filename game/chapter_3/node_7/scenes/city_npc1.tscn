@@ -8,7 +8,7 @@
 size = Vector2(140, 206)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bn1bc"]
-size = Vector2(28, 60)
+size = Vector2(28, 77)
 
 [node name="city_npc" type="Node2D" unique_id=482488305]
 z_index = 1
@@ -25,10 +25,12 @@ shape = SubResource("RectangleShape2D_8sch7")
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1331495130]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=479709361]
-position = Vector2(0, -13)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_bn1bc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=914546811]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(0, -15.999999)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("3_s76jo")
