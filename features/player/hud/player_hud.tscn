@@ -62,7 +62,7 @@ bg_color = Color(0, 0, 0, 0.2)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_snowstone"]
 atlas = ExtResource("17_snowi")
-region = Rect2(0, 0, 63, 63)
+region = Rect2(320, 320, 64, 64)
 
 [node name="PlayerHUD" type="CanvasLayer" unique_id=966903807]
 script = ExtResource("1_1m6my")
