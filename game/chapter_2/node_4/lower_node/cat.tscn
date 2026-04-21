@@ -216,3 +216,11 @@ animation = &"waving"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=545175619]
 position = Vector2(-1, 9.5)
 shape = SubResource("RectangleShape2D_0uvwr")
+
+[node name="PromptLabel" type="Label" parent="." unique_id=2097676454]
+visible = false
+offset_left = -27.0
+offset_top = -42.0
+offset_right = 28.0
+offset_bottom = -19.0
+text = "Press F"
