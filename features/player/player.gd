@@ -758,8 +758,11 @@ func _void_fall_event():
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, 0.5)
 	
-	var current_scene_path = get_tree().current_scene.scene_file_path
-	get_tree().change_scene_to_file(current_scene_path)
+	#var current_scene_path = get_tree().current_scene.scene_file_path
+	#get_tree().change_scene_to_file(current_scene_path)
+	
+	var level_scene_path = SaveManager.get_level_scene().scene_file_path
+	get_tree().current_scene.load_level(level_scene_path, Vector2(400, 1370), Vector2i(0,1))
 	
 	var dialogue_resource = load("res://game/chapter_2/node_4/dialogue/dead.dialogue")
 	if dialogue_resource:
