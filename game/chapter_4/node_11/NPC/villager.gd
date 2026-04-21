@@ -12,6 +12,7 @@ var _player_in_range: bool = false
 @onready var prompt_label: Label = $PromptLabel
 
 func _ready() -> void:
+	add_to_group("interaction_prompt_target")
 	if hide_if_tower_master_not_returned and not GameState.chap4_node11_tower_master_returned:
 		queue_free()
 		return

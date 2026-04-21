@@ -13,6 +13,7 @@ var _player_in_range: bool = false
 
 
 func _ready() -> void:
+	add_to_group("interaction_prompt_target")
 	prompt_label.hide()
 	prompt_label.top_level = true
 	prompt_label.z_index = 100
