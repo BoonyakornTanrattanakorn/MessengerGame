@@ -100,6 +100,8 @@ func _grant_reward() -> void:
 		player.hud.refresh_items()
 
 	GameState.chap4_node11_snowman_reward_claimed = true
+	if player.has_method("_apply_snowstone_fire_bonus"):
+		player._apply_snowstone_fire_bonus()
 	SaveManager.save_game()
 
 
