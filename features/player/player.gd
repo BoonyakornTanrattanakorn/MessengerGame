@@ -445,13 +445,19 @@ func _on_interaction_area_body_entered(body: Node2D) -> void:
 	if body.has_method("can_interact"):
 		if body.has_meta("no_interact"):
 			return
+		if interact_with != null and interact_with != body and interact_with.is_in_group("interaction_prompt_target") and interact_with.has_method("hide_interaction_prompt"):
+			interact_with.hide_interaction_prompt()
 		interact_with = body
 		current_dialog = body.can_interact()
+		if body.is_in_group("interaction_prompt_target") and body.has_method("show_interaction_prompt"):
+			body.show_interaction_prompt()
 		print("Interactable: ", body.name)
 
 func _on_interaction_area_body_exited(body: Node2D) -> void:
 	if body == self:
 		return
+	if body.is_in_group("interaction_prompt_target") and body.has_method("hide_interaction_prompt"):
+		body.hide_interaction_prompt()
 	if body == interact_with:
 		interact_with = null
 
@@ -461,13 +467,19 @@ func _on_interaction_area_area_entered(area: Area2D) -> void:
 	if area.has_method("can_interact"):
 		if area.has_meta("no_interact"):
 			return
+		if interact_with != null and interact_with != area and interact_with.is_in_group("interaction_prompt_target") and interact_with.has_method("hide_interaction_prompt"):
+			interact_with.hide_interaction_prompt()
 		interact_with = area
 		current_dialog = area.can_interact()
+		if area.is_in_group("interaction_prompt_target") and area.has_method("show_interaction_prompt"):
+			area.show_interaction_prompt()
 		print("Interactable area: ", area.name)
 
 func _on_interaction_area_area_exited(area: Area2D) -> void:
 	if area == self:
 		return
+	if area.is_in_group("interaction_prompt_target") and area.has_method("hide_interaction_prompt"):
+		area.hide_interaction_prompt()
 	if area == interact_with:
 		interact_with = null
 

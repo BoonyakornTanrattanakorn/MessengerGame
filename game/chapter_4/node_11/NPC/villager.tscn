@@ -110,3 +110,12 @@ shape = SubResource("RectangleShape2D_cwdef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=1987345611]
 shape = SubResource("RectangleShape2D_cwdef")
+
+[node name="PromptLabel" type="Label" parent="." unique_id=1100010003]
+z_index = 1
+offset_left = -54.0
+offset_top = -42.0
+offset_right = 54.0
+offset_bottom = -19.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Press F to talk"

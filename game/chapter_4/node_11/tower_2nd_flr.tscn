@@ -8852,8 +8852,88 @@ shape = SubResource("RectangleShape2D_x3uwj")
 position = Vector2(400, 186)
 shape = SubResource("RectangleShape2D_mbb5s")
 
+[node name="NormalBookcaseLabel" type="Label" parent="BookcasesInteract" unique_id=1100010004]
+z_index = 1
+offset_left = -75.0
+offset_top = -122.0
+offset_right = 65.0
+offset_bottom = -98.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Press F to read"
+horizontal_alignment = 1
+
+[node name="NormalBookcase2Label" type="Label" parent="BookcasesInteract" unique_id=1100010005]
+z_index = 1
+offset_left = 31.0
+offset_top = -121.0
+offset_right = 171.0
+offset_bottom = -97.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Press F to read"
+horizontal_alignment = 1
+
+[node name="NormalBookcase3Label" type="Label" parent="BookcasesInteract" unique_id=1100010006]
+z_index = 1
+offset_left = -67.0
+offset_top = 58.0
+offset_right = 73.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Press F to read"
+horizontal_alignment = 1
+
+[node name="NormalBookcase4Label" type="Label" parent="BookcasesInteract" unique_id=1100010007]
+z_index = 1
+offset_left = 35.0
+offset_top = 59.0
+offset_right = 175.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Press F to read"
+horizontal_alignment = 1
+
+[node name="NormalBookcase5Label" type="Label" parent="BookcasesInteract" unique_id=1100010008]
+z_index = 1
+offset_left = 234.0
+offset_top = -122.0
+offset_right = 374.0
+offset_bottom = -98.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Press F to read"
+horizontal_alignment = 1
+
+[node name="NormalBookcase6Label" type="Label" parent="BookcasesInteract" unique_id=1100010009]
+z_index = 1
+offset_left = 333.0
+offset_top = -122.0
+offset_right = 473.0
+offset_bottom = -98.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Press F to read"
+horizontal_alignment = 1
+
+[node name="NormalBookcase7Label" type="Label" parent="BookcasesInteract" unique_id=1100010010]
+z_index = 1
+offset_left = 235.0
+offset_top = 59.0
+offset_right = 375.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Press F to read"
+horizontal_alignment = 1
+
+[node name="ClueBookcaseLabel" type="Label" parent="BookcasesInteract" unique_id=1100010011]
+z_index = 1
+offset_left = 331.0
+offset_top = 58.0
+offset_right = 471.0
+offset_bottom = 82.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Press F to read"
+horizontal_alignment = 1
+
 [node name="Villager" parent="." unique_id=151893683 instance=ExtResource("8_mgk0e")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(224, 111)
+position = Vector2(233, 138)
 hide_if_tower_master_not_returned = true

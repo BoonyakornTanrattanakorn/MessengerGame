@@ -5,12 +5,18 @@ extends CharacterBody2D
 @export var required_item_count: int = 1
 
 var _is_talking: bool = false
+var _player_in_range: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interaction_area: Area2D = $InteractArea
+@onready var prompt_label: Label = $PromptLabel
 
 
 func _ready() -> void:
+	add_to_group("interaction_prompt_target")
+	prompt_label.hide()
+	prompt_label.top_level = true
+	prompt_label.z_index = 100
 	if interaction_area != null:
 		interaction_area.body_entered.connect(_on_interaction_area_body_entered)
 		interaction_area.body_exited.connect(_on_interaction_area_body_exited)
@@ -36,10 +42,12 @@ func _talk() -> void:
 	var dialogue_tag := _resolve_dialogue_tag()
 	_set_talking_animation(true)
 	_is_talking = true
+	prompt_label.hide()
 	DialogueManager.show_dialogue_balloon(dialogue_resource, dialogue_tag)
 	await DialogueManager.dialogue_ended
 	_is_talking = false
 	_set_talking_animation(false)
+	_refresh_prompt()
 
 	if dialogue_tag == "has_item":
 		_grant_reward()
@@ -120,9 +128,33 @@ func _set_talking_animation(is_talking: bool) -> void:
 
 func _on_interaction_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		_player_in_range = true
 		body.interact_with = self
+		_refresh_prompt()
 
 
 func _on_interaction_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player") and body.interact_with == self:
-		body.interact_with = null
+	if body.is_in_group("player"):
+		_player_in_range = false
+		prompt_label.hide()
+		if body.interact_with == self:
+			body.interact_with = null
+
+
+func _refresh_prompt() -> void:
+	if _player_in_range and not _is_talking:
+		prompt_label.text = "Press F to talk"
+		prompt_label.global_position = global_position + Vector2(-54, -42)
+		prompt_label.show()
+	else:
+		prompt_label.hide()
+
+
+func show_interaction_prompt() -> void:
+	_player_in_range = true
+	_refresh_prompt()
+
+
+func hide_interaction_prompt() -> void:
+	_player_in_range = false
+	prompt_label.hide()
