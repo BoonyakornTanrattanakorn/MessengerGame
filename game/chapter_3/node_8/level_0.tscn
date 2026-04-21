@@ -50,7 +50,6 @@ shape = SubResource("RectangleShape2D_s5lu3")
 [node name="WarpToNode9" type="Area2D" parent="." unique_id=2071488013]
 position = Vector2(1443, 719)
 script = ExtResource("4_7ndse")
-next_level_path = ""
 facing_direction_on_warp = Vector2(0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToNode9" unique_id=56870286]

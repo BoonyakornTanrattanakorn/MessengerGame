@@ -5,7 +5,7 @@ var player_mounted = false
 var mounted_player = null
 
 # Speed system
-var cart_speed = 150.0
+var cart_speed = 200.0
 var target_speed = 250.0
 var speed_increase_per_second = 5.0
 
@@ -62,6 +62,7 @@ func _on_body_exited(body):
 		if body.interact_with == self:
 			body.interact_with = null
 
+
 func activate():
 	print("yesris")
 	var player = get_tree().get_first_node_in_group("player")
@@ -85,33 +86,35 @@ func dismount_player():
 func stop_cart():
 	is_moving = false
 	move_direction = Vector2.ZERO
-	cart_speed = 150.0  # reset speed
+	cart_speed = 200.0  # reset speed
 
 func _physics_process(delta):
 	if player_mounted:
 		if Input.is_action_just_pressed("greater_magic") and in_turn_zone:
-			var dir = Vector2.ZERO
-			if Input.is_action_pressed(turn_input):
-				dir = turn_direction
+			var mouse_pos = get_global_mouse_position()
+			var dir_to_mouse = (mouse_pos - global_position).normalized()
+			var snapped_dir = _snap_to_cardinal(dir_to_mouse)
 
-			if dir != Vector2.ZERO:
+			if snapped_dir == -turn_direction:
 				is_moving = true
-				move_direction = dir
+				move_direction = turn_direction
+			else:
+				print("wrong direction! mouse snapped to: ", snapped_dir, " but zone wants: ", turn_direction)
 
-	#  Speed ramp
+	# Speed ramp
 	if is_moving and cart_speed < target_speed:
 		cart_speed += speed_increase_per_second * delta
 		cart_speed = min(cart_speed, target_speed)
 
-	# move cart
+	# Move cart
 	if is_moving:
 		global_position += move_direction * cart_speed * delta
 
-	# keep player on cart
+	# Keep player on cart
 	if player_mounted and mounted_player:
 		mounted_player.global_position = mount_point.global_position
 
-	# update sprite
+	# Update sprite
 	if is_moving:
 		if abs(move_direction.x) > abs(move_direction.y):
 			sprite.region_rect = side_region
@@ -120,10 +123,17 @@ func _physics_process(delta):
 			sprite.region_rect = front_region
 			sprite.flip_h = false
 
+func _snap_to_cardinal(dir: Vector2) -> Vector2:
+	# Snap a normalized direction to the nearest of 4 cardinal directions
+	if abs(dir.x) > abs(dir.y):
+		return Vector2(sign(dir.x), 0)
+	else:
+		return Vector2(0, sign(dir.y))
+
 func _on_danger_entered(area):
 	if area.is_in_group("danger"):
 		if mounted_player:
-			mounted_player.die_in_minecart_and_respawn(Vector2(-30, -200))
+			mounted_player.die_in_minecart_and_respawn(Vector2(113, 130))
 		stop_cart()
 
 func _on_stop_area_entered(area):
@@ -150,7 +160,7 @@ func load_data(data):
 
 	is_moving = data.get("is_moving", false)
 
-	cart_speed = data.get("cart_speed", 150.0)
+	cart_speed = data.get("cart_speed", 200.0)
 
 	if player_mounted:
 		var player = get_tree().get_first_node_in_group("player")
