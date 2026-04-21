@@ -5,6 +5,7 @@ signal lever_activated(room_id: int)
 @export var room_id: int = 0
 
 @onready var sprite = $AnimatedSprite2D
+@onready var prompt_label: Label = $PromptLabel
 
 var is_active: bool = false
 var player_in_range: bool = false
@@ -36,10 +37,12 @@ func _on_area_entered(area):
 func _on_body_entered(body):
 	if body.name == "Player":
 		player_in_range = true
+		prompt_label.visible = true
 
 func _on_body_exited(body):
 	if body.name == "Player":
 		player_in_range = false
+		prompt_label.visible = false
 		
 func _update_sprite():
 	if is_active:

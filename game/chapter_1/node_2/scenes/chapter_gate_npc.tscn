@@ -19,8 +19,8 @@ shape = SubResource("RectangleShape2D_wpeu3")
 
 [node name="PromptLabel" type="Label" parent="." unique_id=1566003305]
 visible = false
-offset_left = -32.0
-offset_top = -96.0
-offset_right = 30.0
-offset_bottom = -73.0
+offset_left = -30.0
+offset_top = -66.0
+offset_right = 32.0
+offset_bottom = -43.0
 text = "Interact"
