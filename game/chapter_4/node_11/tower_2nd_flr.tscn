@@ -8858,7 +8858,7 @@ offset_left = -75.0
 offset_top = -122.0
 offset_right = 65.0
 offset_bottom = -98.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Press F to read"
 horizontal_alignment = 1
 
@@ -8868,7 +8868,7 @@ offset_left = 31.0
 offset_top = -121.0
 offset_right = 171.0
 offset_bottom = -97.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Press F to read"
 horizontal_alignment = 1
 
@@ -8878,7 +8878,7 @@ offset_left = -67.0
 offset_top = 58.0
 offset_right = 73.0
 offset_bottom = 82.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Press F to read"
 horizontal_alignment = 1
 
@@ -8888,7 +8888,7 @@ offset_left = 35.0
 offset_top = 59.0
 offset_right = 175.0
 offset_bottom = 83.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Press F to read"
 horizontal_alignment = 1
 
@@ -8898,7 +8898,7 @@ offset_left = 234.0
 offset_top = -122.0
 offset_right = 374.0
 offset_bottom = -98.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Press F to read"
 horizontal_alignment = 1
 
@@ -8908,7 +8908,7 @@ offset_left = 333.0
 offset_top = -122.0
 offset_right = 473.0
 offset_bottom = -98.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Press F to read"
 horizontal_alignment = 1
 
@@ -8918,7 +8918,7 @@ offset_left = 235.0
 offset_top = 59.0
 offset_right = 375.0
 offset_bottom = 83.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Press F to read"
 horizontal_alignment = 1
 
@@ -8928,7 +8928,7 @@ offset_left = 331.0
 offset_top = 58.0
 offset_right = 471.0
 offset_bottom = 82.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Press F to read"
 horizontal_alignment = 1
 
