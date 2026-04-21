@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqy1ka172sygm" path="res://ui/loading_menu/loading_menu.gd" id="1_0exkh"]
 [ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="1_tku8r"]
+[ext_resource type="Texture2D" uid="uid://dxf2chj8hw42" path="res://ui/loading_menu/Screenshot 2026-04-21 232456.png" id="3_6to1d"]
 
 [node name="LoadingMenu" type="Control" unique_id=2008267167]
 layout_mode = 3
@@ -12,6 +13,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tku8r")
 script = ExtResource("1_0exkh")
+
+[node name="Screenshot20260421232456" type="Sprite2D" parent="." unique_id=572266223]
+position = Vector2(655, 360)
+scale = Vector2(2.252322, 2.252322)
+texture = ExtResource("3_6to1d")
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1600773309]
 layout_mode = 1
