@@ -3,6 +3,11 @@ extends LevelEventHandler
 @export var switch_node: Node2D
 @export var dialogue_resource: DialogueResource
 
+func _ready() -> void:
+	add_to_group("savable")
+	await get_tree().process_frame
+	player.health_component.player_dead.connect(_on_player_dead)
+
 func handle_intro_for_level() -> void:
 	if Node7State.intro_objective_started:
 		BGMManager.play_bgm("caravan", 0.0, true)
@@ -26,3 +31,6 @@ func _play_intro_dialogue() -> void:
 		return
 	DialogueManager.show_dialogue_balloon(dialogue_resource, "start")
 	await DialogueManager.dialogue_ended
+
+func _on_player_dead():
+	DeadManager.kill_player("Sandmonster", "Try using water and wind", Vector2(412,675))

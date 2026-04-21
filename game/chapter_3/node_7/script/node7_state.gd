@@ -14,6 +14,8 @@ var talked_to_guard_after_riddle := false
 var sandmonster_quest_turned_in := false
 var visited_shop := false
 
+func _ready() -> void:
+	add_to_group("savable")
 
 func update_objective() -> void:
 	if sandmonster_quest_turned_in:
@@ -44,7 +46,6 @@ func update_objective() -> void:
 			ObjectiveManager.set_objective(
 				"Find the missing statues (%d/%d)" % [get_statue_count(), TOTAL_STATUES]
 			)
-			SaveManager.save_game()
 	else:
 		ObjectiveManager.set_objective("Talk to the Guard")
 		SaveManager.save_game()

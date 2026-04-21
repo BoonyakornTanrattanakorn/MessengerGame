@@ -105,18 +105,17 @@ func load_game():
 	#player_hud._pause_game()
 	
 	var root_scene = get_tree().current_scene
-
 	if level_path != "":
-		root_scene.load_level(level_path, Vector2.ZERO)
+		await root_scene.load_level(level_path, Vector2.ZERO)
 
-	restore_objects()
+	await restore_objects()
+	
+	
 
 
 
 func restore_objects():
 	await get_tree().process_frame
-	
-	GameState.new_game()
 	
 	level_scene = get_level_scene()
 
@@ -133,11 +132,11 @@ func restore_objects():
 
 	savables += root_scene.find_children("*", "", true, false)
 	savables += level_scene.find_children("*", "", true, false)
-	for node in get_tree().root.get_children():
-		if node == root_scene:
-			continue
-		savables += node.find_children("*", "", true, false)
-		savables.append(node)
+	# for node in get_tree().root.get_children():
+	# 	if node == root_scene:
+	# 		continue
+	# 	savables += node.find_children("*", "", true, false)
+	# 	savables.append(node)
 		
 	for node in savables:
 		if not node.has_method("load_data"):
@@ -229,8 +228,8 @@ func restore_global_objects():
 
 func new_game():
 	save_data = init_data.duplicate(true)
+	GameState.new_game()
 	get_tree().change_scene_to_file(init_scene_path)
-	restore_objects()
 	await get_tree().scene_changed
 	get_tree().current_scene.call_deferred(
 		"load_level",
@@ -238,6 +237,7 @@ func new_game():
 		Vector2(0, 0),
 		Vector2.DOWN
 	)
+	save_game()
 	
 	
 func new_game_from_level(scene_path, spawn_position, facing_direction_on_warp):

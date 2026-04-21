@@ -7,6 +7,7 @@ var _player_in_range: bool = false
 var _collected: bool = false
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var prompt_label: Label = $PromptLabel
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -28,10 +29,12 @@ func _process(_delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.name == "Player":
 		_player_in_range = true
+		prompt_label.visible = true
 
 func _on_body_exited(body: Node) -> void:
 	if body.name == "Player":
 		_player_in_range = false
+		prompt_label.visible = false
 
 func _collect() -> void:
 	if _collected:

@@ -58,6 +58,7 @@ func _run_level_intro_if_needed() -> void:
 
 	# Delegate node-specific intro handling to subclasses
 	await current_level.handle_intro_for_level()
+	SaveManager.save_game()
 
 func _on_level_loaded() -> void:
 	# Default post-load hook for subclasses.
