@@ -39,7 +39,120 @@ Jarn Thorian [#sprite=attribute/neutral]: (...but they will return again and aga
 
 ~ accuse_king
 Jarn Thorian [#sprite=attribute/neutral]: No. You are the one behind the attacks.
-King: The messenger has gone mad! Call in the royal mages! 
+King: Big words from a messenger. Do you have any proof?
+
+if can_accuse_effectively()
+	Jarn Thorian [#sprite=attribute/neutral]: I do. And I will lay out every piece of it.
+	=> accuse_king_all_clues
+else
+	Jarn Thorian [#sprite=attribute/neutral]: I have evidence... but not enough to expose everything.
+	=> accuse_king_partial
+
+~ accuse_king_partial
+King: Then your accusation is empty noise.
+King: Show what little you have, and be done with this farce.
+
+What evidence will you present?
+if can_present_clue_1()
+	- Royal order: all guards recalled before the attack.
+		do choose_clue_1()
+		=> accuse_clue_1_partial
+if can_present_clue_2()
+	- Ancient relic warning: "Power of the Bloodline, the Soil for the Abyss."
+		do choose_clue_2()
+		=> accuse_clue_2_partial
+if can_present_clue_3()
+	- Merchant testimony: the king poisoned the guardian worm.
+		do choose_clue_3()
+		=> accuse_clue_3_partial
+if can_present_clue_4()
+	- Palace photo album: proof I was raised in the palace.
+		do choose_clue_4()
+		=> accuse_clue_4_partial
+
+- I give up.
+	do choose_give_up()
+	=> thanks_king
+
+~ accuse_clue_1_partial
+Jarn Thorian [#sprite=attribute/neutral]: I found a sealed royal order in the ruined watchtower.
+Jarn Thorian [#sprite=attribute/neutral]: It recalls every royal guard to the capital the night before the attack.
+King: A strategic redeployment. You know nothing of war.
+King: You cannot prove intent from one military order.
+=> accuse_king_partial
+
+~ accuse_clue_2_partial
+Jarn Thorian [#sprite=attribute/neutral]: In the desert ruins, an ancient relic spoke of a royal pact.
+Jarn Thorian [#sprite=attribute/neutral]: "Power of the Bloodline, the Soil for the Abyss."
+King: Desert myths and broken stone are your evidence?
+King: Legends do not convict kings.
+=> accuse_king_partial
+
+~ accuse_clue_3_partial
+Jarn Thorian [#sprite=attribute/neutral]: A merchant told me you poisoned the guardian worm to plunge the roads into chaos.
+King: Street gossip from frightened traders?
+King: Rumor is not proof.
+=> accuse_king_partial
+
+~ accuse_clue_4_partial
+Jarn Thorian [#sprite=attribute/neutral]: I found an old palace album.
+Jarn Thorian [#sprite=attribute/neutral]: The baby in those photos is me.
+Jarn Thorian [#sprite=attribute/neutral]: I grew up in a tower, so why are my infancy photos hidden in your palace library?
+King: A coincidence. A servant's child, perhaps.
+King: Your imagination outruns the facts.
+=> accuse_king_partial
+
+~ accuse_king_all_clues
+King: Then speak. Let the court hear your "truth."
+
+What evidence will you present?
+if can_present_clue_1()
+	- Royal order: all guards recalled before the attack.
+		do choose_clue_1()
+		=> accuse_clue_1_all
+if can_present_clue_2()
+	- Ancient relic warning: "Power of the Bloodline, the Soil for the Abyss."
+		do choose_clue_2()
+		=> accuse_clue_2_all
+if can_present_clue_3()
+	- Merchant testimony: the king poisoned the guardian worm.
+		do choose_clue_3()
+		=> accuse_clue_3_all
+if can_present_clue_4()
+	- Palace photo album: proof I was raised in the palace.
+		do choose_clue_4()
+		=> accuse_clue_4_all
+
+if all_required_clues_presented()
+	- That is all the proof I need.
+		=> accuse_king_fight
+
+~ accuse_clue_1_all
+Jarn Thorian [#sprite=attribute/neutral]: First: your sealed order recalled every royal guard the night before my town was attacked.
+King: Military timing proves nothing.
+=> accuse_king_all_clues
+
+~ accuse_clue_2_all
+Jarn Thorian [#sprite=attribute/neutral]: Second: an ancient record speaks of your bloodline trading the land to the abyss.
+Jarn Thorian [#sprite=attribute/neutral]: "Power of the Bloodline, the Soil for the Abyss."
+King: Old superstition. Keep going.
+=> accuse_king_all_clues
+
+~ accuse_clue_3_all
+Jarn Thorian [#sprite=attribute/neutral]: Third: a witness confirmed you poisoned the guardian worm to destabilize the region.
+King: Witnesses can be bought.
+=> accuse_king_all_clues
+
+~ accuse_clue_4_all
+Jarn Thorian [#sprite=attribute/neutral]: Fourth: palace records show my infant photos in the royal chambers.
+Jarn Thorian [#sprite=attribute/neutral]: I was hidden away so the throne could be stolen.
+King: ...
+=> accuse_king_all_clues
+
+~ accuse_king_fight
+Jarn Thorian [#sprite=attribute/neutral]: The pattern is clear. You staged the attacks, silenced the guards, and stole the throne.
+King: Enough! Guards, seize him!
+King: The messenger has gone mad! Call in the royal mages!
 do _fade_to_black_then_warp_player()
 King: My royal mages! Capture him dead or alive!
 do _reveal_mages_with_camera_pan()

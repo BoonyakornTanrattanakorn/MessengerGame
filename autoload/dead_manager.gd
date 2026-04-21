@@ -1,5 +1,7 @@
 extends Node
 
+signal player_respawned(position: Vector2)
+
 var death_scene = preload("res://ui/dead_menu/dead_scene.tscn")
 
 var player = null
@@ -9,22 +11,22 @@ func register_player(p):
 	player = p
 
 
-func kill_player(reason: String, tips: String, respawn_position: Vector2):
+func kill_player(reason: String, tips: String, respawn_position: Vector2, reload_game_on_respawn: bool = true):
 	if player:
 		player.hide()
 		player.set_physics_process(false)
 		is_dead = true
 	
 	get_tree().paused = true
-	show_death_screen(reason, tips, respawn_position)
+	show_death_screen(reason, tips, respawn_position, reload_game_on_respawn)
 
 
-func show_death_screen(reason: String, tips: String, respawn_position: Vector2 = Vector2.ZERO):
+func show_death_screen(reason: String, tips: String, respawn_position: Vector2 = Vector2.ZERO, reload_game_on_respawn: bool = true):
 	var death_ui = death_scene.instantiate()
 	death_ui.process_mode = PROCESS_MODE_ALWAYS
 	get_tree().current_scene.add_child(death_ui)
 
-	death_ui.setup(reason, tips, respawn_position)
+	death_ui.setup(reason, tips, respawn_position, reload_game_on_respawn)
 
 
 func respawn_player(position: Vector2):
@@ -35,6 +37,7 @@ func respawn_player(position: Vector2):
 		player.respawn(position)
 		player.show()
 		player.set_physics_process(true)
+	player_respawned.emit(position)
 		
 func _remove_all_spells():
 	for spell in get_tree().get_nodes_in_group("spell"):

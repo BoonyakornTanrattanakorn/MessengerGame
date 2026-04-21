@@ -25,5 +25,6 @@ func handle_intro_for_level() -> void:
 		)
 
 		await DialogueManager.dialogue_ended
+	player.earth_greater_locked = true
 	SaveManager.save_game()
 		

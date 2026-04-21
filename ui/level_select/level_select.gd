@@ -7,6 +7,7 @@ var node_9_scene = "res://game/chapter_3/node_9/node_9.tscn"
 var node_10_scene = "res://game/chapter_4/node_10/node_10.tscn"
 var node_11_scene = "res://game/chapter_4/node_11/node_11.tscn"
 var node_12_scene = "res://game/chapter_4/node_12/node_12.tscn"
+var game_scene = "res://game/game_scene.tscn"
 
 func _ready():
 	$CenterContainer/HBoxContainer/Chapter1Container/Node1Button.pressed.connect(_node_1_start)
@@ -21,6 +22,7 @@ func _ready():
 	$CenterContainer/HBoxContainer/Chapter4Container/Node10Button.pressed.connect(_node_10_start)
 	$CenterContainer/HBoxContainer/Chapter4Container/Node11Button.pressed.connect(_node_11_start)
 	$CenterContainer/HBoxContainer/Chapter4Container/Node12Button.pressed.connect(_node_12_start)
+	$CenterContainer/HBoxContainer/Chapter4Container/Node12DebugAllCluesButton.pressed.connect(_node_12_debug_all_clues_start)
 	$BackToMenuButton.pressed.connect(_back_to_menu)
 		
 func _node_1_start():
@@ -57,7 +59,28 @@ func _node_11_start():
 	SaveManager.new_game_from_level(node_11_scene, Vector2(-330, 350), Vector2.RIGHT)
 
 func _node_12_start():
+	_unlock_all_powers()
 	SaveManager.new_game_from_level(node_12_scene, Vector2(0,0), Vector2.UP)
+
+func _node_12_debug_all_clues_start():
+	# Debug path: force a clean state and unlock all accusation clues before Node 12.
+	GameState.new_game()
+	_unlock_all_powers()
+	GameState.clue_1_unlocked = true
+	GameState.clue_2_unlocked = true
+	GameState.clue_3_unlocked = true
+	GameState.clue_4_unlocked = true
+	GameState.chap4_node12_shown = false
+	GameState.pending_level = node_12_scene
+	GameState.pending_spawn = Vector2(0, 0)
+	GameState.pending_facing = Vector2.UP
+	get_tree().change_scene_to_file(game_scene)
+
+func _unlock_all_powers() -> void:
+	GameState.element_wind_unlocked = true
+	GameState.element_earth_unlocked = true
+	GameState.element_water_unlocked = true
+	GameState.element_fire_unlocked = true
 	
 func _back_to_menu():
 	get_tree().change_scene_to_file("res://ui/menu/main_menu.tscn")

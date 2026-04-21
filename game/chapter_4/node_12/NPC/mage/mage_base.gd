@@ -36,9 +36,7 @@ func _ready() -> void:
 	add_to_group("enemy")
 	_register_in_turn_roster()
 	queue_redraw()
-	
-	_player_ref = _find_player()
-	assert(_player_ref != null, "Can't find player!")
+	_try_resolve_player_ref()
 
 func _exit_tree() -> void:
 	_unregister_from_turn_roster()
@@ -46,6 +44,11 @@ func _exit_tree() -> void:
 func _physics_process(delta: float) -> void:
 	if _hp <= 0:
 		return
+
+	if _player_ref == null or not is_instance_valid(_player_ref):
+		_try_resolve_player_ref()
+		if _player_ref == null:
+			return
 
 	_prune_projectiles()
 
@@ -90,10 +93,25 @@ func finish_casting(next_cooldown: float = attack_interval) -> void:
 	_pass_turn()
 
 func get_direction_to_player() -> Vector2:
+	if _player_ref == null or not is_instance_valid(_player_ref):
+		return Vector2.DOWN
 	var dir := _player_ref.global_position - global_position
 	if dir.length_squared() <= 0.0001:
 		return Vector2.DOWN
 	return dir.normalized()
+
+func _try_resolve_player_ref() -> void:
+	if _player_ref != null and is_instance_valid(_player_ref):
+		return
+
+	var group_player := get_tree().get_first_node_in_group("player")
+	if group_player != null and group_player is CharacterBody2D:
+		_player_ref = group_player as CharacterBody2D
+		return
+
+	var by_scene := _find_player()
+	if by_scene != null and by_scene is CharacterBody2D:
+		_player_ref = by_scene as CharacterBody2D
 
 func register_projectile(projectile: Area2D) -> void:
 	if projectile == null:
@@ -194,6 +212,7 @@ func _pass_turn() -> void:
 	_prune_turn_roster()
 	if _turn_roster.is_empty():
 		return
+	get_tree().call_group("node12_mage_turn_listener", "_on_node12_mage_turn_passed", self)
 	_turn_index = (_turn_index + 1) % _turn_roster.size()
 
 func _prune_turn_roster() -> void:

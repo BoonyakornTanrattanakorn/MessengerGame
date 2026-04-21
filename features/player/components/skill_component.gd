@@ -256,6 +256,8 @@ func spawn_rock_pillar() -> void:
 		return
 	if player.skill_locked:
 		return
+	if player.earth_greater_locked:
+		return
 		
 	player.active_pillars = player.active_pillars.filter(func(p): return is_instance_valid(p))
 	
