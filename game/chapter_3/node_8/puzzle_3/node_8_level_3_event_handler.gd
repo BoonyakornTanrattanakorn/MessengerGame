@@ -14,11 +14,16 @@ func _ready() -> void:
 		if guardian:
 			guardian.queue_free()
 
+	player.health_component.player_dead.connect(_on_player_dead)
+
+func _on_player_dead() -> void:
+	DeadManager.kill_player("Defeated by the Stone Guardian", "", Vector2(100, 500))
+
 func on_level_loaded() -> void:
 	Chap3Node8State.update_objective()
 
 func handle_intro_for_level() -> void:
-	BGMManager.play_bgm("res://assets/audio/caravan.ogg", 0.0, true)
+	BGMManager.play_bgm("caravan", 0.0, true)
 	if not GameState.chap3_node8_3_shown:
 		GameState.chap3_node8_3_shown = true
 
@@ -37,3 +42,4 @@ func handle_intro_for_level() -> void:
 
 		if puzzle_manager and puzzle_manager.has_method("activate_guardian"):
 			puzzle_manager.activate_guardian()
+		SaveManager.save_game()

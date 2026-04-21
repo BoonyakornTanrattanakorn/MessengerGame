@@ -5,12 +5,12 @@ extends LevelEventHandler
 
 func handle_intro_for_level() -> void:
 	if Node7State.intro_objective_started:
-		BGMManager.play_bgm("res://assets/audio/caravan.ogg", 0.0, true)
+		BGMManager.play_bgm("caravan", 0.0, true)
 		Node7State.update_objective()
 		return
 
 	Node7State.reset()
-	BGMManager.play_bgm("res://assets/audio/caravan.ogg", 0.0, true)
+	BGMManager.play_bgm("caravan", 0.0, true)
 	Node7State.start_desert_objective()
 	
 	await _play_intro_dialogue()
@@ -19,6 +19,7 @@ func handle_intro_for_level() -> void:
 		player.focus_camera_to(switch_node)
 		await get_tree().create_timer(2.0).timeout
 		player.return_camera()
+	SaveManager.save_game()
 
 func _play_intro_dialogue() -> void:
 	if dialogue_resource == null:

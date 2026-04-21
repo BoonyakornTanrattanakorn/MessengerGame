@@ -14,7 +14,7 @@ func on_level_loaded() -> void:
 			warp_to_node_9.hide_portal()
 
 func handle_intro_for_level() -> void:
-	BGMManager.play_bgm("res://assets/audio/caravan.ogg", 0.0, true)
+	BGMManager.play_bgm("caravan", 0.0, true)
 	if not GameState.chap3_node8_shown:
 		GameState.chap3_node8_shown = true
 
@@ -29,3 +29,4 @@ func handle_intro_for_level() -> void:
 			player.focus_camera_to(pyramid_entrance)
 			await get_tree().create_timer(1.5).timeout
 			player.return_camera()
+		SaveManager.save_game()

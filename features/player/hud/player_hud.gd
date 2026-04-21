@@ -176,16 +176,10 @@ func _process(_delta):
 
 	# Skill bar — up/down
 	if Input.is_action_just_pressed("element_rotate_left"):
-		skill_index = (skill_index - 1 + skills.size()) % skills.size()
-		update_skill_display()
-		_play_ui_sfx("ui.hover")
-		emit_signal("skill_changed", skills[skill_index]["attribute"])
+		_rotate_skill(-1)
 
 	if Input.is_action_just_pressed("element_rotate_right"):
-		skill_index = (skill_index + 1) % skills.size()
-		update_skill_display()
-		_play_ui_sfx("ui.hover")
-		emit_signal("skill_changed", skills[skill_index]["attribute"])
+		_rotate_skill(1)
 
 	# Item bar — left/right
 	if items.size() > 0 and Input.is_action_just_pressed("item_rotate_left"):
@@ -255,10 +249,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		if power_wheel:
 			var sel_idx = power_wheel.select_current()
 			if sel_idx >= 0 and sel_idx < skills.size():
-				skill_index = sel_idx
-				update_skill_display()
-				_play_ui_sfx("ui.equip")
-				emit_signal("skill_changed", skills[skill_index]["attribute"])
+				var selected_attribute := String(skills[sel_idx]["attribute"])
+				if _is_skill_unlocked(selected_attribute):
+					skill_index = sel_idx
+					update_skill_display()
+					_play_ui_sfx("ui.equip")
+					emit_signal("skill_changed", skills[skill_index]["attribute"])
+				else:
+					_play_ui_sfx("ui.denied")
 			else:
 				_play_ui_sfx("ui.decline")
 			power_wheel.visible = false
@@ -301,6 +299,7 @@ func _on_pause_quit_requested() -> void:
 	get_tree().quit()
 
 func update_skill_display():
+	_ensure_valid_skill_index()
 	#skill_label.text = skills[skill_index]["name"]
 	# Change border color based on element
 	var style = skill_slot.get_theme_stylebox("panel").duplicate()
@@ -321,6 +320,7 @@ func _hide_all_element_icons() -> void:
 			icon_node.visible = false
 
 func get_current_skill() -> String:
+	_ensure_valid_skill_index()
 	return skills[skill_index]["attribute"]
 
 func set_current_skill(attribute: String) -> void:
@@ -330,7 +330,10 @@ func set_current_skill(attribute: String) -> void:
 	var normalized_attribute := attribute.to_lower()
 	for i in range(skills.size()):
 		if String(skills[i]["attribute"]).to_lower() == normalized_attribute:
-			skill_index = i
+			if _is_skill_unlocked(String(skills[i]["attribute"])):
+				skill_index = i
+			else:
+				skill_index = _find_first_unlocked_skill_index()
 			update_skill_display()
 			emit_signal("skill_changed", skills[skill_index]["attribute"])
 			return
@@ -527,6 +530,7 @@ func save():
 func load_data(data):
 	skill_index = int(data.get("skill_index", skill_index))
 	item_index = int(data.get("item_index", item_index))
+	_ensure_valid_skill_index()
 
 	update_skill_display()
 	refresh_items()
@@ -556,6 +560,52 @@ func load_data(data):
 		_refresh_objective_display()
 	else:
 		set_objective_text(saved_objective, current_objective_prefix)
+
+func _is_skill_unlocked(attribute: String) -> bool:
+	if GameState == null:
+		return true
+
+	match attribute.to_lower():
+		"wind":
+			return GameState.element_wind_unlocked
+		"earth":
+			return GameState.element_earth_unlocked
+		"water":
+			return GameState.element_water_unlocked
+		"fire":
+			return GameState.element_fire_unlocked
+
+	return true
+
+func _find_first_unlocked_skill_index() -> int:
+	for i in range(skills.size()):
+		if _is_skill_unlocked(String(skills[i]["attribute"])):
+			return i
+	return 0
+
+func _ensure_valid_skill_index() -> void:
+	if skills.is_empty():
+		return
+
+	skill_index = clamp(skill_index, 0, skills.size() - 1)
+	if not _is_skill_unlocked(String(skills[skill_index]["attribute"])):
+		skill_index = _find_first_unlocked_skill_index()
+
+func _rotate_skill(step: int) -> void:
+	if skills.is_empty():
+		return
+
+	var original: int = skill_index
+	for _i in range(skills.size()):
+		skill_index = (skill_index + step + skills.size()) % skills.size()
+		if _is_skill_unlocked(String(skills[skill_index]["attribute"])):
+			update_skill_display()
+			_play_ui_sfx("ui.hover")
+			emit_signal("skill_changed", skills[skill_index]["attribute"])
+			return
+
+	skill_index = original
+	_play_ui_sfx("ui.denied")
 func _on_heat_changed(value: float):
 	heat_gauge.update_heat(value)
 

@@ -1,0 +1,18 @@
+~ start
+Jarn Thorian [#sprite=attribute/neutral]: W-What's happening?! Why are the monsters suddenly attacking our tower?!
+Jarn Thorian [#sprite=attribute/neutral]: I can't stay here... I have to get out of here.
+Jarn Thorian [#sprite=attribute/neutral]: Wait... is that a knight over there?
+=> END
+
+~ knight_spotted
+Jarn Thorian [#sprite=attribute/neutral]: He's still standing. I should go talk to him — maybe he knows what's going on.
+=> END
+
+~ tutorial
+Tutorial: Move your character with W, A, S, D.
+Tutorial: Press F to interact with people and objects.
+Tutorial: Press T to use your selected item.
+Tutorial: Normally you'd have to LEFT CLICK to use lesser magic, and RIGHT CLICK to use greater magic.
+Tutorial: But for now, press SHIFT to use lesser magic, and RIGHT CLICK to use greater magic.
+Tutorial: That's all, good luck!
+=> END

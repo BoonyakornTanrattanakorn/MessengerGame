@@ -1,7 +1,7 @@
 ~ start
-Player [#sprite=wind/neutral]: The rail goes deeper inside...
-Player [#sprite=wind/neutral]: That minecart might be the way across.
-Player [#sprite=wind/neutral]: I need to find the green gem.
-Player [#sprite=wind/neutral]: Hmm... what if I use my power to push it from the opposite direction?
-Player [#sprite=wind/neutral]: But I should be careful... if I slip off the rails, I might end up in the water.
+Jarn Thorian [#sprite=attribute/neutral]: The rail goes deeper inside...
+Jarn Thorian [#sprite=attribute/neutral]: That minecart might be the way across.
+Jarn Thorian [#sprite=attribute/neutral]: I need to find the green gem.
+Jarn Thorian [#sprite=attribute/neutral]: Hmm... what if I use my power to push it from the opposite direction?
+Jarn Thorian [#sprite=attribute/neutral]: But I should be careful... if I slip off the rails, I might end up in the water.
 => END

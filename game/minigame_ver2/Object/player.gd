@@ -9,20 +9,22 @@ const DOUBLE_JUMP_FORCE = -300.0
 const SLIDE_DURATION = 0.6
 const RUN_SPEED = 100.0
 const COYOTE_TIME = 0.15
+const AIR_DIVE_FORCE = 600.0
 
 @onready var anim = $AnimatedSprite2D
 @onready var stand_shape = $CollisionShape2D
 @onready var slide_shape = $SlideShape
 
-enum State { RUN, JUMP, DOUBLE_JUMP, SLIDE, HURT }
+enum State { RUN, JUMP, DOUBLE_JUMP, SLIDE, HURT, AIR_DIVE }
 var state = State.RUN
+var prev_state = State.RUN
 var can_double_jump = false
 var slide_timer = 0.0
 var health = 3
 var is_invincible = false
 var invincible_timer = 0.0
 var coyote_timer = 0.0
-var coyote_used = false  # ← prevents coyote from granting double jump
+var coyote_used = false
 
 signal shard_changed(amount)
 var max_health = 3
@@ -43,14 +45,19 @@ func _physics_process(delta):
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
+		# Cancel ground slide if we walk off a ledge
 		if state == State.SLIDE:
 			stop_slide()
 			state = State.JUMP
 	else:
-		if state == State.JUMP or state == State.DOUBLE_JUMP:
+		# Landing — reset state
+		if state == State.JUMP or state == State.DOUBLE_JUMP or state == State.AIR_DIVE:
 			state = State.RUN
+		# If holding slide on landing, go into slide immediately
+		elif state == State.AIR_DIVE:
+			start_slide()
 		can_double_jump = false
-		coyote_used = false  # ← reset when back on floor
+		coyote_used = false
 
 func handle_coyote(delta):
 	if is_on_floor():
@@ -63,20 +70,25 @@ func handle_input(delta):
 	if state == State.HURT:
 		return
 
+	# --- Jump ---
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or state == State.SLIDE:
-			# Normal jump from ground — enables double jump
 			jump()
 		elif coyote_timer > 0 and not coyote_used:
-			# Fell off ledge — coyote jump, NO double jump after
 			coyote_jump()
 		elif can_double_jump:
-			# Double jump — only after normal jump, not after coyote
 			double_jump()
 
-	if Input.is_action_just_pressed("slide") and is_on_floor():
-		start_slide()
+	# --- Slide / Air dive ---
+	if Input.is_action_just_pressed("slide"):
+		if is_on_floor():
+			# Normal ground slide
+			start_slide()
+		elif state == State.JUMP or state == State.DOUBLE_JUMP:
+			# Air dive — slam to ground fast
+			air_dive()
 
+	# Release slide early on ground
 	if Input.is_action_just_released("slide") and state == State.SLIDE:
 		stop_slide()
 		state = State.RUN
@@ -84,15 +96,15 @@ func handle_input(delta):
 func jump():
 	velocity.y = JUMP_FORCE
 	state = State.JUMP
-	can_double_jump = true   # ← normal jump allows double jump
-	coyote_used = true       # ← consume coyote
+	can_double_jump = true
+	coyote_used = true
 	coyote_timer = 0
 	stop_slide()
 
 func coyote_jump():
 	velocity.y = JUMP_FORCE
 	state = State.JUMP
-	can_double_jump = false  # ← coyote jump does NOT allow double jump
+	can_double_jump = false
 	coyote_used = true
 	coyote_timer = 0
 
@@ -100,6 +112,11 @@ func double_jump():
 	velocity.y = DOUBLE_JUMP_FORCE
 	state = State.DOUBLE_JUMP
 	can_double_jump = false
+
+func air_dive():
+	velocity.y = AIR_DIVE_FORCE
+	can_double_jump = false
+	state = State.AIR_DIVE
 
 func start_slide():
 	state = State.SLIDE
@@ -143,6 +160,13 @@ func die():
 	emit_signal("player_died")
 
 func update_animation():
+	if state == prev_state:
+		# Keep slide looping while held
+		if state == State.SLIDE and not anim.is_playing():
+			anim.play("slide")
+		return
+	prev_state = state
+
 	match state:
 		State.RUN:
 			anim.play("run")
@@ -152,6 +176,8 @@ func update_animation():
 			anim.play("double_jump")
 		State.SLIDE:
 			anim.play("slide")
+		State.AIR_DIVE:
+			anim.play("jump")  # reuse jump anim, or make a "dive" anim
 		State.HURT:
 			anim.play("hurt")
 
@@ -166,10 +192,8 @@ func try_heal():
 		health += 1
 		emit_signal("health_changed", health)
 		emit_signal("shard_changed", health_shards)
-		# check again in case we have enough for another heal
 		try_heal()
 
 func stop():
-	print("stop called")  # ← does this print?
 	set_physics_process(false)
 	velocity = Vector2.ZERO

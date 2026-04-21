@@ -1,0 +1,22 @@
+~ knight_intro
+Royal Knight: ... You need to leave this place.
+Royal Knight: The creatures... they came without warning. I couldn't hold them back...
+Royal Knight: Just one day before this... the king issued an order recalling all royal guards back to the capital city.
+Royal Knight: Of all the times to pull them back... why now? Why the night before all of this?
+Royal Knight: Go tell others city to help us about the attack.
+Royal Knight: There's a secret passage to get out on the end of the hall way. Don't look back.
+Royal Knight: *coughs* I... I can't hold on much longer. Please... just go.
+=> END
+
+~ not_talked
+Jarn Thorian [#sprite=attribute/neutral]: I really should talk to that knight first.
+=> END
+
+~ knight_clue
+Jarn Thorian [#sprite=attribute/neutral]: Hm...? What's this?
+Jarn Thorian [#sprite=attribute/neutral]: A royal document... with the king's seal on it.
+Jarn Thorian [#sprite=attribute/neutral]: "Effective immediately, all royal guards are to stand down and return to the capital."
+Jarn Thorian [#sprite=attribute/neutral]: This was signed the night before the attack...
+Jarn Thorian [#sprite=attribute/neutral]: The king pulled back every single guard... right before the city was overrun?
+Jarn Thorian [#sprite=attribute/neutral]: This can't be a coincidence. I need to hold on to this.
+=> END

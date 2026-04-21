@@ -33,6 +33,12 @@ var _fight_sequence_done: bool = false
 var _fast_forward_enabled: bool = false
 var _fast_forward_balloons: Array[Node] = []
 var _accusation_branch_unlocked: bool = true
+var _accusation_presented_clues: Dictionary = {
+	1: false,
+	2: false,
+	3: false,
+	4: false
+}
 
 func _ready() -> void:
 
@@ -48,43 +54,45 @@ func _ready() -> void:
 
 	
 func handle_intro_for_level() -> void:
-	var original_input_locked = player.is_in_dialogue
-	var original_camera_pan = player.is_camera_panning
-	var original_input_locked = player.is_in_dialogue
-	var original_camera_pan = player.is_camera_panning
+	if not GameState.chap4_node12_shown:
+		GameState.chap4_node12_shown = true
+		
+		var original_input_locked = player.is_in_dialogue
+		var original_camera_pan = player.is_camera_panning
 
-	# Play intro BGM (orchestral_mission)
-	BGMManager.play_bgm("orchestral_mission")
+		# Play intro BGM (orchestral_mission)
+		BGMManager.play_bgm("orchestral_mission", -8.0)
 
-	player.is_in_dialogue = true
-	player.is_camera_panning = true
-	_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
-	_fight_sequence_started = false
-	_fight_sequence_done = false
-	_fast_forward_enabled = true
-	_track_fast_forward_loop()
 
-	show_player_thoughts()
-	await slow_walk_intro()
-	if _waiting_for_hallway_thoughts and not _hallway_thoughts_done:
-		await hallway_thoughts_finished
-	await show_king_cutscene()
-	await start_player_king_dialogue()
+		player.is_in_dialogue = true
+		player.is_camera_panning = true
+		_accusation_branch_unlocked = _resolve_accusation_branch_unlock()
+		_fight_sequence_started = false
+		_fight_sequence_done = false
+		_fast_forward_enabled = true
+		_track_fast_forward_loop()
 
-	if _fight_sequence_started:
-		if not _fight_sequence_done:
-			await fight_sequence_finished
-		await start_post_fight_cutscene()
-	else:
-		await normal_ending()
+		show_player_thoughts()
+		await slow_walk_intro()
+		if _waiting_for_hallway_thoughts and not _hallway_thoughts_done:
+			await hallway_thoughts_finished
+		await show_king_cutscene()
+		await start_player_king_dialogue()
 
-	# Restore intro/outro BGM after fight or ending
-	BGMManager.play_bgm("orchestral_mission")
+		if _fight_sequence_started:
+			if not _fight_sequence_done:
+				await fight_sequence_finished
+			await start_post_fight_cutscene()
+		else:
+			await normal_ending()
 
-	_fast_forward_enabled = false
-	_fast_forward_balloons.clear()
-	player.is_in_dialogue = original_input_locked
-	player.is_camera_panning = original_camera_pan
+		# Restore intro/outro BGM after fight or ending
+		BGMManager.play_bgm("orchestral_mission", -8.0)
+
+		_fast_forward_enabled = false
+		_fast_forward_balloons.clear()
+		player.is_in_dialogue = original_input_locked
+		player.is_camera_panning = original_camera_pan
 
 func show_player_thoughts() -> void:
 	if INTRO_DIALOGUE == null:
@@ -108,27 +116,7 @@ func _on_hallway_thoughts_dialogue_ended(resource: DialogueResource) -> void:
 	if DialogueManager.dialogue_ended.is_connected(_on_hallway_thoughts_dialogue_ended):
 		DialogueManager.dialogue_ended.disconnect(_on_hallway_thoughts_dialogue_ended)
 	hallway_thoughts_finished.emit()
-	if INTRO_DIALOGUE == null:
-		_hallway_thoughts_done = true
-		_waiting_for_hallway_thoughts = false
-		return
-	_hallway_thoughts_done = false
-	_waiting_for_hallway_thoughts = true
-	if not DialogueManager.dialogue_ended.is_connected(_on_hallway_thoughts_dialogue_ended):
-		DialogueManager.dialogue_ended.connect(_on_hallway_thoughts_dialogue_ended)
-	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "hallway_thoughts", [self])
-	_register_fast_forward_balloon(balloon)
 
-func _on_hallway_thoughts_dialogue_ended(resource: DialogueResource) -> void:
-	if not _waiting_for_hallway_thoughts:
-		return
-	if resource != INTRO_DIALOGUE:
-		return
-	_waiting_for_hallway_thoughts = false
-	_hallway_thoughts_done = true
-	if DialogueManager.dialogue_ended.is_connected(_on_hallway_thoughts_dialogue_ended):
-		DialogueManager.dialogue_ended.disconnect(_on_hallway_thoughts_dialogue_ended)
-	hallway_thoughts_finished.emit()
 
 func show_king_cutscene() -> void:
 	if SFXManager != null:
@@ -181,7 +169,7 @@ func start_fight_sequence() -> void:
 		return
 
 	# Play fight BGM
-	BGMManager.play_bgm("fire_blade")
+	BGMManager.play_bgm("fire_blade", -12.0)
 	SFXManager.play_event("node12.cutscene.reveal")
 
 	_set_mage_group_visible(true)
@@ -276,24 +264,101 @@ func choose_thanks_king() -> void:
 func choose_accuse_king() -> void:
 	if not _can_start_accusation_branch():
 		return
+	_reset_accusation_presented_clues()
 
 func can_accuse_king() -> bool:
 	return _can_start_accusation_branch()
+
+func can_accuse_effectively() -> bool:
+	return _get_unlocked_clue_count() >= 4
+
+func can_present_clue_1() -> bool:
+	return _can_present_clue(1)
+
+func can_present_clue_2() -> bool:
+	return _can_present_clue(2)
+
+func can_present_clue_3() -> bool:
+	return _can_present_clue(3)
+
+func can_present_clue_4() -> bool:
+	return _can_present_clue(4)
+
+func has_any_presentable_clue() -> bool:
+	return can_present_clue_1() or can_present_clue_2() or can_present_clue_3() or can_present_clue_4()
+
+func all_required_clues_presented() -> bool:
+	if not can_accuse_effectively():
+		return false
+	for clue_index in _accusation_presented_clues.keys():
+		if not _accusation_presented_clues[clue_index]:
+			return false
+	return true
+
+func choose_clue_1() -> void:
+	_mark_clue_presented(1)
+
+func choose_clue_2() -> void:
+	_mark_clue_presented(2)
+
+func choose_clue_3() -> void:
+	_mark_clue_presented(3)
+
+func choose_clue_4() -> void:
+	_mark_clue_presented(4)
+
+func choose_give_up() -> void:
+	pass
 
 func _can_start_accusation_branch() -> bool:
 	return _accusation_branch_unlocked
 
 func _resolve_accusation_branch_unlock() -> bool:
-	return _check_required_clues_placeholder()
+	return _get_unlocked_clue_count() > 0
 
-func _check_required_clues_placeholder() -> bool:
-	# TODO: Implement node_12-specific clue/flag validation.
-	return _accusation_branch_unlocked
+func _get_unlocked_clue_count() -> int:
+	var clue_count := 0
+	if GameState.clue_1_unlocked:
+		clue_count += 1
+	if GameState.clue_2_unlocked:
+		clue_count += 1
+	if GameState.clue_3_unlocked:
+		clue_count += 1
+	if GameState.clue_4_unlocked:
+		clue_count += 1
+	return clue_count
+
+func _can_present_clue(clue_index: int) -> bool:
+	if not _is_clue_unlocked(clue_index):
+		return false
+	return not bool(_accusation_presented_clues.get(clue_index, false))
+
+func _is_clue_unlocked(clue_index: int) -> bool:
+	match clue_index:
+		1:
+			return GameState.clue_1_unlocked
+		2:
+			return GameState.clue_2_unlocked
+		3:
+			return GameState.clue_3_unlocked
+		4:
+			return GameState.clue_4_unlocked
+		_:
+			return false
+
+func _mark_clue_presented(clue_index: int) -> void:
+	if _accusation_presented_clues.has(clue_index):
+		_accusation_presented_clues[clue_index] = true
+
+func _reset_accusation_presented_clues() -> void:
+	for clue_index in _accusation_presented_clues.keys():
+		_accusation_presented_clues[clue_index] = false
 
 func start_post_fight_cutscene() -> void:
 	# Restore outro BGM (orchestral_mission)
 	if BGMManager != null:
-		BGMManager.play_bgm("orchestral_mission")
+		BGMManager.play_bgm("orchestral_mission", -8.0)
+
 
 	if FINALE_DIALOGUE != null:
 		var balloon := DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE, "start", [self])

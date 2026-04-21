@@ -1,6 +1,6 @@
 ~ start
-Player [#sprite=water/neutral]: The floor is covered in sand. I can barely see anything.
-Player [#sprite=water/neutral]: Those symbols on the wall... they must be a clue.
-Player [#sprite=water/neutral]: I should use wind to blow the sand away.
-Player [#sprite=water/neutral]: Then I can step on it with correct order.
+Jarn Thorian [#sprite=attribute/neutral]: The floor is covered in sand. I can barely see anything.
+Jarn Thorian [#sprite=attribute/neutral]: Those symbols on the wall... they must be a clue.
+Jarn Thorian [#sprite=attribute/neutral]: I should use wind to blow the sand away.
+Jarn Thorian [#sprite=attribute/neutral]: Then I can step on it with correct order.
 => END

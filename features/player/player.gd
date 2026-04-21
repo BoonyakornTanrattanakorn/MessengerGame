@@ -11,7 +11,7 @@ var dash_cooldown = 0.5
 
 var playerAttribute = "wind" # make enum
 var is_boat_mode: bool = false
-var boat_splash_sfx: String = "res://assets/audio/water_ball_sfx.ogg"
+var boat_splash_sfx: String = "res://assets/audio/sfx/water_ball_sfx.ogg"
 var boat_splash_interval: float = 1.0
 var boat_splash_timer: float = 0.0
 
@@ -691,25 +691,25 @@ func check_if_water_at(pos: Vector2) -> bool:
 		return false
 
 	var local_pos = tilemap.to_local(pos)
-	var map_pos = tilemap.local_to_map(local_pos)
-
-	var tile_data = tilemap.get_cell_tile_data(map_pos)
 	
-	if tile_data == null:
+	if tilemap == null:
 		#print("No tile at", map_pos)
 		return false
 	else:
+		var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
+		var tile_data
+		if tilemap.get_cell_tile_data(map_pos) != null:
+			tile_data = tilemap.get_cell_tile_data(map_pos)
+			
 		var tileset: TileSet = tilemap.tile_set
 		if tileset == null:
 			return false
 		if tileset.get_custom_data_layer_by_name("is_water") == -1:
 			return false
-
-		var is_water = tile_data.get_custom_data("is_water")
-
-		if is_water == true:
+		
+		if tile_data != null and tile_data.get_custom_data("is_water") != null:
 			#print("FOUND WATER")
-			return true
+			return tile_data.get_custom_data("is_water")
 
 	#print("NOT WATER")
 	return false
@@ -726,12 +726,20 @@ func check_if_void_at(pos: Vector2) -> bool:
 	
 	if tilemap == null:
 		return false
-
-	var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
-	var tile_data = tilemap.get_cell_tile_data(map_pos)
-	
-	if tile_data:
-		return tile_data.get_custom_data("is_void") == true
+	else:
+		var map_pos = tilemap.local_to_map(tilemap.to_local(pos))
+		var tile_data
+		if tilemap.get_cell_tile_data(map_pos) != null:
+			tile_data = tilemap.get_cell_tile_data(map_pos)
+		
+		var tileset: TileSet = tilemap.tile_set
+		if tileset == null:
+			return false
+		if tileset.get_custom_data_layer_by_name("is_void") == -1:
+			return false
+			
+		if tile_data != null and tile_data.get_custom_data("is_void") != null:
+			return tile_data.get_custom_data("is_void")
 			
 	return false
 	
@@ -751,8 +759,11 @@ func _void_fall_event():
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, 0.5)
 	
-	var current_scene_path = get_tree().current_scene.scene_file_path
-	get_tree().change_scene_to_file(current_scene_path)
+	#var current_scene_path = get_tree().current_scene.scene_file_path
+	#get_tree().change_scene_to_file(current_scene_path)
+	
+	var level_scene_path = SaveManager.get_level_scene().scene_file_path
+	get_tree().current_scene.load_level(level_scene_path, Vector2(400, 1370), Vector2i(0,1))
 	
 	var dialogue_resource = load("res://game/chapter_2/node_4/dialogue/dead.dialogue")
 	if dialogue_resource:

@@ -1,0 +1,16 @@
+~ no_code
+Boss Soldier : Hey! The palace is off-limits right now. Get lost!
+=> END
+
+~ has_code
+Boss Soldier : Halt. State your business.
+Jarn Thorian [#sprite=attribute/neutral]: I need to enter the palace.
+Boss Soldier : No entry without authorization. Go back at once.
+Jarn Thorian [#sprite=attribute/neutral]: Hmm... it seems like this king really is in a "Closed Throne."
+Boss Soldier : ...Who told you that?
+Jarn Thorian [#sprite=attribute/neutral]: I was sent here with clearance. Check if you want.
+Boss Soldier : Hmph. Fine. That's the correct phrase.
+Boss Soldier : Open the way. Let this one pass.
+Jarn Thorian [#sprite=attribute/neutral]: Thanks.
+
+=> END

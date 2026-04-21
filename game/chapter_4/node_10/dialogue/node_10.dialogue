@@ -1,7 +1,7 @@
 ~ start
-Player [#sprite=fire/neutral]: It's freezing in here...
-Player [#sprite=fire/neutral]: The floor feels slippery.
-Player [#sprite=fire/neutral]: I might not be able to stop once I start moving.
+Jarn Thorian [#sprite=attribute/neutral]: It's freezing in here...
+Jarn Thorian [#sprite=attribute/neutral]: The floor feels slippery.
+Jarn Thorian [#sprite=attribute/neutral]: I might not be able to stop once I start moving.
 => END
 
 ~ checkpoint
@@ -10,7 +10,7 @@ System: Press R to reset current room.
 => END
 
 ~ ice_block_found
-Player [#sprite=fire/neutral]: An ice block?
-Player [#sprite=fire/neutral]: It's blocking the path.
-Player [#sprite=fire/neutral]: Maybe I can use fire to melt it.
+Jarn Thorian [#sprite=attribute/neutral]: An ice block?
+Jarn Thorian [#sprite=attribute/neutral]: It's blocking the path.
+Jarn Thorian [#sprite=attribute/neutral]: Maybe I can use fire to melt it.
 	

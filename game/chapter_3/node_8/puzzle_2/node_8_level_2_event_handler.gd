@@ -15,7 +15,7 @@ func on_level_loaded() -> void:
 	Chap3Node8State.update_objective()
 
 func handle_intro_for_level() -> void:
-	BGMManager.play_bgm("res://assets/audio/caravan.ogg", 0.0, true)
+	BGMManager.play_bgm("caravan", 0.0, true)
 	if not GameState.chap3_node8_2_shown:
 		GameState.chap3_node8_2_shown = true
 
@@ -35,3 +35,4 @@ func handle_intro_for_level() -> void:
 			player.focus_camera_to(sand_block)
 			await get_tree().create_timer(1.0).timeout
 		player.return_camera()
+		SaveManager.save_game()

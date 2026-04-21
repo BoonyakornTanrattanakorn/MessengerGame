@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://xi5ajvyv03lk"]
 
 [ext_resource type="Script" uid="uid://b5wqjpoo4xp2i" path="res://game/chapter_3/node_8/puzzle_2/node_8_level_2_event_handler.gd" id="1_evhandler"]
-[ext_resource type="TileSet" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_tileset"]
+[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_tileset"]
 [ext_resource type="Texture2D" uid="uid://dvnflryp0fvr7" path="res://game/chapter_3/node_8/additional_assets/hstone.png" id="3_dq3cv"]
 [ext_resource type="Script" uid="uid://c6mdqo88j33lv" path="res://game/chapter_3/node_8/puzzle_2/puzzle_2_manager.gd" id="3_p2manager"]
 [ext_resource type="Script" uid="uid://pdl4a6jud7ei" path="res://game/chapter_3/node_8/puzzle_2/sand_cover.gd" id="4_sandcover"]

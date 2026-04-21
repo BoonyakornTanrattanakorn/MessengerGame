@@ -26,8 +26,6 @@ var _saved_limit_right: int = 0
 var _saved_limit_top: int = 0
 var _saved_limit_bottom: int = 0
 
-var water_serpent_bgm = "res://assets/audio/water_serpent_bgm.ogg"
-
 func _ready() -> void:
 	_set_borders_enabled(false)
 	if _trigger_area != null:
@@ -70,7 +68,7 @@ func _start_boss_fight(player: Node2D) -> void:
 	BGMManager.stop_bgm(2.0)
 	await _play_serpent_intro(player)
 	await _play_encounter_dialogue()
-	BGMManager.play_bgm(water_serpent_bgm, 0.0, true)
+	BGMManager.play_bgm("water_serpent_bgm", 0.0, true)
 	_set_borders_enabled(true)
 	_save_camera_limits(camera)
 	_apply_zone_limits(camera)
@@ -285,7 +283,9 @@ func _finish_boss_fight_win() -> void:
 	_set_borders_enabled(false)
 	_disable_trigger_area()
 
-	ObjectiveManager.set_objective("Continue to town")
+	ObjectiveManager.set_objective("Continue to the desert")
+	GameState.element_water_unlocked = true
+	SaveManager.save_game()
 	boss_fight_won.emit(_tracked_player)
 	_set_player_cutscene_lock(false)
 

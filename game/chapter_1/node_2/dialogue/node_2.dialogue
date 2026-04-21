@@ -1,12 +1,13 @@
 ~ start
-Player [#sprite=wind/neutral]: ... 
-Player [#sprite=wind/neutral]: Wow... I didn't know such dungeons existed beneath the castle. 
-Player [#sprite=wind/neutral]: I need to find a way out of here.
-Player [#sprite=wind/neutral]: That switch on the left side of the room looks familiar...
-Player [#sprite=wind/neutral]: Maybe I can flip it with my wind power.
+Jarn Thorian [#sprite=attribute/neutral]: ... 
+Jarn Thorian [#sprite=attribute/neutral]: Wow... I didn't know such dungeons existed beneath the watchtower.
+Jarn Thorian [#sprite=attribute/neutral]: I still can't believe it... the monsters attacked out of nowhere.
+Jarn Thorian [#sprite=attribute/neutral]: The knight was right. I need to get out and warn everyone.
+Jarn Thorian [#sprite=attribute/neutral]: That switch on the left side of the room looks familiar...
+Jarn Thorian [#sprite=attribute/neutral]: I should be able to activate it myself, or maybe trigger it with wind.
 => END
 
 ~ after_first_room
-Player [#sprite=wind/neutral]: ...
-Player [#sprite=wind/neutral]: More switches
+Jarn Thorian [#sprite=attribute/neutral]: ...
+Jarn Thorian [#sprite=attribute/neutral]: More switches
 => END

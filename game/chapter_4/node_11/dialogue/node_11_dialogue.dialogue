@@ -1,0 +1,8 @@
+~ start
+Jarn Thorian [#sprite=attribute/neutral]: She looks kind of familiar.
+Jarn Thorian [#sprite=attribute/neutral]: Maybe I should go talk to her.
+=> END
+
+~ tower_stop
+Jarn Thorian [#sprite=attribute/neutral]: I think I should talk to her before going in...
+=> END

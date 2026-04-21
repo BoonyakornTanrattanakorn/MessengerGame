@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://dfjc3bx0wkbi5" path="res://game/chapter_4/node_10/scripts/ice_block_ex.gd" id="13_x8fxk"]
 [ext_resource type="Texture2D" uid="uid://5g2o2yd2frhx" path="res://assets/sprites/maps/tilesets/Inside_C.png" id="14_x8fxk"]
 [ext_resource type="Texture2D" uid="uid://d2cycdbamd2gj" path="res://assets/sprites/maps/tilesets/Inside_B.png" id="15_muc34"]
-[ext_resource type="Script" uid="uid://e54xslor2ysu" path="res://game/chapter_4/node_10/scripts/warp_node_10.gd" id="16_bt7nk"]
+[ext_resource type="Script" uid="uid://bd8fb6idi1qua" path="res://game/chapter_4/node_10/scripts/warp_to_node_11.gd" id="16_bt7nk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ghb4q"]
 texture = ExtResource("4_pnn34")
@@ -13627,8 +13627,6 @@ iceBlock = NodePath("../TriggerIceBlock")
 z_index = 1
 position = Vector2(2249, -1528)
 script = ExtResource("16_bt7nk")
-next_level_path = "res://game/chapter_4/node_11/node_11.tscn"
-spawn_position_in_next_level = Vector2(1, 312)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" unique_id=2105304042]
 position = Vector2(-1, 0)

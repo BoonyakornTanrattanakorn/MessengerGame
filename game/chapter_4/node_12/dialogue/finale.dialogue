@@ -1,29 +1,29 @@
 ~ start
 do _warp_player_to_intro_walk_end_for_finale()
 King: Damned those useless mages!
-Player: You can't stop me with those mages! So give it up and surrender!
+Jarn Thorian [#sprite=attribute/neutral]: You can't stop me with those mages! So give it up and surrender!
 Soldier: How can a mere messenger defeats all of the four royal mages!?!
 King: Soldier! Arrest this man immediately!
 Soldier: No. We want to hear what this man has to say.
 King: Now even my soldier betrays me! I shouldn't have kept you all alive just so you can betray me once again!
 Soldier: What?
-Player: That's right. Not only he usurped my father's throne but he also ordered the attack on my town!
+Jarn Thorian [#sprite=attribute/neutral]: That's right. Not only he usurped my father's throne but he also ordered the attack on my town!
 King: Shut up! You have no proof for that!
-Player: (show proof)
+Jarn Thorian [#sprite=attribute/neutral]: (show proof)
 Soldier: This letter... There's no more doubt! We need to arrest the king immediately!
 King: I am the KING! You can't arrest the king!
-Player: If you are really the king, why are you using the royal mages instead of using magic yourself?
+Jarn Thorian [#sprite=attribute/neutral]: If you are really the king, why are you using the royal mages instead of using magic yourself?
 King: !!!
-Player: The real king is me!
+Jarn Thorian [#sprite=attribute/neutral]: The real king is me!
 King: No! Don't listen to this madman!
 Soldier: You are the madman! Now that your plan has been undone, you will pay the price for all the innocent victim of your ambitions!
 Soldier: All hail the true king! We all are waiting for your commands!
-Player: Get that fake king into the dungeon at once!
+Jarn Thorian [#sprite=attribute/neutral]: Get that fake king into the dungeon at once!
 Soldier: Yes Sir!
 do! _soldier_escort_king_out()
 King: You will come to regret your decision sooner or later.
 do _walk_player_to_throne()
 Soldier: Sir! We are ready to follow your orders!
-Player: Then my first order is to alert the army at once! We shall march to the [town] and defeat the traitor's army once and for all!
+Jarn Thorian [#sprite=attribute/neutral]: Then my first order is to alert the army at once! We shall march to the [town] and defeat the traitor's army once and for all!
 Soldier: We will obey your commands! Long live the true king!
 => END

@@ -16,20 +16,82 @@ signal element_selected(index)
 
 var _child_controls: Array = []
 var _hover_index: int = -1
+var _element_nodes: Dictionary = {}
+var _normal_textures: Dictionary = {}
+var _locked_textures: Dictionary = {}
+var _element_order: Array[String] = ["wind", "fire", "water", "earth"]
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_SORT_CHILDREN:
 		_arrange_children()
 	elif what == NOTIFICATION_READY:
+		_cache_element_nodes()
+		_refresh_locked_visuals()
 		set_process(true)
+
+func _cache_element_nodes() -> void:
+	_element_nodes.clear()
+	_normal_textures.clear()
+	_locked_textures.clear()
+
+	for element in _element_order:
+		var node := get_node_or_null(element) as TextureRect
+		if node == null:
+			continue
+
+		_element_nodes[element] = node
+		_normal_textures[element] = node.texture
+
+		var locked_node := get_node_or_null("locked_" + element) as TextureRect
+		if locked_node != null:
+			_locked_textures[element] = locked_node.texture
+			locked_node.visible = false
+		else:
+			_locked_textures[element] = node.texture
+
+func _refresh_locked_visuals() -> void:
+	if _element_nodes.is_empty():
+		return
+
+	for element in _element_order:
+		if not _element_nodes.has(element):
+			continue
+
+		var node := _element_nodes[element] as TextureRect
+		if node == null:
+			continue
+
+		node.texture = _normal_textures.get(element) if _is_element_unlocked(element) else _locked_textures.get(element)
+
+func _is_element_unlocked(element: String) -> bool:
+	if Engine.is_editor_hint() or GameState == null:
+		return true
+
+	match element:
+		"wind":
+			return GameState.element_wind_unlocked
+		"earth":
+			return GameState.element_earth_unlocked
+		"water":
+			return GameState.element_water_unlocked
+		"fire":
+			return GameState.element_fire_unlocked
+
+	return true
 
 func _arrange_children() -> void:
 	var nodes: Array = []
-	for c in get_children():
-		if c is Control:
-			nodes.append(c)
+	for element in _element_order:
+		var node: Control = _element_nodes.get(element, null) as Control
+		if node is Control:
+			nodes.append(node)
 
-	var count := nodes.size()
+	if nodes.size() == 0:
+		for c in get_children():
+			if c is Control and not String(c.name).begins_with("locked_"):
+				nodes.append(c)
+
+	var count: int = nodes.size()
 	if count == 0:
 		return
 
@@ -58,6 +120,8 @@ func _arrange_children() -> void:
 func _process(delta: float) -> void:
 	if not visible:
 		return
+
+	_refresh_locked_visuals()
 
 	if _child_controls.size() == 0:
 		return

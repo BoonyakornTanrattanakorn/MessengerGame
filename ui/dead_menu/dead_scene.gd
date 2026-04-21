@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var reason_label = %DeadReason
+@onready var tips_label = %Tips
 @onready var respawn_button = %RespawnButton
 @onready var menu_button = %MenuButton
 
@@ -11,8 +12,10 @@ func _ready():
 	respawn_button.pressed.connect(_on_respawn_button_pressed)
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	
-func setup(reason: String, position: Vector2):
+func setup(reason: String, tips: String, position: Vector2):
 	reason_label.text = "Reason :  " + reason
+	if tips != "":
+		tips_label.text = "Tips :  " + tips
 	respawn_position = position
 
 

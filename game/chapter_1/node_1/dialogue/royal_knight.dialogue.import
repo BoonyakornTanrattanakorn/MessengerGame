@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://d3rkoxv0836u8"
+path="res://.godot/imported/royal_knight.dialogue-988c2aceff748cc98ed98dd68c367719.tres"
+
+[deps]
+
+source_file="res://game/chapter_1/node_1/dialogue/royal_knight.dialogue"
+dest_files=["res://.godot/imported/royal_knight.dialogue-988c2aceff748cc98ed98dd68c367719.tres"]
+
+[params]
+
+defaults=true

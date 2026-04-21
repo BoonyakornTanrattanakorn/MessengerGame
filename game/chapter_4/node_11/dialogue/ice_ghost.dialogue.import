@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bixlfwyl6a77b"
+path="res://.godot/imported/ice_ghost.dialogue-0ca4879ed2596d6a9aa209667d96f855.tres"
+
+[deps]
+
+source_file="res://game/chapter_4/node_11/dialogue/ice_ghost.dialogue"
+dest_files=["res://.godot/imported/ice_ghost.dialogue-0ca4879ed2596d6a9aa209667d96f855.tres"]
+
+[params]
+
+defaults=true
