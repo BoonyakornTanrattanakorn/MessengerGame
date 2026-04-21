@@ -86,7 +86,15 @@ func _grant_reward() -> void:
 
 	if player.health_component != null:
 		player.health_component.increase_max_hp(1)
-		player.health_component.heal(player.health_component.max_hp)
+		player.health_component.hp = player.health_component.max_hp
+		player.health_component.health_changed.emit(player.health_component.hp)
+
+	if player.hud != null:
+		if player.hud.has_method("set_max_health"):
+			player.hud.set_max_health(player.health_component.max_hp)
+		if "top_left_gui" in player.hud and player.hud.top_left_gui != null:
+			player.hud.top_left_gui.set_max_health(player.health_component.max_hp)
+			player.hud.top_left_gui.update_health(player.health_component.hp)
 
 	if player.hud != null and player.hud.has_method("refresh_items"):
 		player.hud.refresh_items()
