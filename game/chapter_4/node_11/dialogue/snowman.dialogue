@@ -1,0 +1,16 @@
+~ no_item
+Snowman: Brrr... if only I had something special to keep this chill away.
+Snowman: Come back if you find anything useful, okay?
+
+=> END
+
+
+
+~ has_item
+Snowman: Oh! You actually brought something for me?
+Snowman: Hehe... that should make this snowy post a lot more bearable.
+Snowman: Thanks, friend.
+
+
+
+=> END
