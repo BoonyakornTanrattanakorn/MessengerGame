@@ -1,0 +1,26 @@
+~ no_item
+Snowman: Brrr... if only I had something special to keep this chill away.
+Snowman: Come back if you find anything useful, okay?
+
+=> END
+
+
+
+~ has_item
+Snowman: Oh! You actually brought something for me?
+Snowman: Hehe... that should make this snowy post a lot more bearable.
+Snowman: Thanks, friend. Here, let me return the favor.
+Snowman: I patched you up a little, so you should feel sturdier now.
+Snowman: And if you are going to play with fire, you will find it easier to keep it under control too.
+
+=> END
+
+
+
+~ after_reward
+Snowman: Ahh... much better now.
+Snowman: Thanks again for the snowstone, friend.
+Snowman: You should still be feeling that little boost I gave you.
+Snowman: Your body is tougher now, and the heat from your flames should settle down more gently too.
+
+=> END

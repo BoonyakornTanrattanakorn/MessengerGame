@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://daoui26l1n777"
+path="res://.godot/imported/snowman.dialogue-26014e9e4446856267e3483c6888bff0.tres"
+
+[deps]
+
+source_file="res://game/chapter_4/node_11/dialogue/snowman.dialogue"
+dest_files=["res://.godot/imported/snowman.dialogue-26014e9e4446856267e3483c6888bff0.tres"]
+
+[params]
+
+defaults=true

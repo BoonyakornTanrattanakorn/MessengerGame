@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bhjxqgqyedi1h"]
+
+[ext_resource type="Script" uid="uid://dc23scy0vtinc" path="res://game/chapter_4/node_11/items/snowstone_pickup.gd" id="1_pick"]
+[ext_resource type="Texture2D" uid="uid://pgqnr6v4fbhc" path="res://assets/sprites/icons/GemSheet.png" id="2_icon"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snowstone_pickup"]
+atlas = ExtResource("2_icon")
+region = Rect2(320, 320, 64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pick"]
+radius = 23.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_body"]
+radius = 14.0
+
+[node name="SnowstonePickup" type="Area2D" unique_id=1018937643]
+script = ExtResource("1_pick")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1405171444]
+scale = Vector2(0.75, 0.75)
+texture = SubResource("AtlasTexture_snowstone_pickup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2072476087]
+shape = SubResource("CircleShape2D_pick")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=213662627]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1852558226]
+shape = SubResource("CircleShape2D_body")

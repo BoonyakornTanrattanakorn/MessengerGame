@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://qmhmbctqud61" path="res://assets/sprites/icons/statue_villager.png" id="15_d2r6w"]
 [ext_resource type="Texture2D" uid="uid://de30tiop3d72d" path="res://assets/sprites/icons/statue_scarab.png" id="16_6qjy5"]
 [ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/sprites/icons/elements/wind_icon.png" id="16_qtp52"]
+[ext_resource type="Texture2D" path="res://assets/sprites/icons/GemSheet.png" id="17_snowi"]
 [ext_resource type="Script" uid="uid://0mpy01q3e3yo" path="res://features/player/hud/power_wheel.gd" id="20_circ"]
 [ext_resource type="Texture2D" uid="uid://dvh3xjhdehycg" path="res://assets/sprites/icons/elements/fire_icon.png" id="21_61gxr"]
 [ext_resource type="Texture2D" uid="uid://cxr6xgmyk66c5" path="res://assets/sprites/icons/elements/water_icon.png" id="22_aq8ub"]
@@ -59,12 +60,17 @@ corner_radius_bottom_left = 4
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjha8"]
 bg_color = Color(0, 0, 0, 0.2)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_snowstone"]
+atlas = ExtResource("17_snowi")
+region = Rect2(320, 320, 64, 64)
+
 [node name="PlayerHUD" type="CanvasLayer" unique_id=966903807]
 script = ExtResource("1_1m6my")
 red_gem = ExtResource("2_3bhmu")
 blue_gem = ExtResource("3_mycat")
 green_gem = ExtResource("4_6wtyk")
 brave_stone = ExtResource("5_al7x7")
+snowstone = SubResource("AtlasTexture_snowstone")
 potion = ExtResource("6_tydpe")
 antidote = ExtResource("7_qtp52")
 torn_paper_1 = ExtResource("8_61gxr")

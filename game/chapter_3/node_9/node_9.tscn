@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://d4fywmtymmat8" path="res://game/chapter_3/node_9/node_9.gd" id="1_8qlak"]
 [ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_xuldb"]
-[ext_resource type="Script" uid="uid://ddmrvgk6syq6p" path="res://game/chapter_3/node_9/tile_manager.gd" id="3_kcmjt"]
-[ext_resource type="PackedScene" uid="uid://c6ink07pklewb" path="res://game/chapter_3/node_9/BossDisplay.tscn" id="5_6kppn"]
-[ext_resource type="PackedScene" uid="uid://bgu4m8ejsh4dv" path="res://game/chapter_3/node_9/PressurePlate.tscn" id="6_3fxbd"]
-[ext_resource type="PackedScene" uid="uid://b5m6jgbxk62e5" path="res://game/chapter_3/node_9/RockFallManager.tscn" id="8_bgr4g"]
-[ext_resource type="PackedScene" uid="uid://o3f4qu2b65da" path="res://game/chapter_3/sandmonster/Sandmonster.tscn" id="9_4v4sc"]
-[ext_resource type="PackedScene" uid="uid://3xd5iijpu3f1" path="res://game/chapter_3/sandmonster/BigSandmonster.tscn" id="10_v10b6"]
+[ext_resource type="Script" path="res://game/chapter_3/node_9/tile_manager.gd" id="3_kcmjt"]
+[ext_resource type="PackedScene" path="res://game/chapter_3/node_9/BossDisplay.tscn" id="5_6kppn"]
+[ext_resource type="PackedScene" path="res://game/chapter_3/node_9/PressurePlate.tscn" id="6_3fxbd"]
+[ext_resource type="PackedScene" path="res://game/chapter_3/node_9/RockFallManager.tscn" id="8_bgr4g"]
+[ext_resource type="PackedScene" path="res://game/chapter_3/sandmonster/Sandmonster.tscn" id="9_4v4sc"]
+[ext_resource type="PackedScene" uid="uid://bhjxqgqyedi1h" path="res://game/chapter_4/node_11/items/snowstone_pickup.tscn" id="9_gcgg4"]
+[ext_resource type="PackedScene" path="res://game/chapter_3/sandmonster/BigSandmonster.tscn" id="10_v10b6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e10d6"]
 size = Vector2(20, 257)
@@ -600,3 +601,7 @@ shape = SubResource("RectangleShape2D_neu1r")
 [node name="CollisionShape2D21" type="CollisionShape2D" parent="Area2D" unique_id=360982815]
 position = Vector2(1533.5, -830.5)
 shape = SubResource("RectangleShape2D_kb845")
+
+[node name="SnowstonePickup" parent="." unique_id=1018937643 instance=ExtResource("9_gcgg4")]
+position = Vector2(471, -1230)
+scale = Vector2(0.5, 0.5)

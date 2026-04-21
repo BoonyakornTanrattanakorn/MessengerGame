@@ -1,6 +1,11 @@
 extends Node
 class_name SkillComponent
 
+const FIRE_SMALL_HEAT_COST: float = 20.0
+const FIRE_HEAVY_HEAT_COST: float = 40.0
+const SNOWSTONE_FIRE_SMALL_HEAT_COST: float = 10.0
+const SNOWSTONE_FIRE_HEAVY_HEAT_COST: float = 20.0
+
 @export var wind_scene: PackedScene
 @export var earth_shield_scene: PackedScene
 @export var fire_small_scene: PackedScene
@@ -83,7 +88,7 @@ func shoot_fire_small() -> void:
 	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
-		player.add_heat(20.0)
+		player.add_heat(_get_fire_small_heat_cost())
 
 
 func shoot_fire_heavy() -> void:
@@ -103,7 +108,19 @@ func shoot_fire_heavy() -> void:
 	ball.rotation = aim_dir.angle()
 	get_tree().current_scene.add_child(ball)
 	if player.has_method("add_heat"):
-		player.add_heat(40.0)
+		player.add_heat(_get_fire_heavy_heat_cost())
+
+
+func _get_fire_small_heat_cost() -> float:
+	if GameState != null and GameState.chap4_node11_snowman_reward_claimed:
+		return SNOWSTONE_FIRE_SMALL_HEAT_COST
+	return FIRE_SMALL_HEAT_COST
+
+
+func _get_fire_heavy_heat_cost() -> float:
+	if GameState != null and GameState.chap4_node11_snowman_reward_claimed:
+		return SNOWSTONE_FIRE_HEAVY_HEAT_COST
+	return FIRE_HEAVY_HEAT_COST
 
 
 func summon_fairy() -> void:

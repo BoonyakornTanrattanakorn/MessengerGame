@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://4adc4u5tcoe7"]
 
 [ext_resource type="Texture2D" uid="uid://qxoytagsclua" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Xmas/pipo-xmaschara05.png" id="1_pjgwa"]
+[ext_resource type="Script" path="res://game/chapter_4/node_11/NPC/snowman.gd" id="2_w6t4b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dvxp3"]
 atlas = ExtResource("1_pjgwa")
@@ -46,7 +47,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwdef"]
 size = Vector2(32, 32)
 
-[node name="Villager" type="CharacterBody2D" unique_id=151893683]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(32, 32)
+
+[node name="Snowman" type="CharacterBody2D" unique_id=151893683]
+script = ExtResource("2_w6t4b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1344047570]
 sprite_frames = SubResource("SpriteFrames_qp5b3")
@@ -56,3 +61,8 @@ frame_progress = 0.89576215
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1404574336]
 shape = SubResource("RectangleShape2D_cwdef")
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=542113807]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=192235777]
+shape = SubResource("RectangleShape2D_interact")

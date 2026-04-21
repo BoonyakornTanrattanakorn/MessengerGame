@@ -23,6 +23,11 @@ var heat_cooldown_delay: float = 3.0   # seconds before cooling starts
 var heat_drain_rate: float = 15.0      # gauge units drained per second
 signal heat_changed(value: float)
 
+const BASE_HEAT_COOLDOWN_DELAY: float = 3.0
+const BASE_HEAT_DRAIN_RATE: float = 15.0
+const SNOWSTONE_HEAT_COOLDOWN_DELAY: float = 2.0
+const SNOWSTONE_HEAT_DRAIN_RATE: float = 20.0
+
 # Water system
 var cool_gauge: int = 0          # 0, 1, 2, or 3
 var max_cool_gauge: int = 3
@@ -86,6 +91,7 @@ var inventory = {
 	"green_gem": 0,
 	"blue_gem": 0,
 	"brave_stone": 0,
+	"snowstone": 0,
 	"potion": 3,
 	"antidote": 2,
 	"desert_crystal": 0
@@ -117,6 +123,7 @@ func _ready():
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	#ObjectiveManager.set_objective("Use wind power to flip the switch")
 	add_to_group("sava	ble")
+	_apply_snowstone_fire_bonus()
 	hud.skill_changed.connect(_on_skill_changed)
 	# Set starting attribute from HUD
 	playerAttribute = hud.get_current_skill()
@@ -551,6 +558,7 @@ func load_data(data):
 	var loaded_inventory = data.get("inventory", {})
 	for key in loaded_inventory:
 		inventory[key] = int(loaded_inventory[key])
+	_apply_snowstone_fire_bonus()
 
 
 func _on_health_changed(new_hp: int) -> void:
@@ -604,6 +612,14 @@ func add_heat(amount: float):
 	if heat_gauge >= max_heat:
 		print("Overheated! Skills locked until cooled!")
 
+
+func _apply_snowstone_fire_bonus() -> void:
+	heat_cooldown_delay = BASE_HEAT_COOLDOWN_DELAY
+	heat_drain_rate = BASE_HEAT_DRAIN_RATE
+
+	if GameState != null and GameState.chap4_node11_snowman_reward_claimed:
+		heat_cooldown_delay = SNOWSTONE_HEAT_COOLDOWN_DELAY
+		heat_drain_rate = SNOWSTONE_HEAT_DRAIN_RATE
 
 func add_cool(amount: int):
 	cool_gauge = clamp(cool_gauge + amount, 0, max_cool_gauge)
