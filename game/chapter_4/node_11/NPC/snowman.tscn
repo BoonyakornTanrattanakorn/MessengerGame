@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://4adc4u5tcoe7"]
 
 [ext_resource type="Texture2D" uid="uid://qxoytagsclua" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Xmas/pipo-xmaschara05.png" id="1_pjgwa"]
-[ext_resource type="Script" path="res://game/chapter_4/node_11/NPC/snowman.gd" id="2_w6t4b"]
+[ext_resource type="Script" uid="uid://dikcirdeh6p2q" path="res://game/chapter_4/node_11/NPC/snowman.gd" id="2_w6t4b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dvxp3"]
 atlas = ExtResource("1_pjgwa")
@@ -66,3 +66,11 @@ shape = SubResource("RectangleShape2D_cwdef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=192235777]
 shape = SubResource("RectangleShape2D_interact")
+
+[node name="PromptLabel" type="Label" parent="." unique_id=1100010002]
+offset_left = -54.0
+offset_top = -42.0
+offset_right = 54.0
+offset_bottom = -19.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Press F to talk"
