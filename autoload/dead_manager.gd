@@ -4,7 +4,7 @@ signal player_respawned(position: Vector2)
 
 var death_scene = preload("res://ui/dead_menu/dead_scene.tscn")
 
-var player = null
+var player: Player = null
 var is_dead = false
 
 func register_player(p):
@@ -29,17 +29,18 @@ func show_death_screen(reason: String, tips: String, respawn_position: Vector2 =
 	death_ui.setup(reason, tips, respawn_position, reload_game_on_respawn)
 
 
-func respawn_player(position: Vector2):
+func respawn_player():
 	get_tree().paused = false
 	_remove_all_spells()
 	is_dead = false
 	if player:
-		player.respawn(position)
 		player.show()
 		player.set_physics_process(true)
-	player_respawned.emit(position)
+		player.health_component.heal(player.health_component.max_hp)
+		player.health_component.call_deferred("emit_signal", "health_changed", player.health_component.hp)
 		
 func _remove_all_spells():
 	for spell in get_tree().get_nodes_in_group("spell"):
 		if is_instance_valid(spell):
 			spell.queue_free()
+			
