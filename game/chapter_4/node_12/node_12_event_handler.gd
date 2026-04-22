@@ -116,7 +116,7 @@ func show_player_thoughts() -> void:
 	_waiting_for_hallway_thoughts = true
 	if not DialogueManager.dialogue_ended.is_connected(_on_hallway_thoughts_dialogue_ended):
 		DialogueManager.dialogue_ended.connect(_on_hallway_thoughts_dialogue_ended)
-	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "hallway_thoughts", [self])
+	var balloon = DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "hallway_thoughts", [self])
 	_register_fast_forward_balloon(balloon)
 
 func _on_hallway_thoughts_dialogue_ended(resource: DialogueResource) -> void:
@@ -156,7 +156,7 @@ func _show_bad_end_walk_out_dialogue() -> void:
 	_waiting_for_bad_end_dialogue = true
 	if not DialogueManager.dialogue_ended.is_connected(_on_bad_end_dialogue_ended):
 		DialogueManager.dialogue_ended.connect(_on_bad_end_dialogue_ended)
-	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "thanks_king", [self])
+	var balloon = DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "thanks_king", [self])
 	_register_fast_forward_balloon(balloon)
 
 func _on_bad_end_dialogue_ended(resource: DialogueResource) -> void:
@@ -403,7 +403,7 @@ func start_player_king_dialogue() -> void:
 		push_error("Dialogue resource not found: intro.dialogue")
 		return
 
-	var balloon := DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "throne_intro", [self])
+	var balloon = DialogueManager.show_dialogue_balloon(INTRO_DIALOGUE, "throne_intro", [self])
 	_register_fast_forward_balloon(balloon)
 	await DialogueManager.dialogue_ended
 
@@ -510,7 +510,7 @@ func start_post_fight_cutscene() -> void:
 
 
 	if FINALE_DIALOGUE != null:
-		var balloon := DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE, "start", [self])
+		var balloon = DialogueManager.show_dialogue_balloon(FINALE_DIALOGUE, "start", [self])
 		_register_fast_forward_balloon(balloon)
 		await DialogueManager.dialogue_ended
 	_show_ending_banner()
