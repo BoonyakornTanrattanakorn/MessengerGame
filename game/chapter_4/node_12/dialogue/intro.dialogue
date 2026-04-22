@@ -54,7 +54,7 @@ King: Show what little you have, and be done with this farce.
 
 What evidence will you present?
 if can_present_clue_1()
-	- Royal order: all guards recalled before the attack.
+	- Royal order: All guards recalled before the attack.
 		do choose_clue_1()
 		=> accuse_clue_1_partial
 if can_present_clue_2()
@@ -62,11 +62,11 @@ if can_present_clue_2()
 		do choose_clue_2()
 		=> accuse_clue_2_partial
 if can_present_clue_3()
-	- Merchant testimony: the king poisoned the guardian worm.
+	- Merchant testimony: The king poisoned the guardian worm.
 		do choose_clue_3()
 		=> accuse_clue_3_partial
 if can_present_clue_4()
-	- Palace photo album: proof I was raised in the palace.
+	- Palace photo album: Proof I was raised in the palace.
 		do choose_clue_4()
 		=> accuse_clue_4_partial
 
@@ -107,7 +107,7 @@ King: Then speak. Let the court hear your "truth."
 
 What evidence will you present?
 if can_present_clue_1()
-	- Royal order: all guards recalled before the attack.
+	- Royal order: All guards recalled before the attack.
 		do choose_clue_1()
 		=> accuse_clue_1_all
 if can_present_clue_2()
@@ -115,11 +115,11 @@ if can_present_clue_2()
 		do choose_clue_2()
 		=> accuse_clue_2_all
 if can_present_clue_3()
-	- Merchant testimony: the king poisoned the guardian worm.
+	- Merchant testimony: The king poisoned the guardian worm.
 		do choose_clue_3()
 		=> accuse_clue_3_all
 if can_present_clue_4()
-	- Palace photo album: proof I was raised in the palace.
+	- Palace photo album: Proof I was raised in the palace.
 		do choose_clue_4()
 		=> accuse_clue_4_all
 
