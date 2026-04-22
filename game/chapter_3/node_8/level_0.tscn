@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dc8ddf0j4nnby"]
 
 [ext_resource type="Script" uid="uid://c7wlrrgfrvwbx" path="res://game/chapter_3/node_8/exterior/node_8_level_0_event_handler.gd" id="1_7iydh"]
-[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_ilyw1"]
+[ext_resource type="TileSet" uid="uid://d4b5jpcjpgo4g" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_ilyw1"]
 [ext_resource type="Script" uid="uid://cg62rqgd80634" path="res://game/chapter_3/node_8/exterior/warp_to_level_1.gd" id="3_840er"]
 [ext_resource type="Script" uid="uid://b0i76yist3qxk" path="res://game/chapter_3/node_8/exterior/warp_to_node_9.gd" id="4_7ndse"]
 [ext_resource type="Texture2D" uid="uid://dbg7ut2mytwaa" path="res://assets/sprites/maps/tilesets/pyramid.png" id="5_840er"]
@@ -75,6 +75,7 @@ texture = ExtResource("5_840er")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=272066165]
 position = Vector2(748, 735)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=732983827]
 position = Vector2(-6, -2)

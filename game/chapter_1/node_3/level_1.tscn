@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bab30n6bv3wia"]
 
 [ext_resource type="Script" uid="uid://kp0fewpnw38j" path="res://game/chapter_1/node_3/lion_level/node_3_level_1_event_handler.gd" id="1_8kra5"]
-[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_5gto7"]
+[ext_resource type="TileSet" uid="uid://d4b5jpcjpgo4g" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_5gto7"]
 [ext_resource type="Script" uid="uid://bamwo7l48o40x" path="res://game/chapter_1/node_3/lion_level/warp_to_level_0_from_1.gd" id="3_0vawc"]
 [ext_resource type="Script" uid="uid://6jv154ufl3u3" path="res://game/chapter_1/node_3/lion_level/red_gem_pickup.gd" id="4_8up4l"]
 [ext_resource type="Texture2D" uid="uid://bi5saalcfd6o3" path="res://assets/sprites/icons/red_gem.png" id="5_2l83u"]
@@ -54,7 +54,7 @@ tile_set = ExtResource("2_5gto7")
 [node name="Dragon" type="TileMapLayer" parent="." unique_id=258359430]
 z_index = 1
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAEACUAFQAhAB4AAAAFACUAFQAiAB4AAAAGACUAFQAjAB4AAAAHACUAFQAkAB4AAAAIACUAFQAlAB4AAAAJACUAFQAmAB4AAAAEACYAFQAhAB8AAAAFACYAFQAiAB8AAAAGACYAFQAjAB8AAAAHACYAFQAkAB8AAAAIACYAFQAlAB8AAAAJACYAFQAmAB8AAAAEACcAFQAhACAAAAAFACcAFQAiACAAAAAGACcAFQAjACAAAAAHACcAFQAkACAAAAAIACcAFQAlACAAAAAJACcAFQAmACAAAAAEACgAFQAhACEAAAAFACgAFQAiACEAAAAGACgAFQAjACEAAAAHACgAFQAkACEAAAAIACgAFQAlACEAAAAJACgAFQAmACEAAAAEACkAFQAhACIAAAAFACkAFQAiACIAAAAGACkAFQAjACIAAAAHACkAFQAkACIAAAAIACkAFQAlACIAAAAJACkAFQAmACIAAAAEACoAFQAhACMAAAAFACoAFQAiACMAAAAGACoAFQAjACMAAAAHACoAFQAkACMAAAAIACoAFQAlACMAAAAJACoAFQAmACMAAAA=")
+tile_map_data = PackedByteArray("AAAEACUAEAAqABUAAAAFACUAEAArABUAAAAGACUAEAAsABUAAAAHACUAEAAtABUAAAAIACUAEAAuABUAAAAJACUAEAAvABUAAAAEACYAEAAqABYAAAAFACYAEAArABYAAAAGACYAEAAsABYAAAAHACYAEAAtABYAAAAIACYAEAAuABYAAAAJACYAEAAvABYAAAAEACcAEAAqABcAAAAFACcAEAArABcAAAAGACcAEAAsABcAAAAHACcAEAAtABcAAAAIACcAEAAuABcAAAAJACcAEAAvABcAAAAEACgAEAAqABgAAAAFACgAEAArABgAAAAGACgAEAAsABgAAAAHACgAEAAtABgAAAAIACgAEAAuABgAAAAJACgAEAAvABgAAAAEACkAEAAqABkAAAAFACkAEAArABkAAAAGACkAEAAsABkAAAAHACkAEAAtABkAAAAIACkAEAAuABkAAAAJACkAEAAvABkAAAAEACoAEAAqABoAAAAFACoAEAArABoAAAAGACoAEAAsABoAAAAHACoAEAAtABoAAAAIACoAEAAuABoAAAAJACoAEAAvABoAAAA=")
 tile_set = ExtResource("2_5gto7")
 
 [node name="WarpToLevel0" type="Area2D" parent="." unique_id=1132759704]
@@ -70,7 +70,6 @@ z_index = 1
 y_sort_enabled = true
 position = Vector2(775, 162)
 scale = Vector2(0.05, 0.05)
-collision_layer = 0
 script = ExtResource("4_8up4l")
 
 [node name="Sprite2D" type="Sprite2D" parent="RedGemPickup" unique_id=1240632182]
@@ -85,6 +84,7 @@ shape = SubResource("RectangleShape2D_ajqbw")
 z_index = 1
 y_sort_enabled = true
 position = Vector2(547, 56)
+collision_mask = 5
 script = ExtResource("6_o6inr")
 lion_guard_path = NodePath("../LionGuard")
 red_gem_path = NodePath("../RedGemPickup")

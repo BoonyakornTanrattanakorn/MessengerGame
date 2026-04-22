@@ -30,13 +30,12 @@ position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_t5rao")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1421405616]
-z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -15.999999)
-scale = Vector2(0.3, 0.3)
+position = Vector2(1.9073486e-06, -10.000004)
+scale = Vector2(0.19395605, 0.19395605)
 texture = ExtResource("3_05msc")
 region_enabled = true
-region_rect = Rect2(990, 4, 115, 200)
+region_rect = Rect2(916.9944, 4, 273.78674, 494.82382)
 
 [node name="PromptLabel" type="Label" parent="." unique_id=1886921801]
 offset_left = -52.0

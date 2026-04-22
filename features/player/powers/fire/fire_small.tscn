@@ -9,7 +9,8 @@ size = Vector2(9, 8)
 [node name="fire_small" type="Area2D" unique_id=620186940 groups=["fire_spell"]]
 z_index = 1
 y_sort_enabled = true
-collision_mask = 39
+collision_layer = 6
+collision_mask = 38
 script = ExtResource("1_xjbj5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1316428308]

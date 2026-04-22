@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bvg7a5bb1btco" path="res://assets/sprites/icons/statue_princess.png" id="1_bydx0"]
 
 [node name="statue_princess" type="Node2D" unique_id=1083481428]
-z_index = 1
+z_index = 2
 y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=682664280]

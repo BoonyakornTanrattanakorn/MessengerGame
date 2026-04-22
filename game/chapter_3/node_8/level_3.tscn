@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://tcsted1kut7v"]
 
 [ext_resource type="Script" uid="uid://22kw6hw7a6r" path="res://game/chapter_3/node_8/puzzle_3/node_8_level_3_event_handler.gd" id="1_evhandler"]
-[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_tileset"]
+[ext_resource type="TileSet" uid="uid://d4b5jpcjpgo4g" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_tileset"]
 [ext_resource type="Script" uid="uid://fkogq7viw174" path="res://game/chapter_3/node_8/puzzle_3/puzzle_3_manager.gd" id="3_p3manager"]
 [ext_resource type="Script" uid="uid://dg5076iirl386" path="res://game/chapter_3/node_8/puzzle_3/stone_guardian.gd" id="6_uqfqg"]
 [ext_resource type="Script" uid="uid://bpdguurenvxq1" path="res://game/chapter_3/node_8/puzzle_3/warp_to_level_0_from_3.gd" id="6_warp"]
@@ -66,6 +66,7 @@ shape = SubResource("CapsuleShape2D_k1i6g")
 texture = ExtResource("8_has05")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2001391622]
+collision_layer = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=109405786]
 position = Vector2(533.5, 0)

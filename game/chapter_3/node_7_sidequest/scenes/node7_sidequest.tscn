@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dm6mcss0wylso"]
 
 [ext_resource type="Script" uid="uid://eufjdajbxwos" path="res://game/chapter_3/node_7_sidequest/script/sidequest_event_handler.gd" id="1_7w5uh"]
-[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_ovnnr"]
+[ext_resource type="TileSet" uid="uid://d4b5jpcjpgo4g" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_ovnnr"]
 [ext_resource type="PackedScene" uid="uid://3xd5iijpu3f1" path="res://game/chapter_3/sandmonster/BigSandmonster.tscn" id="2_dmsw7"]
 [ext_resource type="Texture2D" uid="uid://bc7mutn1t47gy" path="res://assets/sprites/maps/tilesets/Desert cactus.png" id="3_18vnm"]
 [ext_resource type="Texture2D" uid="uid://s5jp4ujrd0lm" path="res://assets/sprites/maps/tilesets/coconut palm tree.png" id="4_eoeoy"]
@@ -388,6 +388,7 @@ position = Vector2(1006, 471)
 position = Vector2(694, 785)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1308556124]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=376472813]
 position = Vector2(-373, 585)

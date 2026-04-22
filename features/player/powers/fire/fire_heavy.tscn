@@ -9,7 +9,8 @@ radius = 25.96151
 [node name="fire_heavy" type="Area2D" unique_id=1656025330 groups=["fire_spell"]]
 z_index = 1
 y_sort_enabled = true
-collision_mask = 39
+collision_layer = 6
+collision_mask = 38
 script = ExtResource("1_n54um")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=209320825]

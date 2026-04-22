@@ -8,6 +8,7 @@
 radius = 8.062258
 
 [node name="PressurePlate" type="Area2D" unique_id=362404253]
+y_sort_enabled = true
 script = ExtResource("1_d72m2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=87849399]

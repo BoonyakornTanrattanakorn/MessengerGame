@@ -49,6 +49,7 @@ size = Vector2(32, 32)
 [node name="Soldier" type="CharacterBody2D" unique_id=1597814262]
 z_index = 1
 y_sort_enabled = true
+collision_layer = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=614958511]
 sprite_frames = SubResource("SpriteFrames_lc2q3")

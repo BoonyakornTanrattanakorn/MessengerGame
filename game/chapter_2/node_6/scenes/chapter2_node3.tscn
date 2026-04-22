@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://b48vavelubmdp"]
 
-[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_1mfa1"]
+[ext_resource type="TileSet" uid="uid://d4b5jpcjpgo4g" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="1_1mfa1"]
 [ext_resource type="Script" uid="uid://cls66supdwuig" path="res://game/chapter_2/node_6/scripts/node_6_event_handler.gd" id="1_2kw6h"]
 [ext_resource type="Script" uid="uid://8kpto0gna34x" path="res://game/chapter_2/node_6/scripts/go_back_zone.gd" id="3_gbkap"]
 [ext_resource type="Script" uid="uid://couoawwk1dc3h" path="res://game/chapter_2/node_6/scripts/boss_fight_zone.gd" id="4_ov4mv"]
@@ -79,6 +79,7 @@ _trigger_area = NodePath("BossFightTrigger")
 _borders = NodePath("BossFightZoneBorders")
 
 [node name="BossFightZoneBorders" type="StaticBody2D" parent="BossFightZone" unique_id=1029737312]
+collision_layer = 3
 
 [node name="Left" type="CollisionShape2D" parent="BossFightZone/BossFightZoneBorders" unique_id=657251218]
 position = Vector2(-600, 0)
@@ -107,6 +108,7 @@ shape = SubResource("RectangleShape2D_t4hsj")
 
 [node name="MapCollisions" type="StaticBody2D" parent="." unique_id=618537950]
 position = Vector2(1600, 0)
+collision_layer = 3
 
 [node name="Bottom" type="CollisionShape2D" parent="MapCollisions" unique_id=1725414108]
 position = Vector2(0, 300)

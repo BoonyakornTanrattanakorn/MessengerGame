@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cvrn2p3e27ab0"]
 
 [ext_resource type="Script" uid="uid://qv6dqhhqfo20" path="res://game/chapter_3/node_8/puzzle_1/node_8_level_1_event_handler.gd" id="1_r2bmu"]
-[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_i2qfj"]
+[ext_resource type="TileSet" uid="uid://d4b5jpcjpgo4g" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_i2qfj"]
 [ext_resource type="Script" uid="uid://kspcd4tytbeg" path="res://game/chapter_3/node_8/puzzle_1/puzzle_1_manager.gd" id="3_jd6bv"]
 [ext_resource type="Script" uid="uid://b3ibj7g7sn5rg" path="res://game/chapter_3/node_8/puzzle_1/sand_block.gd" id="4_sandblock"]
 [ext_resource type="Texture2D" uid="uid://cpud8w4jma6u" path="res://game/chapter_3/node_8/additional_assets/Block-A.png" id="5_2kifc"]
@@ -47,6 +47,7 @@ script = ExtResource("3_jd6bv")
 
 [node name="BlockA" type="CharacterBody2D" parent="Puzzle1Manager" unique_id=381920014 groups=["sand_block"]]
 position = Vector2(348, 222)
+collision_layer = 3
 script = ExtResource("4_sandblock")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle1Manager/BlockA" unique_id=381920015]
@@ -67,6 +68,7 @@ shape = SubResource("RectangleShape2D_pushdetector")
 
 [node name="BlockB" type="CharacterBody2D" parent="Puzzle1Manager" unique_id=381920019 groups=["sand_block"]]
 position = Vector2(622, 217)
+collision_layer = 3
 script = ExtResource("4_sandblock")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzle1Manager/BlockB" unique_id=381920020]
@@ -144,6 +146,7 @@ tile_map_data = PackedByteArray("AAA2AAcAAwAVABIAAAA2AAgAAwAVABMAAAA2AAkAAwAVABQ
 tile_set = ExtResource("2_i2qfj")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=120923747]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=472758480]
 position = Vector2(511.5, 0)

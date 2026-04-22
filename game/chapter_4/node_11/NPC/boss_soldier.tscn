@@ -46,6 +46,7 @@ size = Vector2(32, 32)
 [node name="BossSoldier" type="CharacterBody2D" unique_id=1384484859]
 z_index = 1
 y_sort_enabled = true
+collision_layer = 3
 script = ExtResource("2_bossg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=467022871]

@@ -7,6 +7,8 @@ extends LevelEventHandler
 
 func _ready():
 	player.health_component.player_dead.connect(_on_player_dead)
+	if DeadManager != null and not DeadManager.player_respawned.is_connected(_on_player_respawned):
+		DeadManager.player_respawned.connect(_on_player_respawned)
 	for node in get_all_children(self):
 		# Only connect nodes that have switch_activated signal
 		if node.has_method("activate") and node.has_signal("switch_activated"):
@@ -29,7 +31,17 @@ func get_all_children(node: Node) -> Array:
 	return result
 
 func _on_player_dead() -> void:
-	DeadManager.kill_player("Defeated by the tormented flame of Golem Guardian", "Color of the golems seems to resemble the switches...", Vector2(100, 500))
+	DeadManager.kill_player("Defeated by the tormented flame of Golem Guardian", "Color of the golems seems to resemble the switches...", Vector2(900, 600))
+
+
+func _on_player_respawned(_position: Vector2) -> void:
+	if player == null:
+		return
+
+	if player.inventory.get("blue_gem", 0) > 0:
+		player.inventory.erase("blue_gem")
+		if player.hud != null:
+			player.hud.refresh_items()
 
 func handle_intro_for_level() -> void:
 	Node3State.update_objective()

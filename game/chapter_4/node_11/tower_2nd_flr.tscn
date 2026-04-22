@@ -1205,7 +1205,7 @@ texture = ExtResource("2_0gmsd")
 47:23/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_q68e1"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
 sources/4 = SubResource("TileSetAtlasSource_0gmsd")
 pattern_0 = SubResource("TileMapPattern_8ebhh")
 
@@ -6641,7 +6641,7 @@ texture = ExtResource("5_61g8a")
 47:47/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_8rwfx"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
 sources/4 = SubResource("TileSetAtlasSource_62oix")
 sources/5 = SubResource("TileSetAtlasSource_o6glh")
 sources/1 = SubResource("TileSetAtlasSource_qhgts")
@@ -8799,6 +8799,7 @@ position = Vector2(264, 87)
 shape = SubResource("RectangleShape2D_xxk6m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=670263198]
+collision_layer = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1450238249]
 position = Vector2(264, 441)
@@ -8933,7 +8934,5 @@ text = "Press F to read"
 horizontal_alignment = 1
 
 [node name="Villager" parent="." unique_id=151893683 instance=ExtResource("8_mgk0e")]
-z_index = 1
-y_sort_enabled = true
 position = Vector2(233, 138)
 hide_if_tower_master_not_returned = true

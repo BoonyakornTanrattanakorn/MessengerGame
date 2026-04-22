@@ -148,6 +148,7 @@ size = Vector2(32, 32)
 [node name="Villager" type="CharacterBody2D" unique_id=151893683]
 z_index = 1
 y_sort_enabled = true
+collision_layer = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1344047570]
 sprite_frames = SubResource("SpriteFrames_qp5b3")

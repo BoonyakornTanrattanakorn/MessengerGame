@@ -30,14 +30,13 @@ position = Vector2(1, -17.75)
 shape = SubResource("RectangleShape2D_ophmk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=415128659]
-z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -15.999999)
+position = Vector2(0, -4)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_ophmk")
 offset = Vector2(0, -100)
 region_enabled = true
-region_rect = Rect2(1081.2546, 0, 288.23035, 416)
+region_rect = Rect2(1308.7837, -3.6955109, 344.64917, 504.08966)
 
 [node name="PromptLabel" type="Label" parent="." unique_id=521626700]
 offset_left = -50.0

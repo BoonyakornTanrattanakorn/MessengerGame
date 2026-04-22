@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://xi5ajvyv03lk"]
 
 [ext_resource type="Script" uid="uid://b5wqjpoo4xp2i" path="res://game/chapter_3/node_8/puzzle_2/node_8_level_2_event_handler.gd" id="1_evhandler"]
-[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_tileset"]
+[ext_resource type="TileSet" uid="uid://d4b5jpcjpgo4g" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_tileset"]
 [ext_resource type="Texture2D" uid="uid://dvnflryp0fvr7" path="res://game/chapter_3/node_8/additional_assets/hstone.png" id="3_dq3cv"]
 [ext_resource type="Script" uid="uid://c6mdqo88j33lv" path="res://game/chapter_3/node_8/puzzle_2/puzzle_2_manager.gd" id="3_p2manager"]
 [ext_resource type="Script" uid="uid://pdl4a6jud7ei" path="res://game/chapter_3/node_8/puzzle_2/sand_cover.gd" id="4_sandcover"]
@@ -55,6 +55,7 @@ correct_sequence = Array[int]([2, 1, 3])
 position = Vector2(214, 820)
 
 [node name="Cover1" type="Area2D" parent="Puzzle2Manager/Symbol1" unique_id=482010006 groups=["sand_cover"]]
+collision_layer = 3
 script = ExtResource("4_sandcover")
 symbol_node = NodePath("../FloorSymbol1")
 
@@ -83,6 +84,7 @@ texture = ExtResource("9_dq3cv")
 position = Vector2(519, 815)
 
 [node name="Cover2" type="Area2D" parent="Puzzle2Manager/Symbol2" unique_id=482010013 groups=["sand_cover"]]
+collision_layer = 3
 script = ExtResource("4_sandcover")
 symbol_node = NodePath("../FloorSymbol2")
 
@@ -110,6 +112,7 @@ texture = ExtResource("11_kl618")
 position = Vector2(823, 819)
 
 [node name="Cover3" type="Area2D" parent="Puzzle2Manager/Symbol3" unique_id=482010020 groups=["sand_cover"]]
+collision_layer = 3
 script = ExtResource("4_sandcover")
 symbol_node = NodePath("../FloorSymbol3")
 
@@ -157,6 +160,7 @@ tile_map_data = PackedByteArray("AAAyAAQABgASAB4AAAAyAAUABgASAB8AAAAyAAYABgASACA
 tile_set = ExtResource("2_tileset")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2090594261]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1287574306]
 position = Vector2(509.5, 0)
