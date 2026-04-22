@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://qmhmbctqud61" path="res://assets/sprites/icons/statue_villager.png" id="15_d2r6w"]
 [ext_resource type="Texture2D" uid="uid://de30tiop3d72d" path="res://assets/sprites/icons/statue_scarab.png" id="16_6qjy5"]
 [ext_resource type="Texture2D" uid="uid://htc6hsh10lca" path="res://assets/sprites/icons/elements/wind_icon.png" id="16_qtp52"]
-[ext_resource type="Texture2D" path="res://assets/sprites/icons/GemSheet.png" id="17_snowi"]
+[ext_resource type="Texture2D" uid="uid://pgqnr6v4fbhc" path="res://assets/sprites/icons/GemSheet.png" id="17_snowi"]
 [ext_resource type="Script" uid="uid://0mpy01q3e3yo" path="res://features/player/hud/power_wheel.gd" id="20_circ"]
 [ext_resource type="Texture2D" uid="uid://dvh3xjhdehycg" path="res://assets/sprites/icons/elements/fire_icon.png" id="21_61gxr"]
 [ext_resource type="Texture2D" uid="uid://cxr6xgmyk66c5" path="res://assets/sprites/icons/elements/water_icon.png" id="22_aq8ub"]
@@ -32,6 +32,10 @@
 [ext_resource type="Texture2D" uid="uid://bhteh20qwnfdh" path="res://assets/sprites/icons/elements/locked_fire_icon.png" id="27_d2r6w"]
 [ext_resource type="Texture2D" uid="uid://bshkga328ix4h" path="res://assets/sprites/icons/elements/locked_water_icon.png" id="29_6qjy5"]
 [ext_resource type="Texture2D" uid="uid://77nmatuquo5q" path="res://assets/sprites/icons/elements/locked_earth_icon.png" id="31_xncl8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snowstone"]
+atlas = ExtResource("17_snowi")
+region = Rect2(320, 320, 64, 64)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m6my"]
 bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.8)
@@ -59,10 +63,6 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjha8"]
 bg_color = Color(0, 0, 0, 0.2)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_snowstone"]
-atlas = ExtResource("17_snowi")
-region = Rect2(320, 320, 64, 64)
 
 [node name="PlayerHUD" type="CanvasLayer" unique_id=966903807]
 script = ExtResource("1_1m6my")
@@ -335,6 +335,7 @@ texture = ExtResource("21_61gxr")
 expand_mode = 3
 
 [node name="locked_fire" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=1687062241]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("27_d2r6w")
@@ -347,6 +348,7 @@ texture = ExtResource("22_aq8ub")
 expand_mode = 3
 
 [node name="locked_water" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=936899603]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("29_6qjy5")
@@ -360,6 +362,7 @@ texture = ExtResource("23_yi150")
 expand_mode = 3
 
 [node name="locked_earth" type="TextureRect" parent="CenterContainer/PowerWheel" unique_id=506771401]
+visible = false
 z_index = 100
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
