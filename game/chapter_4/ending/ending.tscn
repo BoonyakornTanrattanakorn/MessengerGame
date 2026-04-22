@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ljsa8ex5luev"]
+[gd_scene format=3 uid="uid://ljsa8ex5luev"]
 
 [ext_resource type="Theme" uid="uid://bcvu4e1quq733" path="res://assets/ui/tres/ui_theme.tres" id="1_e5r7r"]
-[ext_resource type="Script" path="res://game/chapter_4/ending/ending.gd" id="2_xke2m"]
+[ext_resource type="Script" uid="uid://djhevxi2c44l3" path="res://game/chapter_4/ending/ending.gd" id="2_xke2m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5em0b"]
 font_size = 72
@@ -15,9 +15,9 @@ font_size = 26
 [node name="Node13" type="Node2D" unique_id=615394464]
 script = ExtResource("2_xke2m")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1371183587]
 
-[node name="Background" type="ColorRect" parent="CanvasLayer"]
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=664286043]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,15 +25,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0196078, 0.0235294, 0.0627451, 1)
 
-[node name="UIRoot" type="Control" parent="CanvasLayer"]
+[node name="UIRoot" type="Control" parent="CanvasLayer" unique_id=2077788944]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EndingTitle" type="Label" parent="CanvasLayer/UIRoot"]
-anchors_preset = 10
+[node name="EndingTitle" type="Label" parent="CanvasLayer/UIRoot" unique_id=971494169]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -340.0
@@ -45,19 +46,30 @@ text = "ENDING"
 label_settings = SubResource("LabelSettings_5em0b")
 horizontal_alignment = 1
 
-[node name="CreditsText" type="Label" parent="CanvasLayer/UIRoot"]
+[node name="CreditsText" type="Label" parent="CanvasLayer/UIRoot" unique_id=1062206295]
+layout_mode = 0
 offset_left = 140.0
 offset_top = 760.0
 offset_right = 1140.0
 offset_bottom = 1360.0
 theme = ExtResource("1_e5r7r")
-text = "Group name: Placeholder\n\nTanapat Inthalaeng\nThanayot Chalernpornlert\nTheerach Sae-Ngow\nJednipit Porapakpenjul\nTanwong Pattamamongkolchai\nTanaphan Krupistrai\nThanaphat Intarapuk\nBoonyakorn Tanrattanakorn\nPongpitchaya Jaidee"
+text = "Group name: Placeholder
+
+Tanapat Inthalaeng
+Thanayot Chalernpornlert
+Theerach Sae-Ngow
+Jednipit Porapakpenjul
+Tanwong Pattamamongkolchai
+Tanaphan Krupistrai
+Thanaphat Intarapuk
+Boonyakorn Tanrattanakorn
+Pongpitchaya Jaidee"
 label_settings = SubResource("LabelSettings_vu283")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SkipHint" type="Label" parent="CanvasLayer/UIRoot"]
-anchors_preset = 10
+[node name="SkipHint" type="Label" parent="CanvasLayer/UIRoot" unique_id=405368271]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -420.0

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b0n62cjbjn8ux"]
 
-[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_fire/fire_projectile.gd" id="1_x8aka"]
+[ext_resource type="Script" uid="uid://ci3b0jvekqcjd" path="res://game/chapter_4/node_12/npc/mage/mage_fire/fire_projectile.gd" id="1_x8aka"]
 [ext_resource type="Texture2D" uid="uid://brb33klyryiw8" path="res://assets/sprites/chapter1_node2/heavy_fire.png" id="2_1ev8o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8twpv"]
