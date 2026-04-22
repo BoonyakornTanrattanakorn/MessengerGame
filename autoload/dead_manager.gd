@@ -29,15 +29,18 @@ func show_death_screen(reason: String, tips: String, respawn_position: Vector2 =
 	death_ui.setup(reason, tips, respawn_position, reload_game_on_respawn)
 
 
-func respawn_player():
+func respawn_player(respawn_position: Vector2 = Vector2.ZERO):
 	get_tree().paused = false
 	_remove_all_spells()
 	is_dead = false
 	if player:
 		player.show()
+		if respawn_position != Vector2.ZERO:
+			player.global_position = respawn_position
 		player.set_physics_process(true)
 		player.health_component.heal(player.health_component.max_hp)
 		player.health_component.call_deferred("emit_signal", "health_changed", player.health_component.hp)
+		player_respawned.emit(player.global_position)
 		
 func _remove_all_spells():
 	for spell in get_tree().get_nodes_in_group("spell"):
