@@ -26226,6 +26226,7 @@ anim_name = "waving"
 z_index = 1
 y_sort_enabled = true
 position = Vector2(538, 1429)
+collision_layer = 0
 script = ExtResource("13_a2mns")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CatLady" unique_id=1410579238]
@@ -26242,6 +26243,7 @@ scale = Vector2(0.6718755, 0.6718755)
 texture = ExtResource("15_gjf1g")
 
 [node name="WarpToMain" type="Area2D" parent="." unique_id=1041776016]
+collision_layer = 0
 script = ExtResource("13_fgb4o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToMain" unique_id=1611604992]

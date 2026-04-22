@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://tre3bourgeyl"]
 
 [ext_resource type="Script" uid="uid://5bx4dpf7xj8n" path="res://game/chapter_1/node_3/center_level/node_3_level_0_event_handler.gd" id="1_o2bvy"]
-[ext_resource type="TileSet" uid="uid://f0rvhxykfmty" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_45wdf"]
+[ext_resource type="TileSet" uid="uid://dqc4xu6hrbd2v" path="res://assets/sprites/maps/tilesets/tileset_16px.tres" id="2_45wdf"]
 [ext_resource type="Texture2D" uid="uid://w23njenxpw23" path="res://assets/sprites/chapter1_node2/decorative_cracks_walls.png" id="3_tgbhp"]
 [ext_resource type="Texture2D" uid="uid://cq0lc2yyx230l" path="res://assets/sprites/chapter1_node2/doors_lever_chest_animation.png" id="4_ddwnc"]
 [ext_resource type="Texture2D" uid="uid://b46tqab1k7m0t" path="res://assets/sprites/chapter1_node2/DoorWall.png" id="5_laplg"]
@@ -794,6 +794,7 @@ tile_set = SubResource("TileSet_3aofb")
 [node name="WarpToLevel1" type="Area2D" parent="." unique_id=1312550118]
 y_sort_enabled = true
 position = Vector2(901, 462)
+collision_layer = 0
 script = ExtResource("7_ggv0x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToLevel1" unique_id=648191162]
@@ -804,6 +805,7 @@ shape = SubResource("RectangleShape2D_us4jb")
 [node name="WarpToLevel2" type="Area2D" parent="." unique_id=1555448645]
 y_sort_enabled = true
 position = Vector2(901, 462)
+collision_layer = 0
 script = ExtResource("8_xur1w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToLevel2" unique_id=1654275100]
@@ -814,6 +816,7 @@ shape = SubResource("RectangleShape2D_us4jb")
 [node name="WarpToLevel3" type="Area2D" parent="." unique_id=1291259245]
 y_sort_enabled = true
 position = Vector2(901, 462)
+collision_layer = 0
 script = ExtResource("9_pu3de")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToLevel3" unique_id=463094034]
@@ -826,6 +829,7 @@ z_index = -1
 y_sort_enabled = true
 position = Vector2(455, 61)
 scale = Vector2(0.5, 0.5)
+collision_layer = 0
 script = ExtResource("10_jwbc4")
 locked_texture = ExtResource("11_ksmu0")
 unlocked_texture = ExtResource("12_w36e4")

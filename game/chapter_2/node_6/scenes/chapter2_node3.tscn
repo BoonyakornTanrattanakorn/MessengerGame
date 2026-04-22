@@ -121,6 +121,7 @@ position = Vector2(1900, 0)
 
 [node name="WarpToNextNode" type="Area2D" parent="." unique_id=1972678340]
 position = Vector2(2950, 0)
+collision_layer = 0
 script = ExtResource("6_cb0fj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToNextNode" unique_id=924662738]

@@ -20,6 +20,7 @@ script = ExtResource("1_fnj5y")
 texture = ExtResource("1_gyyf5")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1754722624]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=462492761]
 position = Vector2(9, 261)

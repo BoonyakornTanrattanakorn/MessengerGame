@@ -16328,6 +16328,7 @@ shape = SubResource("RectangleShape2D_lxchf")
 disabled = true
 
 [node name="WarpToUpperNode" type="Area2D" parent="." unique_id=185353830]
+collision_layer = 0
 script = ExtResource("6_b0f5y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToUpperNode" unique_id=1881160015]
@@ -16335,6 +16336,7 @@ position = Vector2(821, -106.46875)
 shape = SubResource("RectangleShape2D_ddjay")
 
 [node name="WarpToNextNode" type="Area2D" parent="." unique_id=1455182528]
+collision_layer = 0
 script = ExtResource("8_veni3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToNextNode" unique_id=632603943]
@@ -16342,6 +16344,7 @@ position = Vector2(1540, 573)
 shape = SubResource("RectangleShape2D_15aa5")
 
 [node name="WarpToLowerNode" type="Area2D" parent="." unique_id=157875385]
+collision_layer = 0
 script = ExtResource("7_lxchf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToLowerNode" unique_id=619021795]
@@ -16352,6 +16355,7 @@ shape = SubResource("RectangleShape2D_katpi")
 z_index = 1
 y_sort_enabled = true
 position = Vector2(906, 275)
+collision_layer = 0
 script = ExtResource("8_b0f5y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VillageChief" unique_id=1482342303]

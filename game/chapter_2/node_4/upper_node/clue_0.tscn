@@ -22,6 +22,8 @@ animations = [{
 }]
 
 [node name="clue_0" type="Area2D" unique_id=694505532]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_7f0sl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=190924544]

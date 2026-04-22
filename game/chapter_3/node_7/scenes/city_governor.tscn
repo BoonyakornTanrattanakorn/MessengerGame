@@ -17,6 +17,7 @@ script = ExtResource("1_lq1md")
 dialogue_resource = ExtResource("2_lvsxy")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=785591007]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=548108406]
 position = Vector2(5, 0)

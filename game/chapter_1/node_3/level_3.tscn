@@ -259,6 +259,7 @@ scale = Vector2(0.25, 0.25)
 
 [node name="WarpToLevel0from3" type="Area2D" parent="." unique_id=925287505]
 position = Vector2(594, 570)
+collision_layer = 0
 script = ExtResource("17_skg5l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WarpToLevel0from3" unique_id=1228576262]
@@ -267,6 +268,7 @@ shape = SubResource("RectangleShape2D_kwlfy")
 
 [node name="Portal" type="Area2D" parent="." unique_id=230064757]
 position = Vector2(498, 673)
+collision_layer = 0
 script = ExtResource("10_rp52u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Portal" unique_id=1829106467]
