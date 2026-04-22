@@ -70,7 +70,7 @@ func update_objective_for_room(room_id: int):
 	# If not complete yet
 	if current < total:
 		ObjectiveManager.set_objective(
-			"Use wind power to flip the switch (%d/%d)" % [current, total]
+			"Flip the switch (%d/%d)" % [current, total]
 		)
 	else:
 		ObjectiveManager.set_objective("Go to the next room")

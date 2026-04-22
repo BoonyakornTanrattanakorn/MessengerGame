@@ -37,6 +37,7 @@ size = Vector2(127, 102)
 
 [node name="WaterWave" type="Area2D" unique_id=1690637511]
 z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_tflu1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=691227555]

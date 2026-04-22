@@ -133,6 +133,8 @@ animations = [{
 }]
 
 [node name="WaterSerpent" type="Node2D" unique_id=1998665961]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_pe236")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=275422144]

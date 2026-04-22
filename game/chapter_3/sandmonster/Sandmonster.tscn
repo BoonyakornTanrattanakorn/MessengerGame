@@ -48,6 +48,8 @@ size = Vector2(80, 64)
 size = Vector2(76, 90)
 
 [node name="SandMonster" type="CharacterBody2D" unique_id=1501554289]
+z_index = 1
+y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ti36j")
 

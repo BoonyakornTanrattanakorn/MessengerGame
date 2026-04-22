@@ -29111,6 +29111,7 @@ size = Vector2(58.5, 61.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ch7hf"]
 
 [node name="UpperNode" type="Node2D" unique_id=144782613]
+y_sort_enabled = true
 script = ExtResource("1_yprkj")
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=1950580492]
@@ -29183,6 +29184,7 @@ position = Vector2(302.5, 1416.5)
 shape = SubResource("RectangleShape2D_w0hl0")
 
 [node name="QuestItem_Insignia" type="Area2D" parent="." unique_id=1282347528]
+y_sort_enabled = true
 position = Vector2(583, 1128)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("14_ch7hf")
@@ -29249,6 +29251,8 @@ move_step = 64.0
 position = Vector2(775, 1141)
 
 [node name="QuestMarker" type="Sprite2D" parent="Statue" unique_id=1862680824]
+z_index = 2
+y_sort_enabled = true
 position = Vector2(-0.99998474, -67.999985)
 scale = Vector2(0.6718755, 0.6718755)
 texture = ExtResource("19_bxsvo")

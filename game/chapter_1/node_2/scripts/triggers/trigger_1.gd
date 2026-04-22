@@ -21,4 +21,4 @@ func handle_trigger():
 	await DialogueManager.dialogue_ended
 
 	player.return_camera()
-	ObjectiveManager.set_objective("Use wind power to flip the switch (0/2)")
+	ObjectiveManager.set_objective("Flip the switch (0/2)")

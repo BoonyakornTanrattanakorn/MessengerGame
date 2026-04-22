@@ -22,6 +22,7 @@ animations = [{
 size = Vector2(64, 100)
 
 [node name="Statue" type="Area2D" unique_id=888969861]
+y_sort_enabled = true
 script = ExtResource("1_1jgcs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1117924343]

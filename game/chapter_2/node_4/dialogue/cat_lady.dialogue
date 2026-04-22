@@ -20,7 +20,7 @@ Cat Lady: Thank you. Please bring all four back safely.
 
 ~ in_progress
 Cat Lady: Have you found my cats yet?
-Cat Lady: You have found {Node4State.cats_found} out of {Node4State.total_cats}.
+Cat Lady: You have found {{Node4State.cats_found}} out of {{Node4State.total_cats}}.
 => END
 
 ~ all_found

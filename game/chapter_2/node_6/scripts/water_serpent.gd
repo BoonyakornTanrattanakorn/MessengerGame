@@ -41,6 +41,7 @@ enum DiveState {
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var _camera: Camera2D
+var _initial_global_position: Vector2 = Vector2.ZERO
 var _anchors: Array[PatrolAnchor] = []
 var _anchor_index: int = 0
 var _previous_anchor: PatrolAnchor = PatrolAnchor.MID_RIGHT
@@ -61,6 +62,7 @@ var _completed_attack_sets: int = 0
 
 func _ready() -> void:
 	_camera = _resolve_camera()
+	_initial_global_position = global_position
 	_build_anchor_path()
 	if _camera == null:
 		push_warning("WaterSerpent: Camera2D not found. The serpent will keep trying to bind in _process.")
@@ -70,7 +72,6 @@ func _ready() -> void:
 		_sprite.animation_finished.connect(_on_sprite_animation_finished)
 
 	_is_awake = start_awake
-	_update_dive_state(_anchors[_anchor_index])
 	_last_camera_center = _camera.get_screen_center_position()
 	_has_last_camera_center = true
 
@@ -191,6 +192,33 @@ func reset_attack_sets() -> void:
 	_set_has_left_to_right = false
 	_set_has_right_to_left = false
 	_completed_attack_sets = 0
+
+
+func reset_encounter_state() -> void:
+	_build_anchor_path()
+	_anchor_index = 0
+	_previous_anchor = PatrolAnchor.MID_RIGHT
+	_dive_target_anchor = PatrolAnchor.MID_RIGHT
+	_dive_state = DiveState.NONE
+	_active_dive_animation = StringName()
+	_active_rise_animation = StringName()
+	_is_awake = start_awake
+	_is_awakening_intro = false
+	_is_forced_dive_to_right = false
+	_is_playing_defeat_sequence = false
+	reset_attack_sets()
+	global_position = _initial_global_position
+
+	if _camera == null:
+		_camera = _resolve_camera()
+
+	if _camera != null:
+		_last_camera_center = _camera.get_screen_center_position()
+		_has_last_camera_center = true
+
+	if _sprite != null:
+		_sprite.visible = true
+		_update_dive_state(_anchors[_anchor_index])
 
 
 func play_defeat_rise_at_right() -> void:

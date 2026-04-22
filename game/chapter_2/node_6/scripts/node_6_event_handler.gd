@@ -7,6 +7,8 @@ func _ready() -> void:
 	_set_player_boat_mode(true)
 	await get_tree().process_frame
 	player.health_component.player_dead.connect(_on_player_dead)
+	if DeadManager != null and not DeadManager.player_respawned.is_connected(_on_player_respawned):
+		DeadManager.player_respawned.connect(_on_player_respawned)
 
 func _exit_tree() -> void:
 	_set_player_boat_mode(false)
@@ -44,7 +46,21 @@ func handle_intro_for_level() -> void:
 		)
 		
 		await DialogueManager.dialogue_ended
+		ObjectiveManager.set_objective("Continue to the desert")
 		SaveManager.save_game()
 
 func _on_player_dead():
-	DeadManager.kill_player("Shot down by water ball", "Try using wind and earth element alternately.", Vector2(0,0))
+	DeadManager.kill_player("Shot down by water ball", "Try using wind and earth element alternately.", Vector2(1300,0))
+
+
+func _on_player_respawned(_position: Vector2) -> void:
+	call_deferred("_reset_after_respawn")
+
+
+func _reset_after_respawn() -> void:
+	# GameState.chap2_node6_shown = false
+	ObjectiveManager.set_objective("Continue to the desert")
+
+	var boss_fight_zone := get_tree().current_scene.find_child("BossFightZone", true, false)
+	if boss_fight_zone != null and boss_fight_zone.has_method("reset_encounter_after_respawn"):
+		boss_fight_zone.reset_encounter_after_respawn()

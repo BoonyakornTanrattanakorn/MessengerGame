@@ -100,6 +100,7 @@ shape = SubResource("RectangleShape2D_6wfal")
 shape = SubResource("RectangleShape2D_7e4al")
 
 [node name="BossFightTrigger" type="Area2D" parent="BossFightZone" unique_id=735476316]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossFightZone/BossFightTrigger" unique_id=1854690774]
 shape = SubResource("RectangleShape2D_t4hsj")

@@ -22,6 +22,7 @@ animations = [{
 }]
 
 [node name="WeightHole" type="Area2D" unique_id=804057386]
+y_sort_enabled = true
 script = ExtResource("1_bejyj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=441729381]

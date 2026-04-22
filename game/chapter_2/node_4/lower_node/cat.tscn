@@ -205,6 +205,8 @@ animations = [{
 size = Vector2(14, 15)
 
 [node name="Cat" type="Area2D" unique_id=1164750450]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_ls2vt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=529032438]

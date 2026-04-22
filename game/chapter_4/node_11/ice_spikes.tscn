@@ -7,6 +7,8 @@
 size = Vector2(128, 106)
 
 [node name="IceSpikes" type="Area2D" unique_id=621358786]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 5
 script = ExtResource("1_di24v")
 

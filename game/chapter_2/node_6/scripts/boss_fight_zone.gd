@@ -34,6 +34,34 @@ func _ready() -> void:
 	_bind_water_serpent()
 
 
+func reset_encounter_after_respawn() -> void:
+	if _has_won:
+		return
+
+	_bind_water_serpent()
+	if _water_serpent != null and _water_serpent.has_method("reset_encounter_state"):
+		_water_serpent.reset_encounter_state()
+
+	if _tracked_player != null and _tracked_player.has_method("return_camera"):
+		_tracked_player.return_camera()
+	_set_player_cutscene_lock(false)
+
+	if _tracked_camera != null:
+		_restore_camera_limits(_tracked_camera)
+
+	_set_borders_enabled(false)
+	if _trigger_area != null:
+		_trigger_area.set_deferred("monitoring", true)
+		_trigger_area.set_deferred("monitorable", true)
+
+	_has_started = false
+	_is_resolving_victory = false
+	_completed_attack_sets = 0
+	_set_minimap_visible(true)
+	_tracked_player = null
+	_tracked_camera = null
+
+
 func _on_trigger_body_entered(body: Node) -> void:
 	if _has_won:
 		return
@@ -76,6 +104,7 @@ func _start_boss_fight(player: Node2D) -> void:
 	if player.has_method("return_camera"):
 		player.return_camera()
 	await _play_serpent_dive_to_right_and_awaken()
+	_set_minimap_visible(false)
 
 	boss_fight_started.emit(player)
 	_reset_attack_set_progress()
@@ -288,6 +317,7 @@ func _finish_boss_fight_win() -> void:
 	SaveManager.save_game()
 	boss_fight_won.emit(_tracked_player)
 	_set_player_cutscene_lock(false)
+	_set_minimap_visible(true)
 
 	_tracked_player = null
 	_tracked_camera = null
@@ -377,3 +407,18 @@ func _set_borders_enabled(enabled: bool) -> void:
 	for child in _borders.get_children():
 		if child is CollisionShape2D:
 			(child as CollisionShape2D).set_deferred("disabled", not enabled)
+
+
+func _set_minimap_visible(visible: bool) -> void:
+	var minimap := get_node_or_null("/root/GameScene/Minimap")
+	if minimap == null:
+		minimap = get_tree().current_scene.get_node_or_null("Minimap")
+	if minimap == null:
+		minimap = get_tree().current_scene.find_child("Minimap", true, false)
+	if minimap == null:
+		return
+
+	if visible:
+		minimap.show()
+	else:
+		minimap.hide()

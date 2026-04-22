@@ -7,6 +7,8 @@
 size = Vector2(9, 8)
 
 [node name="fire_small" type="Area2D" unique_id=620186940 groups=["fire_spell"]]
+z_index = 1
+y_sort_enabled = true
 collision_mask = 39
 script = ExtResource("1_xjbj5")
 

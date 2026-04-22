@@ -8,8 +8,9 @@ size = Vector2(18, 16)
 
 [node name="wind" type="Area2D" unique_id=769887660]
 z_index = 1
+y_sort_enabled = true
 collision_layer = 4
-collision_mask = 7
+collision_mask = 5
 script = ExtResource("1_gc4i6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=186843631]
