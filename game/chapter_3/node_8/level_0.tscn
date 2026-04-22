@@ -107,6 +107,7 @@ tile_set = ExtResource("2_ilyw1")
 [node name="NpcEntrance" type="Area2D" parent="." unique_id=3001001]
 position = Vector2(290, 622)
 scale = Vector2(1.5, 1.5)
+collision_layer = 0
 script = ExtResource("6_npc")
 dialogue_resource = ExtResource("7_dlg0")
 dialogue_title = "npc_entry"
@@ -130,6 +131,7 @@ text = "Press F"
 
 [node name="NpcExit" type="Area2D" parent="." unique_id=3002001]
 position = Vector2(1221, 610)
+collision_layer = 0
 script = ExtResource("6_npc")
 dialogue_resource = ExtResource("7_dlg0")
 dialogue_title = "npc_exit"

@@ -136,6 +136,7 @@ texture = ExtResource("13_hvu3v")
 [node name="ExitWarp" type="Area2D" parent="." unique_id=482010026]
 visible = false
 position = Vector2(1012, 486)
+collision_layer = 0
 script = ExtResource("6_warp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitWarp" unique_id=482010027]
