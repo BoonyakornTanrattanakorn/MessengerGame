@@ -41,6 +41,10 @@ func respawn_player(respawn_position: Vector2 = Vector2.ZERO):
 		player.health_component.heal(player.health_component.max_hp)
 		player.health_component.call_deferred("emit_signal", "health_changed", player.health_component.hp)
 		player_respawned.emit(player.global_position)
+		player.heat_gauge = 0
+		player.heat_changed.emit(player.heat_gauge)
+		player.cool_gauge = 0
+		player.cool_changed.emit(player.cool_gauge)
 		
 func _remove_all_spells():
 	for spell in get_tree().get_nodes_in_group("spell"):
