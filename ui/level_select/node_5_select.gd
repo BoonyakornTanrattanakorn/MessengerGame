@@ -13,6 +13,7 @@ func _village_start():
 
 func _node_start():
 	SaveManager.new_game_from_level(node_5_scene, Vector2(350, 1275), Vector2.DOWN)
+	GameState.element_earth_unlocked = true
 	
 func _level_select():
 	get_tree().change_scene_to_file("res://ui/level_select/level_select.tscn")

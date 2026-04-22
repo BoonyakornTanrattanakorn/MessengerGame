@@ -33,7 +33,7 @@ func _talk() -> void:
 		push_warning("Failed to load dialogue: " + dialogue_path)
 		return
 
-	var first_talk := not Node4State.talked_to_village_chief
+	var first_talk: bool = not Node4State.talked_to_village_chief
 	_is_talking = true
 
 	if first_talk:

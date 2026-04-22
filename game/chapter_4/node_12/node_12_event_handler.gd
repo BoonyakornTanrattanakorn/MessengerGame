@@ -235,6 +235,7 @@ func _trigger_node12_fight_death_respawn() -> void:
 		respawn_pos,
 		false
 	)
+	GameState.chap4_node12_shown = false
 
 func _on_dead_manager_player_respawned(_position: Vector2) -> void:
 	if not _fight_sequence_started or _fight_sequence_done:

@@ -11,9 +11,13 @@ func _ready():
 func _minigame_start():
 	SaveManager.save_game()
 	get_tree().change_scene_to_file(minigame_scene)
+	GameState.element_earth_unlocked = true
+	GameState.element_water_unlocked = true
 
 func _node_start():
 	get_tree().change_scene_to_file("res://ui/level_select/node_8_select.tscn")
+	GameState.element_earth_unlocked = true
+	GameState.element_water_unlocked = true
 	
 func _level_select():
 	get_tree().change_scene_to_file("res://ui/level_select/level_select.tscn")
