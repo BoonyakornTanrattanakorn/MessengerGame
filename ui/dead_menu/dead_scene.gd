@@ -32,5 +32,5 @@ func _on_menu_button_pressed():
 	await SaveManager.restore_objects()
 	DeadManager.respawn_player(respawn_position)
 	queue_free()
-	get_tree().change_scene_to_file("res://ui/menu/Main_menu.tscn")
+	get_tree().change_scene_to_file("res://ui/menu/main_menu.tscn")
 	

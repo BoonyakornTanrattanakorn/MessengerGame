@@ -129,7 +129,14 @@ static func walk_entity_along_path(
 		tween.set_speed_scale(speed_multiplier)
 		if anim_sprite:
 			anim_sprite.speed_scale = base_anim_speed_scale * speed_multiplier
-		await owner.get_tree().process_frame
+		if owner == null or not is_instance_valid(owner):
+			tween.kill()
+			break
+		var tree := owner.get_tree()
+		if tree == null:
+			tween.kill()
+			break
+		await tree.process_frame
 
 	var final_local_pos := curve.sample_baked(path_length, true)
 	var final_world_pos := path.to_global(final_local_pos)

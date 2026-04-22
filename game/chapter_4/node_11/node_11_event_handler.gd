@@ -15,6 +15,9 @@ func handle_intro_for_level() -> void:
 		GameState.chap4_node11_shown = true
 		BGMManager.play_bgm("node_11_bgm", -6, true)
 		
+		DialogueManager.show_dialogue_balloon(dialogue, "start")
+		await DialogueManager.dialogue_ended
+		
 		if tower != null:
 			player.focus_camera_to(tower)
 			await get_tree().create_timer(1.5).timeout
@@ -26,7 +29,7 @@ func handle_intro_for_level() -> void:
 		if towerleader != null:
 			player.focus_camera_to(towerleader)
 			await get_tree().create_timer(1.5).timeout
-			DialogueManager.show_dialogue_balloon(dialogue, "start")
+			DialogueManager.show_dialogue_balloon(dialogue, "start_2")
 			await DialogueManager.dialogue_ended
 			
 			player.return_camera()

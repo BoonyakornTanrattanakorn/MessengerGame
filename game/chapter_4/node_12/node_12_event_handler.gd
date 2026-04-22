@@ -522,7 +522,10 @@ func _track_fast_forward_loop() -> void:
 			hold_ctrl_dialogue_speed_multiplier,
 			NODE_12_EVENT_UTILS.is_fast_forward_pressed()
 		)
-		await get_tree().process_frame
+		var tree := get_tree()
+		if tree == null:
+			break
+		await tree.process_frame
 
 func _register_fast_forward_balloon(balloon: Node) -> void:
 	_fast_forward_balloons = NODE_12_EVENT_UTILS.register_fast_forward_balloon(_fast_forward_balloons, balloon)

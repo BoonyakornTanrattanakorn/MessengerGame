@@ -41,7 +41,10 @@ func perform_projectile_attack() -> void:
 		await _wait_for_projectiles_to_end()
 
 		if shot_delay > 0.0 and i < count - 1:
-			await get_tree().create_timer(shot_delay).timeout
+			if get_tree() == null:
+				break
+			var tree := get_tree()
+			await tree.create_timer(shot_delay).timeout
 
 	modulate = Color(1, 1, 1, 1)
 
@@ -100,7 +103,10 @@ func _shoot_projectiles(spawned: Array[Area2D]) -> void:
 
 func _wait_for_projectiles_to_end() -> void:
 	while has_active_projectiles() and _hp > 0:
-		await get_tree().process_frame
+		if get_tree() == null:
+			break
+		var tree := get_tree()
+		await tree.process_frame
 
 func _spawn_water_projectile(spawn_pos: Vector2, direction: Vector2) -> Area2D:
 	var projectile_instance := WATER_PROJECTILE_SCENE.instantiate()

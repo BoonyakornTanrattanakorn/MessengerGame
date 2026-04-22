@@ -13,14 +13,15 @@ signal quit_requested
 @onready var menu_button: Button = %MenuButton
 
 var is_settings_open: bool = false
+var _missing_bus_warnings: Dictionary = {}
 
 func _ready() -> void:
 	visible = false
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	
-	# Initialize sliders to 100% (default/normal volume)
-	bgm_slider.value = 100.0
-	sfx_slider.value = 100.0
+	# Initialize sliders from current bus volume so UI matches runtime state.
+	bgm_slider.set_value_no_signal(_get_bus_percent("BGM"))
+	sfx_slider.set_value_no_signal(_get_bus_percent("SFX"))
 
 func open() -> void:
 	visible = true
@@ -70,36 +71,42 @@ func _on_quit_button_pressed() -> void:
 	emit_signal("quit_requested")
 
 func _on_bgm_slider_value_changed(value: float) -> void:
-	# Convert percentage (0-200%) to dB
-	# 100% = 0dB (normal volume)
-	# 0% = -80dB (silent)
-	# 200% = +6dB (loud)
-	var volume_db: float
-	if value <= 100.0:
-		volume_db = -80.0 + (value / 100.0) * 80.0
-	else:
-		volume_db = (value - 100.0) * 0.06
-	
-	if BGMManager:
-		var master_bus_index = AudioServer.get_bus_index("Master")
-		if master_bus_index != -1:
-			AudioServer.set_bus_volume_db(master_bus_index, volume_db)
+	_set_bus_volume_from_percent("BGM", value)
 
 func _on_sfx_slider_value_changed(value: float) -> void:
-	# Convert percentage (0-200%) to dB
-	# 100% = 0dB (normal volume)
-	# 0% = -80dB (silent)
-	# 200% = +6dB (loud)
-	var volume_db: float
-	if value <= 100.0:
-		volume_db = -80.0 + (value / 100.0) * 80.0
-	else:
-		volume_db = (value - 100.0) * 0.06
-	
-	if AudioServer.get_bus_index("SFX") != -1:
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), volume_db)
+	_set_bus_volume_from_percent("SFX", value)
+
+func _resolve_bus_index(bus_name: String) -> int:
+	var bus_index := AudioServer.get_bus_index(bus_name)
+	if bus_index == -1 and not _missing_bus_warnings.has(bus_name):
+		_missing_bus_warnings[bus_name] = true
+		push_warning("Audio bus not found: %s" % bus_name)
+	return bus_index
+
+func _set_bus_volume_from_percent(bus_name: String, value: float) -> void:
+	var bus_index := _resolve_bus_index(bus_name)
+	if bus_index == -1:
+		return
+
+	var clamped_percent := clampf(value, 0.0, 200.0)
+	var linear_volume := clamped_percent / 100.0
+	var volume_db := -80.0 if linear_volume <= 0.0 else linear_to_db(linear_volume)
+	volume_db = clampf(volume_db, -80.0, 6.0)
+	AudioServer.set_bus_volume_db(bus_index, volume_db)
+
+func _get_bus_percent(bus_name: String) -> float:
+	var bus_index := _resolve_bus_index(bus_name)
+	if bus_index == -1:
+		return 100.0
+
+	var volume_db := AudioServer.get_bus_volume_db(bus_index)
+	if volume_db <= -80.0:
+		return 0.0
+
+	var linear_volume := db_to_linear(volume_db)
+	return clampf(linear_volume * 100.0, 0.0, 200.0)
 
 
 func _on_menu_button_pressed() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://ui/menu/Main_menu.tscn")
+	get_tree().change_scene_to_file("res://ui/menu/main_menu.tscn")

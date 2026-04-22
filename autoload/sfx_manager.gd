@@ -50,11 +50,16 @@ const SFX_EVENTS := {
 var _stream_cache: Dictionary = {}
 
 func _ready() -> void:
-	# Ensure SFX bus exists
-	var bus_index = AudioServer.get_bus_index("SFX")
-	if bus_index == -1:
-		# If SFX bus doesn't exist, create it by setting volume on Master
-		pass
+	_ensure_audio_bus("SFX")
+
+func _ensure_audio_bus(bus_name: String) -> void:
+	if AudioServer.get_bus_index(bus_name) != -1:
+		return
+
+	AudioServer.add_bus(AudioServer.get_bus_count())
+	var new_index := AudioServer.get_bus_count() - 1
+	AudioServer.set_bus_name(new_index, bus_name)
+	AudioServer.set_bus_send(new_index, "Master")
 
 func has_event(event_key: String) -> bool:
 	return SFX_EVENTS.has(event_key)

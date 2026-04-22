@@ -10804,7 +10804,6 @@ position = Vector2(-104, 621)
 shape = SubResource("RectangleShape2D_f7ial")
 
 [node name="NPC" type="Node2D" parent="." unique_id=1798320614]
-z_index = 1
 y_sort_enabled = true
 
 [node name="Villager" parent="NPC" unique_id=151893683 instance=ExtResource("5_ixp4i")]

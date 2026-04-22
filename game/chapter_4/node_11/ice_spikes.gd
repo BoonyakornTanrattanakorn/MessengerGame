@@ -13,6 +13,7 @@ var _has_hit: bool = false
 func _ready() -> void:
 	add_to_group("enemy_projectile")
 	area_entered.connect(_on_area_entered)
+	body_entered.connect(_on_body_entered)
 	if direction.length_squared() <= 0.0001:
 		direction = Vector2.LEFT
 	rotation = direction.angle()
@@ -33,6 +34,15 @@ func _on_area_entered(area: Area2D) -> void:
 		return
 	if area.is_in_group("player_hurtbox"):
 		_apply_player_damage(area)
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if _has_hit:
+		return
+	# Despawn on world geometry / obstacle hitboxes (e.g. tower StaticBody2D colliders).
+	if body is StaticBody2D:
+		_has_hit = true
+		queue_free()
 
 
 func _apply_player_damage(target: Node) -> void:

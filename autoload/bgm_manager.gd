@@ -19,12 +19,23 @@ var bgm_paths := {
 }
 
 func _ready() -> void:
+	_ensure_audio_bus("BGM")
+
 	# Create the AudioStreamPlayer for BGM
 	current_bgm = AudioStreamPlayer.new()
-	current_bgm.bus = "Master"
+	current_bgm.bus = "BGM"
 	# Allow BGM to continue playing when game is paused
 	current_bgm.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(current_bgm)
+
+func _ensure_audio_bus(bus_name: String) -> void:
+	if AudioServer.get_bus_index(bus_name) != -1:
+		return
+
+	AudioServer.add_bus(AudioServer.get_bus_count())
+	var new_index := AudioServer.get_bus_count() - 1
+	AudioServer.set_bus_name(new_index, bus_name)
+	AudioServer.set_bus_send(new_index, "Master")
 
 func get_bgm_path(key: String) -> String:
 	if key in bgm_paths:
@@ -55,7 +66,7 @@ func play_bgm(key: String, volume_db: float = 0.0, loop: bool = true) -> void:
 	# Set up and play new track
 	current_bgm.stream = audio_stream
 	current_bgm.volume_db = volume_db
-	current_bgm.bus = "Master"
+	current_bgm.bus = "BGM"
 
 	# Enable looping if supported
 	if loop and audio_stream.has_meta("loop"):
@@ -76,8 +87,8 @@ func stop_bgm(fade_out: float = 0.0) -> void:
 	current_track = ""
 
 func set_volume(volume_db: float) -> void:
-	# Set Master bus volume (affects BGM)
-	var master_bus_index = AudioServer.get_bus_index("Master")
+	# Set BGM bus volume (affects BGM)
+	var master_bus_index = AudioServer.get_bus_index("BGM")
 	if master_bus_index != -1:
 		AudioServer.set_bus_volume_db(master_bus_index, volume_db)
 
