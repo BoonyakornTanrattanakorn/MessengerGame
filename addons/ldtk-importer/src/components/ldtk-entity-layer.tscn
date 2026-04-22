@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dndtl8sgpdo6m"]
-
-[ext_resource type="Script" uid="uid://c0lcjwpaql7fu" path="res://addons/ldtk-importer/src/components/ldtk-entity-layer.gd" id="1_kdfje"]
-
-[node name="LDTK Entity Layer" type="Node2D" unique_id=2063547204]
-script = ExtResource("1_kdfje")
