@@ -42,6 +42,7 @@ func _node_5_start():
 
 func _node_6_start():
 	SaveManager.new_game_from_level(node_6_scene, Vector2(0, 0), Vector2.RIGHT)
+	GameState.element_earth_unlocked = true
 
 func _node_7_start():
 	get_tree().change_scene_to_file("res://ui/level_select/node_7_minigame_select.tscn")
@@ -51,17 +52,21 @@ func _node_8_start():
 
 func _node_9_start():
 	SaveManager.new_game_from_level(node_9_scene, Vector2(50, 350), Vector2.DOWN)
+	GameState.element_earth_unlocked = true
+	GameState.element_water_unlocked = true
 
 func _node_10_start():
 	SaveManager.new_game_from_level(node_10_scene, Vector2(400, 670), Vector2.UP)
+	_unlock_all_powers()
 
 func _node_11_start():
 	SaveManager.new_game_from_level(node_11_scene, Vector2(-330, 350), Vector2.RIGHT)
-
-func _node_12_start():
 	_unlock_all_powers()
+	
+func _node_12_start():
 	SaveManager.new_game_from_level(node_12_scene, Vector2(0,0), Vector2.UP)
-
+	_unlock_all_powers()
+	
 func _node_12_debug_all_clues_start():
 	# Debug path: force a clean state and unlock all accusation clues before Node 12.
 	GameState.new_game()

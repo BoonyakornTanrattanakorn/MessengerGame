@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cmlw3sah421gh"]
 
-[ext_resource type="Script" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.gd" id="1_gcpob"]
+[ext_resource type="Script" uid="uid://cdfc77pwvyxuh" path="res://game/chapter_4/node_12/npc/mage/mage_fire/mage_fire.gd" id="1_gcpob"]
 [ext_resource type="Texture2D" uid="uid://0y7revq8i8p8" path="res://assets/characters/PIPOYA FREE RPG Character Sprites 32x32/Soldier/Soldier 07-1.png" id="2_ut5xf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayddp"]
